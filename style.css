@@ -251,8 +251,12 @@ a:hover {
   font-size: clamp(3rem, 6vw, 5rem);
   margin-bottom: 1.5rem;
   letter-spacing: -1px;
-  color: #ffffff;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #ffc04d 50%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Use drop-shadow filter so the shadow respects the transparent text clip */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
 }
 
 .hero .subtitle {
