@@ -1,10 +1,10 @@
 :root {
   /* Colors */
-  --color-primary: #2a2a2a; /* Deep Dark */
-  --color-primary-dark: #1e1e1e;
-  --color-primary-light: #3a3a3a;
-  --color-accent: #00D9FF; /* Electric Blue */
-  --color-accent-hover: #00b8d9;
+  --color-primary: #0F172A; /* Slate 900 */
+  --color-primary-dark: #020617; /* Slate 950 */
+  --color-primary-light: #1E293B; /* Slate 800 */
+  --color-accent: #14B8A6; /* Teal 500 */
+  --color-accent-hover: #0D9488; /* Teal 600 */
   --color-text: #f5f5f5; /* Light Gray / White */
   --color-text-muted: #aaaaaa;
   
@@ -96,7 +96,7 @@ a:hover {
   background-color: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
 }
 
 .btn-outline {
@@ -248,16 +248,16 @@ a:hover {
 }
 
 .hero h1 {
-  font-family: 'Vast Shadow', serif;
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 6vw, 6rem);
   margin-bottom: 1.5rem;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 50%, var(--color-accent) 100%);
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #14B8A6 0%, #3B82F6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  /* Use drop-shadow filter so the shadow respects the transparent text clip */
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
 }
 
 .hero .subtitle {
@@ -282,7 +282,7 @@ a:hover {
 .hero-actions .btn-outline:hover {
   background-color: var(--color-accent);
   color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 15px rgba(20, 184, 166, 0.4);
 }
 
 /* Global Sections & Layouts */
@@ -352,7 +352,7 @@ a:hover {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300D9FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314B8A6' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   flex-shrink: 0;
@@ -361,7 +361,7 @@ a:hover {
 
 .highlight {
   border: 2px solid var(--color-accent);
-  background: linear-gradient(145deg, var(--color-primary-light), rgba(0, 217, 255, 0.05));
+  background: linear-gradient(145deg, var(--color-primary-light), rgba(20, 184, 166, 0.05));
 }
 
 .badge {
@@ -511,7 +511,7 @@ a:hover {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(0, 217, 255, 0.2);
+  background: rgba(20, 184, 166, 0.2);
 }
 
 .timeline-step {
@@ -540,7 +540,7 @@ a:hover {
   font-weight: 700;
   font-size: 1.2rem;
   transform: translateX(-50%);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 15px rgba(20, 184, 166, 0.3);
   z-index: 2;
 }
 
@@ -562,9 +562,9 @@ a:hover {
 
 .time-badge {
   position: static;
-  background-color: rgba(0, 217, 255, 0.1);
+  background-color: rgba(20, 184, 166, 0.1);
   color: var(--color-accent);
-  border: 1px solid rgba(0, 217, 255, 0.3);
+  border: 1px solid rgba(20, 184, 166, 0.3);
 }
 
 /* About Section */
@@ -593,7 +593,7 @@ a:hover {
   max-width: 800px;
   margin: 0 auto;
   padding: 4rem 2rem;
-  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.05) 0%, var(--color-primary-light) 100%);
+  background: radial-gradient(circle at center, rgba(20, 184, 166, 0.05) 0%, var(--color-primary-light) 100%);
 }
 
 .contact-subtitle {
