@@ -3,26 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brass Tacks | Restaurant Tech Consulting</title>
+    <title>Brass Tacks | brasstacks.space</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Space+Grotesk:wght@500;700&family=Agu+Display&family=Bungee+Inline&family=Frijole&family=Rubik+Dirt&family=Vast+Shadow&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/bt_favicon.svg">
     <!-- Meta/SEO -->
     <meta name="description" content="Custom websites and POS integration for independent restaurants. Built by someone who understands restaurant operations.">
-    <script type="module" crossorigin src="/assets/index-O9FiW-9O.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C-4jXi1_.css">
+    <script type="module" crossorigin src="/assets/index-5l_pl5sX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Kd7FsEfv.css">
   </head>
   <body>
     <!-- Header/Navigation -->
     <header class="header" id="header">
       <div class="container header-inner">
-        <a href="#" class="logo">Brass<span>Tacks</span></a>
+        <a href="/" class="logo">Brass<span>Tacks</span></a>
         <nav class="nav-links">
-          <a href="#services">Services</a>
-          <a href="#portfolio">Past Work</a>
-          <a href="#about">Who We Are</a>
-          <a href="#contact" class="btn btn-outline">Contact</a>
+          <a href="/#services">Services</a>
+          <a href="/how-it-works.html">How It Works</a>
+          <a href="/#portfolio">Past Work</a>
+          <a href="/#about">Who We Are</a>
+          <a href="/#contact" class="btn btn-outline">Contact</a>
         </nav>
         <button class="mobile-menu-btn" aria-label="Toggle Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -35,12 +37,16 @@
       <!-- Hero Section -->
       <section class="hero" id="hero">
         <div class="video-container">
-          <div class="video-split">
-            <video class="hero-video video-left" src="/kitchen.mp4" autoplay loop muted playsinline></video>
-            <video class="hero-video video-right" src="/coding.mp4" autoplay loop muted playsinline></video>
-          </div>
+          <video id="bg-video" class="hero-video" src="/hero.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
           <div class="video-overlay"></div>
         </div>
+        
+        <!-- Video Controls -->
+        <button id="video-toggle" class="video-control-btn" aria-label="Pause Background Video">
+          <svg id="icon-pause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          <svg id="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
+
         <div class="container hero-inner">
           <div class="hero-content">
             <h1>Restaurant Tech That Works</h1>
@@ -102,11 +108,25 @@
         <div class="container">
           <h2 class="section-title">Past Work</h2>
           <div class="portfolio-grid">
-            <div class="card process-card">
-              <div class="card-pill">Taco Restaurant</div>
-              <p class="prob"><strong>Problem:</strong> High reliance on third-party delivery apps eating into margins.</p>
-              <p class="sol"><strong>Solution:</strong> Custom-built robust online order flow integrated via POS API.</p>
-              <p class="res"><strong>Result:</strong> Reduced labor costs, recaptured 20% order volume direct, streamlined ticket flow.</p>
+            <div class="card process-card full-width-card">
+              <div class="card-pill">Laguna Website & POS Integration</div>
+              <p class="project-desc">
+                A seamless custom website built with full custom POS restaurant management system including inventory management and inventory alerts, order tracking and delivery to and from the kitchen and bar.
+              </p>
+              <div class="project-links">
+                <a href="https://www.lagunawichita.com" target="_blank" class="btn btn-outline">lagunawichita.com</a>
+                <a href="https://pos.lagunawichita.com" target="_blank" class="btn btn-outline">pos.lagunawichita.com</a>
+              </div>
+              <div class="project-windows">
+                <div class="browser-window">
+                  <div class="browser-header"><span>www.lagunawichita.com</span></div>
+                  <iframe src="https://www.lagunawichita.com" title="Laguna Website" loading="lazy"></iframe>
+                </div>
+                <div class="browser-window">
+                  <div class="browser-header"><span>pos.lagunawichita.com</span></div>
+                  <iframe src="https://pos.lagunawichita.com" title="Laguna POS System" loading="lazy"></iframe>
+                </div>
+              </div>
             </div>
             <div class="card process-card">
               <div class="card-pill">Food Truck Operation</div>
@@ -136,11 +156,11 @@
       <section id="contact" class="section">
         <div class="container">
           <div class="contact-box card">
-            <h2>Let's talk about your restaurant's tech</h2>
+            <h2>Let's reimagine your business</h2>
             <p class="contact-subtitle">We solve real problems for independent restaurants. Custom solutions, fair pricing, no BS.</p>
             <div class="contact-methods">
-              <a href="mailto:hello@brasstacks.cool" class="btn btn-primary btn-large">Email Us</a>
-              <p class="contact-or">or call us at <strong>(555) 123-4567</strong></p>
+              <a href="mailto:hi.brasstacks@gmail.com" class="btn btn-primary btn-large">Email Us</a>
+              <p class="contact-or">or call us at <strong><a href="tel:3038183433" style="color: inherit;">303-818-3433</a></strong></p>
             </div>
           </div>
         </div>
@@ -155,8 +175,8 @@
           <p>Restaurant tech that actually works.</p>
         </div>
         <div class="footer-links">
-          <a href="mailto:hello@brasstacks.cool">hello@brasstacks.cool</a>
-          <a href="tel:5551234567">(555) 123-4567</a>
+          <a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a>
+          <a href="tel:3038183433">303-818-3433</a>
         </div>
         <div class="footer-copy">
           <p>&copy; 2026 Brass Tacks. All rights reserved.</p>

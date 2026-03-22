@@ -3,8 +3,8 @@
   --color-primary: #2a2a2a; /* Deep Dark */
   --color-primary-dark: #1e1e1e;
   --color-primary-light: #3a3a3a;
-  --color-accent: #FF6B35; /* Fire Orange */
-  --color-accent-hover: #e55a2b;
+  --color-accent: #00D9FF; /* Electric Blue */
+  --color-accent-hover: #00b8d9;
   --color-text: #f5f5f5; /* Light Gray / White */
   --color-text-muted: #aaaaaa;
   
@@ -96,6 +96,7 @@ a:hover {
   background-color: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
 }
 
 .btn-outline {
@@ -251,7 +252,7 @@ a:hover {
   font-size: clamp(3rem, 6vw, 5rem);
   margin-bottom: 1.5rem;
   letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, #ffc04d 50%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #ffffff 50%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -281,6 +282,7 @@ a:hover {
 .hero-actions .btn-outline:hover {
   background-color: var(--color-accent);
   color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
 }
 
 /* Global Sections & Layouts */
@@ -350,7 +352,7 @@ a:hover {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300D9FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   flex-shrink: 0;
@@ -359,7 +361,7 @@ a:hover {
 
 .highlight {
   border: 2px solid var(--color-accent);
-  background: linear-gradient(145deg, var(--color-primary-light), rgba(255, 107, 53, 0.05));
+  background: linear-gradient(145deg, var(--color-primary-light), rgba(0, 217, 255, 0.05));
 }
 
 .badge {
@@ -475,6 +477,96 @@ a:hover {
   background: #fff;
 }
 
+/* Timeline Component */
+.page-top-padding {
+  padding-top: 120px;
+}
+
+.process-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 3.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(0, 217, 255, 0.2);
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -2.3rem;
+  top: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary-dark);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  z-index: 2;
+}
+
+.timeline-content.card {
+  padding: 2.5rem;
+  position: relative;
+}
+
+.timeline-content h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.time-badge {
+  position: static;
+  background-color: rgba(0, 217, 255, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+}
+
 /* About Section */
 .about-flex {
   max-width: 800px;
@@ -501,7 +593,7 @@ a:hover {
   max-width: 800px;
   margin: 0 auto;
   padding: 4rem 2rem;
-  background: radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, var(--color-primary-light) 100%);
+  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.05) 0%, var(--color-primary-light) 100%);
 }
 
 .contact-subtitle {
@@ -574,6 +666,30 @@ a:hover {
 
   .project-windows {
     grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    padding-left: 2.5rem;
+  }
+  
+  .timeline::before {
+    left: 0.5rem;
+  }
+
+  .timeline-icon {
+    left: -2rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .timeline-content.card {
+    padding: 1.5rem;
+  }
+
+  .timeline-content h3 {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero-actions {
