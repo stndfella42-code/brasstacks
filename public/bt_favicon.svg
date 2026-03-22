@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark background with Fire Orange border -->
+  <circle cx="50" cy="50" r="46" fill="#2a2a2a" stroke="#FF6B35" stroke-width="8"/>
+  <!-- Brass Tacks 'BT' in bold light text -->
+  <text x="50" y="66" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="bold" fill="#f5f5f5" text-anchor="middle">BT</text>
+</svg>
