@@ -364,6 +364,32 @@ a:hover {
   background: linear-gradient(145deg, var(--color-primary-light), rgba(20, 184, 166, 0.05));
 }
 
+.highlight-solo {
+  border: 2px solid #00D9FF;
+  background: linear-gradient(145deg, var(--color-primary-light), rgba(0, 217, 255, 0.05));
+  position: relative;
+}
+
+.highlight-solo h3 {
+  color: #00D9FF;
+}
+
+.tier-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.best-for {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.4;
+}
+
 .badge {
   position: absolute;
   top: -12px;
