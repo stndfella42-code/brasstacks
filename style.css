@@ -407,6 +407,74 @@ a:hover {
   font-weight: 600;
 }
 
+/* Portfolio Laguna Windows */
+.full-width-card {
+  grid-column: 1 / -1;
+}
+
+.project-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.project-windows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.browser-window {
+  background: var(--color-primary-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-header {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.browser-header::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #ff5f56;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+}
+
+.browser-header span {
+  margin-left: 3.5rem;
+  opacity: 0.8;
+  font-family: monospace;
+}
+
+.browser-window iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+  background: #fff;
+}
+
 /* About Section */
 .about-flex {
   max-width: 800px;
@@ -502,6 +570,10 @@ a:hover {
 
   .mobile-menu-btn {
     display: block;
+  }
+
+  .project-windows {
+    grid-template-columns: 1fr;
   }
 
   .hero-actions {
