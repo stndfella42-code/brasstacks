@@ -864,6 +864,19 @@ a:hover {
     width: 100%;
   }
 
+  .hero {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-inner {
+    justify-content: center;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
   .section-title {
     font-size: 2rem;
   }
