@@ -115,8 +115,50 @@
             <h2>Let's reimagine your business</h2>
             <p class="contact-subtitle">We solve real problems for small businesses. Custom solutions, fair pricing, no BS.</p>
             <div class="contact-methods">
-              <a href="mailto:hi.brasstacks@gmail.com" class="btn btn-primary btn-large">Email Us</a>
-              <p class="contact-or">or call us at <strong><a href="tel:3038183433" style="color: inherit;">303-818-3433</a></strong></p>
+              <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="New Inquiry from Brass Tacks Website">
+                <input type="hidden" name="replyto" value="hi.brasstacks@gmail.com">
+                <input type="hidden" name="autoresponse" value="Thank you for reaching out! We have received your inquiry and will be in touch within 24-48 hours. - Brass Tacks">
+
+                <div class="form-group">
+                  <label for="name">Your Name</label>
+                  <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                  <label for="business">Business Name</label>
+                  <input type="text" id="business" name="business_name" required placeholder="Doe's Shop">
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" required placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                  <label for="plan">Which plan are you interested in?</label>
+                  <select id="plan" name="plan" required>
+                    <option value="" disabled selected>Select a plan...</option>
+                    <option value="Solo Operator">Solo Operator</option>
+                    <option value="Website Only">Website Only</option>
+                    <option value="POS Integration">POS Integration</option>
+                    <option value="Full Package">Full Package</option>
+                    <option value="Not Sure">Not sure yet / Let's discuss</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">What are you looking to do?</label>
+                  <textarea id="message" name="message" rows="4" required placeholder="Tell us about your current setup and goals..."></textarea>
+                </div>
+                
+                <!-- Spam Protection -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <button type="submit" class="btn btn-primary btn-submit">Submit Inquiry</button>
+              </form>
+              <p class="contact-or" style="margin-top: 1.5rem;">or call us directly at <strong><a href="tel:3038183433" style="color: inherit;">303-818-3433</a></strong></p>
             </div>
           </div>
         </div>
