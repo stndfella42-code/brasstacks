@@ -39,6 +39,7 @@ body {
   background-color: var(--color-primary-dark);
   color: var(--color-text);
   line-height: 1.6;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -62,13 +63,13 @@ a:hover {
 /* Layout Utilities */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
 .section {
-  padding: var(--space-2xl) 0;
+  padding: 4rem 0;
 }
 
 /* Buttons */
@@ -173,7 +174,7 @@ a:hover {
 /* Hero Section */
 .hero {
   position: relative;
-  padding: calc(var(--space-2xl) + 6rem) 0 var(--space-2xl);
+  padding: calc(var(--space-2xl) + 4rem) 0 var(--space-2xl);
   min-height: 90vh;
   display: flex;
   align-items: center;
@@ -311,8 +312,8 @@ a:hover {
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
