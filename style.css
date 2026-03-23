@@ -645,6 +645,52 @@ a:hover {
   font-size: 1rem;
 }
 
+/* Placeholder Screenshots */
+.screenshot-wrapper {
+  margin-top: 2rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-primary-dark);
+}
+
+.ui-screenshot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-dark);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ui-screenshot.placeholder {
+  border: 2px dashed rgba(20, 184, 166, 0.3);
+  margin: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  border-radius: var(--border-radius);
+  background: rgba(20, 184, 166, 0.05);
+}
+
+.screenshot-caption {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-display);
+}
+
+.ui-screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
 /* Contact Form */
 .contact-form {
   display: flex;
