@@ -326,7 +326,7 @@ a:hover {
 .card {
   background-color: var(--color-primary-light);
   border-radius: var(--border-radius);
-  padding: 2.5rem;
+  padding: 1.5rem;
   transition: var(--transition);
   border: 1px solid rgba(255,255,255,0.05);
   position: relative;
@@ -339,16 +339,16 @@ a:hover {
 }
 
 .pricing-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
 }
 
 .price {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-accent);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .features {
@@ -356,10 +356,12 @@ a:hover {
 }
 
 .features li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: flex-start;
   color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 .features li strong {
@@ -395,17 +397,17 @@ a:hover {
 }
 
 .tier-desc {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.4;
 }
 
 .best-for {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   line-height: 1.4;
 }
