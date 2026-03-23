@@ -6,7 +6,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        howItWorks: resolve(__dirname, 'how-it-works.html')
+        howItWorks: resolve(__dirname, 'how-it-works.html'),
+        lagunaCaseStudy: resolve(__dirname, 'laguna-case-study.html')
       }
     }
   }
