@@ -1537,6 +1537,99 @@
       sections.forEach(s => s && io.observe(s));
     })();
 
+    // ── SITE-WIDE SUBTLE TEXT PHYSICS
+    (function initSitePhysics() {
+      if (isMobile()) return;
+      let mouse = { x: -9999, y: -9999 };
+      const tracked = [];
+
+      function wrapEl(el, repelR, repelF, spring, damp) {
+        function walk(node) {
+          if (node.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            for (const ch of node.textContent) {
+              if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); continue; }
+              const s = document.createElement('span');
+              s.className = 'hl';
+              s.textContent = ch;
+              tracked.push({ el: s, ox: 0, oy: 0, dx: 0, dy: 0, vx: 0, vy: 0, ready: false, repelR, repelF, spring, damp });
+              frag.appendChild(s);
+            }
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === 1 && node.nodeName !== 'BR') {
+            [...node.childNodes].forEach(walk);
+          }
+        }
+        walk(el);
+      }
+
+      document.querySelectorAll('.section-title').forEach(el => wrapEl(el, 68, 24, 0.18, 0.82));
+      document.querySelectorAll('.service-name').forEach(el => wrapEl(el, 52, 16, 0.20, 0.84));
+
+      // Cache origins lazily when sections scroll into view (after reveal animation)
+      const sIO = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          setTimeout(() => {
+            tracked.filter(t => entry.target.contains(t.el)).forEach(t => {
+              const r = t.el.getBoundingClientRect();
+              t.ox = r.left + r.width / 2 + window.scrollX;
+              t.oy = r.top + r.height / 2 + window.scrollY;
+              t.ready = true;
+            });
+          }, 700);
+          sIO.unobserve(entry.target);
+        });
+      }, { threshold: 0.1 });
+
+      ['services', 'process', 'why', 'consult'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) sIO.observe(el);
+      });
+
+      document.addEventListener('mousemove', e => {
+        mouse.x = e.clientX + window.scrollX;
+        mouse.y = e.clientY + window.scrollY;
+      });
+
+      window.addEventListener('resize', () => {
+        setTimeout(() => {
+          tracked.forEach(t => {
+            const r = t.el.getBoundingClientRect();
+            t.ox = r.left + r.width / 2 + window.scrollX;
+            t.oy = r.top + r.height / 2 + window.scrollY;
+          });
+        }, 200);
+      });
+
+      (function tick() {
+        tracked.forEach(t => {
+          if (!t.ready) return;
+          const wx = t.ox + t.dx, wy = t.oy + t.dy;
+          const ddx = wx - mouse.x, ddy = wy - mouse.y;
+          const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+
+          let fx = -t.dx * t.spring, fy = -t.dy * t.spring;
+          if (dist < t.repelR && dist > 0) {
+            const f = Math.pow(1 - dist / t.repelR, 1.5) * t.repelF;
+            fx += (ddx / dist) * f * 0.09;
+            fy += (ddy / dist) * f * 0.09;
+          }
+          t.vx = (t.vx + fx) * t.damp;
+          t.vy = (t.vy + fy) * t.damp;
+          t.dx += t.vx; t.dy += t.vy;
+
+          if (Math.abs(t.dx) > 0.08 || Math.abs(t.dy) > 0.08) {
+            t.el.style.transform = `translate(${t.dx.toFixed(1)}px,${t.dy.toFixed(1)}px)`;
+          } else {
+            t.dx = t.dy = t.vx = t.vy = 0;
+            t.el.style.transform = '';
+          }
+        });
+        requestAnimationFrame(tick);
+      })();
+    })();
+
     // ── FORM SUBMIT RIPPLE
     (function initRipple() {
       document.querySelectorAll('.form-submit').forEach(btn => {
