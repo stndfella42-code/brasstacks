@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Custom websites and POS systems for independent businesses. Built by someone who understands your operations. Launch in 2–4 weeks." />
+  <title>Brass Tacks | Business Tech That Actually Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brass: #c4982a;
+      --brass-dim: #8a6a1a;
+      --brass-light: #e8c76a;
+      --bg: #111110;
+      --bg2: #171715;
+      --bg3: #1e1e1b;
+      --border: rgba(255,255,255,0.07);
+      --border-md: rgba(255,255,255,0.12);
+      --text: #f0ede6;
+      --text-2: #a8a49c;
+      --text-3: #5e5c57;
+      --radius: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(17,17,16,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--brass); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--brass);
+      color: #0d0d0b !important;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      font-weight: 500 !important;
+      font-size: 13px !important;
+      letter-spacing: 0.5px !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--brass-light) !important; color: #0d0d0b !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,152,42,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,152,42,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(196,152,42,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: var(--text);
+      max-width: 900px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    .hero-headline em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--brass);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.35s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.5s;
+    }
+
+    .btn-primary {
+      background: var(--brass);
+      color: #0d0d0b;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--brass-light); transform: translateY(-1px); }
+
+    .btn-ghost {
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--text); }
+
+    .btn-ghost svg { transition: transform 0.2s; }
+    .btn-ghost:hover svg { transform: translateX(3px); }
+
+    .hero-proof {
+      margin-top: 72px;
+      padding-top: 36px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 48px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.65s;
+    }
+
+    .proof-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .proof-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--brass);
+      line-height: 1;
+    }
+
+    .proof-label {
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── SOCIAL PROOF TICKER ── */
+    .ticker {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 40px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .ticker-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--brass);
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 120px 48px;
+    }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: 1px;
+      color: var(--text);
+      max-width: 600px;
+    }
+
+    .section-title em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--brass);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--bg2);
+      padding: 36px 32px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover { background: var(--bg3); }
+
+    .service-card.featured {
+      background: var(--bg3);
+    }
+
+    .service-badge {
+      display: inline-block;
+      background: var(--brass);
+      color: #0d0d0b;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .service-price {
+      font-size: 13px;
+      color: var(--brass);
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .service-features li {
+      font-size: 13px;
+      color: var(--text-3);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .service-features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brass-dim);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .service-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      padding: 120px 48px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .process-step {
+      padding: 0 32px 0 0;
+      position: relative;
+    }
+
+    .process-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 18px;
+      right: 0;
+      width: 1px;
+      height: 48px;
+      background: var(--border-md);
+    }
+
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--brass);
+      margin-bottom: 16px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* ── WHY ── */
+    #why {
+      padding: 120px 48px;
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-body {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.85;
+    }
+
+    .why-body p + p { margin-top: 20px; }
+
+    .why-body strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .why-callout {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--brass);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+
+    .callout-quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .callout-attr {
+      font-size: 12px;
+      color: var(--text-3);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── CONSULT ── */
+    #consult {
+      padding: 120px 48px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .consult-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .consult-inner .section-title {
+      max-width: 100%;
+      margin: 0 auto 20px;
+    }
+
+    .consult-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-2);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .consult-form {
+      text-align: left;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-3); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--brass); }
+
+    .form-group select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-submit {
+      margin-top: 24px;
+      width: 100%;
+      padding: 16px;
+      background: var(--brass);
+      color: #0d0d0b;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .form-submit:hover { background: var(--brass-light); transform: translateY(-1px); }
+
+    .form-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {}
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer-logo span { color: var(--brass); }
+
+    .footer-tagline {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-contact a {
+      font-size: 13px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-contact a:hover { color: var(--brass); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-3);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero, #services, #process, #why, #consult { padding-left: 24px; padding-right: 24px; }
+      footer { padding: 36px 24px; }
+      .why-layout { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-proof { gap: 32px; flex-wrap: wrap; }
+      .process-step:not(:last-child)::after { display: none; }
+      .process-step { padding: 0 0 32px 0; }
+      .footer-right { align-items: flex-start; }
+      .footer-contact { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">BRASS<span>.</span>TACKS</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">How It Works</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#consult" class="nav-cta">Book Free Consult</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-lines"></div>
+    <div class="hero-bg-glow"></div>
+    <div class="hero-eyebrow">Custom tech for independent businesses</div>
+    <h1 class="hero-headline">Your business<br>deserves tech that<br><em>works for you</em></h1>
+    <p class="hero-sub">We build custom websites and POS systems for restaurants, shops, and service businesses — not templates, not shortcuts. Done in weeks, not months.</p>
+    <div class="hero-actions">
+      <a href="#consult" class="btn-primary">Book a Free Consult</a>
+      <a href="#services" class="btn-ghost">
+        See what we build
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <span class="proof-num">2–4</span>
+        <span class="proof-label">Week launch</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-num">100%</span>
+        <span class="proof-label">Custom built</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-num">$0</span>
+        <span class="proof-label">Template fees</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-num">1</span>
+        <span class="proof-label">Live in production</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="ticker-dot"></span>Restaurants</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Food Trucks</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Barbershops</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Nail Salons</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Tattoo Studios</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Personal Trainers</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Retail Shops</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Service Businesses</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span>Restaurants</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Food Trucks</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Barbershops</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Nail Salons</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Tattoo Studios</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Personal Trainers</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Retail Shops</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Service Businesses</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What we build</div>
+      <h2 class="section-title">Pick your<br><em>starting point</em></h2>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-name">Solo Operator</div>
+        <div class="service-price">$1,500 – $2,500</div>
+        <p class="service-desc">A clean, branded online presence for independent professionals who need to be found and booked — fast.</p>
+        <ul class="service-features">
+          <li>1–3 page custom site</li>
+          <li>Booking widget integration</li>
+          <li>Mobile responsive</li>
+          <li>Contact form setup</li>
+          <li>Up to 2 weeks turnaround</li>
+        </ul>
+        <div class="service-footer">Best for: salons, barbershops, trainers, tattoo artists</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Custom Website</div>
+        <div class="service-price">$2,500 – $3,500</div>
+        <p class="service-desc">A multi-page site designed from scratch around your brand — not a theme someone else already used 10,000 times.</p>
+        <ul class="service-features">
+          <li>Multi-page custom design</li>
+          <li>Database-driven content</li>
+          <li>SEO optimization</li>
+          <li>English / Spanish toggle</li>
+          <li>3–4 week turnaround</li>
+        </ul>
+        <div class="service-footer">90 days post-launch support included</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">POS Integration</div>
+        <div class="service-price">$3,500 – $4,500</div>
+        <p class="service-desc">Custom ordering and management systems that connect your whole operation — front of house to back.</p>
+        <ul class="service-features">
+          <li>Custom POS build or integration</li>
+          <li>Real-time inventory sync</li>
+          <li>Kitchen display & ticket routing</li>
+          <li>Custom reporting dashboard</li>
+          <li>Staff training & onboarding</li>
+        </ul>
+        <div class="service-footer">90 days post-launch support included</div>
+      </div>
+      <div class="service-card featured">
+        <div class="service-badge">Best Value</div>
+        <div class="service-name">Full Package</div>
+        <div class="service-price">$5,000 – $6,000</div>
+        <p class="service-desc">Site + POS engineered together from day one. One vendor, one unified system, one point of contact.</p>
+        <ul class="service-features">
+          <li>Everything in both tiers</li>
+          <li>Unified design & data architecture</li>
+          <li>Priority support</li>
+          <li>Quarterly check-ins</li>
+          <li>6 months post-launch support</li>
+        </ul>
+        <div class="service-footer">Complete solution, zero overlap</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">How it works</div>
+      <h2 class="section-title">From conversation<br>to <em>live in weeks</em></h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Free Consult</div>
+        <p class="step-desc">We talk through your business, your goals, and what you actually need. No sales pitch, no upsell — just straight talk.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Scoped & Priced</div>
+        <p class="step-desc">You get a clear proposal — what we're building, what it costs, and when it ships. No vague estimates.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">Built Custom</div>
+        <p class="step-desc">We build your site or system from scratch. You see progress weekly. No surprises.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Launch & Support</div>
+        <p class="step-desc">We launch together and stick around. Every package includes post-launch support so you're never on your own.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="why-layout">
+      <div class="reveal">
+        <div class="section-eyebrow">Why we do this</div>
+        <h2 class="section-title" style="margin-bottom: 36px;">Tech should <em>work for you</em></h2>
+        <div class="why-body">
+          <p>Most small business owners end up with tech that was built for someone else — a generic template, a platform that takes a cut, a system that almost fits. You spend more time fighting the tools than running your business.</p>
+          <p>We build <strong>custom</strong> because every business is different. A food truck has different needs than a nail salon. A solo trainer operates differently than a multi-location restaurant. Off-the-shelf doesn't cut it.</p>
+          <p>Brass Tacks exists to give independent operators the same quality of tech that big chains have — without the enterprise price tag or the six-month timeline.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="why-callout">
+          <div class="callout-quote">"We built Laguna's full website and POS system in under four weeks — live on opening day."</div>
+          <div class="callout-attr">Laguna · Wichita, KS · In production now</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULT -->
+  <section id="consult">
+    <div class="consult-inner">
+      <div class="reveal">
+        <div class="section-eyebrow">Book a free consult</div>
+        <h2 class="section-title">Let's get down<br>to <em>brass tacks</em></h2>
+        <p class="consult-sub">No commitment, no pitch deck. Just a straight conversation about your business and what we can build for you.</p>
+      </div>
+      <div class="consult-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" placeholder="First & last name" />
+          </div>
+          <div class="form-group">
+            <label>Business name</label>
+            <input type="text" placeholder="Your business" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@yourbusiness.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone (optional)</label>
+            <input type="tel" placeholder="(303) 000-0000" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>Which plan interests you?</label>
+            <select>
+              <option value="" disabled selected>Select a plan...</option>
+              <option>Solo Operator ($1,500–$2,500)</option>
+              <option>Custom Website ($2,500–$3,500)</option>
+              <option>POS Integration ($3,500–$4,500)</option>
+              <option>Full Package ($5,000–$6,000)</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>Tell us about your business</label>
+            <textarea placeholder="What do you do, what do you need, and when are you hoping to launch?"></textarea>
+          </div>
+        </div>
+        <button class="form-submit">Send my consult request →</button>
+        <div class="form-note">Or call us directly: <a href="tel:3038183433" style="color: var(--brass); text-decoration: none;">303-818-3433</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-logo">BRASS<span>.</span>TACKS</div>
+      <div class="footer-tagline">Business tech that actually works. · Denver, CO</div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-contact">
+        <a href="https://brasstacks.space">brasstacks.space</a>
+        <a href="tel:3038183433">303-818-3433</a>
+        <a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a>
+      </div>
+      <div class="footer-copy">© 2026 Brass Tacks. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
