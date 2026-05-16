@@ -117,6 +117,50 @@
       overflow: hidden;
     }
 
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #hero-spotlight {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shockwave {
+      position: absolute;
+      width: 0; height: 0;
+      border: 1px solid rgba(196,152,42,0.7);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 3;
+      animation: shockwave 1s cubic-bezier(0.1, 0.6, 0.4, 1) forwards;
+    }
+
+    .shockwave-2 {
+      animation-delay: 0.08s;
+      border-color: rgba(196,152,42,0.35);
+      animation-duration: 1.2s;
+    }
+
+    @keyframes shockwave {
+      to { width: 800px; height: 800px; opacity: 0; }
+    }
+
     .hero-bg-lines {
       position: absolute;
       inset: 0;
@@ -126,6 +170,7 @@
       background-size: 60px 60px;
       pointer-events: none;
       transition: transform 0.1s ease-out;
+      z-index: 1;
     }
 
     .hero-bg-glow {
@@ -169,7 +214,7 @@
       color: var(--brass);
     }
 
-    .sc { display: inline-block; }
+    .hl { display: inline-block; will-change: transform; }
 
     .hero-sub {
       font-size: 17px;
@@ -817,32 +862,36 @@
   <section id="hero">
     <div class="hero-bg-lines"></div>
     <div class="hero-bg-glow"></div>
-    <div class="hero-eyebrow">Custom tech for independent businesses</div>
-    <h1 class="hero-headline">Your business<br>deserves tech that<br><em>works for you</em></h1>
-    <p class="hero-sub">We build custom websites and POS systems for restaurants, shops, and service businesses — not templates, not shortcuts. Done in weeks, not months.</p>
-    <div class="hero-actions">
-      <a href="#consult" class="btn-primary">Book a Free Consult</a>
-      <a href="#services" class="btn-ghost">
-        See what we build
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-item">
-        <span class="proof-num">2–4</span>
-        <span class="proof-label">Week launch</span>
+    <canvas id="hero-canvas"></canvas>
+    <div id="hero-spotlight"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Custom tech for independent businesses</div>
+      <h1 class="hero-headline">Your business<br>deserves tech that<br><em>works for you</em></h1>
+      <p class="hero-sub">We build custom websites and POS systems for restaurants, shops, and service businesses — not templates, not shortcuts. Done in weeks, not months.</p>
+      <div class="hero-actions">
+        <a href="#consult" class="btn-primary">Book a Free Consult</a>
+        <a href="#services" class="btn-ghost">
+          See what we build
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
-      <div class="proof-item">
-        <span class="proof-num">100%</span>
-        <span class="proof-label">Custom built</span>
-      </div>
-      <div class="proof-item">
-        <span class="proof-num">$0</span>
-        <span class="proof-label">Template fees</span>
-      </div>
-      <div class="proof-item">
-        <span class="proof-num">1</span>
-        <span class="proof-label">Live in production</span>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <span class="proof-num">2–4</span>
+          <span class="proof-label">Week launch</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">100%</span>
+          <span class="proof-label">Custom built</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">$0</span>
+          <span class="proof-label">Template fees</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">1</span>
+          <span class="proof-label">Live in production</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1117,46 +1166,122 @@
       })();
     })();
 
-    // ── HERO HEADLINE SCRAMBLE
-    (function initScramble() {
+    // ── HERO LETTER SETUP + SCRAMBLE
+    const heroLetters = (function () {
       const headline = document.querySelector('.hero-headline');
-      if (!headline) return;
+      if (!headline) return [];
       const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#@$%&█▓░0123456789';
 
-      function wrapChars(node) {
+      function wrap(node) {
         if (node.nodeType === 3) {
           const frag = document.createDocumentFragment();
           for (const ch of node.textContent) {
             if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); continue; }
             const s = document.createElement('span');
-            s.className = 'sc';
-            s.dataset.t = ch;
-            s.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+            s.className = 'hl';
+            s.dataset.ch = ch;
+            s.textContent = ch;
             frag.appendChild(s);
           }
           node.parentNode.replaceChild(frag, node);
         } else if (node.nodeType === 1 && node.nodeName !== 'BR') {
-          [...node.childNodes].forEach(wrapChars);
+          [...node.childNodes].forEach(wrap);
         }
       }
 
-      // Wait for fade-in animation (0.2s delay + 0.7s duration = ~900ms)
-      setTimeout(() => {
-        wrapChars(headline);
-        const spans = [...headline.querySelectorAll('.sc')];
-        const TOTAL_MS = 1100;
+      wrap(headline);
+      const spans = [...headline.querySelectorAll('.hl')];
 
+      // Scramble after fade-in completes (~950ms)
+      setTimeout(() => {
+        const TOTAL_MS = 1100;
         spans.forEach((span, i) => {
           const delay = (i / spans.length) * TOTAL_MS * 0.55;
           let n = 0;
           setTimeout(() => {
             const iv = setInterval(() => {
-              if (n++ >= 7) { span.textContent = span.dataset.t; clearInterval(iv); }
+              if (n++ >= 7) { span.textContent = span.dataset.ch; clearInterval(iv); }
               else span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
             }, 38);
           }, delay);
         });
       }, 950);
+
+      return spans;
+    })();
+
+    // ── HERO LETTER PHYSICS (repel + color shift)
+    (function initLetterPhysics() {
+      if (isMobile() || !heroLetters.length) return;
+      const hero = document.getElementById('hero');
+      let mouse = { x: -9999, y: -9999 };
+      let origins = [];
+      const state = heroLetters.map(() => ({ dx: 0, dy: 0, vx: 0, vy: 0 }));
+
+      function cacheOrigins() {
+        const hr = hero.getBoundingClientRect();
+        origins = heroLetters.map(l => {
+          const r = l.getBoundingClientRect();
+          return { x: r.left + r.width / 2 - hr.left, y: r.top + r.height / 2 - hr.top };
+        });
+      }
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      const SPRING = 0.14, DAMP = 0.78, REPEL_R = 100, REPEL_F = 60;
+
+      function tick() {
+        heroLetters.forEach((letter, i) => {
+          const o = origins[i];
+          if (!o) return;
+          const s = state[i];
+          const wx = o.x + s.dx, wy = o.y + s.dy;
+          const ddx = wx - mouse.x, ddy = wy - mouse.y;
+          const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+
+          // Spring back to origin
+          let fx = -s.dx * SPRING, fy = -s.dy * SPRING;
+
+          // Repel from cursor
+          if (dist < REPEL_R && dist > 0) {
+            const f = Math.pow(1 - dist / REPEL_R, 1.5) * REPEL_F;
+            fx += (ddx / dist) * f * 0.09;
+            fy += (ddy / dist) * f * 0.09;
+          }
+
+          s.vx = (s.vx + fx) * DAMP;
+          s.vy = (s.vy + fy) * DAMP;
+          s.dx += s.vx; s.dy += s.vy;
+
+          if (Math.abs(s.dx) > 0.08 || Math.abs(s.dy) > 0.08) {
+            letter.style.transform = `translate(${s.dx.toFixed(1)}px,${s.dy.toFixed(1)}px)`;
+          } else {
+            s.dx = s.dy = s.vx = s.vy = 0;
+            letter.style.transform = '';
+          }
+
+          // Color: white→brass for normal letters, brass→brass-light for em letters
+          const t = clamp(1 - dist / REPEL_R, 0, 1);
+          if (t > 0.02) {
+            const inEm = !!letter.closest('em');
+            const from = inEm ? [196, 152, 42] : [240, 237, 230];
+            const to   = inEm ? [232, 199, 106] : [196, 152, 42];
+            letter.style.color = `rgb(${Math.round(from[0]+(to[0]-from[0])*t)},${Math.round(from[1]+(to[1]-from[1])*t)},${Math.round(from[2]+(to[2]-from[2])*t)})`;
+          } else {
+            letter.style.color = '';
+          }
+        });
+        requestAnimationFrame(tick);
+      }
+
+      // Cache after all animations settle
+      setTimeout(cacheOrigins, 1200);
+      window.addEventListener('resize', () => setTimeout(cacheOrigins, 150));
+      requestAnimationFrame(tick);
     })();
 
     // ── HERO MOUSE PARALLAX
@@ -1177,6 +1302,132 @@
       hero.addEventListener('mouseleave', () => {
         lines.style.transform = '';
         glow.style.transform = '';
+      });
+    })();
+
+    // ── HERO PARTICLES
+    (function initHeroParticles() {
+      if (isMobile()) return;
+      const canvas = document.getElementById('hero-canvas');
+      const hero = document.getElementById('hero');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles = [];
+      let mouse = { x: -999, y: -999 };
+
+      function resize() {
+        const r = hero.getBoundingClientRect();
+        W = canvas.width = r.width;
+        H = canvas.height = r.height;
+      }
+
+      function mkParticles() {
+        particles = [];
+        const count = Math.floor((W * H) / 10000);
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            r: Math.random() * 1.2 + 0.4,
+            base: Math.random() * 0.35 + 0.08,
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const REPEL = 130, CONNECT = 90;
+
+        particles.forEach(p => {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < REPEL && d > 0) {
+            const f = (1 - d / REPEL) * 2.5;
+            p.vx += (dx / d) * f * 0.25;
+            p.vy += (dy / d) * f * 0.25;
+          }
+          p.vx *= 0.97; p.vy *= 0.97;
+          if (Math.abs(p.vx) < 0.05) p.vx += (Math.random() - 0.5) * 0.03;
+          if (Math.abs(p.vy) < 0.05) p.vy += (Math.random() - 0.5) * 0.03;
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        });
+
+        // Connection lines
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < CONNECT) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(196,152,42,${0.07 * (1 - d / CONNECT)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Dots
+        particles.forEach(p => {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          const brightened = d < REPEL ? p.base + (1 - d / REPEL) * 0.5 : p.base;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(196,152,42,${brightened})`;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
+
+      resize(); mkParticles(); draw();
+      window.addEventListener('resize', () => { resize(); mkParticles(); });
+    })();
+
+    // ── HERO SPOTLIGHT
+    (function initHeroSpotlight() {
+      if (isMobile()) return;
+      const spotlight = document.getElementById('hero-spotlight');
+      const hero = document.getElementById('hero');
+
+      hero.addEventListener('mousemove', e => {
+        const r = hero.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        spotlight.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, rgba(196,152,42,0.07) 0%, rgba(196,152,42,0.025) 45%, transparent 70%)`;
+        spotlight.style.opacity = '1';
+      });
+
+      hero.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+    })();
+
+    // ── HERO CLICK SHOCKWAVE
+    (function initHeroShockwave() {
+      if (isMobile()) return;
+      const hero = document.getElementById('hero');
+
+      hero.addEventListener('click', e => {
+        const r = hero.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        [0, 1].forEach(i => {
+          const ring = document.createElement('div');
+          ring.className = 'shockwave' + (i ? ' shockwave-2' : '');
+          ring.style.cssText = `left:${x}px;top:${y}px`;
+          hero.appendChild(ring);
+          setTimeout(() => ring.remove(), 1400);
+        });
       });
     })();
 
