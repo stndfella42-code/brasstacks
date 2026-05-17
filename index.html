@@ -868,6 +868,291 @@
 
     #c-ring.hidden { opacity: 0; }
 
+    /* ── DEMO SECTION ── */
+    #demo {
+      padding: 120px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .demo-intro {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-2);
+      margin-top: 14px;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    .demo-switcher {
+      display: flex;
+      gap: 10px;
+      margin: 36px 0;
+      flex-wrap: wrap;
+    }
+
+    .demo-theme-btn {
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: 1px solid var(--border-md);
+      background: transparent;
+      color: var(--text-3);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: none;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+    }
+
+    .demo-theme-btn:hover:not(.active) {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .demo-browser {
+      background: var(--bg3);
+      border: 1px solid var(--border-md);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .demo-browser-bar {
+      padding: 10px 14px;
+      background: #161614;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-browser-dots { display: flex; gap: 5px; flex-shrink: 0; }
+
+    .demo-dot { width: 9px; height: 9px; border-radius: 50%; display: block; }
+
+    .demo-url-bar {
+      flex: 1;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 10px;
+      color: var(--text-3);
+      text-align: center;
+      transition: opacity 0.3s;
+    }
+
+    .demo-site-inner { transition: opacity 0.25s ease, transform 0.25s ease; }
+
+    .dm-nav {
+      padding: 10px 16px;
+      background: rgba(14,14,13,0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dm-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+
+    .dm-nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .dm-link { font-size: 10px; color: var(--text-3); }
+
+    .dm-cta-pill {
+      font-size: 9px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: #0d0d0b;
+      transition: background 0.4s;
+    }
+
+    .dm-hero {
+      padding: 24px 16px 20px;
+      background: #141413;
+      min-height: 190px;
+    }
+
+    .dm-eyebrow {
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      transition: color 0.4s;
+    }
+
+    .dm-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 2.8vw, 30px);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .dm-sub {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      max-width: 280px;
+    }
+
+    .dm-btn {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 4px;
+      border: none;
+      color: #0d0d0b;
+      cursor: none;
+      margin-bottom: 14px;
+      transition: background 0.4s;
+      letter-spacing: 0.5px;
+    }
+
+    .dm-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .dm-tag {
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 20px;
+      padding: 3px 9px;
+      opacity: 0.75;
+      transition: color 0.4s, border-color 0.4s;
+      border: 1px solid currentColor;
+    }
+
+    /* Playground */
+    .playground {
+      background: var(--bg3);
+      border: 1px solid var(--border-md);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .playground-tabs {
+      display: flex;
+      background: #161614;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .playground-tab {
+      flex: 1;
+      padding: 13px 8px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-3);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      cursor: none;
+      transition: color 0.2s, border-bottom-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .playground-tab:hover:not(.active) { color: var(--text-2); }
+
+    .playground-panel {
+      display: none;
+      padding: 20px;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .playground-panel.active { display: block; }
+
+    /* Menu grid */
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .menu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s;
+    }
+
+    .menu-card:hover { border-color: rgba(255,255,255,0.18); }
+
+    .mc-emoji { font-size: 24px; margin-bottom: 6px; }
+    .mc-name { font-weight: 500; font-size: 12px; color: var(--text); margin-bottom: 3px; }
+    .mc-desc { font-size: 10px; color: var(--text-3); line-height: 1.5; flex: 1; }
+    .mc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+    .mc-price { font-family: 'Bebas Neue', sans-serif; font-size: 17px; }
+
+    .mc-add {
+      width: 24px; height: 24px; border-radius: 50%; border: none;
+      color: #0d0d0b; font-size: 15px; display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: transform 0.15s; flex-shrink: 0; font-weight: 300; line-height: 1;
+    }
+
+    /* Booking */
+    .bk-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--text); margin-bottom: 14px; }
+    .bk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .bk-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+    .bk-label { font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); }
+
+    .bk-input {
+      background: var(--bg2); border: 1px solid var(--border-md); border-radius: 5px;
+      padding: 9px 11px; font-family: 'DM Sans', sans-serif; font-size: 12px;
+      color: var(--text); outline: none; width: 100%; cursor: none; transition: border-color 0.2s;
+    }
+
+    .bk-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+    .bk-pill {
+      padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border-md);
+      background: transparent; font-family: 'DM Sans', sans-serif; font-size: 10px;
+      color: var(--text-3); cursor: none; transition: all 0.2s;
+    }
+
+    .bk-submit {
+      width: 100%; padding: 11px; font-family: 'DM Sans', sans-serif; font-size: 12px;
+      font-weight: 500; border: none; border-radius: 6px; cursor: none; margin-top: 14px;
+      color: #0d0d0b; transition: background 0.4s, transform 0.15s;
+    }
+
+    .bk-submit:hover { transform: translateY(-1px); }
+
+    /* Dashboard */
+    .dash-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+    .dash-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 7px; padding: 12px 10px; }
+    .dash-stat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-3); margin-bottom: 4px; }
+    .dash-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); line-height: 1; margin-bottom: 3px; }
+    .dash-delta { font-size: 10px; font-weight: 500; }
+    .dash-delta.up { color: #4ade80; }
+    .dash-delta.dn { color: #f87171; }
+    .dash-table-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-3); margin-bottom: 8px; }
+    .dash-tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .dash-tbl th { text-align: left; color: var(--text-3); font-weight: 400; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 6px; border-bottom: 1px solid var(--border); }
+    .dash-tbl td { padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-2); }
+    .dash-tbl td:first-child { color: var(--text); font-size: 12px; }
+    .dash-pill { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 500; }
+    .dash-pill.in-stock { background: rgba(74,222,128,0.12); color: #4ade80; }
+    .dash-pill.limited, .dash-pill.low-stock { background: rgba(251,191,36,0.12); color: #fbbf24; }
+    .dash-pill.available { background: rgba(96,165,250,0.12); color: #60a5fa; }
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
       body { cursor: auto; }
@@ -884,6 +1169,12 @@
       .process-step { padding: 0 0 32px 0; }
       .footer-right { align-items: flex-start; }
       .footer-contact { justify-content: flex-start; }
+      #demo { padding-left: 24px; padding-right: 24px; }
+      .demo-layout { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .bk-row { grid-template-columns: 1fr; }
+      .playground-tab { font-size: 10px; padding: 11px 4px; }
     }
   </style>
 </head>
@@ -899,6 +1190,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#process">How It Works</a></li>
       <li><a href="#why">About</a></li>
+      <li><a href="#demo">See It In Action</a></li>
       <li><a href="#consult" class="nav-cta">Book Free Consult</a></li>
     </ul>
     <div id="nav-progress"></div>
@@ -1057,6 +1349,69 @@
         <div class="step-num">04</div>
         <div class="step-title">Launch & Support</div>
         <p class="step-desc">We launch together and stick around. Every package includes post-launch support so you're never on your own.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">See it in action</div>
+      <h2 class="section-title">Built for your<br><em>industry</em></h2>
+      <p class="demo-intro">Switch industries below to see how the same platform transforms in real time — same builder, totally different result.</p>
+    </div>
+
+    <div class="demo-switcher">
+      <button class="demo-theme-btn active" data-theme="restaurant">🍽 Restaurant</button>
+      <button class="demo-theme-btn" data-theme="barbershop">💈 Barbershop</button>
+      <button class="demo-theme-btn" data-theme="retail">🛍 Retail</button>
+    </div>
+
+    <div class="demo-layout">
+      <!-- Left: Mini Site Preview -->
+      <div class="demo-browser reveal">
+        <div class="demo-browser-bar">
+          <div class="demo-browser-dots">
+            <span class="demo-dot" style="background:#ff5f57"></span>
+            <span class="demo-dot" style="background:#febc2e"></span>
+            <span class="demo-dot" style="background:#28c840"></span>
+          </div>
+          <div class="demo-url-bar" id="demo-url">laguna-denver.com</div>
+        </div>
+        <div class="demo-site-inner" id="demo-site-content">
+          <div class="dm-nav">
+            <span class="dm-brand" id="demo-brand">Laguna</span>
+            <div class="dm-nav-right">
+              <span class="dm-link" id="demo-nav-l1">Menu</span>
+              <span class="dm-link" id="demo-nav-l2">Events</span>
+              <span class="dm-cta-pill" id="demo-nav-cta">Reserve</span>
+            </div>
+          </div>
+          <div class="dm-hero">
+            <div class="dm-eyebrow" id="demo-eyebrow">Denver, CO · Est. 2024</div>
+            <h3 class="dm-headline" id="demo-headline">Farm to Table,<br>Every Season</h3>
+            <p class="dm-sub" id="demo-sub">Fresh ingredients, bold flavors, unforgettable evenings.</p>
+            <button class="dm-btn" id="demo-cta">Reserve a Table</button>
+            <div class="dm-tags" id="demo-tags">
+              <span class="dm-tag">Dinner</span>
+              <span class="dm-tag">Brunch</span>
+              <span class="dm-tag">Private Events</span>
+              <span class="dm-tag">Catering</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Component Playground -->
+      <div class="playground reveal">
+        <div class="playground-tabs">
+          <button class="playground-tab active" data-tab="menu">Menu / Catalog</button>
+          <button class="playground-tab" data-tab="booking">Booking Widget</button>
+          <button class="playground-tab" data-tab="dashboard">Dashboard</button>
+        </div>
+        <div class="playground-panel active" id="panel-menu"></div>
+        <div class="playground-panel" id="panel-booking"></div>
+        <div class="playground-panel" id="panel-dashboard"></div>
       </div>
     </div>
   </section>
@@ -1569,7 +1924,7 @@
 
     // ── ACTIVE NAV SECTION
     (function initActiveNav() {
-      const sections = ['services', 'process', 'why', 'consult'].map(id => document.getElementById(id));
+      const sections = ['services', 'process', 'demo', 'why', 'consult'].map(id => document.getElementById(id));
       const links = document.querySelectorAll('.nav-links a[href^="#"]');
 
       const io = new IntersectionObserver(entries => {
@@ -1820,7 +2175,282 @@
       })();
     })();
 
-    // ── EASTER EGG: BREAKOUT GAME (click nav dot 5x to trigger)
+    // ── INDUSTRY DEMO
+    (function initDemo() {
+      const THEMES = {
+        restaurant: {
+          accent: '#c4982a', accentRgb: '196,152,42',
+          url: 'laguna-denver.com', brand: 'Laguna',
+          nav: ['Menu', 'Events', 'Reserve'],
+          eyebrow: 'Denver, CO · Est. 2024',
+          headline: 'Farm to Table,\nEvery Season',
+          sub: 'Fresh ingredients, bold flavors, unforgettable evenings.',
+          cta: 'Reserve a Table',
+          tags: ['Dinner', 'Brunch', 'Private Events', 'Catering'],
+          menu: [
+            { emoji: '🥩', name: 'Wagyu Ribeye',     desc: '14oz, roasted garlic butter, truffle frites', price: '$52' },
+            { emoji: '🍝', name: 'House Tagliatelle', desc: 'Wild boar ragù, aged parmigiano',             price: '$28' },
+            { emoji: '🦞', name: 'Maine Lobster',     desc: 'Butter poached, saffron bisque',              price: '$65' },
+            { emoji: '🥗', name: 'Harvest Salad',     desc: 'Roasted beets, goat cheese, walnuts',         price: '$18' },
+          ],
+          booking: { title: 'Reserve Your Table', namePh: 'Guest name', phonePh: '(303) 000-0000', services: ['Dinner', 'Brunch', 'Private Event', 'Catering'], submit: 'Request Reservation' },
+          dash: {
+            stats: [
+              { label: 'Covers Today', value: '142', delta: '+18%', up: true },
+              { label: 'Revenue',      value: '$4,218', delta: '+12%', up: true },
+              { label: 'Avg Check',    value: '$29.70', delta: '-3%',  up: false },
+            ],
+            tLabel: 'Top Menu Items',
+            rows: [
+              { name: 'Wagyu Ribeye',  sold: 34, status: 'In Stock', cls: 'in-stock' },
+              { name: 'Maine Lobster', sold: 22, status: 'Limited',  cls: 'limited'  },
+              { name: 'Tagliatelle',   sold: 51, status: 'In Stock', cls: 'in-stock' },
+              { name: 'Harvest Salad', sold: 40, status: 'In Stock', cls: 'in-stock' },
+            ],
+          },
+        },
+        barbershop: {
+          accent: '#3b7dd8', accentRgb: '59,125,216',
+          url: 'sharpandsons.co', brand: 'Sharp & Sons',
+          nav: ['Services', 'Pricing', 'Book'],
+          eyebrow: 'Denver, CO · Est. 2018',
+          headline: 'Fades, Cuts &\nClassic Shaves',
+          sub: 'Walk in looking good. Walk out feeling great.',
+          cta: 'Book a Cut',
+          tags: ['Fades', 'Beard Trims', 'Hot Towel Shave', 'Kids Cuts'],
+          menu: [
+            { emoji: '✂️', name: 'Classic Cut',     desc: 'Wash, cut, style, and finish',           price: '$35' },
+            { emoji: '🪒', name: 'Hot Towel Shave', desc: 'Straight razor, hot towel, aftershave',  price: '$45' },
+            { emoji: '💈', name: 'Full Service',     desc: 'Cut + shave + beard trim',               price: '$70' },
+            { emoji: '👦', name: 'Kids Cut',         desc: 'Under 12, quick and fun',                price: '$22' },
+          ],
+          booking: { title: 'Book Your Appointment', namePh: 'Your name', phonePh: '(303) 000-0000', services: ['Classic Cut', 'Hot Towel Shave', 'Full Service', 'Kids Cut'], submit: 'Book Appointment' },
+          dash: {
+            stats: [
+              { label: 'Bookings Today', value: '28',   delta: '+5%',  up: true },
+              { label: 'Revenue',        value: '$980',  delta: '+22%', up: true },
+              { label: 'Avg Service',    value: '$35',   delta: '+0%',  up: true },
+            ],
+            tLabel: 'Top Services',
+            rows: [
+              { name: 'Classic Cut',     sold: 14, status: 'Available', cls: 'available' },
+              { name: 'Full Service',    sold:  8, status: 'Available', cls: 'available' },
+              { name: 'Hot Towel Shave', sold:  5, status: 'Limited',   cls: 'limited'   },
+              { name: 'Kids Cut',        sold:  3, status: 'Available', cls: 'available' },
+            ],
+          },
+        },
+        retail: {
+          accent: '#2d9b5f', accentRgb: '45,155,95',
+          url: 'copperandco.shop', brand: 'Copper & Co.',
+          nav: ['Shop', 'Collections', 'Pickup'],
+          eyebrow: 'Denver, CO · Local Makers',
+          headline: 'Curated Goods,\nLocal Roots',
+          sub: 'Everything in this shop is hand-picked for a reason.',
+          cta: 'Shop Now',
+          tags: ['Home Goods', 'Gifts', 'Seasonal', 'Local Makers'],
+          menu: [
+            { emoji: '🕯️', name: 'Soy Candle Set',  desc: 'Set of 3, Colorado-made, various scents', price: '$48' },
+            { emoji: '🧴', name: 'Linen Face Wash',  desc: 'Natural, vegan, 8oz',                     price: '$26' },
+            { emoji: '🧶', name: 'Wool Throw',       desc: 'Hand-woven, 100% merino',                 price: '$95' },
+            { emoji: '🎁', name: 'Gift Bundle',      desc: 'Curated for gifting, wrapped and ready',  price: '$65' },
+          ],
+          booking: { title: 'Reserve for Pickup', namePh: 'Your name', phonePh: '(303) 000-0000', services: ['Curbside Pickup', 'In-Store Pickup', 'Gift Wrapping', 'Local Delivery'], submit: 'Reserve Items' },
+          dash: {
+            stats: [
+              { label: 'Orders Today', value: '63',    delta: '+31%', up: true },
+              { label: 'Revenue',      value: '$2,847', delta: '+19%', up: true },
+              { label: 'Avg Order',    value: '$45.20', delta: '+8%',  up: true },
+            ],
+            tLabel: 'Top Products',
+            rows: [
+              { name: 'Soy Candle Set',  sold: 24, status: 'In Stock',  cls: 'in-stock'  },
+              { name: 'Gift Bundle',     sold: 18, status: 'Low Stock', cls: 'low-stock' },
+              { name: 'Wool Throw',      sold: 12, status: 'In Stock',  cls: 'in-stock'  },
+              { name: 'Linen Face Wash', sold:  9, status: 'In Stock',  cls: 'in-stock'  },
+            ],
+          },
+        },
+      };
+
+      const section = document.getElementById('demo');
+      if (!section) return;
+
+      let currentTheme = 'restaurant';
+      let currentTab   = 'menu';
+
+      const themeBtns  = section.querySelectorAll('.demo-theme-btn');
+      const tabBtns    = section.querySelectorAll('.playground-tab');
+      const panels     = {
+        menu:      document.getElementById('panel-menu'),
+        booking:   document.getElementById('panel-booking'),
+        dashboard: document.getElementById('panel-dashboard'),
+      };
+      const siteEl     = document.getElementById('demo-site-content');
+      const urlEl      = document.getElementById('demo-url');
+      const brandEl    = document.getElementById('demo-brand');
+      const navCtaEl   = document.getElementById('demo-nav-cta');
+      const navL1El    = document.getElementById('demo-nav-l1');
+      const navL2El    = document.getElementById('demo-nav-l2');
+      const eyebrowEl  = document.getElementById('demo-eyebrow');
+      const headlineEl = document.getElementById('demo-headline');
+      const subEl      = document.getElementById('demo-sub');
+      const ctaEl      = document.getElementById('demo-cta');
+      const tagsEl     = document.getElementById('demo-tags');
+
+      function applyAccent(t) {
+        themeBtns.forEach(b => {
+          const active = b.dataset.theme === currentTheme;
+          b.classList.toggle('active', active);
+          b.style.background   = active ? t.accent : '';
+          b.style.borderColor  = active ? 'transparent' : '';
+          b.style.color        = active ? '#0d0d0b' : '';
+        });
+        tabBtns.forEach(b => {
+          if (b.classList.contains('active')) {
+            b.style.color            = t.accent;
+            b.style.borderBottomColor = t.accent;
+          }
+        });
+      }
+
+      function renderMenu(t) {
+        panels.menu.innerHTML = `<div class="menu-grid">${t.menu.map(item => `
+          <div class="menu-card">
+            <div class="mc-emoji">${item.emoji}</div>
+            <div class="mc-name">${item.name}</div>
+            <div class="mc-desc">${item.desc}</div>
+            <div class="mc-foot">
+              <span class="mc-price" style="color:${t.accent}">${item.price}</span>
+              <button class="mc-add" style="background:${t.accent}">+</button>
+            </div>
+          </div>`).join('')}</div>`;
+        panels.menu.querySelectorAll('.mc-add').forEach(btn => {
+          btn.addEventListener('click', () => {
+            btn.textContent = '✓'; btn.style.transform = 'scale(0.85)';
+            setTimeout(() => { btn.textContent = '+'; btn.style.transform = ''; }, 700);
+          });
+        });
+      }
+
+      function renderBooking(t) {
+        const b = t.booking;
+        panels.booking.innerHTML = `
+          <div class="bk-title">${b.title}</div>
+          <div class="bk-row">
+            <div class="bk-field"><div class="bk-label">Name</div><input class="bk-input" type="text" placeholder="${b.namePh}" /></div>
+            <div class="bk-field"><div class="bk-label">Phone</div><input class="bk-input" type="tel" placeholder="${b.phonePh}" /></div>
+          </div>
+          <div class="bk-row">
+            <div class="bk-field"><div class="bk-label">Date</div><input class="bk-input" type="date" /></div>
+            <div class="bk-field"><div class="bk-label">Time</div><input class="bk-input" type="time" /></div>
+          </div>
+          <div class="bk-field">
+            <div class="bk-label">Service</div>
+            <div class="bk-pills">${b.services.map((s, i) => `<button class="bk-pill${i === 0 ? ' active' : ''}" style="${i === 0 ? `border-color:${t.accent};color:${t.accent};background:rgba(${t.accentRgb},0.1)` : ''}">${s}</button>`).join('')}</div>
+          </div>
+          <button class="bk-submit" style="background:${t.accent}">${b.submit}</button>`;
+        const pills = panels.booking.querySelectorAll('.bk-pill');
+        pills.forEach(p => p.addEventListener('click', () => {
+          pills.forEach(x => { x.classList.remove('active'); x.style.cssText = ''; });
+          p.classList.add('active');
+          p.style.borderColor = t.accent; p.style.color = t.accent;
+          p.style.background = `rgba(${t.accentRgb},0.1)`;
+        }));
+        panels.booking.querySelectorAll('.bk-input').forEach(inp => {
+          inp.addEventListener('focus', () => { inp.style.borderColor = t.accent; });
+          inp.addEventListener('blur',  () => { inp.style.borderColor = ''; });
+        });
+      }
+
+      function renderDashboard(t) {
+        const d = t.dash;
+        panels.dashboard.innerHTML = `
+          <div class="dash-stats">${d.stats.map(s => `
+            <div class="dash-stat">
+              <div class="dash-stat-label">${s.label}</div>
+              <div class="dash-stat-val">${s.value}</div>
+              <div class="dash-delta ${s.up ? 'up' : 'dn'}">${s.delta} ${s.up ? '↑' : '↓'}</div>
+            </div>`).join('')}</div>
+          <div class="dash-table-lbl">${d.tLabel}</div>
+          <table class="dash-tbl">
+            <thead><tr><th>Item</th><th>Sold</th><th>Status</th></tr></thead>
+            <tbody>${d.rows.map(r => `
+              <tr>
+                <td>${r.name}</td>
+                <td>${r.sold}</td>
+                <td><span class="dash-pill ${r.cls}">${r.status}</span></td>
+              </tr>`).join('')}</tbody>
+          </table>`;
+      }
+
+      function renderAll(t) { renderMenu(t); renderBooking(t); renderDashboard(t); }
+
+      function updatePreview(t, animate) {
+        const doUpdate = () => {
+          urlEl.textContent      = t.url;
+          brandEl.textContent    = t.brand;
+          navL1El.textContent    = t.nav[0];
+          navL2El.textContent    = t.nav[1];
+          navCtaEl.textContent   = t.nav[2];
+          navCtaEl.style.background = t.accent;
+          eyebrowEl.textContent  = t.eyebrow;
+          eyebrowEl.style.color  = t.accent;
+          headlineEl.innerHTML   = t.headline.replace('\n', '<br>');
+          subEl.textContent      = t.sub;
+          ctaEl.textContent      = t.cta;
+          ctaEl.style.background = t.accent;
+          tagsEl.innerHTML       = t.tags.map(tag => `<span class="dm-tag" style="color:${t.accent};border-color:${t.accent}">${tag}</span>`).join('');
+        };
+        if (animate) {
+          siteEl.style.opacity = '0'; siteEl.style.transform = 'translateY(8px)';
+          setTimeout(() => { doUpdate(); siteEl.style.opacity = '1'; siteEl.style.transform = ''; }, 260);
+        } else { doUpdate(); }
+      }
+
+      function switchTheme(name, animate) {
+        currentTheme = name;
+        const t = THEMES[name];
+        applyAccent(t);
+        updatePreview(t, animate);
+        if (animate) {
+          const activePanel = panels[currentTab];
+          activePanel.style.opacity = '0';
+          setTimeout(() => { renderAll(t); activePanel.style.opacity = '1'; }, 230);
+        } else { renderAll(t); }
+      }
+
+      themeBtns.forEach(btn => btn.addEventListener('click', () => {
+        if (btn.dataset.theme !== currentTheme) switchTheme(btn.dataset.theme, true);
+      }));
+
+      tabBtns.forEach(btn => btn.addEventListener('click', () => {
+        if (btn.dataset.tab === currentTab) return;
+        const t = THEMES[currentTheme];
+        tabBtns.forEach(b => { b.classList.remove('active'); b.style.color = ''; b.style.borderBottomColor = ''; });
+        Object.values(panels).forEach(p => p.classList.remove('active'));
+        currentTab = btn.dataset.tab;
+        btn.classList.add('active'); btn.style.color = t.accent; btn.style.borderBottomColor = t.accent;
+        panels[currentTab].classList.add('active');
+      }));
+
+      // Wire cursor hover ring to dynamically created elements
+      if (!isMobile()) {
+        const ring = document.getElementById('c-ring');
+        section.addEventListener('mouseover', e => {
+          const el = e.target.closest('.demo-theme-btn, .playground-tab, .bk-pill, .mc-add, .bk-submit, .dm-btn');
+          if (el) ring.classList.add('hover');
+        });
+        section.addEventListener('mouseout', e => {
+          const el = e.target.closest('.demo-theme-btn, .playground-tab, .bk-pill, .mc-add, .bk-submit, .dm-btn');
+          if (el) ring.classList.remove('hover');
+        });
+      }
+
+      switchTheme('restaurant', false);
+    })();
+
+    // ── EASTER EGG: BRASS ARCADE (click nav dot 3x)
     (function initEasterEgg() {
       const dot = document.querySelector('.nav-logo span');
       if (!dot) return;
