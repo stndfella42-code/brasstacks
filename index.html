@@ -2011,12 +2011,26 @@
           spawnShockwave(e.clientX - r.left, e.clientY - r.top);
         });
       } else {
+        // Tap detection: only fire if touch didn't scroll (small movement, quick lift)
+        let touchStartX = 0, touchStartY = 0, touchStartT = 0;
+
         hero.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchStartT = Date.now();
+        }, { passive: true });
+
+        hero.addEventListener('touchend', e => {
+          const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+          const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+          const dt = Date.now() - touchStartT;
+          // Only treat as a tap if finger barely moved and lifted quickly
+          if (dx > 10 || dy > 10 || dt > 300) return;
+
           const r = hero.getBoundingClientRect();
-          const t = e.touches[0];
+          const t = e.changedTouches[0];
           spawnShockwave(t.clientX - r.left, t.clientY - r.top);
 
-          // Particle burst from touch point
           const px = t.clientX, py = t.clientY;
           for (let i = 0; i < 12; i++) {
             const angle = (i / 12) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
