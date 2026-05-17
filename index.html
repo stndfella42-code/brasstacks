@@ -2081,28 +2081,6 @@
       }
     })();
 
-    // ── MOBILE AUTO-SCRAMBLE (keeps hero alive without hover)
-    (function initMobileAutoScramble() {
-      if (!isMobile() || !heroLetters.length) return;
-      const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#@$%&█▓░0123456789';
-
-      function scrambleSome() {
-        const count = 3 + Math.floor(Math.random() * 3);
-        const seen = new Set();
-        while (seen.size < count) seen.add(Math.floor(Math.random() * heroLetters.length));
-        seen.forEach(i => {
-          const span = heroLetters[i];
-          let n = 0;
-          const iv = setInterval(() => {
-            if (n++ >= 5) { span.textContent = span.dataset.ch; clearInterval(iv); }
-            else span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-          }, 48);
-        });
-      }
-
-      // Fire after initial scramble settles, then every 3.5s
-      setTimeout(() => { scrambleSome(); setInterval(scrambleSome, 3500); }, 3200);
-    })();
 
     // ── CARD TILT + GLARE
     (function initCardTilt() {
