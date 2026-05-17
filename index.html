@@ -868,6 +868,103 @@
 
     #c-ring.hidden { opacity: 0; }
 
+    /* ── COMPARE SECTION ── */
+    #compare {
+      padding: 120px 48px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cmp-scroll { overflow-x: auto; }
+
+    .cmp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 56px;
+    }
+
+    .cmp-table thead th {
+      padding: 14px 20px 18px;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .cmp-table thead th:first-child {
+      text-align: left;
+      width: 28%;
+    }
+
+    .cmp-table thead th.cmp-us {
+      color: var(--brass);
+      background: rgba(196,152,42,0.06);
+      border-top: 2px solid var(--brass);
+      border-left: 1px solid rgba(196,152,42,0.2);
+      border-right: 1px solid rgba(196,152,42,0.2);
+      border-bottom: 1px solid rgba(196,152,42,0.2);
+      border-radius: 6px 6px 0 0;
+      font-size: 13px;
+    }
+
+    .cmp-row {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .cmp-row.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .cmp-row td {
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .cmp-row td:first-child {
+      text-align: left;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.3px;
+    }
+
+    .cmp-row td.cmp-us {
+      background: rgba(196,152,42,0.05);
+      border-left: 1px solid rgba(196,152,42,0.18);
+      border-right: 1px solid rgba(196,152,42,0.18);
+      border-bottom: 1px solid rgba(196,152,42,0.12);
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .cmp-table tbody tr:last-child td.cmp-us {
+      border-bottom: 1px solid rgba(196,152,42,0.2);
+      border-radius: 0 0 6px 6px;
+    }
+
+    .cmp-check { color: var(--brass); font-size: 16px; }
+    .cmp-cross { color: var(--text-3); font-size: 14px; }
+    .cmp-partial { color: var(--text-3); font-size: 13px; letter-spacing: 1px; }
+    .cmp-val { font-size: 12px; line-height: 1.4; }
+    .cmp-val.good { color: var(--brass); font-weight: 500; }
+    .cmp-val.meh  { color: var(--text-3); }
+    .cmp-val.bad  { color: var(--text-3); }
+
     /* ── DEMO SECTION ── */
     #demo {
       padding: 120px 48px;
@@ -1175,6 +1272,9 @@
       .dash-stats { grid-template-columns: 1fr 1fr; }
       .bk-row { grid-template-columns: 1fr; }
       .playground-tab { font-size: 10px; padding: 11px 4px; }
+      #compare { padding-left: 24px; padding-right: 24px; }
+      .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .cmp-table { min-width: 560px; }
     }
   </style>
 </head>
@@ -1434,6 +1534,85 @@
           <div class="callout-attr">Laguna · Wichita, KS · In production now</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Why Brass Tacks</div>
+      <h2 class="section-title">How we stack<br><em>up</em></h2>
+    </div>
+    <div class="cmp-scroll">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Squarespace / Wix</th>
+            <th>Freelancer</th>
+            <th>Agency</th>
+            <th class="cmp-us">Brass Tacks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cmp-row">
+            <td>Upfront cost</td>
+            <td><span class="cmp-val meh">$0 upfront<br>$20–50/mo forever</span></td>
+            <td><span class="cmp-val meh">Varies wildly</span></td>
+            <td><span class="cmp-val bad">$10K – $50K+</span></td>
+            <td class="cmp-us"><span class="cmp-val good">$1,500 – $6,000</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>Time to launch</td>
+            <td><span class="cmp-val meh">Same day<br>(looks like it)</span></td>
+            <td><span class="cmp-val bad">2 – 6 months</span></td>
+            <td><span class="cmp-val bad">3 – 12 months</span></td>
+            <td class="cmp-us"><span class="cmp-val good">2 – 4 weeks</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>Custom built for you</td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-partial">~ depends</span></td>
+            <td><span class="cmp-check">✓</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>No platform fees ever</td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-check">✓</span></td>
+            <td><span class="cmp-check">✓</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>POS + website together</td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-partial">~ rarely</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>Post-launch support</td>
+            <td><span class="cmp-partial">~ FAQ only</span></td>
+            <td><span class="cmp-partial">~ sometimes</span></td>
+            <td><span class="cmp-val bad">Extra retainer</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓ Included</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>Knows your industry</td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-partial">~ maybe</span></td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓</span></td>
+          </tr>
+          <tr class="cmp-row">
+            <td>You own everything</td>
+            <td><span class="cmp-cross">✕</span></td>
+            <td><span class="cmp-check">✓</span></td>
+            <td><span class="cmp-check">✓</span></td>
+            <td class="cmp-us"><span class="cmp-check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -1924,7 +2103,7 @@
 
     // ── ACTIVE NAV SECTION
     (function initActiveNav() {
-      const sections = ['services', 'process', 'demo', 'why', 'consult'].map(id => document.getElementById(id));
+      const sections = ['services', 'process', 'demo', 'why', 'compare', 'consult'].map(id => document.getElementById(id));
       const links = document.querySelectorAll('.nav-links a[href^="#"]');
 
       const io = new IntersectionObserver(entries => {
@@ -2448,6 +2627,21 @@
       }
 
       switchTheme('restaurant', false);
+    })();
+
+    // ── COMPARE TABLE ROW REVEAL
+    (function initCompare() {
+      const rows = document.querySelectorAll('.cmp-row');
+      if (!rows.length) return;
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const idx = [...rows].indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.15 });
+      rows.forEach(r => io.observe(r));
     })();
 
     // ── EASTER EGG: BRASS ARCADE (click nav dot 3x)
