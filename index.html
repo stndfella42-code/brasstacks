@@ -1390,7 +1390,6 @@
       <div class="service-card card-reveal" data-dir="left">
         <div class="card-glare"></div>
         <div class="service-name">Solo Operator</div>
-        <div class="service-price">$1,500 – $2,500</div>
         <p class="service-desc">A clean, branded online presence for independent professionals who need to be found and booked — fast.</p>
         <ul class="service-features">
           <li>1–3 page custom site</li>
@@ -1404,7 +1403,6 @@
       <div class="service-card card-reveal" data-dir="up">
         <div class="card-glare"></div>
         <div class="service-name">Custom Website</div>
-        <div class="service-price">$2,500 – $3,500</div>
         <p class="service-desc">A multi-page site designed from scratch around your brand — not a theme someone else already used 10,000 times.</p>
         <ul class="service-features">
           <li>Multi-page custom design</li>
@@ -1418,7 +1416,6 @@
       <div class="service-card card-reveal" data-dir="up">
         <div class="card-glare"></div>
         <div class="service-name">POS Integration</div>
-        <div class="service-price">$3,500 – $4,500</div>
         <p class="service-desc">Custom ordering and management systems that connect your whole operation — front of house to back.</p>
         <ul class="service-features">
           <li>Custom POS build or integration</li>
@@ -1433,7 +1430,6 @@
         <div class="card-glare"></div>
         <div class="service-badge">Best Value</div>
         <div class="service-name">Full Package</div>
-        <div class="service-price">$5,000 – $6,000</div>
         <p class="service-desc">Site + POS engineered together from day one. One vendor, one unified system, one point of contact.</p>
         <ul class="service-features">
           <li>Everything in both tiers</li>
@@ -1584,7 +1580,7 @@
             <td><span class="cmp-val meh">$0 upfront<br>$20–50/mo forever</span></td>
             <td><span class="cmp-val meh">Varies wildly</span></td>
             <td><span class="cmp-val bad">$10K – $50K+</span></td>
-            <td class="cmp-us"><span class="cmp-val good">$1,500 – $6,000</span></td>
+            <td class="cmp-us"><span class="cmp-val good">Custom quote</span></td>
           </tr>
           <tr class="cmp-row">
             <td>Time to launch</td>
@@ -1843,8 +1839,21 @@
       hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
       const SPRING = 0.14, DAMP = 0.78, REPEL_R = 100, REPEL_F = 60;
+      const FRAME_MS = 1000 / 30; // cap at 30fps
+      let lastTick = 0, mouseActive = false, anyMoving = false;
 
-      function tick() {
+      hero.addEventListener('mouseenter', () => { mouseActive = true; });
+      hero.addEventListener('mouseleave', () => { mouseActive = false; });
+
+      function tick(now) {
+        requestAnimationFrame(tick);
+        if (now - lastTick < FRAME_MS) return; // throttle to 30fps
+        lastTick = now;
+
+        // If mouse is gone and nothing is moving, skip the whole loop
+        if (!mouseActive && !anyMoving) return;
+
+        anyMoving = false;
         heroLetters.forEach((letter, i) => {
           const o = origins[i];
           if (!o) return;
@@ -1853,10 +1862,8 @@
           const ddx = wx - mouse.x, ddy = wy - mouse.y;
           const dist = Math.sqrt(ddx * ddx + ddy * ddy);
 
-          // Spring back to origin
           let fx = -s.dx * SPRING, fy = -s.dy * SPRING;
 
-          // Repel from cursor
           if (dist < REPEL_R && dist > 0) {
             const f = Math.pow(1 - dist / REPEL_R, 1.5) * REPEL_F;
             fx += (ddx / dist) * f * 0.09;
@@ -1868,13 +1875,13 @@
           s.dx += s.vx; s.dy += s.vy;
 
           if (Math.abs(s.dx) > 0.08 || Math.abs(s.dy) > 0.08) {
+            anyMoving = true;
             letter.style.transform = `translate(${s.dx.toFixed(1)}px,${s.dy.toFixed(1)}px)`;
           } else {
             s.dx = s.dy = s.vx = s.vy = 0;
             letter.style.transform = '';
           }
 
-          // Color: white→brass for normal letters, brass→brass-light for em letters
           const t = clamp(1 - dist / REPEL_R, 0, 1);
           if (t > 0.02) {
             const inEm = !!letter.closest('em');
@@ -1885,7 +1892,6 @@
             letter.style.color = '';
           }
         });
-        requestAnimationFrame(tick);
       }
 
       // Cache after all animations settle
@@ -1918,6 +1924,9 @@
     // ── HERO PARTICLES (desktop + lighter mobile version)
     (function initHeroParticles() {
       const mobile = isMobile();
+      const PARTICLE_FPS = mobile ? 24 : 45;
+      const PARTICLE_MS  = 1000 / PARTICLE_FPS;
+      let lastParticleTick = 0;
       const canvas = document.getElementById('hero-canvas');
       const hero = document.getElementById('hero');
       const ctx = canvas.getContext('2d');
@@ -1946,7 +1955,10 @@
         }
       }
 
-      function draw() {
+      function draw(now) {
+        requestAnimationFrame(draw);
+        if (now - lastParticleTick < PARTICLE_MS) return;
+        lastParticleTick = now;
         ctx.clearRect(0, 0, W, H);
         const REPEL = 130, CONNECT = mobile ? 68 : 90;
 
@@ -1994,7 +2006,6 @@
           ctx.fill();
         });
 
-        requestAnimationFrame(draw);
       }
 
       if (!mobile) {
