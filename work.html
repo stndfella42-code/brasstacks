@@ -863,6 +863,71 @@
     .nav-logo span, .footer-logo span { animation: dot-pulse 3s ease-in-out infinite; }
 
     /* â”€â”€ MOBILE â”€â”€ */
+    /* ── CONCEPT MODAL ── */
+    @keyframes modal-spin-in {
+      0%   { transform: scale(0.06) rotate(-540deg); opacity: 0; }
+      55%  { opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    @keyframes modal-spin-out {
+      0%   { transform: scale(1) rotate(0deg); opacity: 1; }
+      35%  { opacity: 0.6; }
+      100% { transform: scale(0.06) rotate(540deg); opacity: 0; }
+    }
+    .concept-modal {
+      position: fixed; inset: 0; z-index: 600;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px; pointer-events: none; visibility: hidden;
+    }
+    .concept-modal.is-open { pointer-events: all; visibility: visible; }
+    .concept-modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(8,8,7,0.92); backdrop-filter: blur(10px);
+      opacity: 0; transition: opacity 0.35s ease;
+    }
+    .concept-modal.is-open .concept-modal-backdrop { opacity: 1; }
+    .concept-modal-card {
+      position: relative; z-index: 1;
+      width: min(72vw, 900px);
+      background: var(--bg2); border: 1px solid var(--border-md);
+      border-radius: 14px; overflow: hidden;
+      display: flex; flex-direction: column; max-height: 90vh;
+    }
+    .concept-modal.is-open .concept-modal-card {
+      animation: modal-spin-in 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .concept-modal.is-closing .concept-modal-card {
+      animation: modal-spin-out 0.42s cubic-bezier(0.4,0,1,1) both;
+    }
+    .concept-modal-close {
+      position: absolute; top: 14px; right: 14px; z-index: 10;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text-2); display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: background 0.18s, color 0.18s;
+    }
+    .concept-modal-close:hover { background: rgba(255,255,255,0.13); color: var(--text); }
+    .concept-modal-mock-wrap { width: 100%; overflow: hidden; flex-shrink: 0; }
+    .concept-modal-mock-inner { transform-origin: top left; }
+    .concept-modal-mock-inner .mock-content { min-height: 220px; }
+    .concept-modal-info { padding: 22px 26px 26px; border-top: 1px solid var(--border); }
+    .concept-modal-meta { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+    .concept-modal-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      letter-spacing: 1px; color: var(--text); line-height: 1;
+    }
+    .concept-modal-tag {
+      font-size: 9px; font-weight: 500; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--text-3);
+      background: var(--bg3); border: 1px solid var(--border-md);
+      border-radius: 3px; padding: 3px 9px;
+    }
+    .concept-modal-desc {
+      font-size: 14px; font-weight: 300; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 14px; max-width: 620px;
+    }
+    .concept-modal-built { font-size: 12px; color: var(--brass); letter-spacing: 0.5px; }
+
     @media (max-width: 900px) {
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonial-strip { grid-template-columns: 1fr; }
@@ -1292,6 +1357,27 @@
   </section>
 
 
+  <!-- CONCEPT MODAL -->
+  <div id="concept-modal" class="concept-modal" role="dialog" aria-modal="true">
+    <div class="concept-modal-backdrop"></div>
+    <div class="concept-modal-card">
+      <button class="concept-modal-close" aria-label="Close">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="concept-modal-mock-wrap">
+        <div class="concept-modal-mock-inner"></div>
+      </div>
+      <div class="concept-modal-info">
+        <div class="concept-modal-meta">
+          <div class="concept-modal-name"></div>
+          <span class="concept-modal-tag"></span>
+        </div>
+        <p class="concept-modal-desc"></p>
+        <div class="concept-modal-built"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- CTA STRIP -->
   <div class="cta-strip reveal">
     <div class="cta-strip-left">
@@ -1469,6 +1555,85 @@
       });
     })();
 
+  })();
+  </script>
+
+  <script>
+  // ── CONCEPT MODAL — click card to spin-expand
+  (function initConceptModal() {
+    const modal     = document.getElementById('concept-modal');
+    const backdrop  = modal.querySelector('.concept-modal-backdrop');
+    const mockInner = modal.querySelector('.concept-modal-mock-inner');
+    const mockWrap  = modal.querySelector('.concept-modal-mock-wrap');
+    const nameEl    = modal.querySelector('.concept-modal-name');
+    const tagEl     = modal.querySelector('.concept-modal-tag');
+    const descEl    = modal.querySelector('.concept-modal-desc');
+    const builtEl   = modal.querySelector('.concept-modal-built');
+    const closeBtn  = modal.querySelector('.concept-modal-close');
+
+    function openModal(card) {
+      // Clone the mock-browser from the card
+      const srcMock = card.querySelector('.mock-browser');
+      const clone   = srcMock.cloneNode(true);
+
+      // Pull meta from the card
+      const name  = card.querySelector('.portfolio-biz-name')?.textContent || '';
+      const tag   = card.querySelector('.portfolio-tag')?.textContent || '';
+      const desc  = card.querySelector('.portfolio-desc')?.textContent || '';
+      const built = card.querySelector('.portfolio-detail-val')?.textContent || '';
+
+      // Insert clone
+      mockInner.innerHTML = '';
+      mockInner.appendChild(clone);
+
+      // Populate info
+      nameEl.textContent  = name;
+      tagEl.textContent   = tag;
+      descEl.textContent  = desc;
+      builtEl.textContent = built;
+
+      // Open the modal first so we can measure
+      modal.classList.add('is-open');
+      modal.classList.remove('is-closing');
+      document.body.style.overflow = 'hidden';
+
+      // Scale the mockup: fit it to the modal card width
+      requestAnimationFrame(() => {
+        const srcW    = srcMock.offsetWidth;
+        const destW   = mockWrap.offsetWidth;
+        const scale   = destW / srcW;
+        const srcH    = srcMock.offsetHeight;
+        mockInner.style.width     = srcW + 'px';
+        mockInner.style.height    = srcH + 'px';
+        mockInner.style.transform = `scale(${scale})`;
+        mockInner.style.transformOrigin = 'top left';
+        mockWrap.style.height = Math.round(srcH * scale) + 'px';
+      });
+    }
+
+    function closeModal() {
+      modal.classList.add('is-closing');
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        modal.classList.remove('is-closing');
+        modal.style.visibility = 'hidden';
+        mockInner.innerHTML = '';
+        mockWrap.style.height = '';
+      }, 440);
+    }
+
+    // Click on any portfolio card
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => openModal(card));
+    });
+
+    // Close on backdrop, close button, or Escape
+    backdrop.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
   })();
   </script>
 
