@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book a free consult with Brass Tacks. We build custom websites and POS systems for independent businesses in Denver. No pitch deck, just straight talk." />
+  <title>Contact | Brass Tacks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brass: #c4982a;
+      --brass-dim: #8a6a1a;
+      --brass-light: #e8c76a;
+      --bg: #111110;
+      --bg2: #171715;
+      --bg3: #1e1e1b;
+      --border: rgba(255,255,255,0.07);
+      --border-md: rgba(255,255,255,0.12);
+      --text: #f0ede6;
+      --text-2: #a8a49c;
+      --text-3: #5e5c57;
+      --radius: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(17,17,16,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--text);
+      text-decoration: none;
+      cursor: none;
+    }
+
+    .nav-logo span { color: var(--brass); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: none;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--brass); }
+
+    .nav-cta {
+      background: var(--brass);
+      color: #0d0d0b !important;
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      font-weight: 500 !important;
+      font-size: 13px !important;
+      letter-spacing: 0.5px !important;
+      transition: background 0.2s !important;
+      cursor: none;
+    }
+
+    .nav-cta:hover { background: var(--brass-light) !important; color: #0d0d0b !important; }
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 160px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(196,152,42,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196,152,42,0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .page-hero-glow {
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(196,152,42,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .page-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8vw, 100px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: var(--text);
+      max-width: 800px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .page-hero h1 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--brass);
+    }
+
+    .page-hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.75;
+      position: relative;
+    }
+
+    /* ── CONTACT LAYOUT ── */
+    .contact-section {
+      padding: 80px 48px 100px;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 72px;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .form-header {
+      margin-bottom: 36px;
+    }
+
+    .form-label-big {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 12px;
+    }
+
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.05;
+      letter-spacing: 1px;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .form-title em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--brass);
+    }
+
+    .consult-form {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      cursor: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-3); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--brass); }
+
+    .form-group select { appearance: none; cursor: none; }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      margin-top: 24px;
+      width: 100%;
+      padding: 16px;
+      background: var(--brass);
+      color: #0d0d0b;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .form-submit:hover { background: var(--brass-light); }
+
+    .btn-liquid {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      transform: translate(-50%,-50%) scale(0);
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .btn-liquid.active { transform: translate(-50%,-50%) scale(1); }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      width: 0; height: 0;
+      transform: translate(-50%, -50%);
+      animation: ripple-anim 0.65s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-anim {
+      to { width: 600px; height: 600px; opacity: 0; }
+    }
+
+    .form-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .form-note a {
+      color: var(--brass);
+      text-decoration: none;
+      cursor: none;
+    }
+
+    /* ── SIDEBAR ── */
+    .contact-sidebar {}
+
+    .sidebar-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-block:last-child { margin-bottom: 0; }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .contact-item:last-child { margin-bottom: 0; }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-md);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--brass);
+    }
+
+    .contact-item-label {
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .contact-item-val {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .contact-item-val a {
+      color: var(--text);
+      text-decoration: none;
+      cursor: none;
+      transition: color 0.2s;
+    }
+
+    .contact-item-val a:hover { color: var(--brass); }
+
+    .response-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(196,152,42,0.07);
+      border: 1px solid rgba(196,152,42,0.18);
+      border-radius: var(--radius);
+      margin-top: 20px;
+    }
+
+    .response-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brass);
+      flex-shrink: 0;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(196,152,42,0.4); }
+      50% { box-shadow: 0 0 0 4px rgba(196,152,42,0); }
+    }
+
+    .response-text {
+      font-size: 12px;
+      color: var(--brass);
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SIDEBAR FAQ ── */
+    .sidebar-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .sidebar-faq-item {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .sidebar-faq-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .sidebar-faq-q {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .sidebar-faq-a {
+      font-size: 12.5px;
+      font-weight: 300;
+      color: var(--text-3);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 0;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer-logo span { color: var(--brass); }
+
+    .footer-tagline {
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .footer-contact {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-contact a {
+      font-size: 13px;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: none;
+    }
+
+    .footer-contact a:hover { color: var(--brass); }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: none;
+    }
+
+    .footer-social a:hover { color: var(--brass); }
+    .footer-social svg { width: 16px; height: 16px; flex-shrink: 0; fill: currentColor; }
+    .footer-copy { font-size: 11px; color: var(--text-3); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    #c-dot {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--brass);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      top: -3px; left: -3px;
+      will-change: transform;
+    }
+
+    #c-ring {
+      position: fixed;
+      width: 32px; height: 32px;
+      border: 1.5px solid rgba(196,152,42,0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      top: -16px; left: -16px;
+      will-change: transform;
+      transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, left 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
+    }
+
+    #c-ring.hover { width: 54px; height: 54px; top: -27px; left: -27px; border-color: var(--brass); }
+    #c-ring.hidden { opacity: 0; }
+
+    @keyframes dot-pulse {
+      0%, 100% { color: var(--brass); }
+      50% { color: var(--brass-light); text-shadow: 0 0 12px rgba(196,152,42,0.7); }
+    }
+    .nav-logo span, .footer-logo span { animation: dot-pulse 3s ease-in-out infinite; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .contact-sidebar { order: -1; }
+    }
+
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      a, button, select, input, textarea { cursor: auto; }
+      #c-dot, #c-ring { display: none; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .page-hero { padding: 120px 24px 64px; }
+      .contact-section { padding: 56px 24px 80px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 36px 24px; }
+      .footer-right { align-items: flex-start; }
+      .footer-contact { justify-content: flex-start; }
+      .consult-form { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="c-dot"></div>
+  <div id="c-ring"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">BRASS<span>.</span>TACKS</a>
+    <ul class="nav-links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Free Consult</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-glow"></div>
+    <div class="hero-eyebrow" style="opacity:0;animation:fadeUp 0.6s ease forwards 0.1s">Get in touch</div>
+    <h1 style="opacity:0;animation:fadeUp 0.7s ease forwards 0.2s">Let's build<br><em>something.</em></h1>
+    <p class="page-hero-sub" style="opacity:0;animation:fadeUp 0.7s ease forwards 0.35s">No commitment, no pitch deck. Fill out the form and we'll be in touch within 24 hours to schedule a straight conversation about your business.</p>
+  </section>
+
+  <!-- CONTACT LAYOUT -->
+  <section class="contact-section">
+    <div class="contact-layout">
+
+      <!-- FORM -->
+      <div class="reveal">
+        <div class="form-header">
+          <div class="form-label-big">Book a free consult</div>
+          <div class="form-title">Tell us about<br><em>your business</em></div>
+        </div>
+
+        <div class="consult-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your name</label>
+              <input type="text" placeholder="First &amp; last name" />
+            </div>
+            <div class="form-group">
+              <label>Business name</label>
+              <input type="text" placeholder="Your business" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="you@yourbusiness.com" />
+            </div>
+            <div class="form-group">
+              <label>Phone (optional)</label>
+              <input type="tel" placeholder="(303) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label>Which service interests you?</label>
+              <select>
+                <option value="" disabled selected>Select a service...</option>
+                <option>Solo Operator — Simple site, fast launch</option>
+                <option>Custom Website — Multi-page, built from scratch</option>
+                <option>POS Integration — Ordering and management systems</option>
+                <option>Full Package — Site + POS together</option>
+                <option>Not sure yet — let's talk</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label>Tell us about your business</label>
+              <textarea placeholder="What do you do, what do you need, and when are you hoping to launch? The more detail, the better."></textarea>
+            </div>
+          </div>
+          <button class="form-submit">Send my consult request →</button>
+          <div class="form-note">Or call us directly: <a href="tel:3038183433">303-818-3433</a></div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="contact-sidebar reveal">
+
+        <!-- Contact info -->
+        <div class="sidebar-block">
+          <div class="sidebar-label">Direct contact</div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h3.28a1 1 0 0 1 .948.684l1.498 4.493a1 1 0 0 1-.502 1.21l-2.257 1.13a11.042 11.042 0 0 0 5.516 5.516l1.13-2.257a1 1 0 0 1 1.21-.502l4.493 1.498a1 1 0 0 1 .684.949V19a2 2 0 0 1-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-val"><a href="tel:3038183433">303-818-3433</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val"><a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a></div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/><path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Location</div>
+              <div class="contact-item-val">Denver, CO</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Yelp</div>
+              <div class="contact-item-val"><a href="https://www.yelp.com/biz/cPsdfPciLkgb0gMI0-U6Qg" target="_blank" rel="noopener">View us on Yelp</a></div>
+            </div>
+          </div>
+
+          <div class="response-badge">
+            <div class="response-dot"></div>
+            <span class="response-text">Response within 24 hours — usually faster</span>
+          </div>
+        </div>
+
+        <!-- Quick FAQ -->
+        <div class="sidebar-block">
+          <div class="sidebar-label">Quick answers</div>
+          <div class="sidebar-faq-list">
+            <div class="sidebar-faq-item">
+              <div class="sidebar-faq-q">What happens after I submit?</div>
+              <div class="sidebar-faq-a">We'll review your request and reach out within 24 hours to schedule a free 30-minute call. No obligations, no prep needed on your end.</div>
+            </div>
+            <div class="sidebar-faq-item">
+              <div class="sidebar-faq-q">Is the consult really free?</div>
+              <div class="sidebar-faq-a">Yes, completely. The consult costs you nothing. If we're a good fit, we'll send you a clear proposal. If not, we'll tell you that too.</div>
+            </div>
+            <div class="sidebar-faq-item">
+              <div class="sidebar-faq-q">What do I need to bring?</div>
+              <div class="sidebar-faq-a">Just your business knowledge. We'll ask questions and take it from there. No slides, no technical prep required.</div>
+            </div>
+            <div class="sidebar-faq-item">
+              <div class="sidebar-faq-q">How fast can you start?</div>
+              <div class="sidebar-faq-a">Once we agree on scope and you're ready to move, we can typically start within a week. Rush availability depends on our current queue.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-logo">BRASS<span>.</span>TACKS</div>
+      <div class="footer-tagline">Business tech that actually works. · Denver, CO</div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-contact">
+        <a href="https://brasstacks.space">brasstacks.space</a>
+        <a href="tel:3038183433">303-818-3433</a>
+        <a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.yelp.com/biz/cPsdfPciLkgb0gMI0-U6Qg" target="_blank" rel="noopener" aria-label="Brass Tacks on Yelp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041z"/></svg>
+          Yelp
+        </a>
+      </div>
+      <div class="footer-copy">© 2026 Brass Tacks. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ── SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 100);
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    reveals.forEach(el => revealIO.observe(el));
+  </script>
+
+  <script>
+  (function () {
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const isMobile = () => window.innerWidth <= 768 || ('ontouchstart' in window);
+
+    // ── GRAIN OVERLAY
+    (function initGrain() {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.style.cssText = 'position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:997;opacity:0.038;';
+      svg.innerHTML = '<filter id="nt"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" seed="0"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#nt)"/>';
+      document.body.appendChild(svg);
+      const turb = svg.querySelector('feTurbulence');
+      let seed = 0;
+      setInterval(() => { turb.setAttribute('seed', seed = (seed + 1) % 600); }, 55);
+    })();
+
+    // ── CUSTOM CURSOR
+    (function initCursor() {
+      if (isMobile()) return;
+      const dot = document.getElementById('c-dot');
+      const ring = document.getElementById('c-ring');
+      let mx = -200, my = -200, rx = -200, ry = -200;
+
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px,${my}px)`;
+        ring.classList.remove('hidden');
+      });
+
+      document.addEventListener('mouseleave', () => ring.classList.add('hidden'));
+
+      const hoverEls = 'a, button, input, select, textarea';
+      document.querySelectorAll(hoverEls).forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+      });
+
+      (function tick() {
+        rx = lerp(rx, mx, 0.11);
+        ry = lerp(ry, my, 0.11);
+        ring.style.transform = `translate(${rx}px,${ry}px)`;
+        requestAnimationFrame(tick);
+      })();
+    })();
+
+    // ── BUTTON LIQUID FILL + BORDER TRACE
+    (function initButtonEffects() {
+      if (isMobile()) return;
+      const ns = 'http://www.w3.org/2000/svg';
+
+      document.querySelectorAll('.form-submit, .nav-cta').forEach(btn => {
+        const blob = document.createElement('span');
+        blob.className = 'btn-liquid';
+        const sz = Math.max(btn.offsetWidth, btn.offsetHeight) * 2.8;
+        blob.style.width = blob.style.height = sz + 'px';
+        btn.appendChild(blob);
+
+        btn.addEventListener('mouseenter', e => {
+          const r = btn.getBoundingClientRect();
+          blob.style.left = (e.clientX - r.left) + 'px';
+          blob.style.top  = (e.clientY - r.top)  + 'px';
+          blob.classList.add('active');
+        });
+        btn.addEventListener('mouseleave', () => blob.classList.remove('active'));
+
+        const w = btn.offsetWidth, h = btn.offsetHeight, rx = 6;
+        const perim = 2 * (w - 2 * rx) + 2 * (h - 2 * rx) + 2 * Math.PI * rx;
+        const svg = document.createElementNS(ns, 'svg');
+        svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible;';
+        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+        const rect = document.createElementNS(ns, 'rect');
+        rect.setAttribute('x', '1'); rect.setAttribute('y', '1');
+        rect.setAttribute('width', w - 2); rect.setAttribute('height', h - 2);
+        rect.setAttribute('rx', rx);
+        rect.setAttribute('fill', 'none');
+        rect.setAttribute('stroke', '#e8c76a');
+        rect.setAttribute('stroke-width', '1.5');
+        rect.setAttribute('stroke-dasharray', perim);
+        rect.setAttribute('stroke-dashoffset', perim);
+        svg.appendChild(rect);
+        btn.appendChild(svg);
+
+        btn.addEventListener('mouseenter', () => {
+          rect.style.transition = 'stroke-dashoffset 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+          rect.setAttribute('stroke-dashoffset', '0');
+        });
+        btn.addEventListener('mouseleave', () => {
+          rect.style.transition = 'stroke-dashoffset 0.3s ease';
+          rect.setAttribute('stroke-dashoffset', perim);
+        });
+      });
+    })();
+
+    // ── CLICK PARTICLE BURST
+    (function initClickBurst() {
+      document.querySelectorAll('.form-submit, .nav-cta').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const COUNT = 14;
+          for (let i = 0; i < COUNT; i++) {
+            const angle = (i / COUNT) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+            const speed = 45 + Math.random() * 65;
+            const size  = 2.5 + Math.random() * 3;
+            const color = Math.random() > 0.5 ? '#c4982a' : '#e8c76a';
+            const p = document.createElement('div');
+            p.style.cssText = `position:fixed;width:${size}px;height:${size}px;border-radius:50%;background:${color};pointer-events:none;z-index:9996;left:${e.clientX}px;top:${e.clientY}px;transform:translate(-50%,-50%);`;
+            document.body.appendChild(p);
+            const ox = e.clientX, oy = e.clientY;
+            const vx = Math.cos(angle) * speed, vy = Math.sin(angle) * speed;
+            const dur = 480 + Math.random() * 380;
+            const t0 = performance.now();
+            (function anim(now) {
+              const t = Math.min((now - t0) / dur, 1);
+              p.style.left    = (ox + vx * t) + 'px';
+              p.style.top     = (oy + vy * t + 55 * t * t) + 'px';
+              p.style.opacity = 1 - t;
+              p.style.transform = `translate(-50%,-50%) scale(${1 - t * 0.5})`;
+              t < 1 ? requestAnimationFrame(anim) : p.remove();
+            })(t0);
+          }
+        });
+      });
+    })();
+
+    // ── FORM SUBMIT RIPPLE
+    (function initRipple() {
+      document.querySelectorAll('.form-submit').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const r = btn.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          ripple.style.left = (e.clientX - r.left) + 'px';
+          ripple.style.top = (e.clientY - r.top) + 'px';
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 700);
+        });
+      });
+    })();
+
+  })();
+  </script>
+
+</body>
+</html>
