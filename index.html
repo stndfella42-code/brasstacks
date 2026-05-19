@@ -880,7 +880,7 @@
       display: block;
       filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
       transition: filter 0.18s, transform 0.14s;
-      transform-origin: 25.5px 25.5px;
+      transform-origin: 27px 27px;
     }
     #c-tack.hover #c-tack-svg {
       filter: drop-shadow(0 0 10px rgba(196,152,42,0.75)) drop-shadow(0 3px 5px rgba(0,0,0,0.4));
@@ -1305,38 +1305,42 @@
 <body>
 
   <div id="c-tack">
-    <svg id="c-tack-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="c-tack-svg" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="tkfl" cx="36%" cy="30%" r="68%">
-          <stop offset="0%" stop-color="#edd060"/>
-          <stop offset="48%" stop-color="#c4982a"/>
-          <stop offset="100%" stop-color="#4e3208"/>
+        <radialGradient id="tkdm" cx="32%" cy="26%" r="74%">
+          <stop offset="0%"   stop-color="#fffbdc"/>
+          <stop offset="12%"  stop-color="#f8e458"/>
+          <stop offset="38%"  stop-color="#d4a820"/>
+          <stop offset="70%"  stop-color="#9a7010"/>
+          <stop offset="90%"  stop-color="#6a4808"/>
+          <stop offset="100%" stop-color="#3a2204"/>
         </radialGradient>
-        <radialGradient id="tkdm" cx="36%" cy="30%" r="62%">
-          <stop offset="0%" stop-color="#f4e070"/>
-          <stop offset="55%" stop-color="#b8891e"/>
-          <stop offset="100%" stop-color="#5e3e0c"/>
+        <radialGradient id="tkrm" cx="50%" cy="50%" r="50%">
+          <stop offset="60%"  stop-color="rgba(0,0,0,0)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0.5)"/>
         </radialGradient>
         <linearGradient id="tkpn" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ddb438"/>
-          <stop offset="100%" stop-color="#7a5a14"/>
+          <stop offset="0%"   stop-color="#c89820"/>
+          <stop offset="60%"  stop-color="#8a6410"/>
+          <stop offset="100%" stop-color="#4a3008"/>
         </linearGradient>
+        <radialGradient id="tkts" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="rgba(0,0,0,0.55)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+        </radialGradient>
       </defs>
-      <!-- Pin: tip at top-left (hotspot), shaft into neck -->
-      <line x1="2.5" y1="2.5" x2="16.5" y2="16.5" stroke="url(#tkpn)" stroke-width="2" stroke-linecap="round"/>
-      <!-- Neck -->
-      <circle cx="18.5" cy="18.5" r="3" fill="#7a5814"/>
-      <!-- Outer flange disc -->
-      <circle cx="25.5" cy="25.5" r="9.5" fill="url(#tkfl)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
-      <!-- Rim groove detail -->
-      <circle cx="25.5" cy="25.5" r="8.1" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="1.5"/>
-      <circle cx="25.5" cy="25.5" r="8.1" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
-      <!-- Raised center dome -->
-      <circle cx="25.5" cy="25.5" r="5.5" fill="url(#tkdm)"/>
-      <!-- Dome highlight -->
-      <ellipse cx="23.2" cy="23.2" rx="2.2" ry="1.5" fill="rgba(255,255,255,0.42)" transform="rotate(-45 23.2 23.2)"/>
-      <!-- Outer edge catch-light -->
-      <circle cx="25.5" cy="25.5" r="9.5" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
+      <ellipse cx="27" cy="36" rx="10" ry="2.5" fill="rgba(0,0,0,0.2)"/>
+      <ellipse cx="4" cy="5.5" rx="4.5" ry="2" fill="url(#tkts)" transform="rotate(-45 4 5.5)"/>
+      <line x1="2.2" y1="3.8" x2="26.2" y2="27.8" stroke="#2a1800" stroke-width="3.2" stroke-linecap="round"/>
+      <line x1="3" y1="3" x2="27" y2="27" stroke="url(#tkpn)" stroke-width="2.6" stroke-linecap="round"/>
+      <line x1="3.8" y1="2.2" x2="27.8" y2="26.2" stroke="rgba(255,240,120,0.72)" stroke-width="1.1" stroke-linecap="round"/>
+      <circle cx="3" cy="3" r="1.8" fill="#1a1000"/>
+      <circle cx="2.6" cy="2.6" r="0.9" fill="rgba(255,245,160,0.65)"/>
+      <circle cx="27" cy="27" r="11.5" fill="rgba(0,0,0,0.38)"/>
+      <circle cx="27" cy="27" r="10.5" fill="url(#tkdm)"/>
+      <circle cx="27" cy="27" r="10.5" fill="url(#tkrm)"/>
+      <ellipse cx="22.5" cy="21.5" rx="4" ry="2.5" fill="rgba(255,255,235,0.88)" transform="rotate(-38 22.5 21.5)"/>
+      <ellipse cx="21.2" cy="20.2" rx="1.6" ry="1" fill="rgba(255,255,255,0.82)" transform="rotate(-38 21.2 20.2)"/>
     </svg>
   </div>
 
@@ -1778,7 +1782,7 @@
 
       document.addEventListener('mousemove', e => {
         // pin tip is 11px from left, 29px from top — track that point to mouse
-        tack.style.transform = `translate(${e.clientX - 2}px,${e.clientY - 2}px)`;
+        tack.style.transform = `translate(${e.clientX - 3}px,${e.clientY - 3}px)`;
         tack.classList.add('visible');
       });
 
