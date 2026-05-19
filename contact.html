@@ -543,32 +543,32 @@
       transform: translateY(0);
     }
 
-    /* ── CUSTOM CURSOR ── */
-    #c-dot {
+    /* ── CUSTOM CURSOR (brass tack) ── */
+    #c-tack {
       position: fixed;
-      width: 6px; height: 6px;
-      background: var(--brass);
-      border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      top: -3px; left: -3px;
+      top: 0; left: 0;
       will-change: transform;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
-
-    #c-ring {
-      position: fixed;
-      width: 32px; height: 32px;
-      border: 1.5px solid rgba(196,152,42,0.45);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      top: -16px; left: -16px;
-      will-change: transform;
-      transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, left 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
+    #c-tack.visible { opacity: 1; }
+    #c-tack-svg {
+      display: block;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.55));
+      transition: filter 0.18s, transform 0.14s;
+      transform-origin: 11px 29px;
     }
-
-    #c-ring.hover { width: 54px; height: 54px; top: -27px; left: -27px; border-color: var(--brass); }
-    #c-ring.hidden { opacity: 0; }
+    #c-tack.hover #c-tack-svg {
+      filter: drop-shadow(0 0 9px rgba(196,152,42,0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+      transform: scale(1.2);
+    }
+    #c-tack.clicking #c-tack-svg {
+      transform: scale(0.88) translateY(2px);
+      filter: drop-shadow(0 0 14px rgba(196,152,42,0.95)) drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+      transition: filter 0.05s, transform 0.06s;
+    }
 
     @keyframes dot-pulse {
       0%, 100% { color: var(--brass); }
@@ -585,7 +585,7 @@
     @media (max-width: 768px) {
       body { cursor: auto; }
       a, button, select, input, textarea { cursor: auto; }
-      #c-dot, #c-ring { display: none; }
+      #c-tack { display: none; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
       .page-hero { padding: 120px 24px 64px; }
@@ -600,8 +600,21 @@
 </head>
 <body>
 
-  <div id="c-dot"></div>
-  <div id="c-ring"></div>
+  <div id="c-tack">
+    <svg id="c-tack-svg" width="22" height="30" viewBox="0 0 22 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="tg" cx="37%" cy="30%" r="65%">
+          <stop offset="0%" stop-color="#f5e070"/>
+          <stop offset="50%" stop-color="#c4982a"/>
+          <stop offset="100%" stop-color="#6b4a12"/>
+        </radialGradient>
+      </defs>
+      <line x1="11" y1="15" x2="11" y2="29" stroke="#5a3d0e" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="11" cy="10" r="9.5" fill="url(#tg)" stroke="rgba(0,0,0,0.25)" stroke-width="0.5"/>
+      <circle cx="7.5" cy="6.5" r="3.2" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="11" cy="10" r="1.8" fill="rgba(0,0,0,0.2)"/>
+    </svg>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -831,33 +844,27 @@
       setInterval(() => { turb.setAttribute('seed', seed = (seed + 1) % 600); }, 55);
     })();
 
-    // ── CUSTOM CURSOR
+    // ── CUSTOM CURSOR (brass tack)
     (function initCursor() {
       if (isMobile()) return;
-      const dot = document.getElementById('c-dot');
-      const ring = document.getElementById('c-ring');
-      let mx = -200, my = -200, rx = -200, ry = -200;
+      const tack = document.getElementById('c-tack');
 
       document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx}px,${my}px)`;
-        ring.classList.remove('hidden');
+        tack.style.transform = `translate(${e.clientX - 11}px,${e.clientY - 29}px)`;
+        tack.classList.add('visible');
       });
 
-      document.addEventListener('mouseleave', () => ring.classList.add('hidden'));
+      document.addEventListener('mouseleave', () => tack.classList.remove('visible'));
+      document.addEventListener('mouseenter', () => tack.classList.add('visible'));
 
-      const hoverEls = 'a, button, input, select, textarea';
+      const hoverEls = 'a, button, input, select, textarea, [role="button"]';
       document.querySelectorAll(hoverEls).forEach(el => {
-        el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-        el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+        el.addEventListener('mouseenter', () => tack.classList.add('hover'));
+        el.addEventListener('mouseleave', () => tack.classList.remove('hover'));
       });
 
-      (function tick() {
-        rx = lerp(rx, mx, 0.11);
-        ry = lerp(ry, my, 0.11);
-        ring.style.transform = `translate(${rx}px,${ry}px)`;
-        requestAnimationFrame(tick);
-      })();
+      document.addEventListener('mousedown', () => { tack.classList.remove('hover'); tack.classList.add('clicking'); });
+      document.addEventListener('mouseup',   () => tack.classList.remove('clicking'));
     })();
 
     // ── BUTTON LIQUID FILL + BORDER TRACE
