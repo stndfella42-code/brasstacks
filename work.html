@@ -843,17 +843,17 @@
     #c-tack.visible { opacity: 1; }
     #c-tack-svg {
       display: block;
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.55));
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
       transition: filter 0.18s, transform 0.14s;
-      transform-origin: 11px 29px;
+      transform-origin: 25.5px 25.5px;
     }
     #c-tack.hover #c-tack-svg {
-      filter: drop-shadow(0 0 9px rgba(196,152,42,0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.35));
-      transform: scale(1.2);
+      filter: drop-shadow(0 0 10px rgba(196,152,42,0.75)) drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+      transform: scale(1.18);
     }
     #c-tack.clicking #c-tack-svg {
-      transform: scale(0.88) translateY(2px);
-      filter: drop-shadow(0 0 14px rgba(196,152,42,0.95)) drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+      transform: scale(0.9);
+      filter: drop-shadow(0 0 16px rgba(196,152,42,1)) drop-shadow(0 1px 3px rgba(0,0,0,0.5));
       transition: filter 0.05s, transform 0.06s;
     }
 
@@ -953,18 +953,31 @@
 <body>
 
   <div id="c-tack">
-    <svg id="c-tack-svg" width="22" height="30" viewBox="0 0 22 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="c-tack-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="tg" cx="37%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#f5e070"/>
-          <stop offset="50%" stop-color="#c4982a"/>
-          <stop offset="100%" stop-color="#6b4a12"/>
+        <radialGradient id="tkfl" cx="36%" cy="30%" r="68%">
+          <stop offset="0%" stop-color="#edd060"/>
+          <stop offset="48%" stop-color="#c4982a"/>
+          <stop offset="100%" stop-color="#4e3208"/>
         </radialGradient>
+        <radialGradient id="tkdm" cx="36%" cy="30%" r="62%">
+          <stop offset="0%" stop-color="#f4e070"/>
+          <stop offset="55%" stop-color="#b8891e"/>
+          <stop offset="100%" stop-color="#5e3e0c"/>
+        </radialGradient>
+        <linearGradient id="tkpn" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ddb438"/>
+          <stop offset="100%" stop-color="#7a5a14"/>
+        </linearGradient>
       </defs>
-      <line x1="11" y1="15" x2="11" y2="29" stroke="#5a3d0e" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="11" cy="10" r="9.5" fill="url(#tg)" stroke="rgba(0,0,0,0.25)" stroke-width="0.5"/>
-      <circle cx="7.5" cy="6.5" r="3.2" fill="rgba(255,255,255,0.3)"/>
-      <circle cx="11" cy="10" r="1.8" fill="rgba(0,0,0,0.2)"/>
+      <line x1="2.5" y1="2.5" x2="16.5" y2="16.5" stroke="url(#tkpn)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="18.5" cy="18.5" r="3" fill="#7a5814"/>
+      <circle cx="25.5" cy="25.5" r="9.5" fill="url(#tkfl)" stroke="rgba(0,0,0,0.18)" stroke-width="0.5"/>
+      <circle cx="25.5" cy="25.5" r="8.1" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="1.5"/>
+      <circle cx="25.5" cy="25.5" r="8.1" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
+      <circle cx="25.5" cy="25.5" r="5.5" fill="url(#tkdm)"/>
+      <ellipse cx="23.2" cy="23.2" rx="2.2" ry="1.5" fill="rgba(255,255,255,0.42)" transform="rotate(-45 23.2 23.2)"/>
+      <circle cx="25.5" cy="25.5" r="9.5" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.6"/>
     </svg>
   </div>
 
@@ -1468,7 +1481,7 @@
       const tack = document.getElementById('c-tack');
 
       document.addEventListener('mousemove', e => {
-        tack.style.transform = `translate(${e.clientX - 11}px,${e.clientY - 29}px)`;
+        tack.style.transform = `translate(${e.clientX - 2}px,${e.clientY - 2}px)`;
         tack.classList.add('visible');
       });
 
