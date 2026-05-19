@@ -865,14 +865,14 @@
     /* â”€â”€ MOBILE â”€â”€ */
     /* ── CONCEPT MODAL ── */
     @keyframes modal-spin-in {
-      0%   { transform: scale(0.06) rotate(-540deg); opacity: 0; }
-      55%  { opacity: 1; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      0%   { transform: perspective(900px) scale(0.08) rotateY(-360deg); opacity: 0; }
+      45%  { opacity: 1; }
+      100% { transform: perspective(900px) scale(1) rotateY(0deg); opacity: 1; }
     }
     @keyframes modal-spin-out {
-      0%   { transform: scale(1) rotate(0deg); opacity: 1; }
-      35%  { opacity: 0.6; }
-      100% { transform: scale(0.06) rotate(540deg); opacity: 0; }
+      0%   { transform: perspective(900px) scale(1) rotateY(0deg); opacity: 1; }
+      35%  { opacity: 0.5; }
+      100% { transform: perspective(900px) scale(0.08) rotateY(360deg); opacity: 0; }
     }
     .concept-modal {
       position: fixed; inset: 0; z-index: 600;
@@ -1572,6 +1572,10 @@
     const closeBtn  = modal.querySelector('.concept-modal-close');
 
     function openModal(card) {
+      // Cancel any in-progress close animation
+      modal.classList.remove('is-closing');
+      modal.style.visibility = ''; // clear inline style set by close timeout
+
       // Clone the mock-browser from the card
       const srcMock = card.querySelector('.mock-browser');
       const clone   = srcMock.cloneNode(true);
@@ -1616,10 +1620,13 @@
       modal.classList.remove('is-open');
       document.body.style.overflow = '';
       setTimeout(() => {
-        modal.classList.remove('is-closing');
-        modal.style.visibility = 'hidden';
-        mockInner.innerHTML = '';
-        mockWrap.style.height = '';
+        // Only clean up if not already reopened
+        if (!modal.classList.contains('is-open')) {
+          modal.classList.remove('is-closing');
+          modal.style.visibility = 'hidden';
+          mockInner.innerHTML = '';
+          mockWrap.style.height = '';
+        }
       }, 440);
     }
 

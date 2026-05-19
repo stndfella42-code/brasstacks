@@ -634,31 +634,39 @@
           <div class="form-title">Tell us about<br><em>your business</em></div>
         </div>
 
-        <div class="consult-form">
+        <!-- FORMSPREE: go to formspree.io, create a free account, create a form,
+             then replace YOUR_FORM_ID below with your actual form ID (e.g. xpwzdovq) -->
+        <form class="consult-form" id="consult-form"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST" novalidate>
+
+          <input type="hidden" name="_subject" value="New consult request — Brass Tacks" />
+          <input type="hidden" name="_replyto" value="" />
+
           <div class="form-row">
             <div class="form-group">
-              <label>Your name</label>
-              <input type="text" placeholder="First &amp; last name" />
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" type="text" name="name" placeholder="First &amp; last name" required />
             </div>
             <div class="form-group">
-              <label>Business name</label>
-              <input type="text" placeholder="Your business" />
+              <label for="cf-biz">Business name</label>
+              <input id="cf-biz" type="text" name="business" placeholder="Your business" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="you@yourbusiness.com" />
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" name="email" placeholder="you@yourbusiness.com" required />
             </div>
             <div class="form-group">
-              <label>Phone (optional)</label>
-              <input type="tel" placeholder="(303) 000-0000" />
+              <label for="cf-phone">Phone (optional)</label>
+              <input id="cf-phone" type="tel" name="phone" placeholder="(303) 000-0000" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group full">
-              <label>Which service interests you?</label>
-              <select>
+              <label for="cf-service">Which service interests you?</label>
+              <select id="cf-service" name="service">
                 <option value="" disabled selected>Select a service...</option>
                 <option>Solo Operator — Simple site, fast launch</option>
                 <option>Custom Website — Multi-page, built from scratch</option>
@@ -670,13 +678,25 @@
           </div>
           <div class="form-row">
             <div class="form-group full">
-              <label>Tell us about your business</label>
-              <textarea placeholder="What do you do, what do you need, and when are you hoping to launch? The more detail, the better."></textarea>
+              <label for="cf-message">Tell us about your business</label>
+              <textarea id="cf-message" name="message" placeholder="What do you do, what do you need, and when are you hoping to launch? The more detail, the better."></textarea>
             </div>
           </div>
-          <button class="form-submit">Send my consult request →</button>
+
+          <button type="submit" class="form-submit" id="cf-submit">Send my consult request →</button>
           <div class="form-note">Or call us directly: <a href="tel:3038183433">303-818-3433</a></div>
-        </div>
+
+          <!-- Success state -->
+          <div id="cf-success" style="display:none; margin-top:28px; padding:20px 24px; background:rgba(196,152,42,0.08); border:1px solid rgba(196,152,42,0.25); border-radius:8px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:#c4982a;margin-bottom:6px;">Got it — we'll be in touch.</div>
+            <div style="font-size:14px;font-weight:300;color:#a8a49c;line-height:1.6;">Expect a reply to your email within 24 hours. If it's urgent, call us at <a href="tel:3038183433" style="color:#c4982a;">303-818-3433</a>.</div>
+          </div>
+
+          <!-- Error state -->
+          <div id="cf-error" style="display:none; margin-top:20px; padding:14px 18px; background:rgba(180,40,40,0.08); border:1px solid rgba(180,40,40,0.25); border-radius:6px; font-size:13px; color:#c08080;">
+            Something went wrong — please try again or email us directly at <a href="mailto:hi.brasstacks@gmail.com" style="color:#c4982a;">hi.brasstacks@gmail.com</a>.
+          </div>
+        </form>
       </div>
 
       <!-- SIDEBAR -->
@@ -933,6 +953,58 @@
       });
     })();
 
+  })();
+  </script>
+
+  <script>
+  // ── CONTACT FORM — async Formspree submission
+  (function() {
+    const form    = document.getElementById('consult-form');
+    const btn     = document.getElementById('cf-submit');
+    const success = document.getElementById('cf-success');
+    const error   = document.getElementById('cf-error');
+
+    if (!form) return;
+
+    // Auto-fill hidden _replyto with whatever the user types in email
+    const emailInput = document.getElementById('cf-email');
+    const replyTo    = form.querySelector('input[name="_replyto"]');
+    if (emailInput && replyTo) {
+      emailInput.addEventListener('input', () => { replyTo.value = emailInput.value; });
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      error.style.display = 'none';
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          // Hide the form fields, show success banner
+          form.querySelectorAll('.form-row, .form-note, #cf-submit').forEach(el => {
+            el.style.display = 'none';
+          });
+          success.style.display = 'block';
+        } else {
+          const data = await res.json().catch(() => ({}));
+          error.style.display = 'block';
+          btn.textContent = 'Send my consult request →';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        error.style.display = 'block';
+        btn.textContent = 'Send my consult request →';
+        btn.disabled = false;
+      }
+    });
   })();
   </script>
 
