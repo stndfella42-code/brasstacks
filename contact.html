@@ -582,12 +582,69 @@
       .contact-sidebar { order: -1; }
     }
 
+    /* ── HAMBURGER NAV ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 6px;
+      cursor: pointer;
+      z-index: 201;
+      position: relative;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--brass);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(13,13,11,0.97);
+      backdrop-filter: blur(14px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .nav-mobile.open { opacity: 1; pointer-events: all; }
+    .nav-mobile a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px; letter-spacing: 3px;
+      color: var(--text); text-decoration: none;
+      transition: color 0.2s; line-height: 1.15;
+    }
+    .nav-mobile a:hover { color: var(--brass); }
+    .nav-mobile-cta {
+      margin-top: 20px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 14px !important; font-weight: 500 !important;
+      letter-spacing: 1px !important; color: var(--brass) !important;
+      border: 1px solid var(--brass); padding: 13px 32px; border-radius: 6px;
+    }
+    .nav-mobile-close {
+      position: absolute; top: 22px; right: 24px;
+      background: none; border: none; color: var(--text-2);
+      font-size: 24px; cursor: pointer; padding: 6px;
+      line-height: 1; transition: color 0.2s;
+    }
+    .nav-mobile-close:hover { color: var(--text); }
+
     @media (max-width: 768px) {
       body { cursor: auto; }
       a, button, select, input, textarea { cursor: auto; }
       #c-tack { display: none; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
       .page-hero { padding: 120px 24px 64px; }
       .contact-section { padding: 56px 24px 80px; }
       .form-row { grid-template-columns: 1fr; }
@@ -649,7 +706,19 @@
       <li><a href="contact.html" class="active">Contact</a></li>
       <li><a href="contact.html" class="nav-cta">Book Free Consult</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-open" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="nav-mobile" id="nav-mobile">
+    <button class="nav-mobile-close" id="nav-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-mobile-cta">Book Free Consult →</a>
+  </div>
 
   <!-- HERO -->
   <section class="page-hero">
@@ -1036,6 +1105,21 @@
         btn.disabled = false;
       }
     });
+  })();
+  </script>
+
+  <script>
+  // ── MOBILE NAV TOGGLE
+  (function() {
+    const openBtn  = document.getElementById('nav-open');
+    const closeBtn = document.getElementById('nav-close');
+    const menu     = document.getElementById('nav-mobile');
+    if (!openBtn) return;
+    const openMenu  = () => { menu.classList.add('open');    openBtn.classList.add('open');    document.body.style.overflow = 'hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); openBtn.classList.remove('open'); document.body.style.overflow = ''; };
+    openBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   })();
   </script>
 
