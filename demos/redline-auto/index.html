@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#0b0b0c; --panel:#141416; --panel2:#1b1b1e;
-  --bone:#f2ede3; --muted:#a8a29a; --faint:#6e6a63;
+  --black:#f6f1e8; --panel:#fffdf7; --panel2:#ece1c9;
+  --bone:#1a1a1c; --muted:#6f675b; --faint:#9a927f;
   --accent:#ff4d1c; --accent-deep:#b73208;
-  --line:#26262a; --ok:#4ade80;
+  --line:#d9cdae; --ok:#4ade80;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -42,7 +42,7 @@ h2{font-size:clamp(34px,5vw,56px); margin-bottom:14px}
 /* ---------- header ---------- */
 header{
   position:sticky; top:0; z-index:50;
-  background:rgba(11,11,12,.94); backdrop-filter:blur(8px);
+  background:rgba(246,241,232,.94); backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
 .hbar{display:flex; align-items:center; justify-content:space-between; height:66px}
@@ -163,7 +163,7 @@ footer{border-top:1px solid var(--line); padding:52px 0 120px}
 /* mobile call bar */
 .mcall{
   display:none; position:fixed; bottom:0; left:0; right:0; z-index:60;
-  background:rgba(11,11,12,.97); border-top:1px solid var(--line); padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:#1a1a1c; border-top:1px solid var(--line); padding:10px 14px calc(10px + env(safe-area-inset-bottom));
   gap:10px;
 }
 .mcall a{flex:1; text-align:center; padding:14px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:14px; text-decoration:none; transform:skewX(-6deg)}
@@ -191,6 +191,12 @@ footer{border-top:1px solid var(--line); padding:52px 0 120px}
   .trust-strip div:last-child{border-bottom:none}
   section{padding:54px 0}
 }
+
+/* LIGHT THEME contrast-band overrides */
+footer{background:#1a1a1c; color:#f2ede3; border-top:4px solid var(--accent);}
+footer p, footer h4, footer .fine, footer .logo-name{color:#f2ede3;}
+footer a{color:#ffb59d;}
+.mcall .book{color:#f2ede3;}
 </style>
 </head>
 <body>
