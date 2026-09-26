@@ -12,19 +12,19 @@
 <style>
 /* ================= TOKENS ================= */
 :root {
-  --paper: #efe4cf;
-  --paper-2: #e5d6ba;
-  --cream: #f7efdf;
-  --ink: #1c1a16;
-  --muted: #6a604f;
+  --paper: #faf4e8;
+  --paper-2: #f3e7cd;
+  --cream: #faf4e8;
+  --ink: #2b1c10;
+  --muted: #6b5f4b;
   --green: #1f3a31;
   --green-2: #2a4b40;
-  --copper: #b8612a;
-  --copper-hi: #cf7336;
+  --copper: #b96a1b;
+  --copper-hi: #d07a35;
   --gold: #d9a441;
-  --board: #151411;
-  --line: rgba(28, 26, 22, .18);
-  --line-cream: rgba(247, 239, 223, .16);
+  --board: #f7efdf;
+  --line: rgba(43, 28, 16, .20);
+  --line-cream: rgba(43, 28, 16, .18);
   --slab: 'Alfa Slab One', 'Rockwell', Georgia, serif;
   --sans: 'Work Sans', system-ui, sans-serif;
   --mono: 'DM Mono', ui-monospace, monospace;
@@ -66,7 +66,7 @@ h2 { font-size: clamp(2.6rem, 11vw, 5.4rem); }
 .btn-gold { background: var(--gold); color: var(--ink); }
 
 /* ================= HEADER ================= */
-.header { position: sticky; top: 0; z-index: 100; background: var(--green); color: var(--cream); border-bottom: 3px solid var(--ink); }
+.header { position: sticky; top: 0; z-index: 100; background: #faf4e8; color: #2b1c10; border-bottom: 3px solid var(--copper); }
 .header-in { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand svg { width: 38px; height: 38px; }
@@ -108,7 +108,7 @@ section { padding: 80px 0; position: relative; }
 .sec-head { display: grid; gap: 14px; margin-bottom: 36px; }
 
 /* ---- tap board ---- */
-.taps { background: var(--green); color: var(--cream); }
+.taps { background: #f3e7cd; color: #2b1c10; }
 .taps .eyebrow { color: var(--gold); }
 .taps .lede { color: rgba(247, 239, 223, .75); }
 .board { background: var(--board); border: 3px solid var(--ink); box-shadow: 0 0 0 6px #6b4a2b, 0 0 0 9px var(--ink), 12px 14px 0 9px rgba(0, 0, 0, .35); margin: 9px; position: relative; }
@@ -200,7 +200,7 @@ section { padding: 80px 0; position: relative; }
 .dish-top .p { font-family: var(--slab); font-size: 1.1rem; }
 .dish p { color: var(--muted); font-size: .9rem; }
 .dish .pair { font-family: var(--mono); font-size: .72rem; color: var(--copper); letter-spacing: .04em; margin-top: 3px; display: block; }
-.togo { margin-top: 48px; background: var(--ink); color: var(--cream); border: 3px solid var(--ink); display: grid; gap: 1px; }
+.togo { margin-top: 48px; background: #efd9b8; color: #2b1c10; border: 3px solid var(--copper); display: grid; gap: 1px; }
 .togo > div { padding: 18px; }
 .togo h3 { font-size: 1.5rem; color: var(--gold); }
 .togo p { font-family: var(--mono); font-size: .84rem; color: rgba(247, 239, 223, .75); margin-top: 6px; }
@@ -257,7 +257,7 @@ section { padding: 80px 0; position: relative; }
   .tap .add { justify-self: end; }
   .events { grid-template-columns: 1fr 1fr; }
   .menu-grid { grid-template-columns: 1fr 1fr; column-gap: 40px; }
-  .togo { grid-template-columns: repeat(3, 1fr); background: var(--line-cream); }
+  .togo { grid-template-columns: repeat(3, 1fr); background: #efd9b8; }
   .togo > div { background: var(--ink); }
   .foot-grid { grid-template-columns: repeat(2, 1fr); }
   .paddle-card { padding: 28px; }
@@ -285,6 +285,17 @@ section { padding: 80px 0; position: relative; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ============ LIGHT THEME overrides (cream/copper/espresso) ============ */
+.filters button { color: #2b1c10; border-color: rgba(43,28,16,.32); }
+.filters button:hover { border-color: #2b1c10; }
+.filters { border-bottom-color: rgba(43,28,16,.22); }
+.tap { border-bottom-color: rgba(43,28,16,.20); }
+.tap .no { color: rgba(43,28,16,.50); }
+.board-head { border-bottom-color: rgba(43,28,16,.28); }
+.board-foot { color: rgba(43,28,16,.66); }
+.flight-copy li { border-bottom-color: rgba(43,28,16,.20); }
+.taps .eyebrow, .taps h2 { color: #2b1c10; }
 </style>
 </head>
 <body>
