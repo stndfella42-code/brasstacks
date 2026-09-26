@@ -932,7 +932,38 @@
     }
     .concept-modal-built { font-size: 12px; color: var(--brass); letter-spacing: 0.5px; }
 
+    /* FEATURED (full-width) card */
+    .portfolio-card.featured { grid-column: 1 / -1; flex-direction: row; }
+    .portfolio-card.featured .mock-browser { flex: 1.35; border-bottom: 0; border-right: 1px solid var(--border); }
+    .portfolio-card.featured .mock-content { min-height: 300px; height: calc(100% - 30px); }
+    .portfolio-card.featured .portfolio-meta { flex: 1; justify-content: center; padding: 32px; }
+    .portfolio-card.featured .portfolio-biz-name { font-size: 30px; }
+    .portfolio-card.featured .portfolio-desc { font-size: 14px; }
+    .featured-flag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brass); margin-bottom: 10px; }
+
+    /* ASSAY: wood-type brewery, kraft + copper green + gold */
+    .mock-assay { background: #efe4cf; color: #1c1a16; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .mock-assay .as-nav { background: #1f3a31; color: #f7efdf; display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 2px solid #1c1a16; }
+    .mock-assay .as-nav b { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; }
+    .mock-assay .as-nav span { font-size: 7px; letter-spacing: 1px; border: 1px solid #d9a441; color: #d9a441; padding: 3px 7px; }
+    .mock-assay .as-body { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px; flex: 1; }
+    .mock-assay .as-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: .8; letter-spacing: 1px; text-shadow: 2px 2px 0 #d9a441, 4px 4px 0 #1c1a16; }
+    .mock-assay .as-sub { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 3px; border-top: 2px solid #1c1a16; border-bottom: 1px solid #1c1a16; margin-top: 10px; padding: 2px 0; text-align: center; }
+    .mock-assay .as-cta { display: inline-block; margin-top: 12px; background: #b8612a; color: #f7efdf; font-size: 7px; letter-spacing: 1px; padding: 6px 10px; border: 1.5px solid #1c1a16; box-shadow: 2px 2px 0 #1c1a16; }
+    .mock-assay .as-board { background: #151411; border: 2px solid #1c1a16; box-shadow: 0 0 0 3px #6b4a2b; color: #f7efdf; padding: 8px 10px; align-self: start; }
+    .mock-assay .as-board h5 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 1.5px; color: #d9a441; margin-bottom: 4px; }
+    .mock-assay .as-row { display: grid; grid-template-columns: 9px 1fr auto; gap: 7px; align-items: center; padding: 4px 0; border-bottom: 1px dashed rgba(247,239,223,.15); font-size: 7.5px; }
+    .mock-assay .as-row:last-child { border-bottom: 0; }
+    .mock-assay .as-row i { width: 9px; height: 11px; display: block; clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%); }
+    .mock-assay .as-row b { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: .8px; }
+    .mock-assay .as-row s { text-decoration: none; display: block; width: 34px; height: 4px; border: 1px solid rgba(247,239,223,.35); position: relative; }
+    .mock-assay .as-row s::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--l); background: #d9a441; }
+    .mock-assay .as-hills { height: 26px; background: #2a4b40; clip-path: polygon(0 100%, 0 55%, 10% 25%, 20% 50%, 32% 5%, 44% 45%, 55% 20%, 68% 55%, 80% 15%, 90% 40%, 100% 25%, 100% 100%); }
+
     @media (max-width: 900px) {
+      .portfolio-card.featured { flex-direction: column; }
+      .portfolio-card.featured .mock-browser { border-right: 0; border-bottom: 1px solid var(--border); }
+      .portfolio-card.featured .portfolio-meta { padding: 22px; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonial-strip { grid-template-columns: 1fr; }
     }
@@ -1049,9 +1080,61 @@
   <!-- PORTFOLIO GRID -->
   <section class="section">
     <div class="section-eyebrow reveal">Design concepts</div>
-    <div class="section-title reveal">Nine industries.<br><em>Nine custom builds.</em></div>
+    <div class="section-title reveal">Ten industries.<br><em>Ten custom builds.</em></div>
 
     <div class="portfolio-grid">
+
+      <!-- FEATURED: Assay Brewing Co. -->
+      <div class="portfolio-card featured card-reveal">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dots">
+              <span class="mock-dot" style="background:#ff5f57"></span>
+              <span class="mock-dot" style="background:#febc2e"></span>
+              <span class="mock-dot" style="background:#28c840"></span>
+            </div>
+            <div class="mock-url">assaybrewing.co</div>
+          </div>
+          <div class="mock-content mock-assay">
+            <div class="as-nav"><b>ASSAY</b><span>● 10 POURING</span></div>
+            <div class="as-body">
+              <div>
+                <div class="as-h1">ASSAY</div>
+                <div class="as-sub">BREWING CO.</div>
+                <div class="as-cta">SEE WHAT'S POURING</div>
+              </div>
+              <div class="as-board">
+                <h5>ON TAP</h5>
+                <div class="as-row"><i style="background:#f3cf55"></i><b>BULLION</b><s style="--l:82%"></s></div>
+                <div class="as-row"><i style="background:#f2b53e"></i><b>PAY DIRT</b><s style="--l:44%"></s></div>
+                <div class="as-row"><i style="background:#dc8a26"></i><b>HEADFRAME</b><s style="--l:12%"></s></div>
+                <div class="as-row"><i style="background:#1f0f0a;box-shadow:inset 0 0 0 1px rgba(247,239,223,.3)"></i><b>TAILINGS</b><s style="--l:38%"></s></div>
+                <div class="as-row"><i style="background:#b3263f"></i><b>RED VEIN</b><s style="--l:9%"></s></div>
+              </div>
+            </div>
+            <div class="as-hills"></div>
+          </div>
+        </div>
+        <div class="portfolio-meta">
+          <div class="featured-flag">Latest build</div>
+          <div class="portfolio-meta-top">
+            <div class="portfolio-biz-name">Assay Brewing Co.</div>
+            <span class="portfolio-tag">Brewery</span>
+          </div>
+          <p class="portfolio-desc">Wood-type brewery brand with a live "Now Pouring" board showing keg levels and last-call alerts, a flight builder that pours each beer's real color onto a paddle, a self-updating events calendar, and a kitchen menu paired to the taps.</p>
+          <div class="portfolio-details">
+            <div class="portfolio-detail">
+              <div class="portfolio-detail-icon"></div>
+              <span class="portfolio-detail-val">Custom Brand + Tap List + Events</span>
+            </div>
+          </div>
+          <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
+          <div class="portfolio-card-footer">
+            <a href="demos/assay-brewing/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
 
       <!-- 1: Rosario's -->
       <div class="portfolio-card card-reveal">

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assay Brewing Co. — Taproom &amp; Kitchen in Olde Town Arvada</title>
+<meta name="description" content="Small-batch brewery and kitchen in Olde Town Arvada, Colorado. Ten taps, build-your-own flights, trivia, live music, and a dog-friendly patio.">
+<meta name="theme-color" content="#1f3a31">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=DM+Mono:wght@400;500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================= TOKENS ================= */
+:root {
+  --paper: #efe4cf;
+  --paper-2: #e5d6ba;
+  --cream: #f7efdf;
+  --ink: #1c1a16;
+  --muted: #6a604f;
+  --green: #1f3a31;
+  --green-2: #2a4b40;
+  --copper: #b8612a;
+  --copper-hi: #cf7336;
+  --gold: #d9a441;
+  --board: #151411;
+  --line: rgba(28, 26, 22, .18);
+  --line-cream: rgba(247, 239, 223, .16);
+  --slab: 'Alfa Slab One', 'Rockwell', Georgia, serif;
+  --sans: 'Work Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(.6, 0, .2, 1);
+}
+
+/* ================= BASE (mobile first) ================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 1rem; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .1; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .8 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+a { color: inherit; }
+svg { display: block; }
+button, input, select { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
+::selection { background: var(--gold); color: var(--ink); }
+
+.wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 18px; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 300; background: var(--ink); color: var(--cream); padding: 10px 16px; }
+.skip:focus { left: 8px; }
+
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); }
+.eyebrow::before, .eyebrow::after { content: ''; width: 18px; height: 2px; background: currentColor; }
+h1, h2, h3 { font-family: var(--slab); font-weight: 400; line-height: .95; text-transform: uppercase; letter-spacing: .01em; }
+h2 { font-size: clamp(2.6rem, 11vw, 5.4rem); }
+.lede { color: var(--muted); font-size: 1.08rem; max-width: 560px; }
+.rule { height: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+
+/* ================= BUTTONS ================= */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px;
+  font-family: var(--mono); font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s; }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn-copper { background: var(--copper); color: var(--cream); }
+.btn-paper { background: var(--cream); color: var(--ink); }
+.btn-gold { background: var(--gold); color: var(--ink); }
+
+/* ================= HEADER ================= */
+.header { position: sticky; top: 0; z-index: 100; background: var(--green); color: var(--cream); border-bottom: 3px solid var(--ink); }
+.header-in { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand svg { width: 38px; height: 38px; }
+.brand b { font-family: var(--slab); font-weight: 400; font-size: 1.35rem; letter-spacing: .04em; line-height: 1; }
+.brand small { display: block; font-family: var(--mono); font-size: .58rem; letter-spacing: .2em; color: var(--gold); margin-top: 3px; }
+.nav { display: none; }
+.pour-pill { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; transition: background .2s, color .2s; }
+.pour-pill:hover { background: var(--gold); color: var(--ink); }
+.pour-pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: blink 2.4s ease-in-out infinite; }
+.pour-pill:hover i { background: var(--ink); }
+@keyframes blink { 50% { opacity: .25; } }
+
+/* ================= HERO ================= */
+.hero { position: relative; padding: 36px 0 0; overflow: hidden; background: var(--paper); }
+.hero-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding-bottom: 10px; }
+.hero-top .co { visibility: hidden; }
+.hero-title { position: relative; margin: 18px 0 6px; }
+.hero-title h1 { font-size: clamp(4.4rem, 24vw, 17rem); line-height: .8; letter-spacing: -.01em; color: var(--ink);
+  text-shadow: 3px 3px 0 var(--gold), 6px 6px 0 var(--ink); }
+.hero-title .sub { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--slab); font-size: clamp(1.5rem, 7vw, 3.2rem); text-transform: uppercase; letter-spacing: .06em; }
+.hero-title .sub::before, .hero-title .sub::after { content: ''; flex: 1; height: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.stamp { position: absolute; right: -4px; top: -58px; width: 86px; height: 86px; transform: rotate(12deg); }
+.stamp svg { width: 100%; height: 100%; animation: spin 90s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero-grid { display: grid; gap: 24px; margin-top: 26px; }
+.hero-grid .lede { color: var(--ink); font-size: 1.15rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); border: 2px solid var(--ink); background: var(--cream); margin-top: 34px; }
+.hero-facts div { padding: 12px 10px; }
+.hero-facts div + div { border-left: 2px solid var(--ink); }
+.hero-facts b { display: block; font-family: var(--slab); font-weight: 400; font-size: clamp(1rem, 4.4vw, 1.6rem); line-height: 1.05; }
+.hero-facts span { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.hero-facts .open b { color: var(--green); }
+.range { margin-top: 36px; }
+.range svg { width: 100%; height: auto; }
+
+/* ================= SECTIONS ================= */
+section { padding: 80px 0; position: relative; }
+.sec-head { display: grid; gap: 14px; margin-bottom: 36px; }
+
+/* ---- tap board ---- */
+.taps { background: var(--green); color: var(--cream); }
+.taps .eyebrow { color: var(--gold); }
+.taps .lede { color: rgba(247, 239, 223, .75); }
+.board { background: var(--board); border: 3px solid var(--ink); box-shadow: 0 0 0 6px #6b4a2b, 0 0 0 9px var(--ink), 12px 14px 0 9px rgba(0, 0, 0, .35); margin: 9px; position: relative; }
+.board-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 16px 12px; border-bottom: 1px dashed var(--line-cream); }
+.board-head h3 { font-size: 1.6rem; color: var(--gold); letter-spacing: .06em; }
+.board-head p { font-family: var(--mono); font-size: .74rem; color: rgba(247, 239, 223, .6); letter-spacing: .06em; }
+.filters { display: flex; gap: 6px; overflow-x: auto; padding: 12px 16px; border-bottom: 1px dashed var(--line-cream); scrollbar-width: none; }
+.filters::-webkit-scrollbar { display: none; }
+.filters button { flex: none; min-height: 38px; padding: 0 14px; font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cream); border: 1px solid var(--line-cream); transition: background .2s, color .2s, border-color .2s; }
+.filters button:hover { border-color: var(--cream); }
+.filters button[aria-pressed="true"] { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.tap { display: grid; grid-template-columns: 30px 36px 1fr auto; gap: 4px 12px; align-items: center; padding: 14px 16px; border-bottom: 1px dashed var(--line-cream); font-family: var(--mono); color: var(--cream); transition: background .2s; }
+.tap[hidden] { display: none; }
+.tap:last-child { border-bottom: 0; }
+.tap:hover { background: rgba(247, 239, 223, .04); }
+.tap .no { font-size: .8rem; color: rgba(247, 239, 223, .45); }
+.tap .glass { width: 28px; height: 36px; }
+.tap .name { min-width: 0; }
+.tap .name b { display: block; font-family: var(--slab); font-weight: 400; font-size: 1.15rem; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; }
+.tap .name span { font-size: .76rem; color: rgba(247, 239, 223, .65); }
+.tap .price { font-size: 1rem; text-align: right; grid-column: 4; grid-row: 1; white-space: nowrap; }
+.tap .price small { display: block; font-size: .64rem; color: rgba(247, 239, 223, .5); }
+.tap .meta { grid-column: 3 / 5; grid-row: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: .72rem; color: rgba(247, 239, 223, .7); }
+.keg { display: inline-flex; align-items: center; gap: 6px; }
+.keg i { display: block; width: 64px; height: 7px; border: 1px solid rgba(247, 239, 223, .35); position: relative; }
+.keg i::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--lvl); background: var(--gold); }
+.keg.low i::after { background: var(--copper-hi); }
+.tag { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: 2px 6px; border: 1px solid currentColor; }
+.tag.last { color: var(--copper-hi); animation: blink 2.4s ease-in-out infinite; }
+.tag.new { color: var(--gold); }
+.tap .add { grid-column: 3 / 5; grid-row: 3; justify-self: start; min-height: 34px; padding: 0 12px; border: 1px solid var(--gold); color: var(--gold); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, color .2s; }
+.tap .add:hover { background: var(--gold); color: var(--ink); }
+.tap .add[aria-pressed="true"] { background: var(--gold); color: var(--ink); }
+.tap .add:disabled { opacity: .35; cursor: not-allowed; }
+.board-foot { padding: 12px 16px; font-family: var(--mono); font-size: .72rem; color: rgba(247, 239, 223, .55); border-top: 1px dashed var(--line-cream); }
+
+/* ---- flight ---- */
+.flight-grid { display: grid; gap: 28px; margin-top: 56px; }
+.paddle-card { background: var(--cream); color: var(--ink); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: 22px 18px; }
+.paddle-card h3 { font-size: 2rem; }
+.paddle-card .lede { color: var(--muted); font-size: .98rem; margin-top: 6px; }
+.paddle { margin: 18px 0 8px; }
+.paddle svg { width: 100%; height: auto; overflow: visible; }
+.paddle .slot { cursor: pointer; }
+.paddle .slot:focus-visible { outline: none; }
+.paddle .slot:focus-visible .ring { stroke: var(--copper); stroke-width: 3; }
+.beer { transition: fill .6s var(--ease); }
+.pour-anim { transform-origin: 50% 100%; animation: pour .8s var(--ease); }
+@keyframes pour { from { transform: scaleY(0); } }
+.order { list-style: none; counter-reset: o; font-family: var(--mono); font-size: .86rem; }
+.order li { counter-increment: o; display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.order li::before { content: counter(o) '.'; color: var(--copper); margin-right: 8px; }
+.order li span:first-of-type { flex: 1; }
+.order li.empty { color: var(--muted); }
+.flight-total { display: flex; justify-content: space-between; align-items: baseline; margin: 16px 0; font-family: var(--slab); font-size: 1.6rem; text-transform: uppercase; }
+.flight-total small { font-family: var(--mono); font-size: .76rem; color: var(--muted); text-transform: none; }
+.flight-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.ticket { margin-top: 18px; padding: 14px; border: 2px dashed var(--ink); font-family: var(--mono); font-size: .84rem; background: var(--paper); }
+.ticket b { font-family: var(--slab); font-weight: 400; font-size: 1.2rem; letter-spacing: .04em; }
+.flight-copy h3 { font-size: clamp(2rem, 8vw, 3rem); color: var(--gold); }
+.flight-copy p { color: rgba(247, 239, 223, .78); margin-top: 12px; max-width: 460px; }
+.flight-copy ul { list-style: none; margin-top: 18px; font-family: var(--mono); font-size: .86rem; }
+.flight-copy li { padding: 8px 0; border-bottom: 1px dashed var(--line-cream); display: flex; gap: 12px; }
+.flight-copy li b { color: var(--gold); font-weight: 500; min-width: 90px; }
+
+/* ---- events ---- */
+.events { display: grid; gap: 12px; }
+.ev { display: grid; grid-template-columns: 70px 1fr; background: var(--cream); border: 2px solid var(--ink); transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+.ev:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+.ev .date { background: var(--ink); color: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; }
+.ev .date small { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.ev .date b { font-family: var(--slab); font-weight: 400; font-size: 2rem; line-height: 1; }
+.ev .date span { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; }
+.ev.today .date { background: var(--copper); }
+.ev .body { padding: 12px 14px; }
+.ev .kind { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); }
+.ev h3 { font-size: 1.25rem; margin: 3px 0 4px; letter-spacing: .02em; }
+.ev p { font-size: .9rem; color: var(--muted); }
+.ev-more { margin-top: 18px; font-family: var(--mono); font-size: .82rem; color: var(--muted); }
+
+/* ---- kitchen ---- */
+.kitchen { background: var(--paper-2); }
+.menu-grid { display: grid; gap: 34px; }
+.menu-col h3 { font-size: 1.7rem; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 3px double var(--ink); }
+.dish { padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.dish-top { display: flex; align-items: baseline; gap: 8px; }
+.dish-top b { font-weight: 700; }
+.dish-top .dots { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-4px); min-width: 16px; }
+.dish-top .p { font-family: var(--slab); font-size: 1.1rem; }
+.dish p { color: var(--muted); font-size: .9rem; }
+.dish .pair { font-family: var(--mono); font-size: .72rem; color: var(--copper); letter-spacing: .04em; margin-top: 3px; display: block; }
+.togo { margin-top: 48px; background: var(--ink); color: var(--cream); border: 3px solid var(--ink); display: grid; gap: 1px; }
+.togo > div { padding: 18px; }
+.togo h3 { font-size: 1.5rem; color: var(--gold); }
+.togo p { font-family: var(--mono); font-size: .84rem; color: rgba(247, 239, 223, .75); margin-top: 6px; }
+
+/* ---- visit ---- */
+.visit-grid { display: grid; gap: 32px; }
+.visit address { font-style: normal; font-family: var(--slab); font-size: clamp(1.8rem, 8vw, 2.6rem); text-transform: uppercase; line-height: 1; margin: 18px 0 14px; }
+.visit .contact a { text-decoration: none; border-bottom: 2px solid var(--copper); }
+.perks { list-style: none; margin-top: 22px; display: grid; gap: 10px; }
+.perks li { display: flex; gap: 12px; align-items: flex-start; }
+.perks svg { width: 26px; height: 26px; flex: none; stroke: var(--copper); stroke-width: 2; fill: none; }
+.perks b { display: block; }
+.perks span { color: var(--muted); font-size: .92rem; }
+.hours-card { background: var(--cream); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: 20px 18px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.status::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+.status.open::before { background: #3f9a5b; box-shadow: 0 0 0 4px rgba(63, 154, 91, .2); }
+.hours { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: .88rem; }
+.hours td { padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.hours td:last-child { text-align: right; }
+.hours tr.today td { font-weight: 500; color: var(--copper); }
+.hours-card .fine { font-family: var(--mono); font-size: .74rem; color: var(--muted); margin-top: 12px; }
+.map { margin-top: 24px; border: 3px solid var(--ink); background: var(--paper-2); aspect-ratio: 16 / 10; overflow: hidden; }
+.map svg { width: 100%; height: 100%; }
+
+/* ---- footer ---- */
+.footer { background: var(--ink); color: var(--cream); padding: 60px 0 28px; }
+.foot-grid { display: grid; gap: 28px; padding-bottom: 36px; }
+.footer h4 { font-family: var(--mono); font-weight: 500; font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.footer p, .footer li { color: rgba(247, 239, 223, .78); font-size: .95rem; }
+.footer ul { list-style: none; }
+.footer li { padding: 2px 0; }
+.footer a { text-decoration: none; color: var(--cream); }
+.footer a:hover { color: var(--gold); }
+.foot-word { font-family: var(--slab); font-size: clamp(4rem, 26vw, 17rem); line-height: .8; text-align: center; color: var(--green-2); margin-bottom: 36px; letter-spacing: -.01em; }
+.foot-base { border-top: 1px dashed var(--line-cream); padding-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--mono); font-size: .74rem; color: rgba(247, 239, 223, .55); }
+.foot-base a { color: rgba(247, 239, 223, .8); }
+
+/* toast */
+.toast { position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 160%); z-index: 150; background: var(--ink); color: var(--cream); border: 2px solid var(--gold); padding: 12px 16px; font-family: var(--mono); font-size: .84rem; display: flex; gap: 14px; align-items: center; transition: transform .45s var(--ease); max-width: calc(100% - 24px); }
+.toast.show { transform: translate(-50%, 0); }
+.toast a { color: var(--gold); white-space: nowrap; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ================= BREAKPOINTS ================= */
+@media (min-width: 640px) {
+  .wrap { padding: 0 32px; }
+  .stamp { width: 130px; height: 130px; right: 0; top: -30px; }
+  .hero-top .co { visibility: visible; }
+  .tap { grid-template-columns: 34px 36px 1.4fr 1.2fr auto auto; gap: 12px 16px; }
+  .tap .meta, .tap .price, .tap .add { grid-column: auto; grid-row: auto; }
+  .tap .add { justify-self: end; }
+  .events { grid-template-columns: 1fr 1fr; }
+  .menu-grid { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+  .togo { grid-template-columns: repeat(3, 1fr); background: var(--line-cream); }
+  .togo > div { background: var(--ink); }
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
+  .paddle-card { padding: 28px; }
+}
+@media (min-width: 980px) {
+  html { scroll-padding-top: 84px; }
+  .header-in { height: 76px; }
+  .nav { display: flex; gap: 26px; }
+  .nav a { text-decoration: none; font-family: var(--mono); font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; padding: 6px 0; border-bottom: 2px solid transparent; transition: border-color .2s, color .2s; }
+  .nav a:hover, .nav a.active { color: var(--gold); border-color: var(--gold); }
+  .hero { padding-top: 56px; }
+  .stamp { width: 170px; height: 170px; right: 10px; top: -10px; }
+  .hero-grid { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 48px; }
+  .hero-actions { justify-content: flex-end; }
+  section { padding: 120px 0; }
+  .sec-head.split { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 48px; }
+  .flight-grid { grid-template-columns: 1.2fr 1fr; align-items: center; gap: 64px; }
+  .events { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .menu-grid { grid-template-columns: repeat(3, 1fr); }
+  .visit-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 40 40">
+    <circle cx="20" cy="20" r="19" fill="#d9a441" stroke="#1c1a16" stroke-width="2"/>
+    <path d="M9 17 Q20 8 31 17" fill="none" stroke="#1c1a16" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M20 12 V31" stroke="#1c1a16" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M14 31 H26" stroke="#1c1a16" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="brand" href="#top" aria-label="Assay Brewing Co. home">
+      <svg><use href="#mark"/></svg>
+      <span><b>Assay</b><small>Brewing Co.</small></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#taps">On tap</a><a href="#flight">Flights</a><a href="#events">Events</a><a href="#kitchen">Kitchen</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="pour-pill" href="#taps"><i></i><span id="pill-count">10 pouring</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="hero-top"><span>Olde Town Arvada</span><span class="co">Colorado</span></div>
+      <div class="rule"></div>
+      <div class="hero-title">
+        <h1>Assay</h1>
+        <p class="sub">Brewing Co.</p>
+        <div class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="circ" d="M100 100 m-72 0 a72 72 0 1 1 144 0 a72 72 0 1 1 -144 0"/></defs>
+            <circle cx="100" cy="100" r="96" fill="#b8612a" stroke="#1c1a16" stroke-width="4"/>
+            <circle cx="100" cy="100" r="84" fill="none" stroke="#f7efdf" stroke-width="1.5" stroke-dasharray="3 5"/>
+            <text font-family="DM Mono, monospace" font-size="15" letter-spacing="4.6" fill="#f7efdf"><textPath href="#circ">SMALL BATCH · TESTED LIKE ORE · ARVADA CO ·</textPath></text>
+            <circle cx="100" cy="100" r="50" fill="#1c1a16"/>
+            <path d="M84 78h32l-4 50h-24z" fill="#d9a441"/><path d="M84 78c2-10 30-10 32 0" fill="#f7efdf"/><path d="M116 88h8a8 8 0 0 1 0 16h-9" fill="none" stroke="#d9a441" stroke-width="5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-grid">
+        <p class="lede">Small-batch beer brewed a few steps from the old Arvada rail line and tested the way miners tested ore: batch by batch, before anything goes on tap. Ten taps, a real kitchen, and a patio that gets the sunset over the foothills.</p>
+        <div class="hero-actions">
+          <a class="btn btn-copper" href="#taps">See what's pouring</a>
+          <a class="btn btn-paper" href="#visit">Plan a visit</a>
+        </div>
+      </div>
+      <div class="hero-facts">
+        <div class="open"><b id="fact-open">Open</b><span id="fact-open-sub">Today</span></div>
+        <div><b id="fact-taps">10 taps</b><span>Pouring now</span></div>
+        <div><b id="fact-event">Trivia</b><span id="fact-event-sub">Tonight</span></div>
+      </div>
+    </div>
+    <div class="range" aria-hidden="true">
+      <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+        <path d="M0 180V120L90 80L170 110L260 50L330 92L420 30L520 100L600 70L690 118L780 40L860 84L940 60L1030 104L1120 36L1210 96L1300 70L1380 100L1440 84V180Z" fill="#2a4b40"/>
+        <path d="M0 180V140L120 112L220 136L330 104L450 138L560 116L680 146L800 110L930 140L1050 118L1170 144L1290 116L1440 136V180Z" fill="#1f3a31"/>
+        <g stroke="#1c1a16" stroke-width="3" fill="none" transform="translate(1080 58)"><path d="M0 60 L18 0 L36 60 M6 40 H30 M10 24 H26"/><circle cx="18" cy="4" r="6" fill="#d9a441"/></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- TAP BOARD -->
+  <section class="taps" id="taps">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="eyebrow">Now pouring</p><h2>Ten taps.<br>No filler.</h2></div>
+        <p class="lede">The board updates whenever we tap or kick a keg. Anything marked "last call" won't be back until next season, so order it while it's here.</p>
+      </header>
+      <div class="board">
+        <div class="board-head"><h3>On tap</h3><p id="board-updated">Updated today</p></div>
+        <div class="filters" id="filters" role="group" aria-label="Filter beers by style"></div>
+        <div id="tap-list"></div>
+        <div class="board-foot">Pours: 5oz taster $3 · 10oz · 16oz · Flights of four $12 · Every beer is available in crowlers to go.</div>
+      </div>
+
+      <!-- FLIGHT -->
+      <div class="flight-grid" id="flight">
+        <div class="flight-copy">
+          <p class="eyebrow">Build a flight</p>
+          <h3>Four tasters.<br>Twelve bucks.</h3>
+          <p>Tap "+ Flight" on any beer to add it to your paddle. We'll pour them from light to dark to sour, so nothing gets drowned out. Show the ticket at the bar and skip the what-should-I-get.</p>
+          <ul>
+            <li><b>Lightest</b>Lagers and pilsners open the palate</li>
+            <li><b>Then</b>Hazy and West Coast IPAs</li>
+            <li><b>Then</b>Ambers, Märzens, and stouts</li>
+            <li><b>Last</b>Sours, which reset everything</li>
+          </ul>
+        </div>
+        <div class="paddle-card">
+          <h3>Your paddle</h3>
+          <p class="lede">Tap a glass to empty it.</p>
+          <div class="paddle" id="paddle"></div>
+          <ol class="order" id="order"></ol>
+          <div class="flight-total"><span>Flight</span><span id="flight-total">$12 <small>0 of 4</small></span></div>
+          <div class="flight-btns">
+            <button class="btn btn-gold" id="surprise" type="button">Surprise me</button>
+            <button class="btn btn-copper" id="ticket-btn" type="button" disabled>Get my ticket</button>
+          </div>
+          <div class="ticket" id="ticket" hidden></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="eyebrow">What's on</p><h2>Something<br>every night.</h2></div>
+        <p class="lede">No cover, ever. Trivia fills up by 6:45 on Tuesdays, and our live music leans toward bluegrass and outlaw country, loud enough to feel and quiet enough to talk over.</p>
+      </header>
+      <div class="events" id="events-list"></div>
+      <p class="ev-more">Want to book the back room for a party of 15 to 60? Email <a href="mailto:events@assaybrewing.co">events@assaybrewing.co</a></p>
+    </div>
+  </section>
+
+  <!-- KITCHEN -->
+  <section class="kitchen" id="kitchen">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="eyebrow">The kitchen</p><h2>Food that<br>earns a pint.</h2></div>
+        <p class="lede">Our own kitchen, not a food truck lottery. Pretzels are baked in-house every morning and the green chile is roasted from Pueblo peppers every fall. Kitchen closes an hour before the bar.</p>
+      </header>
+      <div class="menu-grid">
+        <div class="menu-col reveal">
+          <h3>Snacks</h3>
+          <div class="dish"><div class="dish-top"><b>Hot Pretzel</b><span class="dots"></span><span class="p">$14</span></div><p>Big enough for the table, with beer cheese made with Bullion lager and a grainy mustard.</p><span class="pair">Pairs with: Bullion</span></div>
+          <div class="dish"><div class="dish-top"><b>Green Chile Fries</b><span class="dots"></span><span class="p">$11</span></div><p>Hand-cut fries smothered in pork green chile and cheddar, topped with pickled onion.</p><span class="pair">Pairs with: Claim Jumper</span></div>
+          <div class="dish"><div class="dish-top"><b>Smoked Wings</b><span class="dots"></span><span class="p">$15</span></div><p>Hickory-smoked, then fried. Choose honey-chipotle or dry rub.</p><span class="pair">Pairs with: Ore Cart</span></div>
+        </div>
+        <div class="menu-col reveal">
+          <h3>Mains</h3>
+          <div class="dish"><div class="dish-top"><b>Assay Smash Burger</b><span class="dots"></span><span class="p">$16</span></div><p>Two smashed patties, American cheese, griddled onion, and house sauce on a potato bun.</p><span class="pair">Pairs with: Pay Dirt</span></div>
+          <div class="dish"><div class="dish-top"><b>Fish &amp; Chips</b><span class="dots"></span><span class="p">$18</span></div><p>Cod fried in Canary pilsner batter, with malt-vinegar aioli and slaw.</p><span class="pair">Pairs with: Canary</span></div>
+          <div class="dish"><div class="dish-top"><b>Black Bean Burger</b><span class="dots"></span><span class="p">$15</span></div><p>House-made patty, pepper jack, roasted poblano, and chipotle crema.</p><span class="pair">Pairs with: Red Vein</span></div>
+        </div>
+        <div class="menu-col reveal">
+          <h3>Small &amp; sweet</h3>
+          <div class="dish"><div class="dish-top"><b>Kids' Grilled Cheese</b><span class="dots"></span><span class="p">$8</span></div><p>With fries or apple slices. Kids eat half price on Sundays.</p></div>
+          <div class="dish"><div class="dish-top"><b>Beer Brat</b><span class="dots"></span><span class="p">$12</span></div><p>Simmered in Mother Lode, with kraut and spicy mustard on a pretzel roll.</p><span class="pair">Pairs with: Mother Lode</span></div>
+          <div class="dish"><div class="dish-top"><b>Stout Brownie</b><span class="dots"></span><span class="p">$9</span></div><p>Made with Tailings oatmeal stout and served warm with vanilla ice cream.</p><span class="pair">Pairs with: Tailings</span></div>
+        </div>
+      </div>
+      <div class="togo">
+        <div><h3>Crowlers</h3><p>32oz, canned to order from any tap. $12–$16.</p></div>
+        <div><h3>Four-packs</h3><p>Flagships always in the cooler. $14–$18.</p></div>
+        <div><h3>Growler fills</h3><p>Bring any clean 64oz growler. $18–$24.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <p class="eyebrow">Visit</p>
+        <address>7519 Grandview Ave<br>Arvada, CO 80002</address>
+        <p class="contact"><a href="tel:+13035550167">(303) 555-0167</a> &nbsp;·&nbsp; <a href="mailto:hello@assaybrewing.co">hello@assaybrewing.co</a></p>
+        <ul class="perks">
+          <li><svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V9l6-4 6 4v9"/><path d="M10 18v-5h4v5"/></svg><div><b>Take the G Line</b><span>A four-minute walk from Olde Town Arvada station. Let the train drive.</span></div></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="2"/><circle cx="17" cy="8" r="2"/><circle cx="4.5" cy="13" r="1.8"/><circle cx="19.5" cy="13" r="1.8"/><path d="M12 12c3 0 5 3.5 5 5.5S15 20 12 20s-5-.5-5-2.5S9 12 12 12z"/></svg><div><b>Dogs on the patio</b><span>Leashed, friendly, and with water bowls waiting. Pups stay out on the patio.</span></div></li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M6 20c0-4 3-7 6-7s6 3 6 7"/></svg><div><b>Families welcome until 8pm</b><span>Kids' menu, board games, and a root beer on tap. Adults 21+ with ID to drink.</span></div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="hours-card">
+          <p class="status" id="status">Checking…</p>
+          <table class="hours" id="hours" aria-label="Taproom hours"></table>
+          <p class="fine">Kitchen closes one hour before the taproom. Last call is 15 minutes before close.</p>
+        </div>
+        <div class="map" aria-label="Map of Olde Town Arvada showing the taproom near the G Line station">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="400" height="250" fill="#e5d6ba"/>
+            <g stroke="#c9b894" stroke-width="10"><path d="M0 70H400M0 170H400M90 0V250M210 0V250M320 0V250"/></g>
+            <path d="M0 214 L400 186" stroke="#1c1a16" stroke-width="3"/><path d="M0 214 L400 186" stroke="#e5d6ba" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <text x="12" y="232" font-family="DM Mono" font-size="10" fill="#6a604f" letter-spacing="1">G LINE</text>
+            <rect x="248" y="182" width="36" height="14" fill="#1f3a31" transform="rotate(-4 266 189)"/><text x="243" y="176" font-family="DM Mono" font-size="9" fill="#1f3a31">OLDE TOWN STN</text>
+            <text x="96" y="62" font-family="DM Mono" font-size="10" fill="#6a604f" letter-spacing="1">GRANDVIEW AVE</text>
+            <text x="214" y="116" font-family="DM Mono" font-size="10" fill="#6a604f" letter-spacing="1" transform="rotate(90 214 116)">OLDE WADSWORTH</text>
+            <g transform="translate(160 70)"><circle r="16" fill="#b8612a" stroke="#1c1a16" stroke-width="3"/><path d="M-5-6h10l-1.5 13h-7z" fill="#f7efdf"/></g>
+            <text x="126" y="104" font-family="Alfa Slab One" font-size="15" fill="#1c1a16">ASSAY</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-word" aria-hidden="true">Assay</div>
+    <div class="foot-grid">
+      <div><a class="brand" href="#top"><svg><use href="#mark"/></svg><span><b>Assay</b><small>Brewing Co.</small></span></a><p style="margin-top:14px;max-width:300px">Small-batch brewery and kitchen in Olde Town Arvada. Please drink responsibly and never drive after drinking.</p></div>
+      <div><h4>Visit</h4><p>7519 Grandview Ave<br>Arvada, CO 80002<br><a href="tel:+13035550167">(303) 555-0167</a></p></div>
+      <div><h4>Hours</h4><ul id="foot-hours"></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#" aria-label="Instagram (demo link)">Instagram ↗</a></li><li><a href="#" aria-label="Untappd (demo link)">Untappd ↗</a></li><li><a href="#" aria-label="Facebook (demo link)">Facebook ↗</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Assay Brewing Co. · 21+ to drink</span><span>Concept site for a fictional business · Design &amp; build by <a href="https://brasstacks.space/work.html">Brass Tacks</a></span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span><a href="#flight">View flight</a></div>
+
+<script>
+/* ================= BEERS ================= */
+// order: pour sequence weight (lower pours first). srm: beer color. haze: cloudy.
+const BEERS = [
+  { tap: 1, name: 'Bullion', style: 'Helles Lager', cat: 'Lager', abv: 4.9, ibu: 18, color: '#f3cf55', lvl: .82, p10: 5, p16: 7, order: 1 },
+  { tap: 2, name: 'Canary', style: 'Czech Pilsner', cat: 'Lager', abv: 5.1, ibu: 34, color: '#f0c648', lvl: .61, p10: 5, p16: 7, order: 2 },
+  { tap: 3, name: 'Pay Dirt', style: 'Hazy IPA', cat: 'IPA', abv: 6.8, ibu: 42, color: '#f2b53e', haze: true, lvl: .44, p10: 6, p16: 8, order: 3 },
+  { tap: 4, name: 'Claim Jumper', style: 'West Coast IPA', cat: 'IPA', abv: 7.1, ibu: 70, color: '#e3972a', lvl: .73, p10: 6, p16: 8, order: 4 },
+  { tap: 5, name: 'Headframe', style: 'Double IPA', cat: 'IPA', abv: 8.8, ibu: 88, color: '#dc8a26', lvl: .12, p10: 7, p16: 9, order: 5 },
+  { tap: 6, name: 'Ore Cart', style: 'Amber Ale', cat: 'Dark', abv: 5.4, ibu: 28, color: '#a8471c', lvl: .55, p10: 5, p16: 7, order: 6 },
+  { tap: 7, name: 'Mother Lode', style: 'Märzen · Seasonal', cat: 'Lager', abv: 5.8, ibu: 22, color: '#b8581f', lvl: .9, p10: 6, p16: 8, order: 7, isNew: true },
+  { tap: 8, name: 'Tailings', style: 'Oatmeal Stout', cat: 'Dark', abv: 6.2, ibu: 35, color: '#1f0f0a', lvl: .38, p10: 6, p16: 8, order: 8 },
+  { tap: 9, name: 'Red Vein', style: 'Raspberry Sour', cat: 'Sour', abv: 5.2, ibu: 8, color: '#b3263f', haze: true, lvl: .09, p10: 6, p16: 8, order: 9 },
+  { tap: 10, name: 'Hard Hat', style: 'Non-Alcoholic Hazy', cat: 'N/A', abv: 0.4, ibu: 30, color: '#f0c050', haze: true, lvl: .67, p10: 4, p16: 6, order: 3.5 }
+];
+const byTap = t => BEERS.find(b => b.tap === t);
+const glassSVG = (b, w = 28, h = 36) => `<svg class="glass" viewBox="0 0 28 36" width="${w}" height="${h}" aria-hidden="true"><path d="M3 3h22l-3 31H6z" fill="${b.color}" opacity="${b.haze ? .92 : 1}"/><path d="M3 3h22l-.6 6H3.6z" fill="#f7efdf"/><path d="M3 3h22l-3 31H6z" fill="none" stroke="#f7efdf" stroke-opacity=".5" stroke-width="1.2"/></svg>`;
+
+/* ================= TAP BOARD ================= */
+const list = document.getElementById('tap-list');
+list.innerHTML = BEERS.map(b => {
+  const low = b.lvl < .15;
+  return `<article class="tap" data-cat="${b.cat}" data-tap="${b.tap}">
+    <span class="no">${String(b.tap).padStart(2, '0')}</span>
+    ${glassSVG(b)}
+    <div class="name"><b>${b.name}</b><span>${b.style}</span></div>
+    <div class="meta"><span>${b.abv.toFixed(1)}% ABV</span><span>${b.ibu} IBU</span>
+      <span class="keg ${low ? 'low' : ''}" title="Keg ${Math.round(b.lvl * 100)}% full"><i style="--lvl:${Math.round(b.lvl * 100)}%"></i>${Math.round(b.lvl * 100)}%</span>
+      ${low ? '<span class="tag last">Last call</span>' : ''}${b.isNew ? '<span class="tag new">New</span>' : ''}</div>
+    <div class="price">$${b.p16}<small>16oz · $${b.p10}/10oz</small></div>
+    <button class="add" type="button" data-add="${b.tap}" aria-pressed="false">+ Flight</button>
+  </article>`;
+}).join('');
+const cats = ['All', 'Lager', 'IPA', 'Dark', 'Sour', 'N/A'];
+const filters = document.getElementById('filters');
+filters.innerHTML = cats.map((c, i) => `<button type="button" data-c="${c}" aria-pressed="${i === 0}">${c === 'Dark' ? 'Amber & dark' : c === 'N/A' ? 'Non-alc' : c}</button>`).join('');
+filters.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  filters.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  list.querySelectorAll('.tap').forEach(t => t.hidden = b.dataset.c !== 'All' && t.dataset.cat !== b.dataset.c);
+});
+document.getElementById('board-updated').textContent = 'Updated ' + new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+/* ================= FLIGHT ================= */
+let flight = [];
+const paddle = document.getElementById('paddle');
+function drawPaddle(pourIdx = -1) {
+  const sorted = [...flight].sort((a, b) => byTap(a).order - byTap(b).order);
+  const xs = [70, 170, 270, 370];
+  let s = `<svg viewBox="0 0 440 150" role="group" aria-label="Flight paddle">
+    <defs><linearGradient id="wood" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8a5a33"/><stop offset="1" stop-color="#5e3b1f"/></linearGradient></defs>
+    <rect x="10" y="112" width="420" height="26" rx="6" fill="url(#wood)" stroke="#1c1a16" stroke-width="3"/>
+    <path d="M24 122 H416 M24 129 H416" stroke="#4a2e17" stroke-width="1" opacity=".5"/>
+    <rect x="-24" y="118" width="40" height="14" rx="7" fill="#5e3b1f" stroke="#1c1a16" stroke-width="3"/>`;
+  xs.forEach((x, i) => {
+    const t = sorted[i], b = t && byTap(t);
+    s += `<g class="slot" tabindex="0" role="button" data-slot="${t || ''}" aria-label="${b ? `Remove ${b.name} from flight` : 'Empty glass'}">`;
+    if (b) s += `<path class="beer ${i === pourIdx ? 'pour-anim' : ''}" d="M${x - 25} 30 H${x + 25} L${x + 20} 116 H${x - 20} Z" fill="${b.color}" opacity="${b.haze ? .93 : 1}"/><path d="M${x - 25.5} 22 H${x + 25.5} L${x + 25} 32 H${x - 25} Z" fill="#f7efdf"/>`;
+    s += `<path class="ring" d="M${x - 27} 14 H${x + 27} L${x + 21} 116 H${x - 21} Z" fill="${b ? 'none' : 'rgba(28,26,22,.04)'}" stroke="#1c1a16" stroke-width="2" ${b ? '' : 'stroke-dasharray="4 4"'}/>`;
+    if (!b) s += `<path d="M${x - 7} 66 H${x + 7} M${x} 59 V73" stroke="#6a604f" stroke-width="2"/>`;
+    else s += `<path d="M${x - 16} 40 L${x - 13} 100" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>`;
+    s += `</g>`;
+  });
+  paddle.innerHTML = s + '</svg>';
+  document.getElementById('order').innerHTML = [0, 1, 2, 3].map(i => {
+    const b = sorted[i] && byTap(sorted[i]);
+    return b ? `<li><span>${b.name}</span><span>${b.style.split(' ·')[0]} · ${b.abv}%</span></li>` : `<li class="empty"><span>Empty glass</span></li>`;
+  }).join('');
+  document.getElementById('flight-total').innerHTML = `$12 <small>${flight.length} of 4</small>`;
+  document.getElementById('ticket-btn').disabled = flight.length === 0;
+  list.querySelectorAll('.add').forEach(btn => {
+    const on = flight.includes(+btn.dataset.add);
+    btn.setAttribute('aria-pressed', on);
+    btn.textContent = on ? 'In flight ✓' : '+ Flight';
+    btn.disabled = !on && flight.length >= 4;
+  });
+  document.getElementById('ticket').hidden = true;
+}
+function addBeer(t) {
+  if (flight.includes(t) || flight.length >= 4) return;
+  flight.push(t);
+  const sorted = [...flight].sort((a, b) => byTap(a).order - byTap(b).order);
+  drawPaddle(sorted.indexOf(t));
+}
+const removeBeer = t => { flight = flight.filter(x => x !== t); drawPaddle(); };
+drawPaddle();
+
+const toast = document.getElementById('toast');
+let tt;
+list.addEventListener('click', e => {
+  const b = e.target.closest('[data-add]'); if (!b) return;
+  const t = +b.dataset.add;
+  if (flight.includes(t)) { removeBeer(t); return; }
+  addBeer(t);
+  document.getElementById('toast-msg').textContent = `${byTap(t).name} added · ${flight.length} of 4`;
+  toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600);
+});
+paddle.addEventListener('click', e => { const s = e.target.closest('[data-slot]'); if (s && s.dataset.slot) removeBeer(+s.dataset.slot); });
+paddle.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset.slot) { e.preventDefault(); removeBeer(+e.target.dataset.slot); } });
+document.getElementById('surprise').onclick = () => {
+  const pool = BEERS.filter(b => b.cat !== 'N/A').map(b => b.tap).sort(() => Math.random() - .5);
+  flight = []; drawPaddle();
+  pool.slice(0, 4).forEach((t, i) => setTimeout(() => addBeer(t), i * 280));
+};
+document.getElementById('ticket-btn').onclick = () => {
+  const sorted = [...flight].sort((a, b) => byTap(a).order - byTap(b).order);
+  const code = 'FL-' + sorted.map(t => String(t).padStart(2, '0')).join('');
+  const tk = document.getElementById('ticket');
+  tk.innerHTML = `<b>Flight ticket ${code}</b><br>Show this at the bar: ${sorted.map(t => `#${t} ${byTap(t).name}`).join(' → ')}${sorted.length < 4 ? `<br>(${4 - sorted.length} open ${4 - sorted.length === 1 ? 'glass' : 'glasses'}: bartender's choice)` : ''}`;
+  tk.hidden = false;
+};
+
+/* ================= HOURS (Denver time) ================= */
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const HOURS = { 0: [11, 20], 1: [15, 22], 2: [15, 22], 3: [15, 22], 4: [15, 22], 5: [12, 24], 6: [11, 24] };
+const fmt = h => h === 24 ? 'midnight' : `${h % 12 || 12}${h < 12 ? 'am' : 'pm'}`;
+const now = (() => {
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Denver', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false, year: 'numeric', month: 'numeric', day: 'numeric' }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), h: (+p.hour % 24) + (+p.minute) / 60, date: new Date(+p.year, +p.month - 1, +p.day) };
+  } catch (e) { const d = new Date(); return { day: d.getDay(), h: d.getHours() + d.getMinutes() / 60, date: new Date(d.getFullYear(), d.getMonth(), d.getDate()) }; }
+})();
+const order = [1, 2, 3, 4, 5, 6, 0];
+document.getElementById('hours').innerHTML = order.map(d => `<tr class="${d === now.day ? 'today' : ''}"><td>${DAYS[d]}${d === now.day ? ' (today)' : ''}</td><td>${fmt(HOURS[d][0])} – ${fmt(HOURS[d][1])}</td></tr>`).join('');
+document.getElementById('foot-hours').innerHTML = [['Mon – Thu', '3pm – 10pm'], ['Friday', 'noon – midnight'], ['Saturday', '11am – midnight'], ['Sunday', '11am – 8pm']].map(([a, b]) => `<li>${a} · ${b}</li>`).join('');
+const td = HOURS[now.day], isOpen = now.h >= td[0] && now.h < td[1];
+const st = document.getElementById('status');
+if (isOpen) { st.classList.add('open'); st.textContent = `Open now · until ${fmt(td[1])}`; }
+else if (now.h < td[0]) st.textContent = `Opens today at ${fmt(td[0])}`;
+else st.textContent = `Closed · opens ${DAYS[(now.day + 1) % 7]} ${fmt(HOURS[(now.day + 1) % 7][0])}`;
+document.getElementById('fact-open').textContent = isOpen ? 'Open now' : now.h < td[0] ? `Opens ${fmt(td[0])}` : 'Closed';
+document.getElementById('fact-open-sub').textContent = isOpen ? `Until ${fmt(td[1])}` : now.h < td[0] ? 'Today' : `Back ${DAYS[(now.day + 1) % 7].slice(0, 3)} ${fmt(HOURS[(now.day + 1) % 7][0])}`;
+document.getElementById('fact-taps').textContent = `${BEERS.length} taps`;
+document.getElementById('pill-count').textContent = `${BEERS.length} pouring`;
+
+/* ================= EVENTS (rolling, next 12 days) ================= */
+const BANDS = ['The Rusty Spurs', 'Hollow Pine', 'Low Country Static', 'Mile High String Band', 'Gold Creek Ramblers', 'The Ditch Diggers'];
+const WEEKLY = {
+  0: { kind: 'Sunday', title: 'Pups & Pretzels', time: '11am – 3pm', desc: 'Dog treats from the kitchen, half-price kids\' meals, and bottomless coffee.' },
+  1: { kind: 'Industry night', title: 'Service Industry Monday', time: '3pm – close', desc: 'Show a pay stub from any bar or restaurant and pints are $4 all night.' },
+  2: { kind: 'Trivia', title: 'Tuesday Trivia', time: '7pm', desc: 'Teams of up to six. The winners get a $50 tab, and last place gets bragging rights.' },
+  3: { kind: 'Give back', title: 'Pints for a Purpose', time: 'All day', desc: '$1 from every pint goes to a rotating Arvada nonprofit, chosen by our regulars.' },
+  4: { kind: 'Run club', title: 'Ralston Creek Run Club', time: '6pm', desc: 'A no-drop 5K on the creek trail, then $5 pints for everyone who ran.' },
+  5: { kind: 'Live music', title: '', time: '7pm – 10pm', desc: 'On the patio when the weather cooperates, and by the fireplace when it doesn\'t.' },
+  6: { kind: 'Live music', title: '', time: '3pm – 6pm', desc: 'An afternoon set on the patio. Bring the dog and grab a crowler for the road.' }
+};
+const evs = [];
+for (let i = 0; i < 12 && evs.length < 9; i++) {
+  const d = new Date(now.date); d.setDate(d.getDate() + i);
+  const w = WEEKLY[d.getDay()]; if (!w) continue;
+  const ev = { ...w, d, today: i === 0 };
+  if (!ev.title) ev.title = BANDS[(d.getDate() + d.getMonth()) % BANDS.length];
+  if (d.getDay() === 6 && d.getDate() <= 7) { ev.kind = 'Release day'; ev.title = 'First Saturday Release'; ev.time = '11am'; ev.desc = 'A new small batch goes on at opening. The first 50 pints come in a free Assay glass.'; }
+  evs.push(ev);
+}
+document.getElementById('events-list').innerHTML = evs.map(e => `
+  <article class="ev reveal${e.today ? ' today' : ''}">
+    <div class="date"><small>${e.today ? 'Tonight' : e.d.toLocaleDateString('en-US', { weekday: 'short' })}</small><b>${e.d.getDate()}</b><span>${e.d.toLocaleDateString('en-US', { month: 'short' })}</span></div>
+    <div class="body"><span class="kind">${e.kind} · ${e.time}</span><h3>${e.title}</h3><p>${e.desc}</p></div>
+  </article>`).join('');
+const tonight = evs[0] && evs[0].today ? evs[0] : null;
+document.getElementById('fact-event').textContent = (tonight || evs[0]).title;
+document.getElementById('fact-event-sub').textContent = tonight ? `Today · ${tonight.time.split(' ')[0]}` : evs[0].d.toLocaleDateString('en-US', { weekday: 'long' });
+
+/* ================= NAV + REVEAL ================= */
+const links = [...document.querySelectorAll('.nav a')];
+const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+links.forEach(a => spy.observe(document.querySelector(a.getAttribute('href'))));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
