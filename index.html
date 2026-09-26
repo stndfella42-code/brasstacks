@@ -139,6 +139,11 @@
       transform: rotate(8deg);
     }
     #hero .badge svg { width: 100%; height: 100%; display: block; }
+    #hero .badge .badge-ring {
+      animation: badge-spin 30s linear infinite;
+      transform-box: fill-box; transform-origin: center;
+    }
+    @keyframes badge-spin { to { transform: rotate(360deg); } }
     #hero .rule-row {
       display: flex; align-items: center; gap: 26px; margin: 36px 0 30px;
     }
@@ -514,6 +519,7 @@
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; }
+      #hero .badge .badge-ring { animation: none; }
     }
   </style>
 </head>
@@ -547,9 +553,11 @@
             </defs>
             <circle cx="100" cy="100" r="97" fill="#f2ead8" stroke="#6b1f1f" stroke-width="2.5"/>
             <circle cx="100" cy="100" r="58" fill="none" stroke="#6b1f1f" stroke-width="1.25"/>
+            <g class="badge-ring">
             <text font-family="'Bebas Neue', sans-serif" font-size="21" letter-spacing="2" fill="#6b1f1f">
               <textPath href="#badge-circle" textLength="460" lengthAdjust="spacingAndGlyphs">NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226; NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226;</textPath>
             </text>
+            </g>
             <circle cx="100" cy="100" r="24" fill="#b8860b" stroke="#7a5c06" stroke-width="2"/>
             <circle cx="92" cy="92" r="6" fill="#e8c96a" opacity="0.85"/>
           </svg>
