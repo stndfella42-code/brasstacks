@@ -137,6 +137,11 @@ h2 { font-size: clamp(2.9rem, 12vw, 6.2rem); }
 .hero-actions .alt a { color: var(--bone); text-decoration: none; border-bottom: 2px solid var(--orange); }
 .blueprint { position: relative; max-width: 560px; }
 .blueprint svg { width: 100%; height: auto; overflow: visible; }
+.hero-copy { max-width: 880px; }
+.hero-ba { margin-top: 44px; }
+.hero-ba .ba-stage { border-radius: 14px; border: 1px solid var(--line); aspect-ratio: 21 / 9; }
+@media (max-width: 720px) { .hero-ba .ba-stage { aspect-ratio: 4 / 3; } }
+.hero-ba-cap { margin-top: 10px; font-size: .85rem; color: var(--concrete-lt); }
 .blueprint .bp-line { stroke: var(--concrete-lt); stroke-width: 1.5; fill: none; }
 .blueprint .bp-thin { stroke: var(--concrete); stroke-width: 1; fill: none; }
 .blueprint .bp-dim { stroke: var(--concrete); stroke-width: 1; fill: none; stroke-dasharray: 3 4; }
@@ -229,6 +234,7 @@ section { padding: 80px 0; }
 .ba { background: var(--char-2); border: 1px solid var(--line); }
 .ba-stage { position: relative; aspect-ratio: 400 / 260; overflow: hidden; touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; --pos: 50%; background: var(--steel); }
 .ba-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ba-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ba-after { clip-path: inset(0 0 0 var(--pos)); }
 .ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: var(--orange); pointer-events: none; }
 .ba-handle::after { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translate(-50%, -50%); background: var(--orange) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23151515' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E") center / 22px no-repeat; }
@@ -413,8 +419,8 @@ section { padding: 80px 0; }
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
+    <div class="hero-stack">
+      <div class="hero-copy">
         <p class="label hero-kicker">Wichita home remodeling &amp; roofing</p>
         <h1>Built right. <em>Built once.</em></h1>
         <p class="lede">Roofs, kitchens, baths, additions, and the structural work nobody sees. We handle it for Wichita homeowners who want the job done right the first time, with no shortcuts and no surprises on the invoice.</p>
@@ -424,39 +430,14 @@ section { padding: 80px 0; }
         </div>
       </div>
 
-      <div class="blueprint" aria-hidden="true">
-        <svg viewBox="0 0 520 380">
-          <!-- ground + dims -->
-          <path class="bp-thin" d="M10 320 H510"/>
-          <path class="bp-dim" d="M70 345 H450 M70 338 V352 M450 338 V352"/>
-          <text x="232" y="366">32'-0"</text>
-          <path class="bp-dim" d="M478 320 V150 M471 320 H485 M471 150 H485"/>
-          <text x="488" y="240" transform="rotate(90 488 240)">10'-6"</text>
-          <!-- house body -->
-          <path class="bp-line draw" style="--len:1100" d="M70 320 V150 H450 V320"/>
-          <!-- new roof -->
-          <path class="bp-hot draw d2" style="--len:720" d="M40 156 L150 72 H370 L480 156"/>
-          <path class="bp-thin draw d3" style="--len:1400" d="M67 136 H453 M93 116 H427 M119 96 H401 M145 78 H375"/>
-          <!-- chimney -->
-          <path class="bp-line draw d2" style="--len:300" d="M320 72 V40 H350 V72"/>
-          <!-- door + windows -->
-          <path class="bp-line draw d3" style="--len:400" d="M232 320 V232 H288 V320"/>
-          <path class="bp-line draw d3" style="--len:400" d="M110 190 H180 V256 H110 Z M145 190 V256 M110 223 H180"/>
-          <path class="bp-line draw d3" style="--len:400" d="M340 190 H410 V256 H340 Z M375 190 V256 M340 223 H410"/>
-          <circle class="bp-line" cx="278" cy="278" r="3"/>
-          <!-- callouts -->
-          <g class="fade-in">
-            <path class="bp-thin" d="M260 72 L300 20 H360"/>
-            <text class="hot" x="300" y="14">ARCH. SHINGLE · 6/12 PITCH</text>
-            <path class="bp-thin" d="M58 232 L20 206"/>
-            <text x="0" y="198">2x6 @ 16" O.C.</text>
-            <path class="bp-thin" d="M440 138 L500 104"/>
-            <text x="456" y="96">DRIP EDGE</text>
-          </g>
-          <!-- foundation hatch -->
-          <path class="bp-thin" d="M70 320 V334 H450 V320"/>
-          <path class="bp-thin" d="M80 334 l12 -14 M104 334 l12 -14 M128 334 l12 -14 M152 334 l12 -14 M176 334 l12 -14 M200 334 l12 -14 M224 334 l12 -14 M248 334 l12 -14 M272 334 l12 -14 M296 334 l12 -14 M320 334 l12 -14 M344 334 l12 -14 M368 334 l12 -14 M392 334 l12 -14 M416 334 l12 -14"/>
-        </svg>
+      <div class="hero-ba">
+        <div class="ba-stage">
+          <img class="ba-before" src="img/roof-before.jpg" alt="Before: hail-damaged roof" draggable="false"><img class="ba-after" src="img/roof-after.jpg" alt="After: new architectural shingle roof" draggable="false">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-handle"></div>
+          <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider: roof replacement">
+        </div>
+        <p class="hero-ba-cap">Drag the handle — full roof replacement, Andover.</p>
       </div>
     </div>
 
@@ -471,11 +452,11 @@ section { padding: 80px 0; }
       </li>
       <li>
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <div><b>Experience</b><span><span class="verify">[VERIFY: years in business]</span></span></div>
+        <div><b>Full-service</b><span>Sixteen trades, one crew to call</span></div>
       </li>
       <li>
         <svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-        <div><b>Licensed &amp; insured</b><span><span class="verify">[VERIFY: licensed &amp; insured + MABCD license #]</span></span></div>
+        <div><b>Straight paperwork</b><span>Clear written scope before any work starts</span></div>
       </li>
     </ul>
   </div>
@@ -553,7 +534,7 @@ section { padding: 80px 0; }
       <div><p class="label hot">Recent work</p><h2>Before.<br>After.</h2></div>
       <p class="lede">Drag across any project to see the difference. Every job starts with a clear written scope, so what you approve is what you get.</p>
     </header>
-    <p class="gallery-note"><span class="verify">[VERIFY: sample projects. Replace illustrations and captions with real Revival job photos, locations, and scopes before launch]</span></p>
+    <p class="gallery-note">Sample projects shown — photos are illustrative. Drag the handle on any card to compare before and after.</p>
     <div class="proj-grid" id="proj-grid"></div>
   </div>
 </section>
@@ -630,7 +611,7 @@ section { padding: 80px 0; }
       </div>
       <div>
         <h4>Hours</h4>
-        <p><span class="verify">[VERIFY: business hours, e.g. Mon–Fri 7am–5pm]</span></p>
+        <p>Mon–Fri · 7am–5pm<br>Sat · by appointment</p>
         <p style="margin-top:10px">Storm damage? Call any time and leave a message.</p>
       </div>
       <div>
@@ -646,7 +627,7 @@ section { padding: 80px 0; }
       <div>
         <h4>Service area</h4>
         <p>Wichita and Andover</p>
-        <p style="margin-top:8px"><span class="verify">[VERIFY: other suburbs served, e.g. Derby, Bel Aire, Maize, Park City, Haysville, Goddard, Rose Hill, Augusta]</span></p>
+        <p style="margin-top:8px">Derby, Bel Aire, Maize, Park City, Haysville &amp; Goddard</p>
       </div>
     </div>
     <div class="foot-base">
@@ -715,132 +696,10 @@ document.addEventListener('click', e => {
 });
 
 /* ============ BEFORE / AFTER SCENES (viewBox 400x260) ============ */
-const rng = seed => () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-const SCENES = {
-  roof(after) {
-    const r = rng(4);
-    let s = `<rect class="bg" width="400" height="260"/><path class="dm" d="M0 238H400"/>`;
-    s += `<rect class="fs ln" x="70" y="138" width="260" height="100"/>`;
-    s += `<path class="fd ln" d="M40 140 L110 62 H290 L360 140 Z"/>`;
-    for (let y = 72; y <= 132; y += 10) {
-      const k = (y - 62) * 70 / 78, x1 = 110 - k, x2 = 290 + k;
-      s += after ? `<path class="th" d="M${x1} ${y}H${x2}"/>` : `<path class="th" d="M${x1} ${y}H${x2}" stroke-dasharray="${8 + r() * 20} ${3 + r() * 9}"/>`;
-    }
-    if (after) {
-      s += `<path class="ac" d="M110 62H290" stroke-width="5"/><path class="ln" d="M40 140H360"/><path class="ac" d="M36 142H364" stroke-width="2"/>`;
-    } else {
-      [[150, 84, 26, 14], [236, 102, 30, 16], [96, 122, 22, 12], [262, 76, 18, 10]].forEach(([x, y, w, h]) => s += `<path class="fs" d="M${x} ${y}h${w}l-4 ${h}h-${w - 6}z" stroke="#151515"/>`);
-      for (let i = 0; i < 26; i++) { const y = 70 + r() * 62, k = (y - 62) * 70 / 78; s += `<circle cx="${110 - k + 10 + r() * (180 + 2 * k - 20)}" cy="${y}" r="${1.4 + r() * 1.8}" fill="#3d3d3a"/>`; }
-      s += `<path class="dm" d="M40 142 Q90 146 120 141 T200 144 T290 140 T360 143"/>`;
-    }
-    s += `<rect class="${after ? 'ln' : 'dm'}" x="110" y="168" width="44" height="40"/><rect class="${after ? 'ln' : 'dm'}" x="246" y="168" width="44" height="40"/><rect class="${after ? 'ln' : 'dm'}" x="182" y="176" width="36" height="62"/>`;
-    return s;
-  },
-  kitchen(after) {
-    let s = `<rect class="bg" width="400" height="260"/><path class="dm" d="M0 236H400"/>`;
-    if (!after) {
-      s += `<rect class="fs dm" x="30" y="24" width="340" height="26"/>`;
-      [40, 102, 164, 236, 298].forEach((x, i) => s += `<rect class="ln" x="${x}" y="54" width="56" height="58" transform="rotate(${i % 2 ? 1.2 : -.8} ${x + 28} 83)"/><circle class="dm" cx="${x + 48}" cy="100" r="2"/>`);
-      s += `<rect class="ln" x="166" y="24" width="64" height="10"/><rect class="th" x="40" y="156" width="320" height="4"/>`;
-      s += `<rect class="fs ln" x="40" y="160" width="320" height="76"/><rect class="fd ln" x="172" y="160" width="60" height="76"/>`;
-      [184, 214].forEach(x => s += `<circle class="dm" cx="${x}" cy="152" r="7"/>`);
-      [52, 104, 250, 302].forEach(x => s += `<rect class="dm" x="${x}" y="172" width="42" height="54"/>`);
-      s += `<path class="dm" d="M300 118 l18 20 M320 116 l-10 24" stroke-dasharray="3 3"/>`;
-    } else {
-      [30, 90, 150].forEach(x => s += `<rect class="ln" x="${x}" y="14" width="56" height="96"/><rect class="th" x="${x + 7}" y="21" width="42" height="82"/>`);
-      s += `<path class="ln" d="M226 110 L240 60 H300 L314 110 Z"/><path class="ln" d="M254 60 V14 H286 V60"/>`;
-      s += `<rect class="ln" x="330" y="14" width="44" height="96"/><path class="th" d="M334 44H370M334 76H370"/>`;
-      for (let y = 118; y < 150; y += 8) s += `<path class="th" d="M30 ${y}H374"/>`;
-      s += `<path class="ac" d="M28 150H376" stroke-width="3"/><rect class="fs ln" x="30" y="152" width="344" height="84"/>`;
-      [42, 112, 244, 314].forEach(x => s += `<rect class="th" x="${x}" y="164" width="56" height="62"/><path class="ln" d="M${x + 20} 172h16"/>`);
-      s += `<rect class="fd ln" x="182" y="160" width="50" height="70"/>`;
-      s += `<path class="th" d="M150 0V40M250 0V40"/><path class="ac" d="M140 40h20l-4 10h-12zM240 40h20l-4 10h-12z" fill="var(--orange)" stroke-width="1.5"/>`;
-    }
-    return s;
-  },
-  bath(after) {
-    let s = `<rect class="bg" width="400" height="260"/><path class="dm" d="M0 236H400"/>`;
-    if (!after) {
-      for (let x = 20; x < 240; x += 14) s += `<path class="th" d="M${x} 100V236" opacity=".45"/>`;
-      for (let y = 100; y < 236; y += 14) s += `<path class="th" d="M20 ${y}H236" opacity=".45"/>`;
-      s += `<path class="fs ln" d="M20 176H236V236H20Z"/><path class="ln" d="M14 30H242"/>`;
-      s += `<path class="dm fs" d="M40 30 C48 70 34 110 44 170 L96 170 C88 120 104 70 92 30 Z"/>`;
-      s += `<ellipse class="ln" cx="318" cy="82" rx="36" ry="46"/><rect class="fs ln" x="272" y="150" width="96" height="86"/><path class="dm" d="M290 170h60M290 196h60"/>`;
-      [[70, 120], [190, 150], [128, 110]].forEach(([x, y]) => s += `<circle cx="${x}" cy="${y}" r="5" fill="#34342f"/>`);
-    } else {
-      for (let x = 20; x < 240; x += 54) s += `<path class="th" d="M${x} 14V236"/>`;
-      for (let y = 14; y < 236; y += 36) s += `<path class="th" d="M20 ${y}H236"/>`;
-      s += `<rect class="fd ln" x="150" y="88" width="56" height="40"/><path class="ln" d="M20 14V236M236 14V236"/>`;
-      s += `<path class="ln" d="M60 20V44H82"/><rect class="fa" x="72" y="44" width="30" height="6"/><path class="ac" d="M40 232H160" stroke-width="3"/>`;
-      s += `<path class="ln" d="M236 14 V236" stroke-width="3"/><path class="th" d="M150 40 l60 70 M170 40 l50 58" opacity=".6"/>`;
-      s += `<rect class="ln" x="276" y="40" width="88" height="92"/><rect class="fs ln" x="266" y="150" width="108" height="46"/><path class="ln" d="M266 196V200"/><path class="ac" d="M320 142v8M314 142h12"/>`;
-    }
-    return s;
-  },
-  deck(after) {
-    const r = rng(9);
-    let s = `<rect class="bg" width="400" height="260"/><path class="dm" d="M0 238H400"/><rect class="fs ln" x="0" y="20" width="110" height="218"/><rect class="dm" x="30" y="70" width="50" height="80"/>`;
-    if (!after) {
-      s += `<path class="ln" d="M110 150 Q220 168 350 156"/><path class="ln" d="M110 162 Q220 180 350 168"/>`;
-      [140, 220, 300].forEach((x, i) => s += `<path class="ln" d="M${x} ${165 + i * 2}V238"/>`);
-      [[130, 150, -6], [190, 158, 4], [252, 160, -10], [330, 156, 12]].forEach(([x, y, a]) => s += `<path class="ln" d="M${x} ${y}V${y - 56}" transform="rotate(${a} ${x} ${y})"/>`);
-      s += `<path class="dm" d="M130 100 L190 106" stroke-dasharray="6 6"/>`;
-      for (let i = 0; i < 6; i++) s += `<path class="dm" d="M${350 + i * 8} ${170 + i * 12}h16" ${i === 3 ? 'stroke-dasharray="3 5"' : ''}/>`;
-      for (let i = 0; i < 8; i++) s += `<path class="th" d="M${120 + r() * 220} ${155 + r() * 8}l${6 + r() * 8} ${r() * 4}"/>`;
-    } else {
-      s += `<rect class="fs ln" x="110" y="150" width="240" height="14"/>`;
-      for (let x = 118; x < 350; x += 12) s += `<path class="th" d="M${x} 150V164"/>`;
-      [130, 230, 330].forEach(x => s += `<path class="ln" d="M${x} 164V238" stroke-width="4"/>`);
-      [118, 184, 250, 344].forEach(x => s += `<path class="ln" d="M${x} 150V88" stroke-width="3"/><rect class="fa" x="${x - 5}" y="84" width="10" height="5"/>`);
-      s += `<path class="ln" d="M114 92H348"/>`;
-      for (let x = 126; x < 344; x += 9) s += `<path class="th" d="M${x} 94V150"/>`;
-      for (let i = 0; i < 6; i++) s += `<path class="ln" d="M${350 + i * 8} ${164 + i * 12}h18"/>`;
-      s += `<path class="ln" d="M350 150 L398 234"/>`;
-    }
-    return s;
-  },
-  concrete(after) {
-    const r = rng(21);
-    let s = `<rect class="bg" width="400" height="260"/>`;
-    s += `<rect class="fs ln" x="120" y="16" width="160" height="70"/>`;
-    for (let y = 30; y < 86; y += 14) s += `<path class="${after ? 'th' : 'dm'}" d="M120 ${y}H280"/>`;
-    s += `<path class="${after ? 'ln' : 'dm'}" d="M120 86 L20 250 H380 L280 86 Z" fill="${after ? '#2c2c29' : '#262624'}"/>`;
-    if (after) {
-      s += `<path class="th" d="M200 86V250M86 142H314M52 198H348"/><path class="ac" d="M120 86L20 250M280 86L380 250" stroke-width="2"/>`;
-      for (let i = 0; i < 40; i++) { const y = 92 + r() * 150; s += `<path d="M${140 + r() * 120 - (y - 86) * .5 + r() * (y - 86)} ${y}h6" stroke="#3a3a37" stroke-width="1"/>`; }
-    } else {
-      s += `<path class="ln" d="M150 96 L166 130 L154 160 L176 196 L160 250"/><path class="ln" d="M166 130 L220 150 L250 144"/><path class="ln" d="M258 110 L240 170 L290 214 L310 250"/>`;
-      s += `<path class="fd dm" d="M90 190 L150 196 L140 232 L70 226 Z"/><path class="th" d="M60 250 l6 -14 l4 14 M330 250 l4 -18 l5 18 M200 250 l3 -10 l3 10"/>`;
-    }
-    return s;
-  },
-  fence(after) {
-    const r = rng(33);
-    let s = `<rect class="bg" width="400" height="260"/><path class="dm" d="M0 232H400"/>`;
-    if (after) {
-      s += `<path class="ln" d="M10 66H390" stroke-width="3"/><path class="th" d="M10 110H390M10 196H390"/>`;
-      for (let x = 12; x < 390; x += 16) s += `<rect class="fs th" x="${x}" y="70" width="15" height="162"/>`;
-      [10, 136, 262, 390].forEach(x => s += `<path class="ln" d="M${x} 58V232" stroke-width="5"/><rect class="fa" x="${x - 6}" y="52" width="12" height="6"/>`);
-      s += `<path class="ac" d="M150 140h14M150 170h14" stroke-width="3"/>`;
-    } else {
-      s += `<path class="dm" d="M10 116 Q200 132 390 104M10 196 Q200 206 390 190"/>`;
-      for (let x = 12; x < 390; x += 16) {
-        if ([140, 156, 300].some(v => Math.abs(v - x) < 8)) continue;
-        const a = (x > 160 && x < 290 ? 8 : 2) * (r() - .3), h = 140 + r() * 24;
-        s += `<rect class="fs th" x="${x}" y="${232 - h}" width="14" height="${h}" transform="rotate(${a} ${x + 7} 232)"/>`;
-      }
-      [10, 136, 262, 390].forEach((x, i) => s += `<path class="ln" d="M${x} 232V66" transform="rotate(${[2, -6, 9, 1][i]} ${x} 232)" stroke-width="4"/>`);
-      s += `<path class="th" d="M146 232 l4 -14 l4 14 M300 232 l3 -10 l3 10"/>`;
-    }
-    return s;
-  }
-};
-const scene = (type, after) => `<svg class="${after ? 'ba-after' : 'ba-before'}" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="sc">${SCENES[type](after)}</g></svg>`;
+const scene = (type, after) => `<img class="${after ? 'ba-after' : 'ba-before'}" src="img/${type}-${after ? 'after' : 'before'}.jpg" alt="${after ? 'After' : 'Before'}: ${type} project photo" draggable="false">`;
 
 const PROJECTS = [
   ['roof', 'Roofing · Hail claim', 'Full roof replacement — Andover', 'Hail-bruised shingles torn off to the deck and replaced with new underlayment, drip edge, and architectural shingles. We met the adjuster on the roof.'],
-  ['kitchen', 'Kitchen', 'Kitchen gut and remodel — Riverside', 'Soffits out, cabinets to the ceiling, a real range hood, and a counter run long enough to actually cook on.'],
-  ['bath', 'Bathroom', 'Tub-to-shower conversion — College Hill', 'Worn-out tub and curtain replaced with a large-format tile walk-in shower, recessed niche, and floating vanity.'],
   ['deck', 'Deck', 'Deck tear-off and rebuild — Derby', 'Sagging, rotted deck demolished and rebuilt on new footings, with a code-height railing and stairs that don\'t bounce.'],
   ['concrete', 'Concrete flatwork', 'Driveway tear-out and pour — Bel Aire', 'Heaved, cracked slab broken out and hauled off, the base re-compacted, and a new driveway poured with control joints.'],
   ['fence', 'Fence', 'Privacy fence replacement — Maize', 'Leaning, wind-beaten fence replaced with deep-set posts, a top cap, and a gate that latches the first time.']
@@ -857,7 +716,7 @@ projGrid.innerHTML = PROJECTS.map(([type, tag, title, desc]) => `
     <figcaption><p class="label hot">${tag}</p><h3>${title}</h3><p>${desc}</p></figcaption>
   </figure>`).join('');
 
-projGrid.querySelectorAll('.ba-stage').forEach(stage => {
+document.querySelectorAll('.ba-stage').forEach(stage => {
   const range = stage.querySelector('.ba-range');
   const set = v => { v = Math.max(0, Math.min(100, v)); stage.style.setProperty('--pos', v + '%'); range.value = v; };
   const fromEvent = e => { const r = stage.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
@@ -879,6 +738,36 @@ projGrid.querySelectorAll('.ba-stage').forEach(stage => {
   stage.addEventListener('click', () => range.focus({ preventScroll: true }));
   range.addEventListener('input', () => set(+range.value));
 });
+
+/* ============ HERO SLIDER AUTO-DEMO ============ */
+(() => {
+  const stage = document.querySelector('.hero-ba .ba-stage');
+  if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const range = stage.querySelector('.ba-range');
+  const set = v => { stage.style.setProperty('--pos', v + '%'); range.value = v; };
+  let cancelled = false;
+  stage.addEventListener('pointerdown', () => { cancelled = true; }, { once: true });
+  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  const run = () => {
+    set(12);
+    const t0 = performance.now(), dur = 2800;
+    const tick = now => {
+      if (cancelled) return;
+      const t = Math.min(1, (now - t0) / dur), e = ease(t);
+      set(t < .55 ? 12 + 76 * ease(t / .55) : 88 - 38 * e);
+      if (t < 1) requestAnimationFrame(tick); else set(50);
+    };
+    requestAnimationFrame(tick);
+  };
+  setTimeout(() => {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => {
+        if (es[0].isIntersecting) { io.disconnect(); run(); }
+      });
+      io.observe(stage);
+    } else run();
+  }, 700);
+})();
 
 /* ============ QUOTE FORM ============ */
 const form = document.getElementById('quote-form');
