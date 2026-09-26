@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halfmoon Nail Boutique — Structured Gel, Extensions &amp; Nail Art in Denver</title>
+<meta name="description" content="Halfmoon is a nail boutique on Tennyson Street in Denver's Berkeley neighborhood. Structured gel, soft-gel extensions, hand-painted nail art, and pedicures.">
+<meta name="theme-color" content="#f7f2ec">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================= TOKENS ================= */
+:root {
+  --paper: #f7f2ec;
+  --paper-2: #f1e9e1;
+  --blush: #efd9d2;
+  --blush-2: #e5c3b9;
+  --ink: #1f1a1a;
+  --muted: #6d625f;
+  --cherry: #8e1c2e;
+  --cherry-hi: #a8243a;
+  --line: rgba(31, 26, 26, .14);
+  --line-hi: rgba(31, 26, 26, .3);
+  --serif: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --sans: 'Manrope', system-ui, sans-serif;
+  --ease: cubic-bezier(.6, 0, .2, 1);
+  --radius: 22px;
+}
+
+/* ================= BASE (mobile first) ================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 1rem; line-height: 1.65; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+a { color: inherit; }
+svg { display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--cherry); outline-offset: 3px; }
+::selection { background: var(--cherry); color: var(--paper); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { width: 100%; max-width: 1220px; margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 300; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 99px; }
+.skip:focus { left: 8px; }
+
+.label { font-family: var(--sans); font-weight: 700; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.label.cherry { color: var(--cherry); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1; letter-spacing: -.015em; }
+h1 em, h2 em, h3 em { font-style: italic; font-weight: 400; color: var(--cherry); }
+h2 { font-size: clamp(2.6rem, 10vw, 5.4rem); }
+.lede { color: var(--muted); font-size: 1.08rem; max-width: 540px; }
+
+/* ================= BUTTONS ================= */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 28px; border-radius: 999px;
+  font-weight: 700; font-size: .88rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; border: 1.5px solid transparent;
+  transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-ink:hover { background: var(--cherry); }
+.btn-line { border-color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: var(--paper); }
+.btn-cherry { background: var(--cherry); color: var(--paper); }
+.btn-cherry:hover { background: var(--ink); }
+.btn .arr { transition: transform .35s var(--ease); }
+.btn:hover .arr { transform: translateX(4px); }
+
+/* ================= HEADER ================= */
+.header { position: sticky; top: 0; z-index: 100; background: rgba(247, 242, 236, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.header-in { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo svg { width: 24px; height: 32px; }
+.logo span { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; letter-spacing: -.01em; }
+.logo span i { font-weight: 400; color: var(--cherry); }
+.nav { display: none; }
+.header .btn { min-height: 40px; padding: 0 18px; font-size: .76rem; }
+
+/* ================= HERO ================= */
+.hero { padding: 36px 0 0; position: relative; overflow: hidden; }
+.hero-grid { display: grid; gap: 28px; }
+.hero h1 { font-size: clamp(3.1rem, 14vw, 6.6rem); margin: 16px 0 20px; }
+.hero h1 em { white-space: nowrap; }
+.hero .lede { font-size: 1.12rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-stage { position: relative; aspect-ratio: 540 / 460; border-radius: var(--radius); overflow: hidden; background: var(--blush); }
+.hero-stage::before { content: ''; position: absolute; width: 78%; aspect-ratio: 1; left: 50%; top: 58%; transform: translate(-50%, -50%); border-radius: 50%; background: var(--paper); opacity: .55; }
+.hero-stage .layer { position: absolute; inset: 0; transition: opacity 1.2s var(--ease); }
+.hero-stage .layer svg { width: 100%; height: 100%; }
+.hero-stage .layer.enter { opacity: 0; }
+.now { position: absolute; left: 14px; bottom: 14px; right: 14px; display: flex; align-items: center; gap: 10px; background: rgba(247, 242, 236, .9); backdrop-filter: blur(6px); border-radius: 999px; padding: 8px 16px 8px 8px; font-size: .84rem; }
+.now i { width: 26px; height: 26px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); transition: background 1.2s var(--ease); }
+.now b { font-weight: 700; }
+.now span { color: var(--muted); }
+
+.ticker { margin-top: 44px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 14px 0; }
+.ticker-track { display: flex; width: max-content; gap: 36px; animation: tick 60s linear infinite; font-family: var(--serif); font-style: italic; font-size: 1.35rem; }
+.ticker-track span { display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; }
+.ticker-track i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* ================= SECTIONS ================= */
+section { padding: 84px 0; }
+.sec-head { display: grid; gap: 16px; margin-bottom: 44px; }
+.alt { background: var(--paper-2); }
+
+/* ---- menu ---- */
+.menu-grid { display: grid; gap: 40px; }
+.menu-cat h3 { font-size: 2rem; padding-bottom: 12px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; display: flex; justify-content: space-between; align-items: baseline; }
+.menu-cat h3 small { font-family: var(--sans); font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.item { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.item-top { display: flex; align-items: baseline; gap: 10px; }
+.item-top b { font-weight: 700; font-size: 1.02rem; }
+.item-top .dots { flex: 1; border-bottom: 1px dotted var(--line-hi); transform: translateY(-4px); min-width: 20px; }
+.item-top .price { font-family: var(--serif); font-size: 1.25rem; }
+.item p { color: var(--muted); font-size: .92rem; margin-top: 4px; }
+.item .dur { font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cherry); margin-top: 6px; display: block; }
+.item.sig b::after { content: 'Signature'; margin-left: 8px; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; background: var(--cherry); color: var(--paper); padding: 3px 8px; border-radius: 99px; vertical-align: 2px; }
+
+/* ---- studio ---- */
+.studio { background: var(--ink); color: var(--paper); }
+.studio .label { color: rgba(247, 242, 236, .6); }
+.studio .lede { color: rgba(247, 242, 236, .72); }
+.studio h2 em { color: #e8a3ae; }
+.studio-grid { display: grid; gap: 28px; }
+.stage { position: relative; aspect-ratio: 540 / 460; border-radius: var(--radius); overflow: hidden; background: var(--blush); }
+.stage::before { content: ''; position: absolute; width: 78%; aspect-ratio: 1; left: 50%; top: 58%; transform: translate(-50%, -50%); border-radius: 50%; background: var(--paper); opacity: .55; }
+.stage > div { position: absolute; inset: 0; }
+.stage svg { width: 100%; height: 100%; }
+.stage-wrap { position: sticky; top: 64px; z-index: 5; background: var(--ink); padding: 10px 0; margin: -10px 0; }
+.stage-wrap .stage { max-width: 300px; margin: 0 auto; }
+.controls { display: grid; gap: 24px; }
+.ctl legend { font-weight: 700; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(247, 242, 236, .6); margin-bottom: 12px; display: flex; justify-content: space-between; width: 100%; }
+.ctl legend output { color: var(--paper); letter-spacing: .04em; text-transform: none; font-family: var(--serif); font-style: italic; font-size: 1.05rem; font-weight: 400; }
+fieldset { border: 0; min-width: 0; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { position: relative; }
+.opt input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.opt span { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(247, 242, 236, .25); font-size: .86rem; font-weight: 600; transition: background .25s, color .25s, border-color .25s; }
+.opt input:hover + span { border-color: var(--paper); }
+.opt input:checked + span { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.opt input:focus-visible + span { outline: 2px solid #e8a3ae; outline-offset: 2px; }
+.opt span svg { width: 14px; height: 22px; }
+.sw span { width: 40px; height: 40px; min-height: 0; padding: 0; border-radius: 50%; border: 0; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18); }
+.sw input:checked + span { box-shadow: 0 0 0 3px var(--ink), 0 0 0 5px var(--paper); }
+.summary { margin-top: 4px; background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px; display: grid; gap: 14px; }
+.summary h3 { font-size: 1.7rem; line-height: 1.1; }
+.summary .est { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 12px; gap: 10px; }
+.summary .est strong { font-family: var(--serif); font-size: 2.2rem; font-weight: 500; line-height: 1; }
+.summary .est span { color: var(--muted); font-size: .88rem; }
+.summary .fine { color: var(--muted); font-size: .8rem; }
+
+/* ---- sets gallery ---- */
+.sets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.set { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--blush); aspect-ratio: 4 / 5; display: flex; flex-direction: column; }
+.set:nth-child(3n+2) { background: #e8ddd2; }
+.set:nth-child(3n) { background: #eadfe3; }
+.set .art { flex: 1; position: relative; }
+.set .art svg { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform .8s var(--ease); }
+.set:hover .art svg { transform: scale(1.05); }
+.set figcaption { padding: 12px 14px 14px; background: rgba(247, 242, 236, .92); }
+.set figcaption b { font-family: var(--serif); font-weight: 500; font-size: 1.05rem; display: block; line-height: 1.15; }
+.set figcaption span { font-size: .76rem; color: var(--muted); }
+.set button { margin-top: 8px; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cherry); display: inline-flex; gap: 6px; min-height: 30px; align-items: center; }
+.set button:hover { color: var(--ink); }
+
+/* ---- artists ---- */
+.artists { display: grid; gap: 18px; }
+.artist { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: grid; grid-template-columns: 120px 1fr; }
+.artist .pic { background: var(--blush); position: relative; }
+.artist .pic svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.artist-body { padding: 18px 18px 20px; }
+.artist h3 { font-size: 1.6rem; margin: 4px 0 8px; }
+.artist p { color: var(--muted); font-size: .9rem; }
+
+/* ---- policies ---- */
+.policies { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.policy { background: var(--paper); padding: 24px 22px; }
+.policy .n { font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--cherry); line-height: 1; }
+.policy h3 { font-size: 1.35rem; margin: 10px 0 6px; }
+.policy p { color: var(--muted); font-size: .93rem; }
+
+/* ---- booking ---- */
+.book-grid { display: grid; gap: 36px; }
+.form { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 20px; display: grid; gap: 18px; }
+.row { display: grid; gap: 18px; }
+.field { display: grid; gap: 6px; }
+.field > span { font-weight: 700; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.field > span i { font-style: normal; color: var(--cherry); }
+.field input, .field select, .field textarea { width: 100%; min-height: 50px; padding: 12px 16px; border-radius: 14px; border: 1px solid var(--line-hi); background: #fffdfa; font-size: 1rem; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
+.field textarea { min-height: 96px; resize: vertical; }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231f1a1a' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--cherry); box-shadow: 0 0 0 3px rgba(142, 28, 46, .12); }
+.field.bad input, .field.bad select { border-color: var(--cherry); }
+.err { color: var(--cherry); font-size: .82rem; }
+.look-chip { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--blush); }
+.look-chip .mini { width: 54px; height: 46px; flex: none; border-radius: 10px; overflow: hidden; background: var(--paper); }
+.look-chip .mini svg { width: 100%; height: 100%; }
+.look-chip div { flex: 1; font-size: .9rem; line-height: 1.35; }
+.look-chip button { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: underline; }
+.form .btn { width: 100%; }
+.form .fine { font-size: .82rem; color: var(--muted); text-align: center; }
+.done { text-align: center; padding: 20px 4px; }
+.done h3 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin: 10px 0 12px; }
+.done p { color: var(--muted); margin-bottom: 8px; }
+
+/* ---- visit ---- */
+.visit-card { background: var(--ink); color: var(--paper); border-radius: var(--radius); padding: 28px 22px; }
+.visit-card address { font-style: normal; font-family: var(--serif); font-size: 1.8rem; line-height: 1.15; margin: 10px 0 14px; }
+.visit-card a { color: var(--paper); }
+.visit-card .fine { color: rgba(247, 242, 236, .65); font-size: .88rem; margin-top: 12px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin: 22px 0 8px; }
+.status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: rgba(247, 242, 236, .4); }
+.status.open::before { background: #7fd49a; box-shadow: 0 0 0 4px rgba(127, 212, 154, .2); }
+.hours { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.hours td { padding: 8px 0; border-bottom: 1px solid rgba(247, 242, 236, .12); }
+.hours td:last-child { text-align: right; color: rgba(247, 242, 236, .7); }
+.hours tr.today td { color: var(--paper); font-weight: 700; }
+
+/* ---- footer ---- */
+.footer { padding: 64px 0 40px; border-top: 1px solid var(--line); }
+.foot-word { font-family: var(--serif); font-size: clamp(4rem, 22vw, 15rem); line-height: .85; letter-spacing: -.03em; text-align: center; margin-bottom: 40px; }
+.foot-word em { color: var(--cherry); font-weight: 400; }
+.foot-grid { display: grid; gap: 28px; padding-bottom: 36px; }
+.footer h4 { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.footer ul { list-style: none; }
+.footer li { padding: 2px 0; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--cherry); }
+.foot-base { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: .8rem; color: var(--muted); }
+
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ================= BREAKPOINTS ================= */
+@media (min-width: 640px) {
+  .wrap { padding: 0 32px; }
+  .sets { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .row { grid-template-columns: 1fr 1fr; }
+  .form { padding: 32px; }
+  .policies { grid-template-columns: 1fr 1fr; }
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
+  .artist { grid-template-columns: 160px 1fr; }
+}
+@media (min-width: 980px) {
+  html { scroll-padding-top: 88px; }
+  .header-in { height: 76px; }
+  .nav { display: flex; gap: 30px; }
+  .nav a { text-decoration: none; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); position: relative; padding: 4px 0; transition: color .25s; }
+  .nav a::after { content: ''; position: absolute; left: 50%; bottom: -4px; width: 5px; height: 5px; border-radius: 50%; background: var(--cherry); transform: translateX(-50%) scale(0); transition: transform .3s var(--ease); }
+  .nav a:hover, .nav a.active { color: var(--ink); }
+  .nav a:hover::after, .nav a.active::after { transform: translateX(-50%) scale(1); }
+  .header .btn { min-height: 46px; padding: 0 24px; font-size: .8rem; }
+  .hero { padding-top: 64px; }
+  .hero-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
+  section { padding: 120px 0; }
+  .sec-head.split { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 48px; }
+  .menu-grid { grid-template-columns: 1fr 1fr; column-gap: 64px; row-gap: 56px; }
+  .studio-grid { grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+  .stage-wrap { top: 110px; padding: 0; margin: 0; }
+  .stage-wrap .stage { max-width: none; }
+  .sets { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .artists { grid-template-columns: repeat(3, 1fr); }
+  .artist { grid-template-columns: 1fr; }
+  .artist .pic { aspect-ratio: 540 / 460; }
+  .policies { grid-template-columns: repeat(4, 1fr); }
+  .book-grid { grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top" aria-label="Halfmoon Nail Boutique home">
+      <svg viewBox="0 0 24 32" aria-hidden="true"><path d="M2 30V10a10 10 0 0 1 20 0v20Z" fill="#8e1c2e"/><path d="M5 30a7 7 0 0 1 14 0Z" fill="#f7f2ec"/></svg>
+      <span>Half<i>moon</i></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#menu">Menu</a><a href="#studio">Shade Studio</a><a href="#sets">Sets</a><a href="#artists">Artists</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-ink" href="#book">Book</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top" style="padding-bottom:0">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label cherry">Nail boutique · Berkeley, Denver</p>
+        <h1>Hands,<br><em>but make it</em><br>art.</h1>
+        <p class="lede">Structured gel that actually lasts, extensions shaped by hand, and nail art painted with a brush the width of an eyelash. Four chairs, no rush, and nobody leaves with something they didn't love.</p>
+        <div class="hero-actions">
+          <a class="btn btn-ink" href="#book">Book an appointment <span class="arr">→</span></a>
+          <a class="btn btn-line" href="#studio">Design your set</a>
+        </div>
+      </div>
+      <div class="hero-stage" id="hero-stage" aria-label="Rotating preview of nail sets">
+        <div class="now" aria-live="polite"><i id="now-dot"></i><div><b id="now-name">Cherry Cola</b> <span id="now-desc">almond · aura</span></div></div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label cherry">The menu</p><h2>Everything <em>by hand.</em></h2></div>
+        <p class="lede">Every service includes cuticle work, shaping, and a hand massage long enough to count. Prices start where listed; complex art is quoted at your appointment before we begin.</p>
+      </header>
+      <div class="menu-grid">
+        <div class="menu-cat reveal">
+          <h3>Manicures <small>Natural nails</small></h3>
+          <div class="item"><div class="item-top"><b>Classic Manicure</b><span class="dots"></span><span class="price">$38</span></div><p>Shape, cuticle care, massage, and regular polish. Dries in about fifteen minutes.</p><span class="dur">30 min</span></div>
+          <div class="item"><div class="item-top"><b>Gel Manicure</b><span class="dots"></span><span class="price">$52</span></div><p>Two-plus weeks of shine with no chips and no dry time. Walk out and grab your keys.</p><span class="dur">45 min</span></div>
+          <div class="item sig"><div class="item-top"><b>Structured Gel</b><span class="dots"></span><span class="price">$68</span></div><p>A builder-gel overlay that gives weak or peeling nails a real apex, so you can grow your own length without breaks.</p><span class="dur">60 min</span></div>
+        </div>
+        <div class="menu-cat reveal">
+          <h3>Extensions <small>Added length</small></h3>
+          <div class="item"><div class="item-top"><b>Soft-Gel Full Set</b><span class="dots"></span><span class="price">$85+</span></div><p>Full-coverage soft-gel tips, filed to any shape and length. Lightweight, flexible, and removable without damage.</p><span class="dur">90 min</span></div>
+          <div class="item"><div class="item-top"><b>Sculpted Gel Set</b><span class="dots"></span><span class="price">$110+</span></div><p>Built on forms, not tips, for the thinnest possible extension and a clean, seamless side profile.</p><span class="dur">2 hr</span></div>
+          <div class="item"><div class="item-top"><b>Rebalance</b><span class="dots"></span><span class="price">$65</span></div><p>Every three to four weeks: we fill regrowth, restore the apex, and refresh the color.</p><span class="dur">75 min</span></div>
+        </div>
+        <div class="menu-cat reveal">
+          <h3>Nail Art <small>Add-on</small></h3>
+          <div class="item"><div class="item-top"><b>Level One</b><span class="dots"></span><span class="price">+$10–15</span></div><p>French, half-moon, dots, and single-accent nails.</p></div>
+          <div class="item"><div class="item-top"><b>Level Two</b><span class="dots"></span><span class="price">+$20</span></div><p>Chrome, aura, cat-eye, and ombré across all ten nails.</p></div>
+          <div class="item"><div class="item-top"><b>Level Three</b><span class="dots"></span><span class="price">from +$35</span></div><p>Hand-painted pieces, characters, 3D gel, and charms. Bring your inspo and we'll quote it before we start.</p></div>
+        </div>
+        <div class="menu-cat reveal">
+          <h3>Pedicures <small>Feet up</small></h3>
+          <div class="item"><div class="item-top"><b>Classic Pedicure</b><span class="dots"></span><span class="price">$48</span></div><p>Soak, callus care, shaping, massage, and regular polish.</p><span class="dur">45 min</span></div>
+          <div class="item"><div class="item-top"><b>Gel Pedicure</b><span class="dots"></span><span class="price">$62</span></div><p>Everything in the classic, finished in gel that makes it through a month of sandals.</p><span class="dur">60 min</span></div>
+          <div class="item sig"><div class="item-top"><b>Milk Bath Pedicure</b><span class="dots"></span><span class="price">$78</span></div><p>A warm oat-milk soak, sugar scrub, a hydrating mask with hot towels, and a longer massage.</p><span class="dur">75 min</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO -->
+  <section class="studio" id="studio">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label">Shade Studio</p><h2>Try it on <em>before you sit down.</em></h2></div>
+        <p class="lede">Pick a shade, a shape, and a finish, and see it on a hand closer to yours. When it's right, book the look and your artist will have it before you arrive.</p>
+      </header>
+      <div class="studio-grid">
+        <div class="stage-wrap">
+          <div class="stage" aria-hidden="true"><div id="studio-stage"></div></div>
+        </div>
+        <form class="controls" id="studio-form" onsubmit="return false">
+          <fieldset class="ctl"><legend>Shade <output id="o-shade"></output></legend><div class="opts" id="c-shade"></div></fieldset>
+          <fieldset class="ctl"><legend>Shape <output id="o-shape"></output></legend><div class="opts" id="c-shape"></div></fieldset>
+          <fieldset class="ctl"><legend>Length</legend><div class="opts" id="c-length"></div></fieldset>
+          <fieldset class="ctl"><legend>Finish</legend><div class="opts" id="c-finish"></div></fieldset>
+          <fieldset class="ctl"><legend>Art</legend><div class="opts" id="c-art"></div></fieldset>
+          <fieldset class="ctl"><legend>Skin tone</legend><div class="opts" id="c-skin"></div></fieldset>
+          <div class="summary">
+            <p class="label cherry">Your look</p>
+            <h3 id="look-title"></h3>
+            <div class="est"><span id="look-svc"></span><strong id="look-price"></strong></div>
+            <a class="btn btn-cherry" href="#book" id="book-look">Book this look <span class="arr">→</span></a>
+            <p class="fine">Estimate only. Your artist confirms the final price before starting.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETS -->
+  <section id="sets">
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label cherry">Recent sets</p><h2>Straight off <em>the table.</em></h2></div>
+        <p class="lede">A few favorites from this month. Tap any set to load it into the Shade Studio and make it your own.</p>
+      </header>
+      <div class="sets" id="sets-grid"></div>
+    </div>
+  </section>
+
+  <!-- ARTISTS -->
+  <section class="alt" id="artists">
+    <div class="wrap">
+      <header class="sec-head"><p class="label cherry">The artists</p><h2>Three chairs, <em>three specialists.</em></h2></header>
+      <div class="artists" id="artists-grid"></div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section>
+    <div class="wrap">
+      <header class="sec-head"><p class="label cherry">Good to know</p><h2>The <em>fine print,</em> kindly.</h2></header>
+      <div class="policies">
+        <div class="policy reveal"><span class="n">i.</span><h3>Deposits</h3><p>Extensions and art appointments hold with a $20 deposit, which comes off your total. Manicures and pedicures don't need one.</p></div>
+        <div class="policy reveal"><span class="n">ii.</span><h3>Running late</h3><p>You get a 15-minute grace period. After that, we may need to simplify the design or move you to another time.</p></div>
+        <div class="policy reveal"><span class="n">iii.</span><h3>Changing plans</h3><p>Give us 24 hours' notice to cancel or reschedule and your deposit carries over. Life happens; just text us.</p></div>
+        <div class="policy reveal"><span class="n">iv.</span><h3>Coming from elsewhere</h3><p>We'll gently remove another salon's product for $15. Your nails come first, so we never rip or pry.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK + VISIT -->
+  <section class="alt" id="book">
+    <div class="wrap">
+      <header class="sec-head"><p class="label cherry">Book</p><h2>Save <em>your seat.</em></h2></header>
+      <div class="book-grid">
+        <form class="form" id="book-form" novalidate>
+          <div id="book-fields" style="display:grid;gap:18px">
+            <div class="row">
+              <label class="field" data-f="name"><span>Name <i>*</i></span><input name="name" autocomplete="name" required><small class="err"></small></label>
+              <label class="field" data-f="phone"><span>Mobile <i>*</i></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" required><small class="err"></small></label>
+            </div>
+            <div class="row">
+              <label class="field" data-f="service"><span>Service <i>*</i></span><select name="service" id="svc-select" required><option value="">Choose a service…</option></select><small class="err"></small></label>
+              <label class="field"><span>Artist</span><select name="artist" id="artist-select"><option value="Any">First available</option></select></label>
+            </div>
+            <div class="row">
+              <label class="field" data-f="date"><span>Preferred day <i>*</i></span><input name="date" type="date" required><small class="err"></small></label>
+              <label class="field"><span>Time of day</span><select name="time"><option>Morning</option><option selected>Afternoon</option><option>Evening</option></select></label>
+            </div>
+            <div class="look-chip" id="look-chip" hidden><div class="mini" id="chip-mini"></div><div id="chip-text"></div><button type="button" id="chip-clear">Remove</button></div>
+            <label class="field"><span>Notes or inspo</span><textarea name="notes" placeholder="Describe what you're after, or tell us to expect screenshots by text."></textarea></label>
+            <button class="btn btn-ink" type="submit">Request appointment <span class="arr">→</span></button>
+            <p class="fine">We'll text you within a few hours to confirm a time.</p>
+          </div>
+          <div class="done" id="book-done" hidden tabindex="-1">
+            <p class="label cherry">Request sent</p>
+            <h3>See you <em>soon.</em></h3>
+            <p id="done-msg"></p>
+            <button class="btn btn-line" type="button" id="again">Book another</button>
+          </div>
+        </form>
+
+        <aside class="visit-card" id="visit">
+          <p class="label" style="color:rgba(247,242,236,.6)">Visit</p>
+          <address>4217 Tennyson St<br>Denver, CO 80212</address>
+          <p><a href="tel:+13035550148">(303) 555-0148</a><br><a href="mailto:hello@halfmoonnails.co">hello@halfmoonnails.co</a></p>
+          <p class="status" id="status">Checking hours…</p>
+          <table class="hours" id="hours" aria-label="Opening hours"></table>
+          <p class="fine">Street parking on Tennyson and 42nd. We're up the stairs above the bookshop, and the side entrance has a lift.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-word" aria-hidden="true">Half<em>moon</em></div>
+    <div class="foot-grid">
+      <div><h4>Halfmoon Nail Boutique</h4><p style="color:var(--muted);max-width:300px">Structured gel, extensions, and hand-painted nail art in Berkeley, Denver.</p></div>
+      <div><h4>Visit</h4><p>4217 Tennyson St<br>Denver, CO 80212<br><a href="tel:+13035550148">(303) 555-0148</a></p></div>
+      <div><h4>Hours</h4><ul id="foot-hours"></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#" aria-label="Instagram (demo link)">Instagram ↗</a></li><li><a href="#" aria-label="TikTok (demo link)">TikTok ↗</a></li><li><a href="#" aria-label="Pinterest (demo link)">Pinterest ↗</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Halfmoon Nail Boutique</span><span>Concept site for a fictional business · Design &amp; build by <a href="https://brasstacks.space/work.html">Brass Tacks</a></span></div>
+  </div>
+</footer>
+
+
+<script>
+/* ================= DATA ================= */
+const SHADES = [
+  { id: 'milk', name: 'Milk Bath', hex: '#efe5da' },
+  { id: 'ballet', name: 'Ballet Slipper', hex: '#e7bfbb' },
+  { id: 'butter', name: 'Butter Yellow', hex: '#f0d98f' },
+  { id: 'pistachio', name: 'Pistachio Gelato', hex: '#b6c69f' },
+  { id: 'lilac', name: 'Glazed Lilac', hex: '#c3b0d8' },
+  { id: 'cherry', name: 'Cherry Cola', hex: '#6e1423' },
+  { id: 'red', name: 'Red Carpet', hex: '#b3121b' },
+  { id: 'espresso', name: 'Espresso Martini', hex: '#3d2620' },
+  { id: 'midnight', name: 'Midnight', hex: '#1d1c24' }
+];
+const SHAPES = ['Square', 'Round', 'Almond', 'Coffin', 'Stiletto'];
+const LENGTHS = ['Short', 'Medium', 'Long'];
+const FINISHES = ['Gloss', 'Matte', 'Chrome'];
+const ARTS = ['Solid', 'French', 'Half-moon', 'Dots', 'Aura'];
+const SKINS = [
+  { name: 'Porcelain', hex: '#f3d8c6' }, { name: 'Sand', hex: '#e2b590' }, { name: 'Honey', hex: '#c68d60' },
+  { name: 'Umber', hex: '#8f5b3c' }, { name: 'Espresso', hex: '#5a3726' }
+];
+const ARTISTS = [
+  { name: 'Noor Haddad', role: 'Founder · Structured gel & aura', bio: 'Noor opened Halfmoon after a decade of fixing other people\'s lifting gel. She obsesses over apex placement, so your manicure lasts the full three weeks.', look: { shade: 'lilac', shape: 'Almond', length: 'Medium', finish: 'Gloss', art: 'Aura', skin: 1 } },
+  { name: 'Kimi Tran', role: 'Hand-painted art', bio: 'Kimi can fit a tiny portrait of your dog on a ring finger. Bring a reference photo and a little patience. Level Three art is Kimi\'s whole world.', look: { shade: 'butter', shape: 'Square', length: 'Short', finish: 'Gloss', art: 'Dots', skin: 3 } },
+  { name: 'Sofía Reyes', role: 'Extensions & chrome', bio: 'Sofía sculpts the thinnest extensions in the city and has strong opinions about stiletto proportions. Her chrome sets stop strangers in the grocery line.', look: { shade: 'midnight', shape: 'Stiletto', length: 'Long', finish: 'Chrome', art: 'Solid', skin: 2 } }
+];
+const SETS = [
+  { title: 'Cherry Cola aura', by: 'Noor', look: { shade: 'cherry', shape: 'Almond', length: 'Medium', finish: 'Gloss', art: 'Aura', skin: 2 } },
+  { title: 'Butter half-moons', by: 'Kimi', look: { shade: 'butter', shape: 'Round', length: 'Short', finish: 'Gloss', art: 'Half-moon', skin: 4 } },
+  { title: 'Espresso coffin', by: 'Sofía', look: { shade: 'espresso', shape: 'Coffin', length: 'Long', finish: 'Matte', art: 'Solid', skin: 0 } },
+  { title: 'Milk Bath chrome', by: 'Sofía', look: { shade: 'milk', shape: 'Almond', length: 'Long', finish: 'Chrome', art: 'Solid', skin: 3 } },
+  { title: 'Pistachio French', by: 'Noor', look: { shade: 'pistachio', shape: 'Square', length: 'Short', finish: 'Gloss', art: 'French', skin: 1 } },
+  { title: 'Red Carpet dots', by: 'Kimi', look: { shade: 'red', shape: 'Stiletto', length: 'Medium', finish: 'Gloss', art: 'Dots', skin: 2 } }
+];
+const SERVICES = ['Classic Manicure', 'Gel Manicure', 'Structured Gel', 'Soft-Gel Full Set', 'Sculpted Gel Set', 'Rebalance', 'Classic Pedicure', 'Gel Pedicure', 'Milk Bath Pedicure'];
+const shadeById = id => SHADES.find(s => s.id === id);
+
+/* ================= COLOR HELPERS ================= */
+const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, t) => '#' + rgb(a).map((v, i) => Math.round(v + (rgb(b)[i] - v) * t).toString(16).padStart(2, '0')).join('');
+const lum = h => { const [r, g, b] = rgb(h); return (.299 * r + .587 * g + .114 * b) / 255; };
+
+/* ================= NAIL RENDERER ================= */
+function nailPath(shape, nw, L) {
+  const h = nw / 2, cut = `L${h} 0Q0 ${nw * .45} ${-h} 0Z`;
+  switch (shape) {
+    case 'Square': return `M${-h} 0L${-h} ${-L + 5}Q${-h} ${-L} ${-h + 5} ${-L}L${h - 5} ${-L}Q${h} ${-L} ${h} ${-L + 5}${cut}`;
+    case 'Round': return `M${-h} 0L${-h} ${-L + h}A${h} ${h} 0 0 1 ${h} ${-L + h}${cut}`;
+    case 'Almond': return `M${-h} 0L${-h} ${-L * .52}C${-h} ${-L * .84} ${-nw * .16} ${-L} 0 ${-L}C${nw * .16} ${-L} ${h} ${-L * .84} ${h} ${-L * .52}${cut}`;
+    case 'Coffin': return `M${-h} 0L${-h} ${-L * .5}L${-nw * .3} ${-L}L${nw * .3} ${-L}L${h} ${-L * .5}${cut}`;
+    case 'Stiletto': return `M${-h} 0L${-h} ${-L * .4}C${-h} ${-L * .74} ${-nw * .05} ${-L * .95} 0 ${-L}C${nw * .05} ${-L * .95} ${h} ${-L * .74} ${h} ${-L * .4}${cut}`;
+  }
+}
+const FINGERS = [
+  { x: 128, t: 206, w: 62, r: -9 },
+  { x: 210, t: 128, w: 70, r: -3, ring: true },
+  { x: 294, t: 98, w: 72, r: 2 },
+  { x: 376, t: 134, w: 70, r: 7 },
+  { x: 404, t: 296, w: 76, r: 30 }
+];
+let uidN = 0;
+function hand(look) {
+  const u = 'h' + (uidN++);
+  const shade = shadeById(look.shade).hex, skin = SKINS[look.skin].hex;
+  const pointy = ['Almond', 'Coffin', 'Stiletto'].includes(look.shape);
+  const ext = { Short: pointy ? 18 : 5, Medium: 28, Long: 50 }[look.length] + (look.shape === 'Stiletto' ? 10 : 0);
+  const nude = mix(skin, '#f6d9d3', .7);
+  let fillId = shade;
+  let defs = `<linearGradient id="${u}s" x1="0" x2="1"><stop offset="0" stop-color="${mix(skin, '#000000', .16)}"/><stop offset=".3" stop-color="${skin}"/><stop offset=".72" stop-color="${skin}"/><stop offset="1" stop-color="${mix(skin, '#000000', .2)}"/></linearGradient>
+    <linearGradient id="${u}g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e9d9a8"/><stop offset=".5" stop-color="#c8a55a"/><stop offset="1" stop-color="#9c7a36"/></linearGradient>`;
+  if (look.finish === 'Chrome') {
+    defs += `<linearGradient id="${u}c" x1="0" x2="1" y1="0" y2=".25"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".32" stop-color="#fff" stop-opacity=".55"/><stop offset=".47" stop-color="#fff" stop-opacity=".95"/><stop offset=".6" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>`;
+  }
+  if (look.art === 'Aura') {
+    defs += `<radialGradient id="${u}a" cx=".5" cy=".62" r=".6"><stop offset="0" stop-color="${lum(shade) > .6 ? mix(shade, '#b3121b', .45) : mix(shade, '#ffb3c1', .6)}"/><stop offset=".55" stop-color="${lum(shade) > .6 ? mix(shade, '#b3121b', .15) : mix(shade, '#ffb3c1', .2)}"/><stop offset="1" stop-color="${shade}"/></radialGradient>`;
+    fillId = `url(#${u}a)`;
+  }
+  let body = '';
+  FINGERS.forEach((f, i) => {
+    const nw = f.w * .7, bed = f.w * .82, cy = f.t + bed, L = bed + ext, d = nailPath(look.shape, nw, L);
+    let nail = '';
+    const base = look.art === 'French' ? mix('#efe5da', skin, .25) : fillId;
+    nail += `<rect x="${-nw}" y="${-L - 4}" width="${nw * 2}" height="${L + nw}" fill="${base}"/>`;
+    if (look.art === 'French') nail += `<rect x="${-nw}" y="${-L - 4}" width="${nw * 2}" height="${ext + nw * .42}" fill="${fillId}"/>`;
+    if (look.art === 'Half-moon') nail += `<circle cx="0" cy="${nw * .08}" r="${nw * .42}" fill="${nude}"/>`;
+    if (look.art === 'Dots') { const dc = lum(shade) > .55 ? '#1f1a1a' : '#f7f2ec'; [.3, .5, .7].forEach(t => nail += `<circle cx="0" cy="${-L * t}" r="${nw * .075}" fill="${dc}"/>`); }
+    if (look.finish === 'Gloss') nail += `<rect x="${-nw * .32}" y="${-L + (pointy ? L * .22 : 8)}" width="${nw * .14}" height="${L * .55}" rx="${nw * .07}" fill="#fff" opacity=".5"/><circle cx="${-nw * .25}" cy="${-L * .12}" r="${nw * .05}" fill="#fff" opacity=".45"/>`;
+    if (look.finish === 'Chrome') nail += `<rect x="${-nw}" y="${-L - 4}" width="${nw * 2}" height="${L + nw}" fill="url(#${u}c)"/>`;
+    if (look.finish === 'Matte') nail += `<rect x="${-nw}" y="${-L - 4}" width="${nw * 2}" height="${L + nw}" fill="#fff" opacity=".06"/>`;
+    const knuckles = `<path d="M${f.x - f.w * .22} ${f.t + 128}q${f.w * .22} 7 ${f.w * .44} 0M${f.x - f.w * .18} ${f.t + 138}q${f.w * .18} 5 ${f.w * .36} 0" stroke="${mix(skin, '#000000', .28)}" stroke-width="1.4" fill="none" opacity=".45"/>`;
+    const ring = f.ring ? `<rect x="${f.x - f.w / 2 - 1}" y="${f.t + 176}" width="${f.w + 2}" height="9" rx="4.5" fill="url(#${u}g)"/>` : '';
+    body += `<g transform="rotate(${f.r} ${f.x} 520)">
+      <rect x="${f.x - f.w / 2}" y="${f.t}" width="${f.w}" height="${560 - f.t}" rx="${f.w / 2}" fill="url(#${u}s)"/>
+      ${knuckles}${ring}
+      <path d="M${f.x - nw / 2 - 3} ${cy + 2}Q${f.x} ${cy + nw * .55} ${f.x + nw / 2 + 3} ${cy + 2}" stroke="${mix(skin, '#000000', .18)}" stroke-width="1.2" fill="none" opacity=".5"/>
+      <clipPath id="${u}n${i}"><path d="${d}" transform="translate(${f.x} ${cy})"/></clipPath>
+      <g clip-path="url(#${u}n${i})"><g transform="translate(${f.x} ${cy})">${nail}</g></g>
+      <path d="${d}" transform="translate(${f.x} ${cy})" fill="none" stroke="${mix(shade, '#000000', .35)}" stroke-width="1" opacity=".35"/>
+    </g>`;
+  });
+  return `<svg viewBox="0 0 540 460" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs>${defs}</defs>${body}</svg>`;
+}
+const shapeIcon = s => `<svg viewBox="-12 -34 24 38" aria-hidden="true"><path d="${nailPath(s, 20, 30)}" fill="currentColor"/></svg>`;
+const describe = l => `${l.length.toLowerCase()} ${l.shape.toLowerCase()} · ${l.finish === 'Gloss' ? '' : l.finish.toLowerCase() + ' '}${l.art === 'Solid' ? 'solid' : l.art.toLowerCase()}`.replace(' ·  ', ' · ');
+
+/* ================= PRICING ================= */
+function estimate(l) {
+  const ext = l.length !== 'Short' || ['Almond', 'Coffin', 'Stiletto'].includes(l.shape);
+  let svc = ext ? 'Soft-Gel Full Set' : 'Structured Gel', price = ext ? 85 : 68, mins = ext ? 90 : 60;
+  if (l.length === 'Long') { price += 10; mins += 15; }
+  const art = { Solid: 0, French: 15, 'Half-moon': 10, Dots: 10, Aura: 20 }[l.art];
+  const chrome = l.finish === 'Chrome' ? 20 : 0;
+  price += Math.max(art, chrome) + (art && chrome ? 10 : 0);
+  if (art || chrome) mins += 15;
+  return { svc, price, mins };
+}
+
+/* ================= HERO ROTATION ================= */
+const heroStage = document.getElementById('hero-stage');
+const heroLooks = [SETS[0].look, SETS[3].look, SETS[1].look, SETS[2].look, SETS[4].look];
+let hi = 0;
+function showHero(first) {
+  const l = heroLooks[hi % heroLooks.length], s = shadeById(l.shade);
+  const layer = document.createElement('div');
+  layer.className = 'layer' + (first ? '' : ' enter');
+  layer.innerHTML = hand(l);
+  heroStage.insertBefore(layer, heroStage.querySelector('.now'));
+  document.getElementById('now-dot').style.background = s.hex;
+  document.getElementById('now-name').textContent = s.name;
+  document.getElementById('now-desc').textContent = describe(l);
+  if (!first) {
+    requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('enter')));
+    const old = heroStage.querySelectorAll('.layer');
+    setTimeout(() => old.forEach(o => o !== layer && o.remove()), 1300);
+  }
+  hi++;
+}
+showHero(true);
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(() => { if (!document.hidden) showHero(false); }, 4200);
+
+document.getElementById('ticker').innerHTML = [...SHADES, ...SHADES].map(s => `<span><i style="background:${s.hex}"></i>${s.name}</span>`).join('');
+
+/* ================= STUDIO ================= */
+const state = { shade: 'cherry', shape: 'Almond', length: 'Medium', finish: 'Gloss', art: 'Aura', skin: 2 };
+const radios = (id, name, items, fmt, cls = '') => {
+  document.getElementById(id).innerHTML = items.map((v, i) => {
+    const { value, label, inner, style } = fmt(v, i);
+    return `<label class="opt ${cls}"><input type="radio" name="${name}" value="${value}"><span ${style ? `style="${style}"` : ''}>${inner ?? label}</span>${cls ? `<b class="sr">${label}</b>` : ''}</label>`;
+  }).join('');
+};
+radios('c-shade', 'shade', SHADES, s => ({ value: s.id, label: s.name, inner: '', style: `background:${s.hex}` }), 'sw');
+radios('c-shape', 'shape', SHAPES, s => ({ value: s, label: s, inner: `${shapeIcon(s)}${s}` }));
+radios('c-length', 'length', LENGTHS, s => ({ value: s, label: s }));
+radios('c-finish', 'finish', FINISHES, s => ({ value: s, label: s }));
+radios('c-art', 'art', ARTS, s => ({ value: s, label: s }));
+radios('c-skin', 'skin', SKINS, (s, i) => ({ value: i, label: s.name, inner: '', style: `background:${s.hex}` }), 'sw');
+
+const studioForm = document.getElementById('studio-form');
+const lookTitle = l => `${shadeById(l.shade).name}, ${describe(l)}`;
+function renderStudio() {
+  Object.entries(state).forEach(([k, v]) => { const r = studioForm.querySelector(`input[name="${k}"][value="${v}"]`); if (r) r.checked = true; });
+  document.getElementById('studio-stage').innerHTML = hand(state);
+  document.getElementById('o-shade').textContent = shadeById(state.shade).name;
+  document.getElementById('o-shape').textContent = state.shape;
+  const e = estimate(state);
+  document.getElementById('look-title').innerHTML = `${shadeById(state.shade).name}, <em>${describe(state)}</em>`;
+  document.getElementById('look-svc').textContent = `${e.svc} + art · about ${Math.floor(e.mins / 60)}h${e.mins % 60 ? ' ' + (e.mins % 60) + 'm' : ''}`;
+  document.getElementById('look-price').textContent = '$' + e.price;
+}
+studioForm.addEventListener('change', e => { const t = e.target; state[t.name] = t.name === 'skin' ? +t.value : t.value; renderStudio(); });
+renderStudio();
+
+/* ================= SETS + ARTISTS ================= */
+document.getElementById('sets-grid').innerHTML = SETS.map((s, i) => `
+  <figure class="set reveal"><div class="art">${hand(s.look)}</div>
+    <figcaption><b>${s.title}</b><span>${s.look.shape} · ${s.look.length} · by ${s.by}</span><br><button type="button" data-set="${i}">Try this look →</button></figcaption>
+  </figure>`).join('');
+document.getElementById('sets-grid').addEventListener('click', e => {
+  const b = e.target.closest('[data-set]'); if (!b) return;
+  Object.assign(state, SETS[+b.dataset.set].look); renderStudio();
+  document.getElementById('studio').scrollIntoView();
+});
+document.getElementById('artists-grid').innerHTML = ARTISTS.map(a => `
+  <article class="artist reveal"><div class="pic">${hand(a.look)}</div>
+    <div class="artist-body"><p class="label cherry">${a.role}</p><h3>${a.name}</h3><p>${a.bio}</p></div></article>`).join('');
+
+/* ================= BOOKING ================= */
+const svcSel = document.getElementById('svc-select'), artSel = document.getElementById('artist-select');
+SERVICES.forEach(s => svcSel.insertAdjacentHTML('beforeend', `<option>${s}</option>`));
+ARTISTS.forEach(a => artSel.insertAdjacentHTML('beforeend', `<option>${a.name}</option>`));
+const dateIn = document.querySelector('input[name="date"]');
+const iso = d => d.toISOString().slice(0, 10);
+dateIn.min = iso(new Date());
+const chip = document.getElementById('look-chip');
+let bookedLook = null;
+document.getElementById('book-look').addEventListener('click', () => {
+  bookedLook = { ...state };
+  const e = estimate(bookedLook);
+  svcSel.value = e.svc; svcSel.closest('.field').classList.remove('bad');
+  document.getElementById('chip-mini').innerHTML = hand(bookedLook);
+  document.getElementById('chip-text').innerHTML = `<b>${lookTitle(bookedLook)}</b><br>Estimated $${e.price}`;
+  chip.hidden = false;
+});
+document.getElementById('chip-clear').onclick = () => { bookedLook = null; chip.hidden = true; };
+
+const form = document.getElementById('book-form');
+const rules = {
+  name: v => v.trim().length > 1 || 'Please add your name.',
+  phone: v => v.replace(/\D/g, '').length >= 10 || 'We text to confirm, so we need a 10-digit number.',
+  service: v => !!v || 'Pick a service. You can change it later.',
+  date: v => !!v || 'Pick a day and we\'ll find the closest opening.'
+};
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let first = null;
+  for (const [k, fn] of Object.entries(rules)) {
+    const w = form.querySelector(`[data-f="${k}"]`), r = fn(form.elements[k].value);
+    w.classList.toggle('bad', r !== true); w.querySelector('.err').textContent = r === true ? '' : r;
+    if (r !== true && !first) first = form.elements[k];
+  }
+  if (first) { first.focus(); return; }
+  const day = new Date(form.elements.date.value + 'T12:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const who = form.elements.artist.value === 'Any' ? 'the first available artist' : form.elements.artist.value.split(' ')[0];
+  document.getElementById('done-msg').textContent = `${form.elements.name.value.trim().split(/\s+/)[0]}, we'll text you shortly to confirm ${form.elements.time.value === 'Morning' ? 'a morning' : 'an ' + form.elements.time.value.toLowerCase()} opening on ${day} with ${who}${bookedLook ? `, and ${lookTitle(bookedLook)} is saved to your booking` : ''}.`;
+  document.getElementById('book-fields').hidden = true;
+  const d = document.getElementById('book-done'); d.hidden = false; d.focus();
+});
+form.addEventListener('input', e => { const w = e.target.closest('.bad'); if (w) { w.classList.remove('bad'); w.querySelector('.err').textContent = ''; } });
+document.getElementById('again').onclick = () => { form.reset(); chip.hidden = true; bookedLook = null; document.getElementById('book-done').hidden = true; document.getElementById('book-fields').hidden = false; };
+
+/* ================= HOURS (Denver time) ================= */
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const HOURS = { 0: [11, 16], 1: null, 2: [10, 19], 3: [10, 19], 4: [10, 20], 5: [10, 19], 6: [9, 17] };
+const fmt = h => `${h % 12 || 12}${h < 12 ? 'am' : 'pm'}`;
+const now = (() => {
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Denver', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), h: (+p.hour % 24) + (+p.minute) / 60 };
+  } catch (e) { const d = new Date(); return { day: d.getDay(), h: d.getHours() + d.getMinutes() / 60 }; }
+})();
+const order = [2, 3, 4, 5, 6, 0, 1];
+document.getElementById('hours').innerHTML = order.map(d => `<tr class="${d === now.day ? 'today' : ''}"><td>${DAYS[d]}</td><td>${HOURS[d] ? fmt(HOURS[d][0]) + ' – ' + fmt(HOURS[d][1]) : 'Closed'}</td></tr>`).join('');
+document.getElementById('foot-hours').innerHTML = [['Tue – Fri', '10am – 7pm'], ['Thu late', 'until 8pm'], ['Saturday', '9am – 5pm'], ['Sunday', '11am – 4pm'], ['Monday', 'Closed']].map(([a, b]) => `<li>${a} <span style="color:var(--muted)">· ${b}</span></li>`).join('');
+const st = document.getElementById('status'), td = HOURS[now.day];
+if (td && now.h >= td[0] && now.h < td[1]) { st.classList.add('open'); st.textContent = `Open now · until ${fmt(td[1])}`; }
+else if (td && now.h < td[0]) st.textContent = `Opens today at ${fmt(td[0])}`;
+else { let d = now.day; do { d = (d + 1) % 7; } while (!HOURS[d]); st.textContent = `Closed · opens ${DAYS[d]} ${fmt(HOURS[d][0])}`; }
+
+/* ================= NAV, FLOAT, REVEAL ================= */
+const links = [...document.querySelectorAll('.nav a')];
+const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+links.forEach(a => spy.observe(document.querySelector(a.getAttribute('href'))));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
