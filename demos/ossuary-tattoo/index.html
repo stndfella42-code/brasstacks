@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ossuary Tattoo Co. — Custom Tattooing, Denver</title>
+<meta name="description" content="Private custom tattoo studio on South Broadway, Denver. Blackwork, neo-traditional, fine-line, and lettering by appointment.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --void: #0b0a09;
+  --ink: #131110;
+  --panel: #1a1715;
+  --blood: #a4161a;
+  --blood-hi: #d0202a;
+  --blood-text: #e2393f;
+  --bone: #e9e2d4;
+  --ash: #948b7e;
+  --line: rgba(233, 226, 212, .13);
+  --line-hi: rgba(233, 226, 212, .32);
+  --ease: cubic-bezier(.7, 0, .2, 1);
+  --display: 'Anton', 'Impact', sans-serif;
+  --body: 'Archivo', system-ui, sans-serif;
+  --black: 'UnifrakturCook', serif;
+}
+
+/* ============ BASE (mobile first) ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+body { background: var(--void); color: var(--bone); font-family: var(--body); font-size: 1rem; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 200; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+body.locked { overflow: hidden; }
+a { color: inherit; }
+img, svg { display: block; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--blood-hi); outline-offset: 3px; }
+::selection { background: var(--blood); color: var(--bone); }
+
+.wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--blood); padding: 10px 16px; z-index: 300; }
+.skip:focus { left: 8px; }
+
+.label { font-family: var(--body); font-stretch: 75%; font-weight: 600; font-size: .74rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ash); }
+.label .idx, .label.red { color: var(--blood-text); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: .005em; }
+h2 { font-size: clamp(3.2rem, 13vw, 8.5rem); }
+.lede { color: var(--ash); font-size: 1.05rem; max-width: 520px; }
+.fine { color: var(--ash); font-size: .85rem; }
+.fine a { color: var(--bone); }
+.rough { filter: url(#rough); }
+
+/* fine-line corner ticks */
+.ticks { position: relative; border: 1px solid var(--line);
+  background-image:
+    linear-gradient(var(--bone), var(--bone)), linear-gradient(var(--bone), var(--bone)),
+    linear-gradient(var(--bone), var(--bone)), linear-gradient(var(--bone), var(--bone)),
+    linear-gradient(var(--bone), var(--bone)), linear-gradient(var(--bone), var(--bone)),
+    linear-gradient(var(--bone), var(--bone)), linear-gradient(var(--bone), var(--bone));
+  background-repeat: no-repeat;
+  background-size: 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px;
+  background-position: -1px -1px, -1px -1px, calc(100% + 1px) -1px, calc(100% + 1px) -1px, -1px calc(100% + 1px), -1px calc(100% + 1px), calc(100% + 1px) calc(100% + 1px), calc(100% + 1px) calc(100% + 1px); }
+
+/* torn section edges */
+section, .foot { position: relative; }
+.tear { position: absolute; left: 0; right: 0; top: -17px; height: 18px; pointer-events: none; z-index: 2; }
+.tear svg { width: 100%; height: 100%; fill: currentColor; }
+.alt { background: var(--ink); }
+.alt > .tear { color: var(--ink); }
+section:not(.alt) > .tear { color: var(--void); }
+.foot > .tear { color: #070605; }
+
+/* ============ BUTTONS ============ */
+.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 50px; padding: 0 26px; font-family: var(--body); font-stretch: 75%; font-weight: 700; font-size: .86rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: color .45s var(--ease); }
+.btn::before { content: ''; position: absolute; inset: 0; z-index: -1; transform: scaleX(0); transform-origin: right; transition: transform .45s var(--ease); }
+.btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); transform-origin: left; }
+.btn-red { background: var(--blood); color: var(--bone); }
+.btn-red::before { background: var(--bone); }
+.btn-red:hover, .btn-red:focus-visible { color: var(--void); }
+.btn-line { box-shadow: inset 0 0 0 1px var(--line-hi); }
+.btn-line::before { background: var(--blood); }
+.btn[disabled] { opacity: .35; pointer-events: none; }
+
+/* ============ NAV ============ */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(11, 10, 9, .82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-size: 1.45rem; letter-spacing: .06em; text-transform: uppercase; }
+.sigil { width: 30px; height: 30px; color: var(--bone); }
+.links { display: none; }
+.nav-cta { display: none; }
+.burger { width: 44px; height: 44px; display: grid; place-content: center; gap: 7px; position: relative; z-index: 120; }
+.burger span { width: 26px; height: 1.5px; background: var(--bone); transition: transform .4s var(--ease); }
+.menu-open .burger span:first-child { transform: translateY(4.25px) rotate(45deg); }
+.menu-open .burger span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
+
+.menu { position: fixed; inset: 0; z-index: 90; background: var(--void); display: flex; flex-direction: column; justify-content: center; padding: 96px 24px 40px;
+  clip-path: inset(0 0 100% 0); transition: clip-path .6s var(--ease); visibility: hidden; }
+.menu-open .menu { clip-path: inset(0); visibility: visible; }
+.menu a { font-family: var(--display); font-size: clamp(3rem, 15vw, 5rem); text-transform: uppercase; text-decoration: none; line-height: 1.05; display: flex; align-items: baseline; gap: 14px; }
+.menu a small { font-family: var(--body); font-size: .8rem; color: var(--blood-text); letter-spacing: .1em; }
+.menu a:hover { color: var(--blood-text); }
+.menu .fine { margin-top: 32px; }
+
+/* ============ HERO ============ */
+.hero { padding: 40px 0 0; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero-sigil { position: absolute; width: 130vw; max-width: 1100px; aspect-ratio: 1; right: -55vw; top: 40px; opacity: .1; animation: spin 240s linear infinite; pointer-events: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero .wrap { position: relative; }
+.hero-top { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.hero-title { font-size: clamp(5.4rem, 25vw, 21rem); line-height: .8; letter-spacing: -.005em; margin: 22px 0 0 -.04em; opacity: 0; animation: rise 1.4s var(--ease) .1s forwards; }
+.hero-title span { color: var(--blood); }
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.hero-row { display: grid; gap: 24px; margin-top: 18px; opacity: 0; animation: rise 1.4s var(--ease) .35s forwards; }
+.blackletter { font-family: var(--black); font-size: clamp(2.4rem, 9vw, 4.6rem); color: var(--blood-text); line-height: 1; }
+.hero-copy p { font-size: 1.1rem; max-width: 460px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.hero-strip { list-style: none; display: grid; margin-top: 48px; border-top: 1px solid var(--line); opacity: 0; animation: rise 1.4s var(--ease) .6s forwards; }
+.hero-strip li { padding: 18px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.hero-strip strong { font-family: var(--display); font-weight: 400; font-size: 1.35rem; text-transform: uppercase; letter-spacing: .02em; }
+.hero-strip li:last-child { border-bottom: 0; }
+
+/* ============ SECTIONS ============ */
+section { padding: 88px 0; }
+.sec-head { display: grid; gap: 18px; margin-bottom: 48px; }
+
+.ethos .statement { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem, 7.5vw, 4.6rem); line-height: 1; margin: 22px 0 56px; max-width: 1100px; }
+.ethos .statement em { font-style: normal; color: var(--blood-text); }
+.pillars { display: grid; border-top: 1px solid var(--line); }
+.pillars > div { padding: 28px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 48px 1fr; column-gap: 12px; }
+.pillars .num { font-family: var(--black); font-size: 1.6rem; color: var(--blood-text); grid-row: span 2; line-height: 1; }
+.pillars h3 { font-size: 1.6rem; margin-bottom: 8px; }
+.pillars p { color: var(--ash); }
+
+/* ---- artists ---- */
+.roster { display: grid; gap: 20px; }
+.artist { background: var(--void); border: 1px solid var(--line); transition: border-color .5s var(--ease); }
+.artist:hover { border-color: var(--blood); }
+.artist-art { aspect-ratio: 1; margin: 14px; padding: 8%; --art-bg: var(--void); }
+.artist-art svg { width: 100%; height: 100%; transition: transform 1.2s var(--ease); }
+.artist:hover .artist-art svg { transform: scale(1.05) rotate(-2deg); }
+.artist-body { padding: 4px 22px 24px; }
+.artist h3 { font-size: clamp(2.4rem, 10vw, 3rem); margin: 8px 0 18px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+.facts div { padding: 12px 0; }
+.facts div + div { padding-left: 12px; border-left: 1px solid var(--line); }
+.facts dt { font-stretch: 75%; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ash); }
+.facts dd { font-weight: 600; }
+.artist .btn { width: 100%; }
+
+/* ---- art (SVG motifs) ---- */
+.art svg { stroke: var(--bone); stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; overflow: visible; }
+.art .t { stroke-width: 1; }
+.art .r { fill: var(--blood); }
+.art .b { fill: var(--bone); }
+.art .v { fill: var(--art-bg, var(--void)); }
+.art text { stroke: none; fill: var(--bone); font-family: var(--black); }
+
+/* ---- flash wall ---- */
+.filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 24px; scrollbar-width: none; }
+.filters::-webkit-scrollbar { display: none; }
+.filters button { flex: none; min-height: 42px; padding: 0 16px; border: 1px solid var(--line-hi); font-stretch: 75%; font-weight: 600; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+.filters button:hover { border-color: var(--bone); }
+.filters button[aria-pressed="true"] { background: var(--blood); border-color: var(--blood); }
+.flash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.flash { position: relative; background: var(--void); display: flex; flex-direction: column; overflow: hidden; --art-bg: var(--void); }
+.flash[hidden] { display: none; }
+.flash::after { content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: var(--blood); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.flash:hover::after { transform: scaleX(1); }
+.flash-art { aspect-ratio: 1; padding: 16%; }
+.flash-art svg { width: 100%; height: 100%; transition: transform .8s var(--ease); }
+.flash:hover .flash-art svg { transform: scale(1.07); }
+.flash-meta { padding: 0 14px; flex: 1; }
+.flash-no { font-stretch: 75%; font-size: .68rem; letter-spacing: .2em; color: var(--blood-text); font-weight: 600; }
+.flash h3 { font-size: 1.35rem; margin: 4px 0 4px; line-height: 1; }
+.flash-meta p { font-size: .8rem; color: var(--ash); }
+.flash-foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 14px; gap: 8px; }
+.price { font-family: var(--display); font-size: 1.4rem; }
+.claim { min-height: 38px; padding: 0 12px; border: 1px solid var(--line-hi); font-stretch: 75%; font-weight: 700; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, border-color .3s, color .3s; }
+.claim:hover { background: var(--bone); color: var(--void); border-color: var(--bone); }
+.stamp { position: absolute; top: 34%; left: 50%; transform: translate(-50%, -50%) rotate(-14deg); font-family: var(--display); font-size: clamp(1.6rem, 6vw, 2.4rem); letter-spacing: .08em; color: var(--blood-hi); border: 3px solid var(--blood-hi); padding: 2px 14px; text-transform: uppercase; filter: url(#rough); pointer-events: none; opacity: 0; transition: opacity .4s; }
+.flash.claimed .stamp, .flash.held .stamp { opacity: .95; }
+.flash.claimed .flash-art { opacity: .28; }
+.flash.claimed .claim { opacity: .3; pointer-events: none; }
+.flash.held { outline: 1px solid var(--blood); outline-offset: -1px; }
+.flash.held .claim { background: var(--blood); border-color: var(--blood); color: var(--bone); }
+
+/* ---- booking ---- */
+.book { display: grid; gap: 56px; }
+.steps { list-style: none; border-top: 1px solid var(--line); }
+.steps li { display: grid; grid-template-columns: 52px 1fr; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.steps b { font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--blood-text); line-height: 1.1; }
+.steps h4 { font-stretch: 75%; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem; }
+.steps p { color: var(--ash); font-size: .95rem; }
+.rates { display: grid; grid-template-columns: repeat(3, 1fr); margin: 32px 0 18px; }
+.rates div { padding: 16px 12px; }
+.rates div + div { border-left: 1px solid var(--line); }
+.rates strong { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.5rem, 6vw, 2.1rem); margin-top: 4px; }
+
+.book-form { display: grid; gap: 26px; align-content: start; }
+.row { display: grid; gap: 26px; }
+.field { display: grid; gap: 6px; }
+.field > span, fieldset legend { font-stretch: 75%; font-weight: 600; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ash); }
+.field > span i { font-style: normal; color: var(--blood-text); }
+.field input, .field select, .field textarea { width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--line-hi); border-radius: 0; color: var(--bone); font: inherit; font-size: 1.05rem; padding: 10px 0; transition: border-color .3s; -webkit-appearance: none; appearance: none; }
+.field textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e9e2d4' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; cursor: pointer; }
+.field select option { background: var(--ink); color: var(--bone); }
+.field input::placeholder, .field textarea::placeholder { color: rgba(233, 226, 212, .3); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--blood-hi); box-shadow: 0 1px 0 var(--blood-hi); }
+.field.bad input, .field.bad textarea, .field.bad select { border-bottom-color: var(--blood-hi); }
+.err { color: var(--blood-text); font-size: .8rem; min-height: 0; }
+fieldset { border: 0; display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips label { position: relative; }
+.chips input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.chips span { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border: 1px solid var(--line-hi); font-stretch: 75%; font-weight: 600; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+.chips input:checked + span { background: var(--blood); border-color: var(--blood); }
+.chips input:focus-visible + span { outline: 2px solid var(--blood-hi); outline-offset: 2px; }
+.held-piece { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--blood); background: rgba(164, 22, 26, .08); }
+.held-piece button { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ash); text-decoration: underline; }
+.check { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: .92rem; color: var(--ash); cursor: pointer; }
+.check input { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border: 1px solid var(--line-hi); display: grid; place-content: center; cursor: pointer; margin-top: 1px; }
+.check input::after { content: ''; width: 10px; height: 10px; background: var(--blood-hi); transform: scale(0); transition: transform .25s var(--ease); }
+.check input:checked::after { transform: scale(1); }
+.check.bad input { border-color: var(--blood-hi); }
+.book-form .btn { width: 100%; }
+.book-done { align-self: start; padding: 40px 24px; }
+.book-done h3 { font-size: clamp(2.6rem, 11vw, 4.2rem); margin: 12px 0 16px; }
+.book-done p { color: var(--ash); margin-bottom: 12px; }
+.book-done strong { color: var(--bone); }
+
+/* ---- aftercare ---- */
+.heal { list-style: none; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); counter-reset: heal; }
+.heal li { background: var(--void); padding: 28px 22px; counter-increment: heal; position: relative; }
+.heal li::before { content: '0' counter(heal); position: absolute; right: 18px; top: 14px; font-family: var(--display); font-size: 3.4rem; color: transparent; -webkit-text-stroke: 1px var(--line-hi); line-height: 1; }
+.heal .when { display: inline-block; font-stretch: 75%; font-weight: 700; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blood-text); border-bottom: 1px solid var(--blood); padding-bottom: 4px; }
+.heal h3 { font-size: 1.9rem; margin: 18px 0 10px; }
+.heal p { color: var(--ash); font-size: .95rem; }
+.never { margin-top: 20px; padding: 28px 22px; }
+.never h3 { font-size: 1.9rem; margin-bottom: 14px; }
+.never ul { list-style: none; margin-bottom: 20px; }
+.never li { padding: 10px 0 10px 28px; border-bottom: 1px solid var(--line); position: relative; }
+.never li::before { content: ''; position: absolute; left: 0; top: 50%; width: 14px; height: 1.5px; background: var(--blood-hi); transform: rotate(-45deg); }
+.never li::after { content: ''; position: absolute; left: 0; top: 50%; width: 14px; height: 1.5px; background: var(--blood-hi); transform: rotate(45deg); }
+
+/* ---- visit ---- */
+.visit { display: grid; gap: 48px; }
+.visit address { font-style: normal; font-family: var(--display); font-size: clamp(2rem, 8vw, 2.8rem); text-transform: uppercase; line-height: 1; margin: 28px 0 18px; }
+.contact-lines { margin-bottom: 18px; }
+.contact-lines a { text-decoration: none; border-bottom: 1px solid var(--line-hi); transition: border-color .3s, color .3s; }
+.contact-lines a:hover { color: var(--blood-text); border-color: var(--blood); }
+.open-now { display: flex; align-items: center; gap: 10px; font-stretch: 75%; font-weight: 700; font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 14px; }
+.open-now::before { content: ''; width: 9px; height: 9px; background: var(--ash); }
+.open-now.is-open::before { background: var(--blood-hi); box-shadow: 0 0 0 4px rgba(208, 32, 42, .2); }
+.hours { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.hours td { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.hours td:last-child { text-align: right; color: var(--ash); }
+.hours tr.today td { color: var(--bone); font-weight: 700; }
+.hours tr.today td:first-child::after { content: ' — today'; color: var(--blood-text); font-weight: 400; font-size: .8rem; }
+.map { aspect-ratio: 4 / 3; overflow: hidden; background: var(--void); }
+.map svg { width: 100%; height: 100%; }
+
+/* ---- footer ---- */
+.foot { background: #070605; padding: 72px 0 28px; border-top: 1px solid var(--line); }
+.foot-grid { display: grid; gap: 36px; padding-bottom: 48px; }
+.foot h4 { font-stretch: 75%; font-weight: 700; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ash); margin-bottom: 12px; }
+.foot ul { list-style: none; }
+.foot li { padding: 3px 0; }
+.foot li span { color: var(--ash); }
+.foot a { text-decoration: none; transition: color .3s; }
+.foot a:hover { color: var(--blood-text); }
+.foot-word { font-family: var(--display); font-size: clamp(4.6rem, 24vw, 20rem); line-height: .8; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px var(--line-hi); text-align: center; user-select: none; margin-bottom: 24px; }
+.foot-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; border-top: 1px solid var(--line); padding-top: 20px; font-size: .78rem; color: var(--ash); }
+
+/* ---- portfolio dialog ---- */
+dialog { margin: auto; width: min(960px, calc(100% - 24px)); max-height: calc(100dvh - 24px); background: var(--ink); color: var(--bone); border: 1px solid var(--line-hi); padding: 0; overflow: auto; --art-bg: var(--void); }
+dialog::backdrop { background: rgba(5, 4, 4, .86); backdrop-filter: blur(4px); }
+dialog[open] { animation: fade .5s var(--ease); }
+@keyframes fade { from { opacity: 0; transform: translateY(12px); } }
+.pf-in { padding: 28px 20px 24px; position: relative; }
+.pf-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; display: grid; place-items: center; }
+.pf-x svg { width: 20px; height: 20px; stroke: var(--bone); stroke-width: 1.5; transition: transform .4s var(--ease), stroke .3s; }
+.pf-x:hover svg { transform: rotate(90deg); stroke: var(--blood-hi); }
+dialog h3 { font-size: clamp(2.6rem, 11vw, 4.4rem); margin: 8px 0 12px; }
+.pf-bio { color: var(--ash); max-width: 620px; margin-bottom: 24px; }
+.pf-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-bottom: 24px; }
+.pf-grid figure { background: var(--void); aspect-ratio: 1; padding: 14%; position: relative; }
+.pf-grid figure svg { width: 100%; height: 100%; }
+.pf-grid figcaption { position: absolute; left: 10px; bottom: 8px; font-stretch: 75%; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ash); }
+
+/* ---- reveal ---- */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============ BREAKPOINTS ============ */
+@media (min-width: 640px) {
+  .wrap { padding: 0 32px; }
+  .hero-strip { grid-template-columns: repeat(3, 1fr); }
+  .hero-strip li { flex-direction: column; border-bottom: 0; }
+  .hero-strip li + li { border-left: 1px solid var(--line); padding-left: 20px; }
+  .roster { grid-template-columns: repeat(2, 1fr); }
+  .flash-grid { grid-template-columns: repeat(3, 1fr); }
+  .pf-grid { grid-template-columns: repeat(3, 1fr); }
+  .row { grid-template-columns: 1fr 1fr; }
+  .heal { grid-template-columns: 1fr 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .pf-in { padding: 44px 40px 36px; }
+}
+@media (min-width: 960px) {
+  html { scroll-padding-top: 80px; }
+  .nav-in { height: 72px; }
+  .links { display: flex; gap: 34px; }
+  .links a { position: relative; text-decoration: none; font-stretch: 75%; font-weight: 600; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ash); padding: 6px 0; transition: color .3s; }
+  .links a::after { content: ''; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--blood-hi); transform: scaleX(0); transform-origin: right; transition: transform .45s var(--ease); }
+  .links a:hover, .links a.active { color: var(--bone); }
+  .links a:hover::after, .links a.active::after { transform: scaleX(1); transform-origin: left; }
+  .nav-cta { display: inline-flex; min-height: 42px; }
+  .burger, .menu { display: none; }
+  section { padding: 128px 0; }
+  .hero { padding-top: 56px; }
+  .hero-sigil { right: -18vw; top: -80px; width: 72vw; }
+  .hero-row { grid-template-columns: 1fr 1fr; align-items: end; }
+  .hero-copy { justify-self: end; }
+  .hero-strip { margin-top: 72px; }
+  .sec-head.split { grid-template-columns: 1.2fr 1fr; align-items: end; gap: 48px; }
+  .pillars { grid-template-columns: repeat(3, 1fr); border-top: 0; }
+  .pillars > div { border-top: 1px solid var(--line); border-bottom: 0; padding: 32px 32px 0 0; }
+  .pillars > div + div { border-left: 1px solid var(--line); padding-left: 32px; }
+  .roster { grid-template-columns: repeat(4, 1fr); }
+  .artist h3 { font-size: 2.6rem; }
+  .flash-grid { grid-template-columns: repeat(4, 1fr); }
+  .flash-meta, .flash-foot { padding-left: 18px; padding-right: 18px; }
+  .book { grid-template-columns: 1fr 1.15fr; gap: 88px; }
+  .book-side { position: sticky; top: 110px; align-self: start; }
+  .heal { grid-template-columns: repeat(4, 1fr); }
+  .never { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; padding: 40px; }
+  .never .fine { grid-column: 2; }
+  .visit { grid-template-columns: 1fr 1fr; gap: 88px; }
+  .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .hero-title, .hero-row, .hero-strip { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="3.5"/></filter>
+  <symbol id="sigil" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="32" cy="32" r="24" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="1 3"/>
+    <path d="M32 55 L11 18 H53 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="32" cy="30" r="6" fill="#a4161a"/>
+    <path d="M32 6 V14 M32 50 V58" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Ossuary Tattoo Co., back to top"><svg class="sigil"><use href="#sigil"/></svg><span>Ossuary</span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#artists">Artists</a><a href="#flash">Flash</a><a href="#book">Booking</a><a href="#aftercare">Aftercare</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-red nav-cta" href="#book">Book now</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" aria-label="Menu">
+  <a href="#artists"><small>01</small>Artists</a>
+  <a href="#flash"><small>02</small>Flash</a>
+  <a href="#book"><small>03</small>Booking</a>
+  <a href="#aftercare"><small>04</small>Aftercare</a>
+  <a href="#visit"><small>05</small>Visit</a>
+  <p class="fine">2240 S Broadway, Denver · (303) 555-0113</p>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-sigil art" data-art="mandala:3" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-top"><span class="label">Est. MMXIV</span><span class="label">Denver, Colorado</span></div>
+      <h1 class="hero-title rough">Ossuary<span>.</span></h1>
+      <div class="hero-row">
+        <p class="blackletter">Tattoo Co.</p>
+        <div class="hero-copy">
+          <p>Permanent work for people who mean it. Four resident artists and one private studio on South Broadway, with one standard that doesn't bend: it has to look right in forty years.</p>
+          <div class="actions">
+            <a class="btn btn-red" href="#book">Book a consult</a>
+            <a class="btn btn-line" href="#flash">See the flash wall</a>
+          </div>
+        </div>
+      </div>
+      <ul class="hero-strip">
+        <li><span class="label">Now booking</span><strong>Nov &amp; Dec 2026</strong></li>
+        <li><span class="label">Walk-ins</span><strong>Thursdays, 12–6</strong></li>
+        <li><span class="label red">Flash day</span><strong>Friday the 13th · Nov</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ETHOS -->
+  <section class="ethos">
+    <div class="tear"></div>
+    <div class="wrap">
+      <p class="label"><span class="idx">§ 00</span> — The standard</p>
+      <p class="statement reveal">We don't chase trends. We tattoo things that will still be <em>worth wearing</em> when you're eighty.</p>
+      <div class="pillars">
+        <div class="reveal"><span class="num">I</span><h3>Drawn for you</h3><p>Custom work is drawn from scratch and never repeated. Your piece doesn't go back in a binder for the next person who walks in.</p></div>
+        <div class="reveal"><span class="num">II</span><h3>Clinical where it counts</h3><p>Single-use needles, medical-grade barrier film, and an autoclave that's spore-tested monthly. The room is dark. The station is spotless.</p></div>
+        <div class="reveal"><span class="num">III</span><h3>Honest, not agreeable</h3><p>If an idea will blur, fade, or age badly at the size you want, we'll tell you, and then draw you something better.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTISTS -->
+  <section class="alt" id="artists">
+    <div class="tear"></div>
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label"><span class="idx">§ 01</span> — The roster</p><h2>Four hands.<br>No guests.</h2></div>
+        <p class="lede">Every artist at Ossuary is a full-time resident with at least seven years behind the machine. Open a portfolio and pick the one whose work stops you cold.</p>
+      </header>
+      <div class="roster" id="roster"></div>
+    </div>
+  </section>
+
+  <!-- FLASH -->
+  <section id="flash">
+    <div class="tear"></div>
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label"><span class="idx">§ 02</span> — The flash wall</p><h2>Drawn once.<br>Worn once.</h2></div>
+        <p class="lede">Every design on this wall gets tattooed exactly one time, then it's retired for good. Claim one and we'll hold it for 72 hours while we confirm your date. <strong id="flash-count" style="color:var(--bone)"></strong></p>
+      </header>
+      <div class="filters" id="filters" role="group" aria-label="Filter flash by artist"></div>
+      <div class="flash-grid" id="flash-grid"></div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="alt" id="book">
+    <div class="tear"></div>
+    <div class="wrap book">
+      <div class="book-side">
+        <header class="sec-head"><p class="label"><span class="idx">§ 03</span> — Booking</p><h2>Book<br>the work.</h2></header>
+        <ol class="steps">
+          <li><b>01</b><div><h4>Request</h4><p>Tell us what you want, where it goes, and who you'd like to do it. Every request is read by the artist, not a front desk.</p></div></li>
+          <li><b>02</b><div><h4>Consult</h4><p>Fifteen minutes, in the studio or on video. We check placement and lock in size and price.</p></div></li>
+          <li><b>03</b><div><h4>Deposit</h4><p>A $100 deposit holds your date and comes off the final price. Reschedule once with 48 hours' notice, free.</p></div></li>
+          <li><b>04</b><div><h4>Session</h4><p>Eat a real meal, sleep, and hydrate. Bring a valid ID. We handle the rest.</p></div></li>
+        </ol>
+        <div class="rates ticks">
+          <div><span class="label">Minimum</span><strong>$150</strong></div>
+          <div><span class="label">Hourly</span><strong>$200</strong></div>
+          <div><span class="label">Full day</span><strong>$1,400</strong></div>
+        </div>
+        <p class="fine">No hands, necks, or faces as a first tattoo. It's not personal; it's the rule.</p>
+      </div>
+
+      <form class="book-form" id="book-form" novalidate>
+        <div class="row">
+          <label class="field" data-f="name"><span>Full name <i>*</i></span><input name="name" autocomplete="name" required><small class="err"></small></label>
+          <label class="field" data-f="email"><span>Email <i>*</i></span><input name="email" type="email" autocomplete="email" required><small class="err"></small></label>
+        </div>
+        <div class="row">
+          <label class="field"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" placeholder="Optional"></label>
+          <label class="field"><span>Artist</span>
+            <select name="artist" id="artist-select"><option value="any">No preference</option></select>
+          </label>
+        </div>
+        <fieldset>
+          <legend>Type of work</legend>
+          <div class="chips">
+            <label><input type="radio" name="type" value="Custom" checked><span>Custom</span></label>
+            <label><input type="radio" name="type" value="Flash"><span>Flash</span></label>
+            <label><input type="radio" name="type" value="Cover-up"><span>Cover-up</span></label>
+            <label><input type="radio" name="type" value="Touch-up"><span>Touch-up</span></label>
+          </div>
+        </fieldset>
+        <div class="held-piece" id="held-piece" hidden><span></span><button type="button" id="release">Release</button></div>
+        <div class="row">
+          <label class="field" data-f="placement"><span>Placement <i>*</i></span><input name="placement" placeholder="e.g. Left forearm, inner" required><small class="err"></small></label>
+          <label class="field"><span>Approx. size</span>
+            <select name="size"><option>Under 3 in</option><option selected>3–6 in</option><option>6–10 in</option><option>Half sleeve or larger</option></select>
+          </label>
+        </div>
+        <label class="field" data-f="idea"><span>Describe the idea <i>*</i></span><textarea name="idea" placeholder="What it is, what it means to you, and any references you love (or hate)." required></textarea><small class="err"></small></label>
+        <label class="check" data-f="age"><input type="checkbox" name="age" required><span>I'm 18 or older and will bring a valid government-issued photo ID to my appointment.</span></label>
+        <button class="btn btn-red" type="submit">Send request</button>
+        <p class="fine">Requests are reviewed every Monday. Expect a reply within five days.</p>
+      </form>
+
+      <div class="book-done ticks" id="book-done" hidden tabindex="-1">
+        <p class="label red">Request received</p>
+        <h3>It's in<br>the book.</h3>
+        <p id="done-msg"></p>
+        <p>Reference <strong id="done-ref"></strong>. Keep it handy for your consult.</p>
+        <button class="btn btn-line" id="again" type="button">Send another</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFTERCARE -->
+  <section id="aftercare">
+    <div class="tear"></div>
+    <div class="wrap">
+      <header class="sec-head split">
+        <div><p class="label"><span class="idx">§ 04</span> — Aftercare</p><h2>Heal it<br>right.</h2></div>
+        <p class="lede">Half of a great tattoo is what you do over the next four weeks. Follow this and it heals sharp. Ignore it and no artist on earth can save it.</p>
+      </header>
+      <ol class="heal">
+        <li class="reveal"><span class="when">First 24 hours</span><h3>Leave the wrap on.</h3><p>We seal it with a medical film. Keep it on a full day, even if it fills with ink and plasma. That's normal. Peel it off slowly under warm running water.</p></li>
+        <li class="reveal"><span class="when">Days 2–7</span><h3>Wash. Dry. Thin layer.</h3><p>Wash twice a day with unscented soap and clean hands. Pat dry with a paper towel, never a bath towel. Rub in a rice-grain amount of unscented balm.</p></li>
+        <li class="reveal"><span class="when">Weeks 2–4</span><h3>Let it flake.</h3><p>It will peel and itch like a sunburn. Tap it, don't scratch it. Switch to a fragrance-free lotion once or twice a day.</p></li>
+        <li class="reveal"><span class="when">Forever</span><h3>Sunscreen. Always.</h3><p>UV is what kills tattoos. Put SPF 50 on healed work whenever it sees daylight. Touch-ups are free within 90 days if anything heals light.</p></li>
+      </ol>
+      <div class="never ticks reveal">
+        <h3>For two weeks, never:</h3>
+        <ul>
+          <li>Soak it. No baths, pools, hot tubs, lakes, or ocean.</li>
+          <li>Put it in direct sun or a tanning bed.</li>
+          <li>Re-wrap it in plastic after the first day.</li>
+          <li>Use petroleum jelly, scented lotion, or anything with alcohol.</li>
+          <li>Let shared gym equipment or your pets rub against it.</li>
+        </ul>
+        <p class="fine">Something look wrong? Text the aftercare line any time: <a href="sms:+13035550113">(303) 555-0113</a>. If you have spreading redness or a fever, see a doctor first, then let us know.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="alt" id="visit">
+    <div class="tear"></div>
+    <div class="wrap visit">
+      <div>
+        <header class="sec-head" style="margin-bottom:0"><p class="label"><span class="idx">§ 05</span> — Visit</p><h2>Find the<br>black door.</h2></header>
+        <address>2240 S Broadway<br>Denver, CO 80210</address>
+        <p class="contact-lines"><a href="tel:+13035550113">(303) 555-0113</a><br><a href="mailto:book@ossuarytattoo.co">book@ossuarytattoo.co</a></p>
+        <p class="lede">It's the black door with the brass knocker, between the vintage shop and the barber. Press the buzzer and we'll come get you.</p>
+        <p class="fine" style="margin-top:14px">Street parking on Broadway and the side streets. The lot behind the building is free after 6pm. Evans light rail station is a 15-minute walk.</p>
+      </div>
+      <div>
+        <p class="open-now" id="open-now">Checking hours…</p>
+        <table class="hours" id="hours" aria-label="Studio hours"></table>
+        <div class="map ticks" aria-label="Map showing the studio on South Broadway">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" stroke="rgba(233,226,212,.08)" stroke-width="1"/></pattern></defs>
+            <rect width="400" height="300" fill="url(#hatch)"/>
+            <g stroke="rgba(233,226,212,.16)" stroke-width="1">
+              <path d="M0 40 H400 M0 95 H400 M0 205 H400 M0 262 H400 M60 0 V300 M130 0 V300 M270 0 V300 M340 0 V300"/>
+            </g>
+            <path d="M0 150 H400" stroke="rgba(233,226,212,.35)" stroke-width="6"/>
+            <path d="M200 0 V300" stroke="#e9e2d4" stroke-width="10"/>
+            <path d="M200 0 V300" stroke="#0b0a09" stroke-width="1" stroke-dasharray="8 8"/>
+            <text x="212" y="30" fill="#948b7e" font-family="Archivo" font-size="10" letter-spacing="2">S BROADWAY</text>
+            <text x="12" y="143" fill="#948b7e" font-family="Archivo" font-size="10" letter-spacing="2">E EVANS AVE</text>
+            <g transform="translate(222 192)">
+              <circle r="20" fill="none" stroke="#d0202a" stroke-width="1" opacity=".5"/>
+              <circle r="11" fill="#a4161a"/>
+              <path d="M-5 -5 L5 5 M5 -5 L-5 5" stroke="#e9e2d4" stroke-width="1.5"/>
+            </g>
+            <text x="248" y="196" fill="#e9e2d4" font-family="Anton" font-size="15" letter-spacing="1">OSSUARY</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="tear"></div>
+  <div class="wrap">
+    <div class="foot-word rough" aria-hidden="true">Ossuary</div>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><svg class="sigil"><use href="#sigil"/></svg><span>Ossuary</span></a>
+        <p class="fine" style="margin-top:14px;max-width:300px">Custom tattooing by appointment on South Broadway since 2014. Walk-ins Thursdays.</p>
+      </div>
+      <div><h4>Hours</h4><ul id="foot-hours"></ul></div>
+      <div><h4>Studio</h4><p>2240 S Broadway<br>Denver, CO 80210</p><p style="margin-top:8px"><a href="tel:+13035550113">(303) 555-0113</a><br><a href="mailto:book@ossuarytattoo.co">book@ossuarytattoo.co</a></p></div>
+      <div><h4>Follow</h4><ul><li><a href="#" aria-label="Instagram (demo link)">Instagram ↗</a></li><li><a href="#" aria-label="TikTok (demo link)">TikTok ↗</a></li><li><a href="#" aria-label="Pinterest (demo link)">Pinterest ↗</a></li></ul></div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Ossuary Tattoo Co. · Licensed body art establishment</span>
+      <span>Concept site for a fictional business · Design &amp; build by <a href="https://brasstacks.space/work.html" style="color:var(--bone);border-bottom:1px solid var(--line-hi)">Brass Tacks</a></span>
+    </div>
+  </div>
+</footer>
+
+<dialog id="pf" aria-labelledby="pf-name">
+  <div class="pf-in">
+    <button class="pf-x" id="pf-x" aria-label="Close portfolio"><svg viewBox="0 0 20 20"><path d="M2 2 L18 18 M18 2 L2 18"/></svg></button>
+    <p class="label red" id="pf-style"></p>
+    <h3 id="pf-name"></h3>
+    <p class="pf-bio" id="pf-bio"></p>
+    <div class="pf-grid art" id="pf-grid"></div>
+    <button class="btn btn-red" id="pf-book" type="button"></button>
+  </div>
+</dialog>
+
+<script>
+/* ============ SVG MOTIF LIBRARY ============ */
+const TAU = Math.PI * 2;
+const pt = (r, a, cx = 100, cy = 100) => [(cx + r * Math.cos(a)).toFixed(1), (cy + r * Math.sin(a)).toFixed(1)];
+const poly = (n, r, rot = -Math.PI / 2) => Array.from({ length: n }, (_, i) => pt(r, rot + i * TAU / n).join(',')).join(' ');
+
+const MOTIFS = {
+  mandala(seed = 0) {
+    const n = [8, 10, 12, 16][seed % 4];
+    let s = '<circle cx="100" cy="100" r="92" class="t"/><circle cx="100" cy="100" r="86" class="t" stroke-dasharray="1 5"/>';
+    for (let i = 0; i < n * 2; i++) s += `<path transform="rotate(${360 / (n * 2) * i + 180 / n} 100 100)" d="M100 100Q108 78 100 54Q92 78 100 100Z" class="t"/>`;
+    for (let i = 0; i < n; i++) s += `<g transform="rotate(${360 / n * i} 100 100)"><path d="M100 100Q116 62 100 22Q84 62 100 100Z" class="v"/><path d="M100 78Q106 62 100 46Q94 62 100 78Z" class="r"/><circle cx="100" cy="14" r="2.4" class="b"/></g>`;
+    const k = seed % 2 ? 3 : 4;
+    s += `<polygon points="${poly(k, 50)}" class="t"/><polygon points="${poly(k, 50, Math.PI / 2)}" class="t"/>`;
+    for (let i = 0; i < n * 3; i++) { const [x, y] = pt(70, i * TAU / (n * 3)); s += `<circle cx="${x}" cy="${y}" r="1.6" class="b"/>`; }
+    return s + '<circle cx="100" cy="100" r="18" class="v"/><circle cx="100" cy="100" r="8" class="r"/>';
+  },
+  sun(seed = 0) {
+    let s = '';
+    const n = seed ? 24 : 36;
+    for (let i = 0; i < n; i++) { const a = i * TAU / n, [x1, y1] = pt(46, a), [x2, y2] = pt(i % 2 ? 66 : 92, a); s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${i % 2 ? 't' : ''}"/>`; }
+    return s + `<circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="34" class="b"/><polygon points="${poly(3, 22, seed ? Math.PI / 2 : -Math.PI / 2)}" class="v" stroke="none"/><circle cx="100" cy="100" r="6" class="r" stroke="none"/>`;
+  },
+  eye() {
+    let s = '';
+    for (let i = 0; i <= 12; i++) { const a = Math.PI * (1.12 + i * .064), [x1, y1] = pt(56, a), [x2, y2] = pt(i % 2 ? 72 : 86, a); s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${i % 2 ? 't' : ''}"/>`; }
+    return s + `<path d="M26 104Q100 38 174 104Q100 166 26 104Z" class="v"/><circle cx="100" cy="102" r="27" class="r"/><circle cx="100" cy="102" r="20" class="t"/><circle cx="100" cy="102" r="10" class="v"/><circle cx="107" cy="95" r="3" class="b" stroke="none"/>
+      <path d="M60 128l-6 12M80 136l-3 13M100 138v14M120 136l3 13M140 128l6 12" class="t"/><path d="M100 158Q93 172 100 182Q107 172 100 158Z" class="r"/>`;
+  },
+  dagger() {
+    return `<circle cx="100" cy="22" r="9" class="r"/><rect x="92" y="31" width="16" height="36" rx="3" class="v"/><path d="M92 38h16M92 45h16M92 52h16M92 59h16" class="t"/>
+      <path d="M56 72Q100 62 144 72Q100 86 56 72Z" class="v"/><circle cx="56" cy="72" r="5" class="b"/><circle cx="144" cy="72" r="5" class="b"/>
+      <path d="M86 80H114L108 158L100 184L92 158Z" class="v"/><path d="M100 86V170" class="t"/>
+      <path d="M100 186Q95 194 100 199Q105 194 100 186Z" class="r"/><path d="M109 132Q114 144 110 150Q106 146 109 132Z" class="r"/>
+      <path d="M30 118Q60 104 86 110M170 118Q140 104 114 110" class="t" stroke-dasharray="3 4"/>`;
+  },
+  skull() {
+    return `<g class="t"><g transform="rotate(35 100 120)"><rect x="18" y="113" width="164" height="14" rx="7" class="v"/></g><g transform="rotate(-35 100 120)"><rect x="18" y="113" width="164" height="14" rx="7" class="v"/></g></g>
+      <path d="M100 26C60 26 38 54 38 90c0 20 8 34 22 42v10c0 5 4 8 9 8h62c5 0 9-3 9-8v-10c14-8 22-22 22-42 0-36-22-64-62-64z" class="v"/>
+      <path d="M70 97c0-12 10-18 20-15 7 2 9 11 7 19-2 9-11 13-18 11-6-2-9-8-9-15z" class="r"/><path d="M130 97c0-12-10-18-20-15-7 2-9 11-7 19 2 9 11 13 18 11 6-2 9-8 9-15z" class="r"/>
+      <path d="M100 116l-8 16h16z" class="v"/><path d="M100 30l-6 16 8 8-6 12" class="t"/>
+      <path d="M74 150v12q0 14 14 14h24q14 0 14-14v-12" class="v"/><path d="M86 150v26M100 150v26M114 150v26" class="t"/>`;
+  },
+  moth() {
+    const wing = `<path d="M96 86C70 38 22 32 14 62c-5 24 30 42 82 34Z" class="v"/><path d="M92 86C72 60 46 52 32 62" class="t"/><path d="M88 92C66 84 44 80 26 70" class="t"/><circle cx="50" cy="66" r="8" class="r"/><circle cx="50" cy="66" r="3" class="b" stroke="none"/>
+      <path d="M96 106C70 112 42 138 54 160c10 16 36-6 44-42Z" class="v"/><path d="M94 112C80 126 66 142 62 154" class="t"/>`;
+    return `<path d="M97 64C92 46 84 38 72 34M103 64C108 46 116 38 128 34" class="t"/>${wing}<g transform="translate(200 0) scale(-1 1)">${wing}</g>
+      <ellipse cx="100" cy="102" rx="8" ry="38" class="v"/><circle cx="100" cy="84" r="5" class="b"/><path d="M94 112h12M95 120h10M96 128h8" class="t"/>`;
+  },
+  serpent() {
+    const d = 'M36 178C6 150 52 124 100 128S196 106 160 70S66 72 84 44S120 22 104 20';
+    return `<path d="${d}" stroke-width="16"/><path d="${d}" stroke-width="12" stroke="var(--art-bg,#0b0a09)"/><path d="${d}" class="t" stroke-dasharray="2 7"/>
+      <ellipse cx="104" cy="18" rx="12" ry="8" class="v"/><circle cx="108" cy="16" r="2" class="r" stroke="none"/><path d="M92 18H80L74 13M80 18L74 23" stroke="var(--blood-hi)" stroke-width="1.5"/>
+      <path d="M36 178q-6 8-16 8" class="t"/>`;
+  },
+  rose(seed = 0) {
+    const scallop = (r, n, cls, rot) => {
+      let d = '';
+      for (let i = 0; i < n; i++) {
+        const a0 = rot + i * TAU / n, a1 = rot + (i + 1) * TAU / n, am = (a0 + a1) / 2;
+        const p0 = pt(r, a0, 100, 92), p1 = pt(r, a1, 100, 92), c = pt(r * 1.3, am, 100, 92);
+        d += (i ? '' : `M${p0}`) + `Q${c} ${p1}`;
+      }
+      return `<path d="${d}Z" class="${cls}"/>`;
+    };
+    const leaf = `<path d="M74 132Q42 136 24 170Q60 172 74 132Z" class="v"/><path d="M72 136Q50 150 30 166" class="t"/>`;
+    return `<g transform="rotate(${seed * 25} 100 100)">${leaf}<g transform="translate(200 0) scale(-1 1)">${leaf}</g>
+      ${scallop(48, 7, 'r', seed)}${scallop(34, 6, 'v', seed + .4)}${scallop(20, 5, 'r', seed + .9)}
+      <path d="M100 92m-9 0a9 9 0 1 1 9 9a5 5 0 1 1-5-5" class="t"/><path d="M100 140V192" /><path d="M100 164l-8-6M100 176l8-6" class="t"/></g>`;
+  },
+  moons() {
+    let s = '<path d="M16 100H184" class="t" stroke-dasharray="1 6"/>';
+    const xs = [22, 48, 74, 100, 126, 152, 178];
+    xs.forEach((x, i) => {
+      const r = i === 3 ? 16 : 11;
+      s += `<circle cx="${x}" cy="100" r="${r}" class="v"/>`;
+      if (i === 1) s += `<circle cx="${x}" cy="100" r="${r}" class="b"/><circle cx="${x + 6}" cy="100" r="${r}" class="v" stroke="none"/>`;
+      if (i === 2) s += `<path d="M${x} ${100 - r}A${r} ${r} 0 0 0 ${x} ${100 + r}Z" class="b"/>`;
+      if (i === 3) s += `<circle cx="${x}" cy="100" r="${r - 4}" class="r" stroke="none"/>`;
+      if (i === 4) s += `<path d="M${x} ${100 - r}A${r} ${r} 0 0 1 ${x} ${100 + r}Z" class="b"/>`;
+      if (i === 5) s += `<circle cx="${x}" cy="100" r="${r}" class="b"/><circle cx="${x - 6}" cy="100" r="${r}" class="v" stroke="none"/>`;
+    });
+    return s + '<path d="M100 60V76M100 124V140" class="t"/><circle cx="100" cy="52" r="2.5" class="b"/><circle cx="100" cy="148" r="2.5" class="b"/><path d="M100 40l3 6-3 6-3-6z" class="r" stroke="none"/>';
+  },
+  botanical(seed = 0) {
+    const n = 7 + (seed % 3);
+    let s = `<path d="M100 190C88 150 114 110 98 70C92 50 100 32 104 18" class="t"/>`;
+    for (let i = 0; i < n; i++) {
+      const y = 176 - i * (150 / n), side = i % 2 ? 1 : -1, x = 100 + (i % 3 - 1) * 3, rx = 16 - i * .9;
+      s += `<ellipse cx="${x + side * (rx + 2)}" cy="${y - 4}" rx="${rx}" ry="${rx / 3.2}" transform="rotate(${side * -28} ${x} ${y})" class="t"/><path d="M${x} ${y}l${side * rx * 1.6} ${-rx * .6}" class="t"/>`;
+    }
+    s += seed === 1
+      ? '<circle cx="104" cy="16" r="4" class="r"/><circle cx="113" cy="25" r="3.5" class="r"/><circle cx="95" cy="24" r="3" class="r"/>'
+      : `<path d="M104 18q-8-10 0-16q8 6 0 16Z" class="r"/><circle cx="${seed ? 140 : 58}" cy="44" r="10" class="t"/><circle cx="${seed ? 145 : 63}" cy="41" r="10" class="v" stroke="none"/>`;
+    return s;
+  },
+  lettering(text = 'Memento Mori') {
+    const fs = Math.min(30, 300 / text.length);
+    const ribbon = text.length > 6;
+    return (ribbon
+      ? `<path d="M8 112L24 100L8 88H40V80H160V88H192L176 100L192 112H160V120H40V112Z" class="t"/><path d="M26 82H174V118H26Z" class="v"/>`
+      : `<circle cx="100" cy="100" r="62" class="t"/><circle cx="100" cy="100" r="56" class="t" stroke-dasharray="1 4"/>`) +
+      `<text x="100" y="${100 + fs * .34}" text-anchor="middle" font-size="${fs}">${text}</text>
+       <path d="M100 26V${ribbon ? 70 : 34}M100 ${ribbon ? 130 : 166}V174" class="t"/><path d="M100 18l4 8-4 8-4-8z" class="r" stroke="none"/><path d="M100 174l4 8-4 8-4-8z" class="r" stroke="none"/>`;
+  }
+};
+const art = spec => {
+  const i = spec.indexOf(':'), name = i < 0 ? spec : spec.slice(0, i), arg = i < 0 ? undefined : spec.slice(i + 1);
+  const val = arg !== undefined && /^\d+$/.test(arg) ? +arg : arg;
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${MOTIFS[name](val)}</svg>`;
+};
+document.querySelectorAll('[data-art]').forEach(el => el.innerHTML = art(el.dataset.art));
+
+/* ============ TORN EDGES ============ */
+document.querySelectorAll('.tear').forEach((el, n) => {
+  let seed = 7 + n * 13; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  let d = 'M0 18', x = 0;
+  while (x < 1200) { x += 6 + rnd() * 22; d += ` L${x.toFixed(0)} ${(4 + rnd() * 13).toFixed(1)}`; }
+  el.innerHTML = `<svg viewBox="0 0 1200 18" preserveAspectRatio="none" aria-hidden="true"><path d="${d} L1200 18 Z"/></svg>`;
+});
+
+/* ============ DATA ============ */
+const ARTISTS = [
+  { id: 'mara', name: 'Mara Vex', style: 'Blackwork & Sacred Geometry', years: 11, wait: '8 wks', rate: '$220/hr', sig: 'mandala:1',
+    bio: 'Mara builds every design on a compass and straightedge before a single line touches skin. Dense blackwork, stippled dotwork shading, and geometry laid out to follow the muscle underneath. Sleeves and back pieces are booked as multi-session projects.',
+    pieces: [['mandala:0', 'Sternum, 3 sessions'], ['sun', 'Black Sun, forearm'], ['mandala:2', 'Knee cap'], ['eye', 'The Watcher, flash'], ['sun:1', 'Solar, back of neck'], ['mandala:3', 'Full back, 6 sessions']] },
+  { id: 'dez', name: 'Dez Kovač', style: 'Neo-Traditional', years: 14, wait: '10 wks', rate: '$200/hr', sig: 'dagger',
+    bio: 'Heavy outlines, saturated color, and old-school symbolism with the edges filed sharp. Dez has spent fourteen years proving that bold will hold. Daggers, skulls, snakes, and roses, drawn so they still read from across the room in 2066.',
+    pieces: [['dagger', 'Last Rites, calf'], ['skull', 'Grin, upper arm'], ['serpent', "Serpent's Oath, thigh"], ['rose', 'Blood Rose, hand'], ['rose:2', 'Chest piece, left'], ['skull', 'Memento, shin']] },
+  { id: 'ilse', name: 'Ilse Moreau', style: 'Fine-Line & Botanical', years: 7, wait: '4 wks', rate: '$180/hr', sig: 'moth',
+    bio: 'Single-needle precision for people who want something quiet and exact. Ilse draws botanicals from living specimens, moths from a collection pinned in the back room, and designs every line thick enough to survive the next thirty years.',
+    pieces: [['moth', "Death's-Head, sternum"], ['moons', 'Phases, collarbone'], ['botanical:0', 'Nightshade, ribs'], ['botanical:1', 'Belladonna, spine'], ['botanical:2', 'Fern, ankle'], ['moth', 'Luna, shoulder']] },
+  { id: 'caleb', name: 'Caleb Harrow', style: 'Lettering & Blackletter', years: 9, wait: '3 wks', rate: '$180/hr', sig: 'lettering:Memento Mori',
+    bio: 'Former sign painter, current obsessive. Caleb hand-draws every letterform, from knuckle-width blackletter to full-chest script, and will talk you out of any font you found on your phone.',
+    pieces: [['lettering:Memento Mori', 'Forearm banner'], ['lettering:Nothing Lasts', 'Collarbone'], ['lettering:Sine Metu', 'Ribs'], ['lettering:Mother', 'Classic, bicep'], ['lettering:Loyal', 'Wrist'], ['lettering:Ossuary', 'Shop crest']] }
+];
+const FLASH = [
+  { no: '01', name: 'The Watcher', art: 'eye', artist: 'mara', size: '3 in', price: 180 },
+  { no: '02', name: 'Last Rites', art: 'dagger', artist: 'dez', size: '5 in', price: 260 },
+  { no: '03', name: "Death's-Head", art: 'moth', artist: 'ilse', size: '4 in', price: 220, claimed: true },
+  { no: '04', name: 'Grin', art: 'skull', artist: 'dez', size: '4 in', price: 240 },
+  { no: '05', name: 'Black Sun', art: 'sun', artist: 'mara', size: '4 in', price: 200 },
+  { no: '06', name: "Serpent's Oath", art: 'serpent', artist: 'dez', size: '6 in', price: 320, claimed: true },
+  { no: '07', name: 'Phases', art: 'moons', artist: 'ilse', size: '5 in', price: 190 },
+  { no: '08', name: 'Memento Mori', art: 'lettering:Memento Mori', artist: 'caleb', size: '4 in', price: 160 },
+  { no: '09', name: 'Blood Rose', art: 'rose', artist: 'dez', size: '4 in', price: 230 },
+  { no: '10', name: 'Nightshade', art: 'botanical:1', artist: 'ilse', size: '6 in', price: 210 },
+  { no: '11', name: 'Rose Window', art: 'mandala:1', artist: 'mara', size: '5 in', price: 280, claimed: true },
+  { no: '12', name: 'Sine Metu', art: 'lettering:Sine Metu', artist: 'caleb', size: '3 in', price: 150 }
+];
+const byId = id => ARTISTS.find(a => a.id === id);
+
+/* ============ ROSTER + PORTFOLIO ============ */
+const roster = document.getElementById('roster');
+roster.innerHTML = ARTISTS.map(a => `
+  <article class="artist reveal">
+    <div class="artist-art art ticks">${art(a.sig)}</div>
+    <div class="artist-body">
+      <p class="label red">${a.style}</p>
+      <h3>${a.name}</h3>
+      <dl class="facts"><div><dt>Tattooing</dt><dd>${a.years} yrs</dd></div><div><dt>Wait</dt><dd>${a.wait}</dd></div><div><dt>Rate</dt><dd>${a.rate}</dd></div></dl>
+      <button class="btn btn-line" data-open="${a.id}">View portfolio</button>
+    </div>
+  </article>`).join('');
+
+const artistSelect = document.getElementById('artist-select');
+ARTISTS.forEach(a => artistSelect.insertAdjacentHTML('beforeend', `<option value="${a.id}">${a.name} (${a.style})</option>`));
+
+const pf = document.getElementById('pf');
+let pfArtist = null;
+roster.addEventListener('click', e => {
+  const b = e.target.closest('[data-open]'); if (!b) return;
+  const a = byId(b.dataset.open); pfArtist = a.id;
+  document.getElementById('pf-style').textContent = `${a.style} · ${a.years} years`;
+  document.getElementById('pf-name').textContent = a.name;
+  document.getElementById('pf-bio').textContent = a.bio;
+  document.getElementById('pf-grid').innerHTML = a.pieces.map(([s, c]) => `<figure>${art(s)}<figcaption>${c}</figcaption></figure>`).join('');
+  document.getElementById('pf-book').textContent = `Book with ${a.name.split(' ')[0]}`;
+  pf.showModal();
+});
+document.getElementById('pf-x').onclick = () => pf.close();
+pf.addEventListener('click', e => { if (e.target === pf) pf.close(); });
+document.getElementById('pf-book').onclick = () => {
+  artistSelect.value = pfArtist; pf.close();
+  document.getElementById('book').scrollIntoView();
+};
+
+/* ============ FLASH WALL ============ */
+const grid = document.getElementById('flash-grid');
+grid.innerHTML = FLASH.map(f => `
+  <article class="flash${f.claimed ? ' claimed' : ''}" data-no="${f.no}" data-artist="${f.artist}">
+    <div class="flash-art art">${art(f.art)}</div>
+    <span class="stamp">${f.claimed ? 'Claimed' : 'Held'}</span>
+    <div class="flash-meta"><span class="flash-no">No. ${f.no}</span><h3>${f.name}</h3><p>${byId(f.artist).name} · ${f.size}</p></div>
+    <div class="flash-foot"><span class="price">$${f.price}</span><button class="claim" ${f.claimed ? 'disabled aria-label="Already claimed"' : `aria-label="Claim ${f.name}"`}>${f.claimed ? 'Gone' : 'Claim'}</button></div>
+  </article>`).join('');
+
+const countEl = document.getElementById('flash-count');
+const updateCount = () => { const left = FLASH.filter(f => !f.claimed).length; countEl.textContent = `${left} of ${FLASH.length} still on the wall.`; };
+updateCount();
+
+const filters = document.getElementById('filters');
+filters.innerHTML = [['all', 'All artists'], ...ARTISTS.map(a => [a.id, a.name])].map(([id, n], i) => `<button data-f="${id}" aria-pressed="${i === 0}">${n}</button>`).join('');
+filters.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  filters.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  grid.querySelectorAll('.flash').forEach(c => c.hidden = b.dataset.f !== 'all' && c.dataset.artist !== b.dataset.f);
+});
+
+const heldBox = document.getElementById('held-piece');
+let held = null;
+const release = () => {
+  if (!held) return;
+  const card = grid.querySelector(`[data-no="${held.no}"]`);
+  card.classList.remove('held'); card.querySelector('.claim').textContent = 'Claim';
+  held = null; heldBox.hidden = true;
+  document.querySelector('input[name="type"][value="Custom"]').checked = true;
+};
+grid.addEventListener('click', e => {
+  const b = e.target.closest('.claim'); if (!b) return;
+  const card = b.closest('.flash'), f = FLASH.find(x => x.no === card.dataset.no);
+  if (held && held.no === f.no) { release(); return; }
+  release();
+  held = f; card.classList.add('held'); b.textContent = 'Held';
+  heldBox.querySelector('span').innerHTML = `<b>No. ${f.no} — ${f.name}</b> · ${f.size} · $${f.price}`;
+  heldBox.hidden = false;
+  document.querySelector('input[name="type"][value="Flash"]').checked = true;
+  artistSelect.value = f.artist;
+  document.getElementById('book').scrollIntoView();
+});
+document.getElementById('release').onclick = release;
+
+/* ============ BOOKING FORM ============ */
+const form = document.getElementById('book-form'), done = document.getElementById('book-done');
+const rules = {
+  name: v => v.trim().length > 1 || 'Tell us who you are.',
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'We need a real email to reply to.',
+  placement: v => v.trim().length > 1 || 'Where on your body?',
+  idea: v => v.trim().length > 14 || 'Give us a bit more to work with. A sentence or two.'
+};
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let first = null;
+  Object.entries(rules).forEach(([k, fn]) => {
+    const wrap = form.querySelector(`[data-f="${k}"]`), res = fn(form[k].value);
+    wrap.classList.toggle('bad', res !== true);
+    wrap.querySelector('.err').textContent = res === true ? '' : res;
+    if (res !== true && !first) first = form[k];
+  });
+  const age = form.querySelector('[data-f="age"]');
+  age.classList.toggle('bad', !form.age.checked);
+  if (!form.age.checked && !first) first = form.age;
+  if (first) { first.focus(); return; }
+
+  const a = byId(form.artist.value);
+  const who = a ? a.name.split(' ')[0] : 'The first available artist';
+  document.getElementById('done-msg').innerHTML = `${who} will read your request${held ? ` for <strong>${held.name}</strong>` : ''} on Monday and reply to <strong>${form.email.value.replace(/[<>&]/g, '')}</strong> within five days. Check your spam folder just in case.`;
+  document.getElementById('done-ref').textContent = 'OSS-' + Math.floor(1000 + Math.random() * 9000);
+  if (held) { held.claimed = true; const c = grid.querySelector(`[data-no="${held.no}"]`); c.classList.replace('held', 'claimed'); c.querySelector('.stamp').textContent = 'Claimed'; c.querySelector('.claim').textContent = 'Gone'; held = null; updateCount(); }
+  form.hidden = true; done.hidden = false; done.focus();
+});
+form.addEventListener('input', e => { const w = e.target.closest('.bad'); if (w) { w.classList.remove('bad'); const er = w.querySelector('.err'); if (er) er.textContent = ''; } });
+document.getElementById('again').onclick = () => { form.reset(); heldBox.hidden = true; done.hidden = true; form.hidden = false; };
+
+/* ============ HOURS (live, Denver time) ============ */
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const HOURS = { 0: null, 1: null, 2: [12, 20], 3: [12, 20], 4: [12, 20, 'Walk-ins 12–6'], 5: [12, 22], 6: [11, 19] };
+const fmt = h => `${h % 12 || 12}${h < 12 ? 'am' : 'pm'}`;
+const order = [1, 2, 3, 4, 5, 6, 0];
+const now = (() => {
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Denver', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday), h: (+p.hour % 24) + (+p.minute) / 60 };
+  } catch (e) { const d = new Date(); return { day: d.getDay(), h: d.getHours() + d.getMinutes() / 60 }; }
+})();
+document.getElementById('hours').innerHTML = order.map(d => {
+  const h = HOURS[d];
+  return `<tr class="${d === now.day ? 'today' : ''}"><td>${DAYS[d]}</td><td>${h ? `${fmt(h[0])} – ${fmt(h[1])}${h[2] ? ` · ${h[2]}` : ''}` : 'Closed'}</td></tr>`;
+}).join('');
+document.getElementById('foot-hours').innerHTML = [
+  ['Tue – Thu', '12pm – 8pm'], ['Friday', '12pm – 10pm'], ['Saturday', '11am – 7pm'], ['Sun – Mon', 'Closed']
+].map(([d, h]) => `<li>${d} <span>· ${h}</span></li>`).join('');
+const status = document.getElementById('open-now');
+const today = HOURS[now.day];
+if (today && now.h >= today[0] && now.h < today[1]) {
+  status.classList.add('is-open'); status.textContent = `Open now · Until ${fmt(today[1])}`;
+} else {
+  let d = now.day, i = 0;
+  if (today && now.h < today[0]) status.textContent = `Closed · Opens today at ${fmt(today[0])}`;
+  else { do { d = (d + 1) % 7; i++; } while (!HOURS[d] && i < 7); status.textContent = `Closed · Opens ${DAYS[d]} at ${fmt(HOURS[d][0])}`; }
+}
+
+/* ============ NAV, MENU, REVEAL ============ */
+const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+const setMenu = open => { document.body.classList.toggle('menu-open', open); document.body.classList.toggle('locked', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); };
+burger.onclick = () => setMenu(!document.body.classList.contains('menu-open'));
+menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+const navLinks = [...document.querySelectorAll('.links a')];
+const spy = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+navLinks.forEach(a => spy.observe(document.querySelector(a.getAttribute('href'))));
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
