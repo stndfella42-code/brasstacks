@@ -661,10 +661,11 @@
           <div class="form-title">Tell us about<br><em>your business</em></div>
         </div>
 
-        <!-- FORMSPREE: go to formspree.io, create a free account, create a form,
-             then replace YOUR_FORM_ID below with your actual form ID (e.g. xpwzdovq) -->
+        <!-- FORMSUBMIT: no account needed. First submission triggers a one-time
+             confirmation email to hi.brasstacks@gmail.com — click it once, then
+             every consult request lands in that inbox. -->
         <form class="consult-form" id="consult-form"
-              action="https://formspree.io/f/xdajkddy"
+              action="https://formsubmit.co/ajax/hi.brasstacks@gmail.com"
               method="POST" novalidate>
 
           <input type="hidden" name="_subject" value="New consult request — Brass Tacks" />
@@ -979,10 +980,15 @@
       btn.disabled = true;
 
       try {
+        const data = {};
+        new FormData(form).forEach((v, k) => { data[k] = v; });
+        data._subject = 'New consult request \u2014 Brass Tacks';
+        data._template = 'table';
+        data._captcha = 'false';
         const res = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         });
 
         if (res.ok) {
