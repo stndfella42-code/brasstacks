@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redline Auto Co. — Honest Auto Repair, Denver</title>
+<meta name="description" content="Independent auto repair in Denver's Baker neighborhood. We text you photos of everything we find. You approve from your phone. No upsells, no jargon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0c; --panel:#141416; --panel2:#1b1b1e;
+  --bone:#f2ede3; --muted:#a8a29a; --faint:#6e6a63;
+  --accent:#ff4d1c; --accent-deep:#b73208;
+  --line:#26262a; --ok:#4ade80;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black); color:var(--bone);
+  font-family:'Inter',system-ui,sans-serif; font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+h1,h2,h3,.display{font-family:'Anton',sans-serif; font-weight:400; letter-spacing:.01em; line-height:1.02; text-transform:uppercase}
+.wrap{max-width:1120px; margin:0 auto; padding:0 20px; position:relative; z-index:2}
+section{padding:72px 0; position:relative}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:12px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--accent);
+  margin-bottom:14px;
+}
+.eyebrow::before{content:""; width:28px; height:3px; background:var(--accent)}
+h2{font-size:clamp(34px,5vw,56px); margin-bottom:14px}
+.lede{color:var(--muted); font-size:18px; max-width:640px}
+/* hazard divider */
+.hazard{height:10px; background:repeating-linear-gradient(-45deg,var(--accent) 0 18px,var(--black) 18px 36px); opacity:.9}
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(11,11,12,.94); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.hbar{display:flex; align-items:center; justify-content:space-between; height:66px}
+.logo{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--bone)}
+.logo-mark{width:34px; height:34px; background:var(--accent); display:grid; place-items:center; font-family:'Anton'; font-size:20px; color:#000; transform:skewX(-8deg)}
+.logo-name{font-family:'Anton'; font-size:20px; letter-spacing:.04em; line-height:1}
+.logo-name small{display:block; font-family:'Inter'; font-weight:600; font-size:10px; letter-spacing:.3em; color:var(--muted)}
+nav.main{display:flex; gap:26px}
+nav.main a{color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; letter-spacing:.04em}
+nav.main a:hover{color:var(--bone)}
+.hright{display:flex; align-items:center; gap:14px}
+.shop-status{font-size:12px; font-weight:600; letter-spacing:.06em; display:flex; align-items:center; gap:8px; color:var(--muted)}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 8px var(--ok); animation:pulse 2s infinite}
+.dot.closed{background:#f87171; box-shadow:0 0 8px #f87171}
+@keyframes pulse{50%{opacity:.5}}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--accent); color:#0b0b0c; font-weight:700; font-size:15px;
+  padding:13px 26px; text-decoration:none; border:none; cursor:pointer;
+  text-transform:uppercase; letter-spacing:.06em; transform:skewX(-6deg);
+  transition:background .15s;
+}
+.btn span{transform:skewX(6deg); display:inline-flex; align-items:center; gap:10px}
+.btn:hover{background:#ff6a3d}
+.btn.ghost{background:transparent; color:var(--bone); outline:2px solid var(--line); outline-offset:-2px}
+.btn.ghost:hover{outline-color:var(--accent); color:var(--accent); background:transparent}
+.btn.small{padding:9px 18px; font-size:13px}
+.burger{display:none; background:none; border:none; cursor:pointer; padding:8px}
+.burger span{display:block; width:24px; height:2px; background:var(--bone); margin:5px 0}
+/* ---------- hero ---------- */
+.hero{padding:88px 0 64px; overflow:hidden}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center}
+.hero h1{font-size:clamp(52px,8vw,104px); margin:10px 0 18px}
+.hero h1 .stroke{color:transparent; -webkit-text-stroke:2px var(--accent)}
+.hero p.sub{color:var(--muted); font-size:19px; max-width:520px; margin-bottom:30px}
+.hero p.sub strong{color:var(--bone)}
+.cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px}
+.trust-strip{display:flex; gap:0; border:1px solid var(--line); background:var(--panel)}
+.trust-strip div{flex:1; padding:14px 16px; border-right:1px solid var(--line); font-size:13px}
+.trust-strip div:last-child{border-right:none}
+.trust-strip b{display:block; font-family:'Anton'; font-size:19px; letter-spacing:.03em; color:var(--bone); font-weight:400}
+.trust-strip span{color:var(--muted)}
+.hero-card{
+  background:var(--panel); border:1px solid var(--line); padding:0; position:relative;
+}
+.hero-card .card-top{background:var(--accent); color:#0b0b0c; font-weight:700; font-size:13px; letter-spacing:.14em; padding:10px 18px; text-transform:uppercase}
+.ticket{padding:22px}
+.ticket-row{display:flex; justify-content:space-between; align-items:center; padding:13px 0; border-bottom:1px dashed var(--line); font-size:14px}
+.ticket-row:last-child{border-bottom:none}
+.ticket-row .t{color:var(--muted)}
+.ticket-row .p{font-family:'Anton'; font-size:20px; letter-spacing:.02em}
+.ticket-note{margin-top:14px; font-size:13px; color:var(--faint); font-style:italic}
+/* ---------- price band ---------- */
+.price-band{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.price-band h2 span{color:var(--accent)}
+.price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:30px}
+.price-cell{background:var(--black); padding:26px 24px}
+.price-cell h3{font-size:21px; margin-bottom:6px; letter-spacing:.03em}
+.price-cell .range{font-family:'Anton'; font-size:30px; color:var(--accent); margin:8px 0}
+.price-cell p{font-size:14px; color:var(--muted)}
+/* ---------- services ---------- */
+.svc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:34px}
+.svc{background:var(--panel); border:1px solid var(--line); padding:26px 24px; transition:border-color .15s, transform .15s}
+.svc:hover{border-color:var(--accent); transform:translateY(-3px)}
+.svc svg{width:38px; height:38px; stroke:var(--accent); fill:none; stroke-width:1.8; margin-bottom:16px}
+.svc h3{font-size:20px; margin-bottom:8px; letter-spacing:.03em}
+.svc p{font-size:14px; color:var(--muted)}
+/* ---------- process ---------- */
+.process{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:34px}
+.step{border:1px solid var(--line); background:var(--black); padding:26px 22px; position:relative}
+.step .num{font-family:'Anton'; font-size:52px; color:transparent; -webkit-text-stroke:1.5px var(--accent); line-height:1; margin-bottom:12px}
+.step h3{font-size:19px; margin-bottom:8px; letter-spacing:.03em}
+.step p{font-size:14px; color:var(--muted)}
+.step p em{color:var(--bone); font-style:normal; font-weight:600}
+/* ---------- reviews ---------- */
+.rev-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:34px}
+.rev{background:var(--panel); border:1px solid var(--line); padding:26px 24px; display:flex; flex-direction:column; gap:14px}
+.stars{color:var(--accent); letter-spacing:4px; font-size:15px}
+.rev p{font-size:15px; color:var(--bone); flex:1}
+.rev cite{font-style:normal; font-size:13px; color:var(--muted)}
+.rev cite b{color:var(--bone)}
+.g-badge{display:inline-flex; align-items:center; gap:8px; margin-top:26px; font-size:14px; color:var(--muted)}
+.g-badge b{color:var(--bone); font-size:20px}
+/* ---------- booking ---------- */
+.booking{background:var(--panel); border-top:1px solid var(--line)}
+.book-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start}
+.form{background:var(--black); border:1px solid var(--line); padding:30px}
+.f-row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.f-group{margin-bottom:16px}
+.f-group label{display:block; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:7px}
+.f-group input,.f-group select,.f-group textarea{
+  width:100%; background:var(--panel2); border:1px solid var(--line); color:var(--bone);
+  padding:13px 14px; font-size:15px; font-family:'Inter'; border-radius:0;
+}
+.f-group input:focus,.f-group select:focus,.f-group textarea:focus{outline:none; border-color:var(--accent)}
+.f-group textarea{resize:vertical; min-height:96px}
+.form .btn{width:100%; justify-content:center; margin-top:6px}
+.form-ok{display:none; text-align:center; padding:40px 20px}
+.form-ok h3{font-size:28px; margin-bottom:10px}
+.form-ok p{color:var(--muted)}
+.book-info h2{margin-bottom:14px}
+.book-info ul{list-style:none; margin:24px 0; display:grid; gap:14px}
+.book-info li{display:flex; gap:14px; align-items:flex-start; font-size:15px; color:var(--muted)}
+.book-info li b{color:var(--bone)}
+.check{flex:none; width:22px; height:22px; background:var(--accent); color:#000; font-weight:700; display:grid; place-items:center; font-size:14px; transform:skewX(-8deg); margin-top:2px}
+.hours{border:1px solid var(--line); background:var(--black)}
+.hours div{display:flex; justify-content:space-between; padding:12px 18px; font-size:14px; border-bottom:1px solid var(--line)}
+.hours div:last-child{border-bottom:none}
+.hours span:last-child{color:var(--muted)}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line); padding:52px 0 120px}
+.f-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:36px}
+.f-grid h4{font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); margin-bottom:14px}
+.f-grid p,.f-grid a{font-size:14px; color:var(--muted); text-decoration:none; display:block; margin-bottom:8px}
+.f-grid a:hover{color:var(--accent)}
+.fine{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+/* mobile call bar */
+.mcall{
+  display:none; position:fixed; bottom:0; left:0; right:0; z-index:60;
+  background:rgba(11,11,12,.97); border-top:1px solid var(--line); padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  gap:10px;
+}
+.mcall a{flex:1; text-align:center; padding:14px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:14px; text-decoration:none; transform:skewX(-6deg)}
+.mcall a span{display:inline-block; transform:skewX(6deg)}
+.mcall .call{background:var(--accent); color:#0b0b0c}
+.mcall .book{background:transparent; color:var(--bone); outline:2px solid var(--line); outline-offset:-2px}
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  nav.main{display:none; position:absolute; top:66px; left:0; right:0; background:var(--panel); flex-direction:column; padding:10px 20px 20px; border-bottom:1px solid var(--line); gap:0}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 0; border-bottom:1px solid var(--line); font-size:16px}
+  .burger{display:block}
+  .shop-status{display:none}
+  .hero-grid,.book-grid{grid-template-columns:1fr}
+  .svc-grid,.price-grid{grid-template-columns:1fr 1fr}
+  .steps,.rev-grid{grid-template-columns:1fr 1fr}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .mcall{display:flex}
+  footer{padding-bottom:150px}
+}
+@media(max-width:600px){
+  .svc-grid,.price-grid,.steps,.rev-grid,.f-grid,.f-row{grid-template-columns:1fr}
+  .trust-strip{flex-direction:column}
+  .trust-strip div{border-right:none; border-bottom:1px solid var(--line)}
+  .trust-strip div:last-child{border-bottom:none}
+  section{padding:54px 0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hbar">
+    <a class="logo" href="#top">
+      <span class="logo-mark">R</span>
+      <span class="logo-name">REDLINE<small>AUTO CO. · DENVER</small></span>
+    </a>
+    <nav class="main" id="nav">
+      <a href="#prices">Prices</a>
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#book">Book</a>
+    </nav>
+    <div class="hright">
+      <span class="shop-status"><span class="dot" id="statusDot"></span><span id="statusText">Checking hours…</span></span>
+      <a class="btn small" href="tel:+13035550147"><span>&#9742; (303) 555-0147</span></a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="hazard"></div>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Independent auto repair · Baker, Denver</span>
+      <h1>Fixed right.<br><span class="stroke">Priced honest.</span></h1>
+      <p class="sub">We put your car on the lift, <strong>text you photos of everything we find</strong>, and nothing gets fixed until you approve it from your phone. Old parts go in a box in your trunk if you want them. <strong>No upsells. No jargon. No surprises.</strong></p>
+      <div class="cta-row">
+        <a class="btn" href="#book"><span>Book an appointment</span></a>
+        <a class="btn ghost" href="#prices"><span>See our prices</span></a>
+      </div>
+      <div class="trust-strip">
+        <div><b>ASE-Certified</b><span>Master techs only</span></div>
+        <div><b>24 mo / 24k mi</b><span>Warranty on everything</span></div>
+        <div><b>Free</b><span>Inspection with every visit</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-top">Straight answers, posted on the wall</div>
+      <div class="ticket">
+        <div class="ticket-row"><span class="t">Brake pads, per axle</span><span class="p">$189–$329</span></div>
+        <div class="ticket-row"><span class="t">Full synthetic oil change</span><span class="p">$79</span></div>
+        <div class="ticket-row"><span class="t">Check-engine diagnostic</span><span class="p">$129</span></div>
+        <div class="ticket-row"><span class="t">Pre-purchase inspection</span><span class="p">$179</span></div>
+        <div class="ticket-row"><span class="t">Alignment</span><span class="p">$99</span></div>
+        <p class="ticket-note">Diagnostic fee waived with any completed repair. If we can't explain it in plain English, you don't pay for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="price-band" id="prices">
+  <div class="wrap">
+    <span class="eyebrow">Radical idea</span>
+    <h2>We publish our prices.<br><span>Most shops won't.</span></h2>
+    <p class="lede">You'll never hear "we'll have to see once we get in there" as a pricing strategy. Here's what the common stuff costs. The uncommon stuff gets a photo, a price, and your approval before we touch it.</p>
+    <div class="price-grid">
+      <div class="price-cell">
+        <h3>Brakes</h3>
+        <div class="range">$189 – $329</div>
+        <p>Pads and rotors, per axle. We measure rotor thickness in front of you and show you why they stay or go.</p>
+      </div>
+      <div class="price-cell">
+        <h3>Oil Service</h3>
+        <div class="range">$79</div>
+        <p>Full synthetic, OEM filter, 21-point inspection with photos. Done in 45 minutes or it's free.</p>
+      </div>
+      <div class="price-cell">
+        <h3>Diagnostics</h3>
+        <div class="range">$129</div>
+        <p>Full scan plus a tech's eyes on it, with photos of what we find. Waived entirely if you do the repair with us.</p>
+      </div>
+      <div class="price-cell">
+        <h3>Tires</h3>
+        <div class="range">$25<span style="font-size:16px;color:var(--muted)">/tire +</span></div>
+        <p>Mount, balance, and rotation. Alignment $99. We sell most major brands at online prices, installed.</p>
+      </div>
+      <div class="price-cell">
+        <h3>Battery</h3>
+        <div class="range">$189 – $259</div>
+        <p>Testing is always free. Most replacements installed with a 3-year warranty, while you wait.</p>
+      </div>
+      <div class="price-cell">
+        <h3>Pre-Purchase Inspection</h3>
+        <div class="range">$179</div>
+        <p>150-point inspection with photos before you buy that Craigslist special. Has saved customers thousands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow">What we do</span>
+    <h2>Everything your car needs.<br>Nothing it doesn't.</h2>
+    <p class="lede">Eight bays, dealer-level scan tools, and techs who'd rather show you the problem than describe it.</p>
+    <div class="svc-grid">
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
+        <h3>Brakes</h3><p>Pads, rotors, calipers, lines, fluid. The system that stops you gets measured, photographed, and explained.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg>
+        <h3>Oil &amp; Fluids</h3><p>Full synthetic changes, transmission fluid, coolant, brake fluid. Done fast, done right, inspection included.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 11v2M11 11v2M17 10v4M7 17v2M17 17v2"/></svg>
+        <h3>Electrical</h3><p>Batteries, alternators, starters, wiring gremlins. We chase the actual fault instead of throwing parts at it.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 8v-2M12 18v-2M8 12H6M18 12h-2"/></svg>
+        <h3>Suspension &amp; Steering</h3><p>Struts, control arms, tie rods, alignments. If it clunks when you turn left, "it clunks when I turn left" is a perfect description. Bring it in.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><path d="M5 16V8h9l3 3v5"/><circle cx="8.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/><path d="M5 12h9"/></svg>
+        <h3>Engine Repair</h3><p>Timing belts, water pumps, gaskets, mounts. Big jobs get a written estimate, a timeline, and photo updates.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10M12 13l-4 7M12 13l4 7"/><circle cx="12" cy="5" r="2"/></svg>
+        <h3>A/C &amp; Heating</h3><p>Colorado cars earn their climate control. Recharge, leak detection, compressors, heater cores.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM4 10h-2M4 14h-2M22 10h-2M22 14h-2M10 4V2M14 4V2M10 22v-2M14 22v-2"/></svg>
+        <h3>Transmission</h3><p>Services, rebuilds, replacements. We'll tell you honestly when a used unit makes more sense than a rebuild.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <h3>Inspections</h3><p>Pre-purchase, road-trip, and "is this quote from another shop legit" second opinions. $179, photos included.</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 24 24"><path d="M3 17h18M5 17V9h14v8M9 9V6h6v3"/><circle cx="8" cy="19" r="1.5"/><circle cx="16" cy="19" r="1.5"/></svg>
+        <h3>Tires &amp; Alignment</h3><p>All major brands at online prices, mounted and balanced here. Alignments with a before/after printout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="hazard"></div>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Bring it in. Approve from your phone.<br>Drive it home.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Book it</h3>
+        <p>Online or by phone. Describe the symptom in plain English. <em>"It clunks when I turn left"</em> is a perfect work order.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>We inspect, free</h3>
+        <p>Every visit includes a full inspection. We put it on the lift and <em>photograph everything we find</em>, good and bad.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>You approve</h3>
+        <p>Photos and line-item prices texted to you. Tap yes on what you want. <em>Nothing gets fixed without your say.</em></p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3>Drive home</h3>
+        <p>Old parts in a box in your trunk if you want them. Every repair backed <em>24 months / 24,000 miles</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <span class="eyebrow">Word on the street</span>
+    <h2>4.9 stars. 600+ reviews.<br>Zero paid for.</h2>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>"They texted me a photo of my cracked control arm bushing with a price before touching anything. First shop that's ever done that."</p>
+        <cite><b>Maya R.</b> — Baker · 2019 RAV4</cite>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>"Quoted $240 over the phone for brakes. Charged $240. I genuinely didn't know that was still possible."</p>
+        <cite><b>Derek T.</b> — Athmar Park · 2016 F-150</cite>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>"Took my daughter's car in for a pre-purchase inspection. They found frame damage the seller 'forgot' to mention. Saved us $8,000."</p>
+        <cite><b>Priya S.</b> — Wash Park · Pre-purchase inspection</cite>
+      </div>
+    </div>
+    <div class="g-badge"><b>4.9</b> average across Google reviews · concept demo</div>
+  </div>
+</section>
+
+<div class="hazard"></div>
+
+<section class="booking" id="book">
+  <div class="wrap book-grid">
+    <div class="book-info">
+      <span class="eyebrow">Get it looked at</span>
+      <h2>Book an appointment</h2>
+      <p class="lede">Tell us what's going on. We'll confirm your slot by text, usually within the hour during shop hours.</p>
+      <ul>
+        <li><span class="check">✓</span><span><b>Free inspection</b> with every visit, photos included</span></li>
+        <li><span class="check">✓</span><span><b>Text-to-approve</b> — nothing fixed without your yes</span></li>
+        <li><span class="check">✓</span><span><b>Loaners &amp; shuttle</b> available for jobs over 4 hours</span></li>
+        <li><span class="check">✓</span><span><b>24-month / 24,000-mile warranty</b> on all repairs</span></li>
+      </ul>
+      <div class="hours">
+        <div><span>Monday – Friday</span><span>8:00a – 6:00p</span></div>
+        <div><span>Saturday</span><span>9:00a – 3:00p</span></div>
+        <div><span>Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+    <form class="form" id="bookForm">
+      <div class="f-row">
+        <div class="f-group"><label for="fname">Name</label><input id="fname" required placeholder="Jane Torres"></div>
+        <div class="f-group"><label for="fphone">Phone</label><input id="fphone" type="tel" required placeholder="(303) 555-0100"></div>
+      </div>
+      <div class="f-group"><label for="fveh">Vehicle</label><input id="fveh" required placeholder="2018 Subaru Outback"></div>
+      <div class="f-group"><label for="fsvc">What do you need?</label>
+        <select id="fsvc">
+          <option>Brakes</option><option>Oil service</option><option>Check-engine light</option>
+          <option>Tires / alignment</option><option>Battery / electrical</option><option>Suspension / steering</option>
+          <option>Engine repair</option><option>A/C &amp; heating</option><option>Transmission</option>
+          <option>Pre-purchase inspection</option><option>Not sure — it makes a noise</option>
+        </select>
+      </div>
+      <div class="f-group"><label for="fmsg">What's it doing?</label><textarea id="fmsg" placeholder="Clunks when I turn left. Started last week."></textarea></div>
+      <button class="btn" type="submit"><span>Request appointment</span></button>
+      <div class="form-ok" id="formOk">
+        <h3>Request received.</h3>
+        <p>We'll text you to confirm your slot, usually within the hour during shop hours.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a class="logo" href="#top" style="margin-bottom:16px">
+          <span class="logo-mark">R</span>
+          <span class="logo-name">REDLINE<small>AUTO CO. · DENVER</small></span>
+        </a>
+        <p>Independent auto repair in Baker since 2016. Fixed right, priced honest, photographed throughout.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <p>415 W 8th Ave<br>Denver, CO 80204</p>
+        <a href="tel:+13035550147">(303) 555-0147</a>
+        <a href="#book">hello@redlineautodenver.com</a>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <p>Mon – Fri · 8a – 6p<br>Sat · 9a – 3p<br>Sun · Closed</p>
+        <p style="margin-top:12px">Serving Baker, Wash Park, Athmar Park, Platt Park &amp; South Broadway.</p>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© <span id="yr"></span> Redline Auto Co. — concept demo by Brass Tacks</span>
+      <span>24-mo / 24k-mi warranty on all repairs</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mcall">
+  <a class="call" href="tel:+13035550147"><span>&#9742; Call now</span></a>
+  <a class="book" href="#book"><span>Book online</span></a>
+</div>
+
+<script>
+// mobile nav
+document.getElementById('burger').addEventListener('click', function(){
+  document.getElementById('nav').classList.toggle('open');
+});
+document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () =>
+  document.getElementById('nav').classList.remove('open')));
+// live open/closed status (MT)
+(function(){
+  var now = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Denver'}));
+  var d = now.getDay(), h = now.getHours() + now.getMinutes()/60;
+  var open = (d>=1 && d<=5 && h>=8 && h<18) || (d===6 && h>=9 && h<15);
+  var t = document.getElementById('statusText'), dot = document.getElementById('statusDot');
+  if(open){
+    var close = (d===6) ? '3pm' : '6pm';
+    t.textContent = 'Open now · closes ' + close;
+  } else { t.textContent = 'Closed · opens 8a Mon'; dot.classList.add('closed'); }
+})();
+// fake booking submit
+document.getElementById('bookForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = this;
+  Array.prototype.forEach.call(f.querySelectorAll('.f-group, .f-row, button'), function(el){ el.style.display='none'; });
+  document.getElementById('formOk').style.display='block';
+  document.getElementById('formOk').scrollIntoView({behavior:'smooth', block:'center'});
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
