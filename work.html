@@ -339,6 +339,20 @@
     .mock-ossuary .o-flash .gone::after { content: 'CLAIMED'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); font-family: 'Bebas Neue', sans-serif; font-size: 10px; color: #d0202a; border: 1px solid #d0202a; padding: 0 4px; }
     .mock-ossuary .o-sigil { position: absolute; right: -40px; top: 20px; width: 170px; height: 170px; opacity: .14; }
 
+    /* REVIVAL: Wichita contractor, charcoal + safety orange, blueprint grid */
+    .mock-revival { min-height: 220px; display: flex; flex-direction: column; padding: 12px 14px; color: #eeede9; position: relative; overflow: hidden;
+      background: linear-gradient(rgba(238,237,233,.07) 1px, transparent 1px) 0 0 / 18px 18px, linear-gradient(90deg, rgba(238,237,233,.07) 1px, transparent 1px) 0 0 / 18px 18px, #151515; }
+    .mock-revival .rv-top { display: flex; justify-content: space-between; align-items: center; }
+    .mock-revival .rv-mark { display: flex; align-items: center; gap: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1.5px; }
+    .mock-revival .rv-mark i { width: 14px; height: 14px; background: #ff6b1a; display: block; }
+    .mock-revival .rv-call { background: #ff6b1a; color: #151515; font-size: 7px; font-weight: 600; letter-spacing: .5px; padding: 4px 8px; }
+    .mock-revival .rv-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: .86; margin-top: 16px; letter-spacing: .5px; }
+    .mock-revival .rv-h1 span { color: #ff6b1a; display: block; }
+    .mock-revival .rv-cta { align-self: flex-start; background: #ff6b1a; color: #151515; font-size: 8px; font-weight: 600; letter-spacing: 1px; padding: 6px 12px; margin-top: 12px; }
+    .mock-revival .rv-storm { margin-top: auto; height: 22px; display: flex; align-items: center; padding: 0 8px; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 1px; color: #151515;
+      background: repeating-linear-gradient(-45deg, #ff6b1a 0 8px, #e45a0c 8px 16px); }
+    .mock-revival .rv-house { position: absolute; right: 12px; top: 58px; width: 118px; }
+
     .mock-kings {
       background: #0f0f0f; min-height: 220px; display: flex; flex-direction: column;
     }
@@ -1023,7 +1037,7 @@
   <!-- PORTFOLIO GRID -->
   <section class="section">
     <div class="section-eyebrow reveal">Design concepts</div>
-    <div class="section-title reveal">Seven industries.<br><em>Seven custom concepts.</em></div>
+    <div class="section-title reveal">Eight industries.<br><em>Eight custom builds.</em></div>
 
     <div class="portfolio-grid">
 
@@ -1437,6 +1451,47 @@
           <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
           <div class="portfolio-card-footer">
             <a href="demos/ossuary-tattoo/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8: Revival Construction (real client, preview) -->
+      <div class="portfolio-card card-reveal">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dots">
+              <span class="mock-dot" style="background:#ff5f57"></span>
+              <span class="mock-dot" style="background:#febc2e"></span>
+              <span class="mock-dot" style="background:#28c840"></span>
+            </div>
+            <div class="mock-url">revival construction · wichita</div>
+          </div>
+          <div class="mock-content mock-revival">
+            <svg class="rv-house" viewBox="0 0 120 90" fill="none" stroke="#b9b6af" stroke-width="1.2"><path d="M14 86V44H106V86"/><path d="M4 46L32 18H88L116 46" stroke="#ff6b1a" stroke-width="2.5"/><path d="M52 86V62H68V86M24 54H42V70H24ZM78 54H96V70H78Z"/><path d="M0 86H120" stroke="#8f8c86"/></svg>
+            <div class="rv-top">
+              <div class="rv-mark"><i></i>REVIVAL</div>
+              <div class="rv-call">(316) 651-6816</div>
+            </div>
+            <div class="rv-h1">Built right.<span>Built once.</span></div>
+            <div class="rv-cta">GET A FREE ESTIMATE</div>
+            <div class="rv-storm">HAIL DAMAGE? WE WORK WITH YOUR ADJUSTER</div>
+          </div>
+        </div>
+        <div class="portfolio-meta">
+          <div class="portfolio-meta-top">
+            <div class="portfolio-biz-name">Revival Construction</div>
+            <span class="portfolio-tag">Contractor</span>
+          </div>
+          <p class="portfolio-desc">Rebuild in progress for a real Wichita remodeling contractor. Tap-to-call on every screen, a 16-service quote flow, a hail-damage and insurance-claim section, and before/after project sliders.</p>
+          <div class="portfolio-details">
+            <div class="portfolio-detail">
+              <div class="portfolio-detail-icon"></div>
+              <span class="portfolio-detail-val">Website + Lead Capture</span>
+            </div>
+          </div>
+          <div class="portfolio-launch"><span class="concept-pill">Client Preview</span></div>
+          <div class="portfolio-card-footer">
+            <a href="demos/revival-construction/" class="btn-ghost-sm" target="_blank" rel="noopener">View preview <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
