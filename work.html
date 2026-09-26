@@ -280,235 +280,10 @@
       overflow: hidden;
     }
 
+    .mock-shot { padding: 0; background: #141413; }
+    .mock-shot img { display: block; width: 100%; height: 240px; object-fit: cover; object-position: top center; }
+
     /* â”€â”€â”€ ROSARIO'S â€” dark, cinematic Italian, centered elegance â”€â”€â”€ */
-    .mock-rosarios {
-      background: #080603;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-    }
-    .mock-rosarios .r-nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 14px 8px;
-      border-bottom: 1px solid rgba(201,162,39,0.12);
-    }
-    .mock-rosarios .r-wordmark {
-      font-family: 'Fraunces', serif; font-size: 12px; font-style: italic;
-      font-weight: 300; color: #c9a227; letter-spacing: 1px;
-    }
-    .mock-rosarios .r-nav-links { display: flex; gap: 9px; }
-    .mock-rosarios .r-nav-links span { font-size: 7px; letter-spacing: 0.8px; color: rgba(240,237,230,0.3); }
-    .mock-rosarios .r-hero {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; padding: 14px 14px 10px; text-align: center;
-      background: radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.07) 0%, transparent 65%);
-    }
-    .mock-rosarios .r-rule { width: 20px; height: 1px; background: #c9a227; margin: 0 auto 8px; }
-    .mock-rosarios .r-loc { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: #c9a227; margin-bottom: 6px; }
-    .mock-rosarios .r-h1 {
-      font-family: 'Fraunces', serif; font-size: 19px; font-weight: 300;
-      font-style: italic; color: #f0ede6; line-height: 1.2; margin-bottom: 10px;
-    }
-    .mock-rosarios .r-reserve {
-      display: inline-block; padding: 4px 12px;
-      border: 1px solid rgba(201,162,39,0.45); color: #c9a227;
-      font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase;
-      border-radius: 1px; margin-bottom: 12px;
-    }
-    .mock-rosarios .r-dishes { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; width: 100%; }
-    .mock-rosarios .r-dish {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(201,162,39,0.1);
-      border-radius: 3px; padding: 7px 8px; text-align: left;
-    }
-    .mock-rosarios .r-dish-name { font-size: 8px; font-weight: 500; color: #f0ede6; margin-bottom: 2px; }
-    .mock-rosarios .r-dish-desc { font-size: 7px; color: #5a5448; line-height: 1.4; margin-bottom: 3px; }
-    .mock-rosarios .r-dish-price { font-size: 8px; color: #c9a227; }
-
-    /* â”€â”€â”€ KING'S â€” bold split, red accent, booking slots visible â”€â”€â”€ */
-    /* OSSUARY: death-metal tattoo studio, bone on black, blood red */
-    .mock-ossuary { background: #0b0a09; min-height: 220px; display: flex; flex-direction: column; padding: 12px 14px; color: #e9e2d4; position: relative; overflow: hidden; }
-    .mock-ossuary .o-top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(233,226,212,.13); padding-bottom: 8px; }
-    .mock-ossuary .o-mark { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 2px; }
-    .mock-ossuary .o-book { background: #a4161a; font-size: 7px; font-weight: 600; letter-spacing: 1px; padding: 4px 9px; clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px)); }
-    .mock-ossuary .o-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 58px; line-height: .82; margin-top: 14px; letter-spacing: 1px; }
-    .mock-ossuary .o-h1 span { color: #a4161a; }
-    .mock-ossuary .o-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: #e2393f; margin-top: 4px; }
-    .mock-ossuary .o-flash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(233,226,212,.13); border: 1px solid rgba(233,226,212,.13); margin-top: auto; }
-    .mock-ossuary .o-flash div { background: #0b0a09; padding: 6px 5px; font-size: 7px; letter-spacing: .5px; color: #948b7e; position: relative; }
-    .mock-ossuary .o-flash b { display: block; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 11px; color: #e9e2d4; letter-spacing: .5px; }
-    .mock-ossuary .o-flash .gone::after { content: 'CLAIMED'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); font-family: 'Bebas Neue', sans-serif; font-size: 10px; color: #d0202a; border: 1px solid #d0202a; padding: 0 4px; }
-    .mock-ossuary .o-sigil { position: absolute; right: -40px; top: 20px; width: 170px; height: 170px; opacity: .14; }
-
-    /* REVIVAL: Wichita contractor, charcoal + safety orange, blueprint grid */
-    .mock-revival { min-height: 220px; display: flex; flex-direction: column; padding: 12px 14px; color: #eeede9; position: relative; overflow: hidden;
-      background: linear-gradient(rgba(238,237,233,.07) 1px, transparent 1px) 0 0 / 18px 18px, linear-gradient(90deg, rgba(238,237,233,.07) 1px, transparent 1px) 0 0 / 18px 18px, #151515; }
-    .mock-revival .rv-top { display: flex; justify-content: space-between; align-items: center; }
-    .mock-revival .rv-mark { display: flex; align-items: center; gap: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1.5px; }
-    .mock-revival .rv-mark i { width: 14px; height: 14px; background: #ff6b1a; display: block; }
-    .mock-revival .rv-call { background: #ff6b1a; color: #151515; font-size: 7px; font-weight: 600; letter-spacing: .5px; padding: 4px 8px; }
-    .mock-revival .rv-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; line-height: .86; margin-top: 16px; letter-spacing: .5px; }
-    .mock-revival .rv-h1 span { color: #ff6b1a; display: block; }
-    .mock-revival .rv-cta { align-self: flex-start; background: #ff6b1a; color: #151515; font-size: 8px; font-weight: 600; letter-spacing: 1px; padding: 6px 12px; margin-top: 12px; }
-    .mock-revival .rv-storm { margin-top: auto; height: 22px; display: flex; align-items: center; padding: 0 8px; font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 1px; color: #151515;
-      background: repeating-linear-gradient(-45deg, #ff6b1a 0 8px, #e45a0c 8px 16px); }
-    .mock-revival .rv-ba { position: absolute; right: 12px; top: 58px; width: 150px; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 4px; border: 1px solid rgba(238,237,233,.18); }.mock-revival .rv-ba img { width: 100%; height: 100%; object-fit: cover; display: block; }.mock-revival .rv-tag { position: absolute; top: 4px; font-size: 6px; font-weight: 700; letter-spacing: 1px; padding: 2px 5px; }.mock-revival .rv-tag.b { left: 4px; background: rgba(21,21,21,.78); color: #eeede9; }.mock-revival .rv-tag.a { right: 4px; background: #ff6b1a; color: #151515; }.mock-revival .rv-handle { position: absolute; top: 0; bottom: 0; left: 58%; width: 2px; margin-left: -1px; background: #ff6b1a; }.mock-revival .rv-handle::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; transform: translate(-50%,-50%); border-radius: 50%; background: #ff6b1a; }
-
-    /* HALFMOON: editorial nail boutique, porcelain + blush + cherry */
-    .mock-halfmoon { background: #f7f2ec; min-height: 220px; display: flex; flex-direction: column; padding: 12px 14px; color: #1f1a1a; position: relative; overflow: hidden; }
-    .mock-halfmoon .hm-top { display: flex; justify-content: space-between; align-items: center; }
-    .mock-halfmoon .hm-logo { font-family: 'Fraunces', serif; font-size: 15px; letter-spacing: -.3px; }
-    .mock-halfmoon .hm-logo i { color: #8e1c2e; }
-    .mock-halfmoon .hm-book { background: #1f1a1a; color: #f7f2ec; font-size: 7px; font-weight: 500; letter-spacing: 1px; padding: 4px 10px; border-radius: 99px; }
-    .mock-halfmoon .hm-h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: 30px; line-height: .95; margin-top: 18px; letter-spacing: -.8px; }
-    .mock-halfmoon .hm-h1 em { color: #8e1c2e; }
-    .mock-halfmoon .hm-sw { display: flex; gap: 5px; margin-top: auto; }
-    .mock-halfmoon .hm-sw span { width: 14px; height: 14px; border-radius: 50%; }
-    .mock-halfmoon .hm-hand { position: absolute; right: 10px; top: 44px; width: 120px; height: 150px; background: #efd9d2; border-radius: 12px; overflow: hidden; }
-
-    .mock-kings {
-      background: #0f0f0f; min-height: 220px; display: flex; flex-direction: column;
-    }
-    .mock-kings .k-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .mock-kings .k-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: #f0ede6; }
-    .mock-kings .k-book { background: #d42e23; color: #fff; font-size: 7px; font-weight: 600; padding: 4px 10px; border-radius: 2px; letter-spacing: 0.5px; }
-    .mock-kings .k-body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
-    .mock-kings .k-left {
-      padding: 12px 14px; border-right: 1px solid rgba(255,255,255,0.05);
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .mock-kings .k-headline { font-family: 'Bebas Neue', sans-serif; font-size: 33px; line-height: 0.9; color: #f0ede6; letter-spacing: 1px; }
-    .mock-kings .k-headline em { color: #d42e23; font-style: normal; display: block; }
-    .mock-kings .k-loc { font-size: 7.5px; letter-spacing: 1px; text-transform: uppercase; color: rgba(240,237,230,0.3); margin-top: 8px; }
-    .mock-kings .k-since { font-size: 7px; color: rgba(240,237,230,0.2); }
-    .mock-kings .k-right { padding: 10px 10px; display: flex; flex-direction: column; }
-    .mock-kings .k-avail { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(240,237,230,0.3); margin-bottom: 7px; }
-    .mock-kings .k-slot {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 5px 7px; border: 1px solid rgba(255,255,255,0.07); border-radius: 3px; margin-bottom: 4px;
-    }
-    .mock-kings .k-slot-time { font-size: 8px; color: #f0ede6; }
-    .mock-kings .k-slot-barber { font-size: 7px; color: rgba(240,237,230,0.35); }
-    .mock-kings .k-slot-btn { font-size: 6.5px; background: rgba(212,46,35,0.15); color: #d42e23; padding: 2px 6px; border-radius: 2px; }
-    .mock-kings .k-slot-full { font-size: 7px; color: rgba(240,237,230,0.18); }
-    .mock-kings .k-slot.taken { opacity: 0.45; }
-
-    /* â”€â”€â”€ ALPINE GOODS â€” LIGHT editorial retail, forest green â”€â”€â”€ */
-    .mock-alpine {
-      background: #f3efe8; min-height: 220px; display: flex; flex-direction: column;
-    }
-    .mock-alpine .a-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 14px; border-bottom: 1px solid rgba(0,0,0,0.08); background: #f3efe8;
-    }
-    .mock-alpine .a-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 3px; color: #2d4a3e; }
-    .mock-alpine .a-navright { display: flex; gap: 8px; align-items: center; }
-    .mock-alpine .a-navright span { font-size: 7px; color: #7a8c84; }
-    .mock-alpine .a-search { background: rgba(0,0,0,0.06); border-radius: 2px; padding: 3px 7px; font-size: 7px; color: #aaa; width: 55px; }
-    .mock-alpine .a-band { background: #2d4a3e; padding: 13px 14px 11px; }
-    .mock-alpine .a-band-label { font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(243,239,232,0.45); margin-bottom: 4px; }
-    .mock-alpine .a-band-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 21px; letter-spacing: 1px; color: #f3efe8; line-height: 1; margin-bottom: 8px; }
-    .mock-alpine .a-band-row { display: flex; gap: 6px; align-items: center; }
-    .mock-alpine .a-band-btn { background: #c9a227; color: #1a1208; font-size: 7.5px; font-weight: 600; padding: 4px 10px; border-radius: 2px; }
-    .mock-alpine .a-band-sub { font-size: 7px; color: rgba(243,239,232,0.4); }
-    .mock-alpine .a-prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 9px 14px 10px; }
-    .mock-alpine .a-prod { background: #fff; border-radius: 4px; overflow: hidden; }
-    .mock-alpine .a-prod-img { background: #e8e2d8; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-    .mock-alpine .a-prod-info { padding: 5px 7px; }
-    .mock-alpine .a-prod-name { font-size: 7.5px; font-weight: 500; color: #2d4a3e; margin-bottom: 1px; }
-    .mock-alpine .a-prod-price { font-size: 7px; color: #9a9088; }
-
-    /* â”€â”€â”€ MERIDIAN DENTAL â€” WHITE, clean, appointment form in hero â”€â”€â”€ */
-    .mock-meridian {
-      background: #ffffff; min-height: 220px; display: flex; flex-direction: column;
-    }
-    .mock-meridian .m-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 14px; border-bottom: 1px solid rgba(0,0,0,0.07);
-    }
-    .mock-meridian .m-wordmark { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: #1a2c4e; }
-    .mock-meridian .m-book-pill { background: #1a2c4e; color: #fff; font-size: 7px; padding: 4px 10px; border-radius: 20px; }
-    .mock-meridian .m-body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
-    .mock-meridian .m-left { padding: 14px 14px; background: linear-gradient(135deg, #f7faff 0%, #edf3ff 100%); border-right: 1px solid rgba(26,44,78,0.07); display: flex; flex-direction: column; justify-content: center; }
-    .mock-meridian .m-stars { font-size: 9px; letter-spacing: 1px; color: #f0a830; margin-bottom: 4px; }
-    .mock-meridian .m-reviews { font-size: 7px; color: #8899bb; margin-bottom: 8px; }
-    .mock-meridian .m-h1 { font-size: 16px; font-weight: 700; color: #1a2c4e; line-height: 1.2; margin-bottom: 6px; }
-    .mock-meridian .m-sub { font-size: 7.5px; color: #6b7fa8; line-height: 1.5; margin-bottom: 10px; }
-    .mock-meridian .m-btn { display: inline-block; background: #1a2c4e; color: #fff; font-size: 7.5px; padding: 5px 11px; border-radius: 4px; }
-    .mock-meridian .m-right { padding: 12px 12px; }
-    .mock-meridian .m-form-title { font-size: 7px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8899bb; margin-bottom: 8px; }
-    .mock-meridian .m-field { background: #f4f7fc; border: 1px solid #dde4f0; border-radius: 3px; padding: 5px 8px; font-size: 7.5px; color: #b0bfd4; margin-bottom: 5px; width: 100%; }
-    .mock-meridian .m-row { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px; }
-    .mock-meridian .m-submit { width: 100%; background: #1a2c4e; color: #fff; font-size: 8px; font-weight: 500; padding: 6px; border-radius: 3px; text-align: center; margin-top: 4px; }
-
-    /* â”€â”€â”€ CASA VERDE â€” terracotta/orange, vibrant, bilingual â”€â”€â”€ */
-    .mock-casaverde {
-      background: #160c05; min-height: 220px; display: flex; flex-direction: column;
-    }
-    .mock-casaverde .cv-ticker {
-      background: #c94e12; padding: 4px 14px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .mock-casaverde .cv-ticker-msg { font-size: 7px; color: rgba(255,255,255,0.88); letter-spacing: 0.5px; }
-    .mock-casaverde .cv-ticker-lang { font-size: 7px; color: rgba(255,255,255,0.6); }
-    .mock-casaverde .cv-nav {
-      padding: 8px 14px; display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid rgba(201,78,18,0.18);
-    }
-    .mock-casaverde .cv-brand { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 2px; color: #f0a830; }
-    .mock-casaverde .cv-links { display: flex; gap: 8px; }
-    .mock-casaverde .cv-links span { font-size: 7px; color: rgba(240,237,230,0.35); }
-    .mock-casaverde .cv-body { flex: 1; display: grid; grid-template-columns: 1fr auto; padding: 12px 14px; gap: 10px; }
-    .mock-casaverde .cv-left { display: flex; flex-direction: column; justify-content: center; }
-    .mock-casaverde .cv-headline { font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 0.9; color: #f0ede6; letter-spacing: 1px; margin-bottom: 5px; }
-    .mock-casaverde .cv-headline span { color: #c94e12; }
-    .mock-casaverde .cv-sub { font-size: 7.5px; color: rgba(240,237,230,0.35); margin-bottom: 9px; line-height: 1.4; }
-    .mock-casaverde .cv-order-btn { display: inline-block; background: #c94e12; color: #fff; font-size: 8px; font-weight: 600; padding: 5px 12px; border-radius: 3px; }
-    .mock-casaverde .cv-panel { width: 88px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201,78,18,0.22); border-radius: 5px; padding: 8px; flex-shrink: 0; }
-    .mock-casaverde .cv-panel-title { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; color: #f0a830; margin-bottom: 6px; }
-    .mock-casaverde .cv-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .mock-casaverde .cv-item-name { font-size: 7px; color: rgba(240,237,230,0.65); }
-    .mock-casaverde .cv-item-price { font-size: 7px; color: #f0a830; }
-    .mock-casaverde .cv-total { border-top: 1px solid rgba(201,78,18,0.2); margin-top: 5px; padding-top: 5px; display: flex; justify-content: space-between; }
-    .mock-casaverde .cv-total-label { font-size: 7.5px; font-weight: 600; color: #f0ede6; }
-    .mock-casaverde .cv-total-val { font-size: 7.5px; font-weight: 600; color: #c94e12; }
-
-    /* â”€â”€â”€ BLACK BEAR â€” LIGHT cream, minimal artisan, horizontal menu strip â”€â”€â”€ */
-    .mock-blackbear {
-      background: #f5ede0; min-height: 220px; display: flex; flex-direction: column;
-    }
-    .mock-blackbear .bb-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 14px; border-bottom: 1px solid rgba(26,17,8,0.09);
-    }
-    .mock-blackbear .bb-wordmark { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: #1a1108; }
-    .mock-blackbear .bb-links { display: flex; gap: 8px; }
-    .mock-blackbear .bb-links span { font-size: 7px; color: rgba(26,17,8,0.38); }
-    .mock-blackbear .bb-hero {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; padding: 16px 14px 10px; text-align: center;
-    }
-    .mock-blackbear .bb-tag { display: inline-block; padding: 3px 9px; border: 1px solid rgba(196,122,42,0.4); border-radius: 20px; font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; color: #c47a2a; margin-bottom: 8px; }
-    .mock-blackbear .bb-h1 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 300; font-style: italic; color: #1a1108; line-height: 1.2; margin-bottom: 5px; }
-    .mock-blackbear .bb-sub { font-size: 7.5px; color: rgba(26,17,8,0.4); margin-bottom: 10px; }
-    .mock-blackbear .bb-order { display: inline-block; background: #1a1108; color: #f5ede0; font-size: 8px; font-weight: 500; padding: 5px 14px; border-radius: 3px; }
-    .mock-blackbear .bb-menu { display: flex; border-top: 1px solid rgba(26,17,8,0.08); }
-    .mock-blackbear .bb-item { flex: 1; padding: 7px 10px; border-right: 1px solid rgba(26,17,8,0.07); }
-    .mock-blackbear .bb-item:last-child { border-right: none; }
-    .mock-blackbear .bb-emoji { font-size: 13px; margin-bottom: 3px; }
-    .mock-blackbear .bb-name { font-size: 7.5px; font-weight: 500; color: #1a1108; margin-bottom: 1px; }
-    .mock-blackbear .bb-price { font-size: 7px; color: #c47a2a; }
-
-    /* â”€â”€ CARD META â”€â”€ */
-      font-size: 9px;
-      font-weight: 500;
-      border-radius: 3px;
-      text-align: center;
-    }
-
-    /* â”€â”€ CARD META â”€â”€ */
     .portfolio-meta {
       padding: 20px 22px 22px;
       flex: 1;
@@ -941,25 +716,6 @@
     .portfolio-card.featured .portfolio-desc { font-size: 14px; }
     .featured-flag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brass); margin-bottom: 10px; }
 
-    /* ASSAY: wood-type brewery, kraft + copper green + gold */
-    .mock-assay { background: #efe4cf; color: #1c1a16; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-    .mock-assay .as-nav { background: #1f3a31; color: #f7efdf; display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 2px solid #1c1a16; }
-    .mock-assay .as-nav b { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 15px; letter-spacing: 1.5px; }
-    .mock-assay .as-nav span { font-size: 7px; letter-spacing: 1px; border: 1px solid #d9a441; color: #d9a441; padding: 3px 7px; }
-    .mock-assay .as-body { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 14px; flex: 1; }
-    .mock-assay .as-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: .8; letter-spacing: 1px; text-shadow: 2px 2px 0 #d9a441, 4px 4px 0 #1c1a16; }
-    .mock-assay .as-sub { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 3px; border-top: 2px solid #1c1a16; border-bottom: 1px solid #1c1a16; margin-top: 10px; padding: 2px 0; text-align: center; }
-    .mock-assay .as-cta { display: inline-block; margin-top: 12px; background: #b8612a; color: #f7efdf; font-size: 7px; letter-spacing: 1px; padding: 6px 10px; border: 1.5px solid #1c1a16; box-shadow: 2px 2px 0 #1c1a16; }
-    .mock-assay .as-board { background: #151411; border: 2px solid #1c1a16; box-shadow: 0 0 0 3px #6b4a2b; color: #f7efdf; padding: 8px 10px; align-self: start; }
-    .mock-assay .as-board h5 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 13px; letter-spacing: 1.5px; color: #d9a441; margin-bottom: 4px; }
-    .mock-assay .as-row { display: grid; grid-template-columns: 9px 1fr auto; gap: 7px; align-items: center; padding: 4px 0; border-bottom: 1px dashed rgba(247,239,223,.15); font-size: 7.5px; }
-    .mock-assay .as-row:last-child { border-bottom: 0; }
-    .mock-assay .as-row i { width: 9px; height: 11px; display: block; clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%); }
-    .mock-assay .as-row b { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: .8px; }
-    .mock-assay .as-row s { text-decoration: none; display: block; width: 34px; height: 4px; border: 1px solid rgba(247,239,223,.35); position: relative; }
-    .mock-assay .as-row s::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--l); background: #d9a441; }
-    .mock-assay .as-hills { height: 26px; background: #2a4b40; clip-path: polygon(0 100%, 0 55%, 10% 25%, 20% 50%, 32% 5%, 44% 45%, 55% 20%, 68% 55%, 80% 15%, 90% 40%, 100% 25%, 100% 100%); }
-
     @media (max-width: 900px) {
       .portfolio-card.featured { flex-direction: column; }
       .portfolio-card.featured .mock-browser { border-right: 0; border-bottom: 1px solid var(--border); }
@@ -1080,12 +836,79 @@
   <!-- PORTFOLIO GRID -->
   <section class="section">
     <div class="section-eyebrow reveal">Design concepts</div>
-    <div class="section-title reveal">Ten industries.<br><em>Ten custom builds.</em></div>
+    <div class="section-title reveal">Seven builds.<br><em>Zero templates.</em></div>
 
     <div class="portfolio-grid">
 
-      <!-- FEATURED: Assay Brewing Co. -->
-      <div class="portfolio-card featured card-reveal">
+      <div class="portfolio-card card-reveal">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dots">
+              <span class="mock-dot" style="background:#ff5f57"></span>
+              <span class="mock-dot" style="background:#febc2e"></span>
+              <span class="mock-dot" style="background:#28c840"></span>
+            </div>
+            <div class="mock-url">redlineauto.co</div>
+          </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/redline-auto-cover.png" alt="Redline Auto Co. concept homepage" loading="lazy" />
+          </div>
+        </div>
+        <div class="portfolio-meta">
+          <div class="portfolio-meta-top">
+            <div class="portfolio-biz-name">Redline Auto Co.</div>
+            <span class="portfolio-tag">Auto Repair</span>
+          </div>
+          <p class="portfolio-desc">Bone-and-orange garage brand with posted prices for common jobs, a text-a-tech photo approval flow, and online booking with live shop status. Built as a demo for pitching independent auto shops.</p>
+          <div class="portfolio-details">
+            <div class="portfolio-detail">
+              <div class="portfolio-detail-icon"></div>
+              <span class="portfolio-detail-val">Custom Brand + Booking</span>
+            </div>
+          </div>
+          <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
+          <div class="portfolio-card-footer">
+            <a href="demos/redline-auto/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="portfolio-card card-reveal">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dots">
+              <span class="mock-dot" style="background:#ff5f57"></span>
+              <span class="mock-dot" style="background:#febc2e"></span>
+              <span class="mock-dot" style="background:#28c840"></span>
+            </div>
+            <div class="mock-url">revivalconstruction.co</div>
+          </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/revival-construction-cover.png" alt="Revival Construction concept homepage" loading="lazy" />
+          </div>
+        </div>
+        <div class="portfolio-meta">
+          <div class="portfolio-meta-top">
+            <div class="portfolio-biz-name">Revival Construction</div>
+            <span class="portfolio-tag">Contractor</span>
+          </div>
+          <p class="portfolio-desc">Cream-and-forest contractor brand with an auto-playing before-and-after hero slider, a drag-to-compare project gallery, and a straight-talk storm-damage insurance claim flow. Built as a demo for pitching local contractors.</p>
+          <div class="portfolio-details">
+            <div class="portfolio-detail">
+              <div class="portfolio-detail-icon"></div>
+              <span class="portfolio-detail-val">Custom Brand + Gallery</span>
+            </div>
+          </div>
+          <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
+          <div class="portfolio-card-footer">
+            <a href="demos/revival-construction/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="portfolio-card card-reveal">
         <div class="mock-browser">
           <div class="mock-bar">
             <div class="mock-dots">
@@ -1095,33 +918,16 @@
             </div>
             <div class="mock-url">assaybrewing.co</div>
           </div>
-          <div class="mock-content mock-assay">
-            <div class="as-nav"><b>ASSAY</b><span>● 10 POURING</span></div>
-            <div class="as-body">
-              <div>
-                <div class="as-h1">ASSAY</div>
-                <div class="as-sub">BREWING CO.</div>
-                <div class="as-cta">SEE WHAT'S POURING</div>
-              </div>
-              <div class="as-board">
-                <h5>ON TAP</h5>
-                <div class="as-row"><i style="background:#f3cf55"></i><b>BULLION</b><s style="--l:82%"></s></div>
-                <div class="as-row"><i style="background:#f2b53e"></i><b>PAY DIRT</b><s style="--l:44%"></s></div>
-                <div class="as-row"><i style="background:#dc8a26"></i><b>HEADFRAME</b><s style="--l:12%"></s></div>
-                <div class="as-row"><i style="background:#1f0f0a;box-shadow:inset 0 0 0 1px rgba(247,239,223,.3)"></i><b>TAILINGS</b><s style="--l:38%"></s></div>
-                <div class="as-row"><i style="background:#b3263f"></i><b>RED VEIN</b><s style="--l:9%"></s></div>
-              </div>
-            </div>
-            <div class="as-hills"></div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/assay-brewing-cover.png" alt="Assay Brewing Co. concept homepage" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-meta">
-          <div class="featured-flag">Latest build</div>
           <div class="portfolio-meta-top">
             <div class="portfolio-biz-name">Assay Brewing Co.</div>
             <span class="portfolio-tag">Brewery</span>
           </div>
-          <p class="portfolio-desc">Wood-type brewery brand with a live "Now Pouring" board showing keg levels and last-call alerts, a flight builder that pours each beer's real color onto a paddle, a self-updating events calendar, and a kitchen menu paired to the taps.</p>
+          <p class="portfolio-desc">Copper-and-cream brewery brand with a live Now Pouring board showing keg levels, a flight builder that pours each beer's real color onto a paddle, and a self-updating events calendar. Built as a style demo for breweries.</p>
           <div class="portfolio-details">
             <div class="portfolio-detail">
               <div class="portfolio-detail-icon"></div>
@@ -1136,7 +942,6 @@
       </div>
 
 
-      <!-- 1: Rosario's -->
       <div class="portfolio-card card-reveal">
         <div class="mock-browser">
           <div class="mock-bar">
@@ -1145,366 +950,32 @@
               <span class="mock-dot" style="background:#febc2e"></span>
               <span class="mock-dot" style="background:#28c840"></span>
             </div>
-            <div class="mock-url">rosarios-denver.com</div>
+            <div class="mock-url">halfmoonnails.co</div>
           </div>
-          <div class="mock-content mock-rosarios">
-            <div class="r-nav">
-              <div class="r-wordmark">Rosario's</div>
-              <div class="r-nav-links"><span>Menu</span><span>Reserve</span><span>Events</span></div>
-            </div>
-            <div class="r-hero">
-              <div class="r-rule"></div>
-              <div class="r-loc">Denver Â· Italian Kitchen</div>
-              <div class="r-h1">Old World Flavors,<br>Denver Table</div>
-              <div class="r-reserve">Reserve a Table</div>
-              <div class="r-dishes">
-                <div class="r-dish">
-                  <div class="r-dish-name">Bistecca Fiorentina</div>
-                  <div class="r-dish-desc">28oz T-bone, 60-day aged, rosemary butter</div>
-                  <div class="r-dish-price">$68</div>
-                </div>
-                <div class="r-dish">
-                  <div class="r-dish-name">Tonnarelli Cacio</div>
-                  <div class="r-dish-desc">Housemade pasta, Pecorino, black pepper</div>
-                  <div class="r-dish-price">$24</div>
-                </div>
-              </div>
-            </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/halfmoon-nails-cover.png" alt="Halfmoon Nail Boutique concept homepage" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-meta">
           <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Rosario's</div>
-            <span class="portfolio-tag">Restaurant</span>
+            <div class="portfolio-biz-name">Halfmoon Nail Boutique</div>
+            <span class="portfolio-tag">Nail Salon</span>
           </div>
-          <p class="portfolio-desc">Full site redesign and online reservation system. Integrated with their existing OpenTable account and built a custom menu management panel.</p>
+          <p class="portfolio-desc">Blush-and-rosewood boutique brand with a Shade Studio for designing your set before you book, honest service pricing with real duration estimates, and online booking built in. Built as a demo for salons and spas.</p>
           <div class="portfolio-details">
             <div class="portfolio-detail">
               <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Website + Reservations</span>
+              <span class="portfolio-detail-val">Custom Brand + Booking</span>
             </div>
           </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
+          <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
           <div class="portfolio-card-footer">
+            <a href="demos/halfmoon-nails/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
 
-      <!-- 2: King's Barbershop -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">kingsbarberdenver.com</div>
-          </div>
-          <div class="mock-content mock-kings">
-            <div class="k-topbar">
-              <div class="k-wordmark">KING'S</div>
-              <div class="k-book">BOOK NOW</div>
-            </div>
-            <div class="k-body">
-              <div class="k-left">
-                <div>
-                  <div class="k-headline">SHARP<em>CUTS.</em></div>
-                  <div class="k-loc">Capitol Hill Â· Denver</div>
-                </div>
-                <div class="k-since">Est. 2018</div>
-              </div>
-              <div class="k-right">
-                <div class="k-avail">Today's Availability</div>
-                <div class="k-slot">
-                  <span class="k-slot-time">10:00am</span>
-                  <span class="k-slot-barber">Marcus</span>
-                  <span class="k-slot-btn">Book</span>
-                </div>
-                <div class="k-slot taken">
-                  <span class="k-slot-time">11:30am</span>
-                  <span class="k-slot-barber">Devon</span>
-                  <span class="k-slot-full">Booked</span>
-                </div>
-                <div class="k-slot">
-                  <span class="k-slot-time">1:00pm</span>
-                  <span class="k-slot-barber">Marcus</span>
-                  <span class="k-slot-btn">Book</span>
-                </div>
-                <div class="k-slot taken">
-                  <span class="k-slot-time">2:30pm</span>
-                  <span class="k-slot-barber">Devon</span>
-                  <span class="k-slot-full">Booked</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">King's Barbershop</div>
-            <span class="portfolio-tag">Barbershop</span>
-          </div>
-          <p class="portfolio-desc">Booking-first website with Square integration for appointments. Staff scheduling dashboard lets barbers manage their own books independently.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Booking System + Website</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
-          <div class="portfolio-card-footer">
-          </div>
-        </div>
-      </div>
 
-      <!-- 3: Alpine Goods -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">alpinegoods.co</div>
-          </div>
-          <div class="mock-content mock-alpine">
-            <div class="a-topbar">
-              <div class="a-wordmark">ALPINE GOODS</div>
-              <div class="a-navright">
-                <span>Shop</span><span>Pickup</span>
-                <div class="a-search">Searchâ€¦</div>
-              </div>
-            </div>
-            <div class="a-band">
-              <div class="a-band-label">New Arrivals Â· Spring Collection</div>
-              <div class="a-band-h1">Made for Colorado Living</div>
-              <div class="a-band-row">
-                <div class="a-band-btn">Shop Now</div>
-                <div class="a-band-sub">Free pickup Â· RiNo, Denver</div>
-              </div>
-            </div>
-            <div class="a-prods">
-              <div class="a-prod">
-                <div class="a-prod-img">ðŸ§¶</div>
-                <div class="a-prod-info">
-                  <div class="a-prod-name">Merino Throw</div>
-                  <div class="a-prod-price">$95</div>
-                </div>
-              </div>
-              <div class="a-prod">
-                <div class="a-prod-img">ðŸ•¯ï¸</div>
-                <div class="a-prod-info">
-                  <div class="a-prod-name">Soy Candle</div>
-                  <div class="a-prod-price">$38</div>
-                </div>
-              </div>
-              <div class="a-prod">
-                <div class="a-prod-img">ðŸŽ</div>
-                <div class="a-prod-info">
-                  <div class="a-prod-name">Gift Bundle</div>
-                  <div class="a-prod-price">$72</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Alpine Goods</div>
-            <span class="portfolio-tag">Retail</span>
-          </div>
-          <p class="portfolio-desc">E-commerce site with in-store pickup and local delivery integration. Custom inventory dashboard synced with their point-of-sale in real time.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Website + POS</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
-          <div class="portfolio-card-footer">
-          </div>
-        </div>
-      </div>
-
-      <!-- 4: Meridian Dental -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">meridiandental.co</div>
-          </div>
-          <div class="mock-content mock-meridian">
-            <div class="m-topbar">
-              <div class="m-wordmark">MERIDIAN DENTAL</div>
-              <div class="m-book-pill">Book Appointment</div>
-            </div>
-            <div class="m-body">
-              <div class="m-left">
-                <div class="m-stars">â˜…â˜…â˜…â˜…â˜…</div>
-                <div class="m-reviews">4.9 Â· 312 reviews Â· Cherry Creek</div>
-                <div class="m-h1">Modern Care.<br>Comfortable<br>Experience.</div>
-                <div class="m-sub">Accepting new patients. Most insurance accepted.</div>
-                <div class="m-btn">New Patient Offer â†’</div>
-              </div>
-              <div class="m-right">
-                <div class="m-form-title">Request Appointment</div>
-                <div class="m-field">Full name</div>
-                <div class="m-row">
-                  <div class="m-field">Phone</div>
-                  <div class="m-field">Insurance</div>
-                </div>
-                <div class="m-row">
-                  <div class="m-field">Date</div>
-                  <div class="m-field">Time</div>
-                </div>
-                <div class="m-submit">Request Appointment</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Meridian Dental</div>
-            <span class="portfolio-tag">Professional</span>
-          </div>
-          <p class="portfolio-desc">Patient-first website with online scheduling, new patient intake forms, and insurance verification tool. HIPAA-compliant contact handling throughout.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Custom Website + Scheduling</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
-          <div class="portfolio-card-footer">
-          </div>
-        </div>
-      </div>
-
-      <!-- 5: Casa Verde -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">casaverdedenver.com</div>
-          </div>
-          <div class="mock-content mock-casaverde">
-            <div class="cv-ticker">
-              <span class="cv-ticker-msg">ðŸŒ® Order online â€” pickup in 15 min</span>
-              <span class="cv-ticker-lang">EN / ES</span>
-            </div>
-            <div class="cv-nav">
-              <div class="cv-brand">CASA VERDE</div>
-              <div class="cv-links"><span>MenÃº</span><span>Ordenar</span><span>Catering</span></div>
-            </div>
-            <div class="cv-body">
-              <div class="cv-left">
-                <div class="cv-headline">TACOS<br><span>DE LA CASA.</span></div>
-                <div class="cv-sub">Fresh masa Â· Slow-braised meats<br>Salsas made every morning</div>
-                <div class="cv-order-btn">Order Online</div>
-              </div>
-              <div class="cv-panel">
-                <div class="cv-panel-title">Your Order</div>
-                <div class="cv-item"><span class="cv-item-name">Carnitas Ã—2</span><span class="cv-item-price">$8</span></div>
-                <div class="cv-item"><span class="cv-item-name">Al Pastor Ã—1</span><span class="cv-item-price">$4</span></div>
-                <div class="cv-item"><span class="cv-item-name">Horchata</span><span class="cv-item-price">$4</span></div>
-                <div class="cv-total"><span class="cv-total-label">Total</span><span class="cv-total-val">$16</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Casa Verde</div>
-            <span class="portfolio-tag">Restaurant</span>
-          </div>
-          <p class="portfolio-desc">Fully bilingual (English/Spanish) ordering site with custom POS build for kitchen ticket routing. Order display screens for the kitchen reduce ticket errors by 80%.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Website + POS + Kitchen Display</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
-          <div class="portfolio-card-footer">
-          </div>
-        </div>
-      </div>
-
-      <!-- 6: Black Bear Coffee -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">blackbearcoffee.co</div>
-          </div>
-          <div class="mock-content mock-blackbear">
-            <div class="bb-topbar">
-              <div class="bb-wordmark">BLACK BEAR COFFEE</div>
-              <div class="bb-links"><span>Menu</span><span>Order</span><span>Wholesale</span></div>
-            </div>
-            <div class="bb-hero">
-              <div class="bb-tag">Single Origin Â· RiNo, Denver</div>
-              <div class="bb-h1">Coffee worth<br>slowing down for.</div>
-              <div class="bb-sub">Roasted small-batch, brewed to order.</div>
-              <div class="bb-order">Order Ahead â†’</div>
-            </div>
-            <div class="bb-menu">
-              <div class="bb-item">
-                <div class="bb-emoji">â˜•</div>
-                <div class="bb-name">Pour-Over</div>
-                <div class="bb-price">$6</div>
-              </div>
-              <div class="bb-item">
-                <div class="bb-emoji">ðŸ¥›</div>
-                <div class="bb-name">Oat Cortado</div>
-                <div class="bb-price">$5.50</div>
-              </div>
-              <div class="bb-item">
-                <div class="bb-emoji">ðŸ§Š</div>
-                <div class="bb-name">Cold Brew</div>
-                <div class="bb-price">$5</div>
-              </div>
-              <div class="bb-item">
-                <div class="bb-emoji">ðŸ‚</div>
-                <div class="bb-name">Seasonal Latte</div>
-                <div class="bb-price">$6.50</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Black Bear Coffee</div>
-            <span class="portfolio-tag">CafÃ©</span>
-          </div>
-          <p class="portfolio-desc">CafÃ© website with mobile pre-order system and loyalty punch card integration. Wholesale inquiry portal connects local roasters directly with cafÃ© buyers.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Website + Mobile Ordering</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Concept</span></div>
-          <div class="portfolio-card-footer">
-          </div>
-        </div>
-      </div>
-
-      <!-- 7: Ossuary Tattoo Co. -->
       <div class="portfolio-card card-reveal">
         <div class="mock-browser">
           <div class="mock-bar">
@@ -1515,20 +986,8 @@
             </div>
             <div class="mock-url">ossuarytattoo.co</div>
           </div>
-          <div class="mock-content mock-ossuary">
-            <svg class="o-sigil" viewBox="0 0 64 64" fill="none" stroke="#e9e2d4" stroke-width="1.5"><circle cx="32" cy="32" r="29"/><circle cx="32" cy="32" r="24" stroke-dasharray="1 3"/><path d="M32 55 L11 18 H53 Z"/><circle cx="32" cy="30" r="6" fill="#a4161a" stroke="none"/></svg>
-            <div class="o-top">
-              <div class="o-mark">OSSUARY</div>
-              <div class="o-book">BOOK NOW</div>
-            </div>
-            <div class="o-h1">OSSUARY<span>.</span></div>
-            <div class="o-sub">Tattoo Co.</div>
-            <div class="o-flash">
-              <div><b>The Watcher</b>$180</div>
-              <div><b>Last Rites</b>$260</div>
-              <div class="gone"><b>Death's-Head</b>$220</div>
-              <div><b>Grin</b>$240</div>
-            </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/ossuary-tattoo-cover.png" alt="Ossuary Tattoo Co. concept homepage" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-meta">
@@ -1536,7 +995,7 @@
             <div class="portfolio-biz-name">Ossuary Tattoo Co.</div>
             <span class="portfolio-tag">Tattoo Studio</span>
           </div>
-          <p class="portfolio-desc">Heavy, ritualistic custom brand for a private tattoo studio. Artist portfolios, a one-and-done flash wall where claiming a piece pre-fills the booking form, an aftercare guide, and live open/closed hours.</p>
+          <p class="portfolio-desc">Aged-paper flash-art brand with oxblood accents, a one-and-done flash wall where claiming a piece pre-fills the booking form, plus artist portfolios and an aftercare guide. Built as a demo for tattoo studios.</p>
           <div class="portfolio-details">
             <div class="portfolio-detail">
               <div class="portfolio-detail-icon"></div>
@@ -1550,48 +1009,7 @@
         </div>
       </div>
 
-      <!-- 8: Revival Construction (real client, preview) -->
-      <div class="portfolio-card card-reveal">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <span class="mock-dot" style="background:#ff5f57"></span>
-              <span class="mock-dot" style="background:#febc2e"></span>
-              <span class="mock-dot" style="background:#28c840"></span>
-            </div>
-            <div class="mock-url">revival construction · wichita</div>
-          </div>
-          <div class="mock-content mock-revival">
-            <div class="rv-ba"><img src="demos/revival-construction/img/roof-after.jpg" alt="Roof replacement before and after"><span class="rv-tag b">Before</span><span class="rv-tag a">After</span><i class="rv-handle"></i></div>
-            <div class="rv-top">
-              <div class="rv-mark"><i></i>REVIVAL</div>
-              <div class="rv-call">(316) 651-6816</div>
-            </div>
-            <div class="rv-h1">Built right.<span>Built once.</span></div>
-            <div class="rv-cta">GET A FREE ESTIMATE</div>
-            <div class="rv-storm">HAIL DAMAGE? WE WORK WITH YOUR ADJUSTER</div>
-          </div>
-        </div>
-        <div class="portfolio-meta">
-          <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Revival Construction</div>
-            <span class="portfolio-tag">Contractor</span>
-          </div>
-          <p class="portfolio-desc">Rebuild in progress for a real Wichita remodeling contractor. Tap-to-call on every screen, a 16-service quote flow, a hail-damage and insurance-claim section, and before/after project sliders.</p>
-          <div class="portfolio-details">
-            <div class="portfolio-detail">
-              <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Website + Lead Capture</span>
-            </div>
-          </div>
-          <div class="portfolio-launch"><span class="concept-pill">Client Preview</span></div>
-          <div class="portfolio-card-footer">
-            <a href="demos/revival-construction/" class="btn-ghost-sm" target="_blank" rel="noopener">View preview <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-        </div>
-      </div>
 
-      <!-- 9: Halfmoon Nail Boutique -->
       <div class="portfolio-card card-reveal">
         <div class="mock-browser">
           <div class="mock-bar">
@@ -1600,40 +1018,65 @@
               <span class="mock-dot" style="background:#febc2e"></span>
               <span class="mock-dot" style="background:#28c840"></span>
             </div>
-            <div class="mock-url">halfmoonnails.co</div>
+            <div class="mock-url">sixcapitalbrewing.co</div>
           </div>
-          <div class="mock-content mock-halfmoon">
-            <div class="hm-hand">
-              <svg viewBox="0 0 120 150" width="120" height="150"><g fill="#c68d60"><rect x="10" y="62" width="20" height="100" rx="10"/><rect x="36" y="34" width="22" height="130" rx="11"/><rect x="64" y="24" width="22" height="140" rx="11"/><rect x="92" y="42" width="22" height="120" rx="11"/></g><g fill="#6e1423"><path d="M13 76V64a7 9 0 0 1 14 0v12q-7 4-14 0z"/><path d="M39 48V32a8 11 0 0 1 16 0v16q-8 4-16 0z"/><path d="M67 38V22a8 11 0 0 1 16 0v16q-8 4-16 0z"/><path d="M95 56V40a8 11 0 0 1 16 0v16q-8 4-16 0z"/></g><rect x="35" y="96" width="24" height="3" rx="1.5" fill="#c8a55a"/></svg>
-            </div>
-            <div class="hm-top">
-              <div class="hm-logo">Half<i>moon</i></div>
-              <div class="hm-book">BOOK</div>
-            </div>
-            <div class="hm-h1">Hands,<br><em>but make it</em><br>art.</div>
-            <div class="hm-sw">
-              <span style="background:#efe5da;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)"></span><span style="background:#e7bfbb"></span><span style="background:#f0d98f"></span><span style="background:#b6c69f"></span><span style="background:#6e1423"></span><span style="background:#1d1c24"></span>
-            </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/sixcapital-cover.png" alt="Six Capital Brewing and BBQ concept homepage" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-meta">
           <div class="portfolio-meta-top">
-            <div class="portfolio-biz-name">Halfmoon Nail Boutique</div>
-            <span class="portfolio-tag">Nail Salon</span>
+            <div class="portfolio-biz-name">Six Capital Brewing &amp; BBQ</div>
+            <span class="portfolio-tag">Brewery</span>
           </div>
-          <p class="portfolio-desc">Soft, editorial boutique brand with a Shade Studio: clients try shades, shapes, finishes, and art on a live hand, see an instant price estimate, and book the exact look.</p>
+          <p class="portfolio-desc">Unsolicited concept for a real Aurora business. Cream-and-navy brand with an interactive tap list, a build-your-own flight picker with a printable flight ticket, and a beer-and-BBQ pairing board. Shared with the owner as a free concept.</p>
           <div class="portfolio-details">
             <div class="portfolio-detail">
               <div class="portfolio-detail-icon"></div>
-              <span class="portfolio-detail-val">Custom Brand + Booking</span>
+              <span class="portfolio-detail-val">Custom Brand + Flight Builder</span>
             </div>
           </div>
           <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
           <div class="portfolio-card-footer">
-            <a href="demos/halfmoon-nails/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="demos/sixcapital/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
+
+
+      <div class="portfolio-card card-reveal">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dots">
+              <span class="mock-dot" style="background:#ff5f57"></span>
+              <span class="mock-dot" style="background:#febc2e"></span>
+              <span class="mock-dot" style="background:#28c840"></span>
+            </div>
+            <div class="mock-url">zoiglbrau.co</div>
+          </div>
+          <div class="mock-content mock-shot">
+            <img src="assets/concepts/zoiglbrau-cover.png" alt="ZoiglBraeu concept homepage" loading="lazy" />
+          </div>
+        </div>
+        <div class="portfolio-meta">
+          <div class="portfolio-meta-top">
+            <div class="portfolio-biz-name">ZoiglBr&auml;u</div>
+            <span class="portfolio-tag">German Beer Hall</span>
+          </div>
+          <p class="portfolio-desc">Unsolicited concept for a real Aurora business. Cream-and-forest Bavarian brand with six illustrated German beer glass styles, a four-pour flight builder with a surprise-me option, and a German food pairing board. Shared with the owners as a free concept.</p>
+          <div class="portfolio-details">
+            <div class="portfolio-detail">
+              <div class="portfolio-detail-icon"></div>
+              <span class="portfolio-detail-val">Custom Brand + Flight Builder</span>
+            </div>
+          </div>
+          <div class="portfolio-launch"><span class="concept-pill">Live Concept</span></div>
+          <div class="portfolio-card-footer">
+            <a href="demos/zoiglbrau/" class="btn-ghost-sm" target="_blank" rel="noopener">View live demo <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
 
     </div>
   </section>
