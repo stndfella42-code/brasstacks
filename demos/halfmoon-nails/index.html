@@ -12,16 +12,16 @@
 <style>
 /* ================= TOKENS ================= */
 :root {
-  --paper: #f7f2ec;
-  --paper-2: #f1e9e1;
-  --blush: #efd9d2;
-  --blush-2: #e5c3b9;
-  --ink: #1f1a1a;
-  --muted: #6d625f;
-  --cherry: #8e1c2e;
-  --cherry-hi: #a8243a;
-  --line: rgba(31, 26, 26, .14);
-  --line-hi: rgba(31, 26, 26, .3);
+  --paper: #fdf8f4;
+  --paper-2: #f7ece4;
+  --blush: #f3ddd3;
+  --blush-2: #eec9bd;
+  --ink: #4a3238;
+  --muted: #6f615c;
+  --cherry: #b0574a;
+  --cherry-hi: #c46a5c;
+  --line: rgba(74, 50, 56, .14);
+  --line-hi: rgba(74, 50, 56, .30);
   --serif: 'Bodoni Moda', 'Didot', Georgia, serif;
   --sans: 'Manrope', system-ui, sans-serif;
   --ease: cubic-bezier(.6, 0, .2, 1);
@@ -118,7 +118,7 @@ section { padding: 84px 0; }
 .item.sig b::after { content: 'Signature'; margin-left: 8px; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; background: var(--cherry); color: var(--paper); padding: 3px 8px; border-radius: 99px; vertical-align: 2px; }
 
 /* ---- studio ---- */
-.studio { background: var(--ink); color: var(--paper); }
+.studio { background: var(--blush); color: var(--ink); }
 .studio .label { color: rgba(247, 242, 236, .6); }
 .studio .lede { color: rgba(247, 242, 236, .72); }
 .studio h2 em { color: #e8a3ae; }
@@ -205,7 +205,7 @@ fieldset { border: 0; min-width: 0; }
 .done p { color: var(--muted); margin-bottom: 8px; }
 
 /* ---- visit ---- */
-.visit-card { background: var(--ink); color: var(--paper); border-radius: var(--radius); padding: 28px 22px; }
+.visit-card { background: var(--blush); color: var(--ink); border-radius: var(--radius); padding: 28px 22px; }
 .visit-card address { font-style: normal; font-family: var(--serif); font-size: 1.8rem; line-height: 1.15; margin: 10px 0 14px; }
 .visit-card a { color: var(--paper); }
 .visit-card .fine { color: rgba(247, 242, 236, .65); font-size: .88rem; margin-top: 12px; }
@@ -273,6 +273,12 @@ fieldset { border: 0; min-width: 0; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ============ LIGHT THEME overrides (warm white/blush/rosewood) ============ */
+.stage-wrap { background: var(--paper-2); }
+.studio .label { color: rgba(74,50,56,.62); }
+.studio .lede { color: rgba(74,50,56,.78); }
+.studio h2 em { color: var(--cherry); }
 </style>
 </head>
 <body>
