@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Custom websites and POS systems for independent businesses. Built by someone who understands your operations. Launch in 2–4 weeks." />
-  <title>Brass Tacks | Business Tech That Actually Works</title>
+  <meta name="description" content="Your business isn't a template. Brass Tacks designs and builds custom websites and POS systems for independent businesses. No themes, no page builders, no platform fees." />
+  <title>Brass Tacks | Your Business Isn't a Template</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,7 +35,10 @@
       line-height: 1.6;
       font-size: 16px;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
+
+    ::selection { background: var(--brass); color: #0d0d0b; }
 
     /* ── NAV ── */
     nav {
@@ -46,1631 +49,821 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 48px;
-      height: 64px;
-      background: rgba(17,17,16,0.88);
-      backdrop-filter: blur(12px);
+      height: 68px;
+      background: rgba(17,17,16,0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: 3px;
       color: var(--text);
       text-decoration: none;
     }
-
     .nav-logo span { color: var(--brass); }
 
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-links a {
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      color: var(--text-2);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-size: 13px; letter-spacing: 1px; color: var(--text-2);
+      text-decoration: none; transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active { color: var(--brass); }
 
     .nav-cta {
-      background: var(--brass);
-      color: #0d0d0b !important;
-      padding: 9px 20px;
-      border-radius: var(--radius);
-      font-weight: 500 !important;
-      font-size: 13px !important;
-      letter-spacing: 0.5px !important;
-      transition: background 0.2s !important;
+      background: var(--brass); color: #0d0d0b !important;
+      padding: 10px 22px; border-radius: var(--radius);
+      font-weight: 600 !important; font-size: 13px !important;
+      transition: background 0.2s, transform 0.2s !important;
     }
+    .nav-cta:hover { background: var(--brass-light) !important; transform: translateY(-1px); }
 
-    .nav-cta:hover { background: var(--brass-light) !important; color: #0d0d0b !important; }
-
-    /* ── NAV PROGRESS ── */
-    #nav-progress {
-      position: absolute;
-      bottom: 0; left: 0;
-      height: 1px; width: 0%;
-      background: linear-gradient(90deg, var(--brass-dim), var(--brass), var(--brass-light));
-      transition: width 0.06s linear;
-      z-index: 1;
-    }
+    .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.25s; }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 48px 80px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      padding: 140px 48px 90px;
       position: relative;
       overflow: hidden;
+      max-width: 1440px;
+      margin: 0 auto;
     }
 
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(900px 500px at 12% 18%, rgba(196,152,42,0.10), transparent 60%),
+        radial-gradient(700px 500px at 88% 82%, rgba(196,152,42,0.06), transparent 60%);
       pointer-events: none;
-      z-index: 2;
     }
-
-    #hero-spotlight {
-      position: absolute;
-      inset: 0;
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
       pointer-events: none;
-      z-index: 3;
-      opacity: 0;
-      transition: opacity 0.4s ease;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 4;
-      display: flex;
-      flex-direction: column;
-    }
+    .hero-copy { position: relative; z-index: 2; }
 
-    .shockwave {
-      position: absolute;
-      width: 0; height: 0;
-      border: 1px solid rgba(196,152,42,0.7);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 3;
-      animation: shockwave 1s cubic-bezier(0.1, 0.6, 0.4, 1) forwards;
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      color: var(--brass-light); text-transform: uppercase;
+      margin-bottom: 26px;
     }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--brass); }
 
-    .shockwave-2 {
-      animation-delay: 0.08s;
-      border-color: rgba(196,152,42,0.35);
-      animation-duration: 1.2s;
-    }
-
-    @keyframes shockwave {
-      to { width: 800px; height: 800px; opacity: 0; }
-    }
-
-    .hero-bg-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(196,152,42,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(196,152,42,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      transition: transform 0.1s ease-out;
-      z-index: 1;
-    }
-
-    .hero-bg-glow {
-      position: absolute;
-      top: -200px;
-      right: -200px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(196,152,42,0.07) 0%, transparent 70%);
-      pointer-events: none;
-      transition: transform 0.15s ease-out;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--brass);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.1s;
-    }
-
-    .hero-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(64px, 9vw, 120px);
-      line-height: 0.95;
-      letter-spacing: 2px;
-      color: var(--text);
-      max-width: 900px;
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.2s;
-    }
-
-    .hero-headline em {
+    .hero-h1 {
       font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-weight: 300;
-      color: var(--brass);
+      font-weight: 400;
+      font-size: clamp(48px, 6.2vw, 92px);
+      line-height: 1.02;
+      letter-spacing: -1px;
+      margin-bottom: 28px;
     }
-
-    .hl { display: inline-block; will-change: transform; user-select: none; }
-    .hero-headline, .section-title, .service-name { user-select: none; }
+    .hero-h1 em { font-style: italic; color: var(--brass-light); }
+    .hero-h1 .strike {
+      position: relative; white-space: nowrap; color: var(--text-3);
+    }
+    .hero-h1 .strike::after {
+      content: ''; position: absolute; left: -2%; right: -2%; top: 54%;
+      height: 3px; background: var(--brass);
+      transform: rotate(-2deg); border-radius: 2px;
+    }
 
     .hero-sub {
-      font-size: 17px;
-      font-weight: 300;
-      color: var(--text-2);
-      max-width: 520px;
-      line-height: 1.75;
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.35s;
+      font-size: 18px; color: var(--text-2); max-width: 520px;
+      margin-bottom: 38px; font-weight: 300;
     }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
 
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.5s;
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 52px; }
+
+    .btn-solid {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--brass); color: #0d0d0b;
+      font-weight: 600; font-size: 15px; letter-spacing: 0.3px;
+      padding: 16px 30px; border-radius: var(--radius);
+      text-decoration: none; transition: background 0.2s, transform 0.2s;
+      border: 0; cursor: pointer;
     }
-
-    .btn-primary {
-      background: var(--brass);
-      color: #0d0d0b;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 14px 32px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: background 0.2s;
-      display: inline-block;
-    }
-
-    .btn-primary:hover { background: var(--brass-light); }
+    .btn-solid:hover { background: var(--brass-light); transform: translateY(-2px); }
 
     .btn-ghost {
-      color: var(--text-2);
-      font-size: 14px;
-      font-weight: 400;
-      text-decoration: none;
-      letter-spacing: 0.3px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--text); font-weight: 500; font-size: 15px;
+      padding: 16px 30px; border-radius: var(--radius);
+      text-decoration: none; border: 1px solid var(--border-md);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
+    .btn-ghost:hover { border-color: var(--brass); background: rgba(196,152,42,0.08); transform: translateY(-2px); }
 
-    .btn-ghost:hover { color: var(--text); }
+    .hero-proof { display: flex; gap: 34px; flex-wrap: wrap; }
+    .proof-item { display: flex; flex-direction: column; gap: 2px; }
+    .proof-item b { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: var(--text); }
+    .proof-item b i { font-style: normal; color: var(--brass); }
+    .proof-item span { font-size: 12px; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; }
 
-    .btn-ghost svg { transition: transform 0.2s; }
-    .btn-ghost:hover svg { transform: translateX(3px); }
-
-    .hero-proof {
-      margin-top: 72px;
-      padding-top: 36px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 48px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.65s;
+    /* hero visual: fanned demo cards */
+    .hero-visual { position: relative; z-index: 2; height: 560px; perspective: 1400px; }
+    .fan-card {
+      position: absolute; width: 300px; border-radius: 10px; overflow: hidden;
+      background: var(--bg3); border: 1px solid var(--border-md);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+      text-decoration: none; color: inherit; display: block;
     }
-
-    .proof-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .proof-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      color: var(--brass);
-      line-height: 1;
-    }
-
-    .proof-label {
-      font-size: 12px;
-      color: var(--text-3);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    /* ── SOCIAL PROOF TICKER ── */
-    .ticker {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
+    .fan-card:hover { transform: translateY(-14px) rotate(0deg) !important; z-index: 5; }
+    .fan-card .fc-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 12px; background: rgba(0,0,0,0.35);
       border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      overflow: hidden;
-      white-space: nowrap;
+    }
+    .fan-card .fc-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
+    .fan-card .fc-bar i:first-child { background: #ff5f57; }
+    .fan-card .fc-bar i:nth-child(2) { background: #febc2e; }
+    .fan-card .fc-bar i:nth-child(3) { background: #28c840; }
+    .fan-card .fc-bar span { font-size: 9px; color: var(--text-3); letter-spacing: 0.5px; margin-left: 4px; }
+    .fan-card .fc-body { height: 190px; position: relative; overflow: hidden; }
+    .fan-card .fc-foot {
+      padding: 12px 14px; font-size: 11px; letter-spacing: 1px;
+      color: var(--text-2); text-transform: uppercase;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .fan-card .fc-foot em { font-style: normal; color: var(--brass-light); font-size: 10px; border: 1px solid var(--brass-dim); padding: 2px 8px; border-radius: 20px; }
+
+    .fan-1 { top: 40px; left: 4%; transform: rotate(-7deg); z-index: 1; }
+    .fan-2 { top: 130px; left: 30%; transform: rotate(2deg); z-index: 3; }
+    .fan-3 { top: 60px; left: 58%; transform: rotate(8deg); z-index: 2; }
+
+    .fc-assay { background: linear-gradient(160deg, #1f3a31 0%, #151411 70%); }
+    .fc-assay .fc-mock-h { font-family: 'Bebas Neue'; color: #d9a441; font-size: 34px; letter-spacing: 2px; padding: 18px 16px 0; }
+    .fc-assay .fc-mock-s { color: #f7efdf; font-size: 10px; letter-spacing: 3px; padding: 0 16px; opacity: 0.7; }
+    .fc-assay .fc-taps { display: flex; gap: 6px; padding: 14px 16px; }
+    .fc-assay .fc-taps i { flex: 1; height: 34px; border-radius: 4px; background: rgba(217,164,65,0.16); border: 1px solid rgba(217,164,65,0.4); }
+
+    .fc-revival { background: linear-gradient(160deg, #2a2a26 0%, #171715 70%); }
+    .fc-revival .fc-ba { position: absolute; inset: 14px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-md); }
+    .fc-revival .fc-ba img { width: 100%; height: 100%; object-fit: cover; }
+    .fc-revival .fc-ba::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 55%; width: 3px;
+      background: #ff6b1a; box-shadow: 0 0 12px rgba(255,107,26,0.8);
+    }
+    .fc-revival .fc-tag {
+      position: absolute; top: 22px; font-size: 9px; font-weight: 700; letter-spacing: 1px;
+      padding: 3px 8px; border-radius: 3px; z-index: 2;
+    }
+    .fc-revival .fc-tag.b { left: 22px; background: rgba(0,0,0,0.7); color: #fff; }
+    .fc-revival .fc-tag.a { right: 22px; background: #ff6b1a; color: #111; }
+
+    .fc-ossuary { background: linear-gradient(160deg, #1a1512 0%, #0e0c0a 70%); }
+    .fc-ossuary .fc-mock-h { font-family: 'Bebas Neue'; color: #e9e2d4; font-size: 36px; letter-spacing: 3px; padding: 18px 16px 0; }
+    .fc-ossuary .fc-mock-h span { color: #a4161a; }
+    .fc-ossuary .fc-mock-s { color: #e9e2d4; font-size: 10px; letter-spacing: 4px; padding: 0 16px; opacity: 0.6; text-transform: uppercase; }
+    .fc-ossuary .fc-flash { padding: 14px 16px; display: flex; flex-direction: column; gap: 7px; }
+    .fc-ossuary .fc-flash i {
+      display: flex; justify-content: space-between; font-style: normal;
+      font-size: 11px; color: #e9e2d4; border: 1px solid rgba(233,226,212,0.2);
+      border-radius: 4px; padding: 7px 10px;
+    }
+    .fc-ossuary .fc-flash i b { color: #a4161a; }
+
+    .fan-hint {
+      position: absolute; bottom: 6px; left: 0; right: 0; text-align: center;
+      font-size: 11px; letter-spacing: 2px; color: var(--text-3); text-transform: uppercase;
     }
 
-    .ticker-inner {
-      display: inline-flex;
-      gap: 0;
-      animation: ticker 28s linear infinite;
+    /* ── MARQUEE ── */
+    .marquee {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      overflow: hidden; padding: 20px 0; background: var(--bg2);
+      position: relative; z-index: 2;
+    }
+    .marquee-track { display: flex; gap: 56px; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee-track span {
+      font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 3px;
+      color: var(--text-3); white-space: nowrap;
+    }
+    .marquee-track span i { font-style: normal; color: var(--brass-dim); margin-right: 56px; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ── SECTIONS ── */
+    .block { padding: 120px 48px; max-width: 1240px; margin: 0 auto; position: relative; }
+
+    .sec-head { max-width: 720px; margin-bottom: 64px; }
+    .sec-head h2 {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: clamp(34px, 4vw, 56px); line-height: 1.08; letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+    .sec-head h2 em { font-style: italic; color: var(--brass-light); }
+    .sec-head p { color: var(--text-2); font-size: 17px; font-weight: 300; max-width: 600px; }
+
+    /* problem cards */
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pain-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 34px 30px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .pain-card:hover { border-color: var(--brass-dim); transform: translateY(-4px); }
+    .pain-card .p-num {
+      font-family: 'Bebas Neue'; font-size: 15px; letter-spacing: 2px;
+      color: var(--brass); margin-bottom: 18px; display: block;
+    }
+    .pain-card h3 { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 600; margin-bottom: 12px; }
+    .pain-card p { color: var(--text-2); font-size: 15px; font-weight: 300; }
+    .pain-close {
+      margin-top: 48px; text-align: center;
+      font-family: 'Fraunces', serif; font-size: clamp(22px, 2.6vw, 32px); font-style: italic;
+      color: var(--text-2);
+    }
+    .pain-close strong { color: var(--brass-light); font-style: normal; }
+
+    /* ── DEMO SWITCHER ── */
+    #demo { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .demo-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+    .demo-tab {
+      background: transparent; border: 1px solid var(--border-md); color: var(--text-2);
+      font-family: 'DM Sans'; font-size: 13px; font-weight: 500; letter-spacing: 1px;
+      padding: 12px 22px; border-radius: 30px; cursor: pointer;
+      transition: all 0.25s; text-transform: uppercase;
+    }
+    .demo-tab:hover { border-color: var(--brass); color: var(--text); }
+    .demo-tab.active { background: var(--brass); border-color: var(--brass); color: #0d0d0b; }
+
+    .demo-stage {
+      display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 40px; overflow: hidden; position: relative;
+    }
+    .demo-browser {
+      border-radius: 10px; overflow: hidden; border: 1px solid var(--border-md);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.5); background: var(--bg);
+    }
+    .demo-browser .db-bar {
+      display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+      background: rgba(0,0,0,0.4); border-bottom: 1px solid var(--border);
+    }
+    .demo-browser .db-bar i { width: 10px; height: 10px; border-radius: 50%; }
+    .demo-browser .db-bar i:nth-child(1) { background: #ff5f57; }
+    .demo-browser .db-bar i:nth-child(2) { background: #febc2e; }
+    .demo-browser .db-bar i:nth-child(3) { background: #28c840; }
+    .demo-browser .db-bar span {
+      margin-left: 8px; font-size: 11px; color: var(--text-3); letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.05); padding: 4px 14px; border-radius: 20px; flex: 1; text-align: center;
+    }
+    .demo-frame { height: 340px; position: relative; overflow: hidden; }
+    .demo-panel { position: absolute; inset: 0; opacity: 0; transform: translateY(12px); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
+    .demo-panel.active { opacity: 1; transform: none; pointer-events: auto; }
+
+    .dp-assay { background: linear-gradient(165deg, #1f3a31 0%, #151411 75%); padding: 28px; color: #f7efdf; }
+    .dp-assay .dp-brand { font-family: 'Bebas Neue'; font-size: 30px; letter-spacing: 3px; color: #d9a441; }
+    .dp-assay .dp-sub { font-size: 10px; letter-spacing: 4px; opacity: 0.65; margin-bottom: 20px; }
+    .dp-assay .dp-taps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 18px; }
+    .dp-assay .dp-taps div {
+      border: 1px solid rgba(217,164,65,0.45); background: rgba(217,164,65,0.1);
+      border-radius: 6px; padding: 10px 6px; text-align: center;
+    }
+    .dp-assay .dp-taps b { display: block; font-size: 11px; color: #d9a441; }
+    .dp-assay .dp-taps span { font-size: 9px; opacity: 0.6; }
+    .dp-assay .dp-cta {
+      display: inline-block; background: #d9a441; color: #151411; font-weight: 600;
+      font-size: 12px; letter-spacing: 1px; padding: 10px 20px; border-radius: 6px;
     }
 
-    .ticker:hover .ticker-inner { animation-play-state: paused; }
-
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 40px;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-3);
-      transition: color 0.2s;
+    .dp-revival { background: #1c1c1a; }
+    .dp-revival .dp-img { position: absolute; inset: 0; }
+    .dp-revival .dp-img img { width: 100%; height: 100%; object-fit: cover; }
+    .dp-revival .dp-img::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 52%; width: 4px;
+      background: #ff6b1a; box-shadow: 0 0 20px rgba(255,107,26,0.9);
     }
-
-    .ticker:hover .ticker-item { color: var(--text-2); }
-
-    .ticker-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--brass);
-      flex-shrink: 0;
+    .dp-revival .dp-tag {
+      position: absolute; top: 18px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      padding: 6px 12px; border-radius: 4px; z-index: 2;
     }
-
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .dp-revival .dp-tag.b { left: 18px; background: rgba(0,0,0,0.72); color: #fff; }
+    .dp-revival .dp-tag.a { right: 18px; background: #ff6b1a; color: #111; }
+    .dp-revival .dp-cap {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      padding: 40px 24px 18px; color: #fff;
     }
+    .dp-revival .dp-cap b { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 2px; display: block; }
+    .dp-revival .dp-cap span { font-size: 12px; opacity: 0.75; }
+
+    .dp-ossuary { background: linear-gradient(165deg, #1a1512 0%, #0d0b09 75%); padding: 28px; color: #e9e2d4; }
+    .dp-ossuary .dp-brand { font-family: 'Bebas Neue'; font-size: 38px; letter-spacing: 4px; }
+    .dp-ossuary .dp-brand span { color: #a4161a; }
+    .dp-ossuary .dp-sub { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.6; margin-bottom: 20px; }
+    .dp-ossuary .dp-flash { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .dp-ossuary .dp-flash div {
+      border: 1px solid rgba(233,226,212,0.25); border-radius: 8px; padding: 14px 10px; text-align: center;
+    }
+    .dp-ossuary .dp-flash b { display: block; font-size: 12px; margin-bottom: 4px; }
+    .dp-ossuary .dp-flash span { color: #a4161a; font-size: 13px; font-weight: 600; }
+    .dp-ossuary .dp-note { margin-top: 16px; font-size: 12px; opacity: 0.6; }
+
+    .dp-halfmoon { background: linear-gradient(165deg, #f7f2ec 0%, #efd9d2 75%); padding: 28px; color: #1f1a1a; }
+    .dp-halfmoon .dp-brand { font-family: 'Fraunces'; font-style: italic; font-size: 32px; color: #8e1c2e; }
+    .dp-halfmoon .dp-sub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; margin-bottom: 20px; color: #6d625f; }
+    .dp-halfmoon .dp-shades { display: flex; gap: 10px; margin-bottom: 18px; }
+    .dp-halfmoon .dp-shades i { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fffdfa; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    .dp-halfmoon .dp-svc {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,253,250,0.7); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; font-size: 14px;
+    }
+    .dp-halfmoon .dp-svc span { color: #8e1c2e; font-weight: 600; }
+
+    .demo-info h3 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 6px; }
+    .demo-info .demo-loc { color: var(--text-3); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+    .demo-info .concept-pill {
+      display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brass-light);
+      border: 1px solid var(--brass-dim); padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .demo-info ul { list-style: none; margin-bottom: 28px; }
+    .demo-info li {
+      position: relative; padding-left: 26px; margin-bottom: 12px;
+      color: var(--text-2); font-size: 15px; font-weight: 300;
+    }
+    .demo-info li::before {
+      content: '→'; position: absolute; left: 0; color: var(--brass); font-weight: 600;
+    }
+    .demo-info li strong { color: var(--text); font-weight: 500; }
 
     /* ── SERVICES ── */
-    #services {
-      padding: 120px 48px;
+    .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .tier {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 36px 28px; display: flex; flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s; position: relative;
     }
-
-    .section-header {
-      margin-bottom: 64px;
+    .tier:hover { border-color: var(--brass-dim); transform: translateY(-5px); }
+    .tier.hot { border-color: var(--brass); background: linear-gradient(180deg, rgba(196,152,42,0.07), var(--bg2) 45%); }
+    .tier .t-flag {
+      position: absolute; top: -12px; left: 28px;
+      background: var(--brass); color: #0d0d0b; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
     }
-
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--brass);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 5vw, 64px);
-      line-height: 1;
-      letter-spacing: 1px;
-      color: var(--text);
-      max-width: 600px;
-    }
-
-    .section-title em {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      color: var(--brass);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .service-card {
-      background: var(--bg2);
-      padding: 36px 32px;
-      position: relative;
-      transition: background 0.2s, transform 0.08s ease-out;
-    }
-
-    .service-card:hover { background: var(--bg3); }
-
-    .service-card.featured { background: var(--bg3); }
-
-    .card-glare {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 0;
-    }
-
-    .service-card > *:not(.card-glare) { position: relative; z-index: 1; }
-
-    .service-badge {
-      display: inline-block;
-      background: var(--brass);
-      color: #0d0d0b;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 3px;
-      margin-bottom: 20px;
-    }
-
-    .service-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .service-price {
-      font-size: 13px;
-      color: var(--brass);
-      font-weight: 400;
-      margin-bottom: 18px;
-    }
-
-    .service-desc {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text-2);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .service-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .service-features li {
-      font-size: 13px;
-      color: var(--text-3);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.5;
-    }
-
-    .service-features li::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--brass-dim);
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-
-    .service-footer {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--text-3);
-      letter-spacing: 0.5px;
-    }
+    .tier h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+    .tier .t-price { font-family: 'Bebas Neue'; font-size: 19px; letter-spacing: 1px; color: var(--brass-light); margin-bottom: 6px; }
+    .tier .t-desc { color: var(--text-2); font-size: 14px; font-weight: 300; margin-bottom: 22px; }
+    .tier ul { list-style: none; margin-bottom: 28px; flex: 1; }
+    .tier li { position: relative; padding-left: 22px; margin-bottom: 10px; font-size: 13.5px; color: var(--text-2); }
+    .tier li::before { content: '✓'; position: absolute; left: 0; color: var(--brass); font-weight: 600; font-size: 12px; }
+    .tier .t-link { color: var(--brass-light); font-size: 13px; font-weight: 600; letter-spacing: 1px; text-decoration: none; text-transform: uppercase; }
+    .tier .t-link:hover { text-decoration: underline; }
 
     /* ── PROCESS ── */
-    #process {
-      padding: 120px 48px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    #process { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+    .step {
+      padding: 30px 26px; border-left: 1px solid var(--border-md); position: relative;
     }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0;
-      margin-top: 64px;
-      position: relative;
+    .step .s-num {
+      font-family: 'Bebas Neue'; font-size: 44px; color: transparent;
+      -webkit-text-stroke: 1px var(--brass); margin-bottom: 14px; display: block; line-height: 1;
     }
+    .step h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+    .step p { color: var(--text-2); font-size: 14px; font-weight: 300; }
 
-    .process-step {
-      padding: 0 32px 0 0;
-      position: relative;
-    }
-
-    .process-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 18px;
-      right: 0;
-      width: 1px;
-      height: 48px;
-      background: var(--border-md);
-    }
-
-    .step-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: var(--brass);
-      margin-bottom: 16px;
-    }
-
-    .step-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-
-    .step-desc {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text-2);
-      line-height: 1.7;
-    }
-
-    /* ── WHY ── */
-    #why {
-      padding: 120px 48px;
-    }
-
-    .why-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .why-body {
-      font-size: 17px;
-      font-weight: 300;
-      color: var(--text-2);
-      line-height: 1.85;
-    }
-
-    .why-body p + p { margin-top: 20px; }
-
-    .why-body strong {
-      color: var(--text);
-      font-weight: 400;
-    }
-
-    .why-callout {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--brass);
-      border-radius: var(--radius);
-      padding: 36px;
-    }
-
-    .callout-quote {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .callout-attr {
-      font-size: 12px;
-      color: var(--text-3);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+    /* ── COMPARE ── */
+    .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+    table.compare { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+    .compare th, .compare td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+    .compare thead th { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+    .compare thead th.us { color: var(--brass-light); }
+    .compare tbody th { font-weight: 500; color: var(--text-2); }
+    .compare td { color: var(--text-3); text-align: center; }
+    .compare td.us { color: var(--text); background: rgba(196,152,42,0.06); text-align: center; font-weight: 600; }
+    .compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
+    .compare .yes { color: #4ade80; } .compare .no { color: #f87171; } .compare .mid { color: var(--brass-light); }
 
     /* ── CONSULT ── */
-    #consult {
-      padding: 120px 48px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
+    #consult { background: linear-gradient(180deg, var(--bg) 0%, #151410 100%); border-top: 1px solid var(--border); }
+    .consult-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
+    .consult-copy h2 {
+      font-family: 'Fraunces', serif; font-weight: 400;
+      font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.5px; margin-bottom: 22px;
     }
-
-    .consult-inner {
-      max-width: 640px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .consult-inner .section-title {
-      max-width: 100%;
-      margin: 0 auto 20px;
-    }
-
-    .consult-sub {
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--text-2);
-      margin-bottom: 48px;
-      line-height: 1.7;
-    }
+    .consult-copy h2 em { font-style: italic; color: var(--brass-light); }
+    .consult-copy p { color: var(--text-2); font-weight: 300; margin-bottom: 18px; font-size: 16px; }
+    .consult-copy .direct { margin-top: 28px; font-size: 15px; }
+    .consult-copy .direct a { color: var(--brass-light); font-weight: 600; text-decoration: none; font-size: 20px; }
+    .consult-copy .direct a:hover { text-decoration: underline; }
 
     .consult-form {
-      text-align: left;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 40px;
+      background: var(--bg2); border: 1px solid var(--border-md);
+      border-radius: 14px; padding: 40px;
     }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-2); margin-bottom: 8px; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: var(--bg3); border: 1px solid var(--border-md);
+      border-radius: var(--radius); color: var(--text); font-family: 'DM Sans';
+      font-size: 15px; padding: 13px 16px; outline: none; transition: border-color 0.2s;
     }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group.full { grid-column: 1 / -1; }
-
-    .form-group label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-3);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--bg2);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--text-3); }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--brass); }
-
-    .form-group select {
-      appearance: none;
-    }
-
-    .form-group textarea { resize: vertical; min-height: 100px; }
-
-    .form-submit {
-      margin-top: 24px;
-      width: 100%;
-      padding: 16px;
-      background: var(--brass);
-      color: #0d0d0b;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      border: none;
-      border-radius: var(--radius);
-      transition: background 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .form-submit:hover { background: var(--brass-light); }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
-      width: 0; height: 0;
-      transform: translate(-50%, -50%);
-      animation: ripple-anim 0.65s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-anim {
-      to { width: 600px; height: 600px; opacity: 0; }
-    }
-
-    .form-note {
-      margin-top: 16px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-3);
-    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brass); }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     /* ── FOOTER ── */
-    footer {
-      padding: 48px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
+    footer { border-top: 1px solid var(--border); padding: 64px 48px 36px; background: var(--bg); }
+    .foot-grid { max-width: 1240px; margin: 0 auto 48px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+    .foot-brand .nav-logo { margin-bottom: 14px; display: inline-block; }
+    .foot-brand p { color: var(--text-3); font-size: 14px; max-width: 300px; }
+    .foot-col h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); margin-bottom: 18px; }
+    .foot-col a { display: block; color: var(--text-2); text-decoration: none; font-size: 14px; margin-bottom: 10px; }
+    .foot-col a:hover { color: var(--brass-light); }
+    .foot-base {
+      max-width: 1240px; margin: 0 auto; padding-top: 28px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; color: var(--text-3); font-size: 12px; letter-spacing: 0.5px;
     }
 
-    .footer-left {}
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
 
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      letter-spacing: 3px;
-      color: var(--text);
-      margin-bottom: 6px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1080px) {
+      #hero { grid-template-columns: 1fr; padding: 130px 32px 70px; min-height: auto; }
+      .hero-visual { height: 480px; max-width: 560px; }
+      .tier-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .demo-stage { grid-template-columns: 1fr; }
+      .consult-grid { grid-template-columns: 1fr; gap: 40px; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+      .block { padding: 90px 32px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links {
+        position: fixed; top: 68px; left: 0; right: 0; background: var(--bg2);
+        flex-direction: column; gap: 0; padding: 10px 0 20px;
+        border-bottom: 1px solid var(--border); display: none; align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { text-align: center; }
+      .nav-links a { display: block; padding: 14px; }
+      .nav-links .nav-cta { margin: 10px 24px 0; text-align: center; }
+      .nav-toggle { display: block; }
+      #hero { padding: 120px 20px 60px; }
+      .hero-visual { height: 420px; }
+      .fan-card { width: 240px; }
+      .fan-1 { left: 0; } .fan-2 { left: 22%; top: 110px; } .fan-3 { left: 46%; }
+      .block { padding: 70px 20px; }
+      .tier-grid, .steps, .pain-grid { grid-template-columns: 1fr; }
+      .demo-stage { padding: 24px; }
+      .consult-form { padding: 28px 22px; }
+      .field-row { grid-template-columns: 1fr; }
+      footer { padding: 48px 20px 28px; }
+      .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+      .foot-base { flex-direction: column; gap: 8px; }
     }
 
-    .footer-logo span { color: var(--brass); }
-
-    .footer-tagline {
-      font-size: 12px;
-      color: var(--text-3);
-    }
-
-    .footer-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-    }
-
-    .footer-contact {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .footer-contact a {
-      font-size: 13px;
-      color: var(--text-2);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-contact a:hover { color: var(--brass); }
-
-    .footer-social {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 16px;
-    }
-
-    .footer-social a {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--text-3);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .footer-social a:hover { color: var(--brass); }
-
-    .footer-social svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-      fill: currentColor;
-    }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--text-3);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── BUTTON EFFECTS ── */
-    .btn-primary, .form-submit { isolation: isolate; }
-
-    .btn-liquid {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.14);
-      transform: translate(-50%,-50%) scale(0);
-      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .btn-liquid.active { transform: translate(-50%,-50%) scale(1); }
-
-    /* ── MOBILE NAV ── */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      padding: 6px;
-      cursor: pointer;
-      z-index: 201;
-      position: relative;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--brass);
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    .nav-mobile {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(13,13,11,0.97);
-      backdrop-filter: blur(14px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .nav-mobile.open { opacity: 1; pointer-events: all; }
-    .nav-mobile a {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      letter-spacing: 3px;
-      color: var(--text);
-      text-decoration: none;
-      transition: color 0.2s;
-      line-height: 1.15;
-    }
-    .nav-mobile a:hover { color: var(--brass); }
-    .nav-mobile-cta {
-      margin-top: 20px !important;
-      font-family: 'DM Sans', sans-serif !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
-      letter-spacing: 1px !important;
-      color: var(--brass) !important;
-      border: 1px solid var(--brass);
-      padding: 13px 32px;
-      border-radius: 6px;
-    }
-    .nav-mobile-close {
-      position: absolute;
-      top: 22px;
-      right: 24px;
-      background: none;
-      border: none;
-      color: var(--text-2);
-      font-size: 24px;
-      cursor: pointer;
-      padding: 6px;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-    .nav-mobile-close:hover { color: var(--text); }
-
-    /* ── NAV LOGO PULSE ── */
-    @keyframes dot-pulse {
-      0%, 100% { color: var(--brass); }
-      50% { color: var(--brass-light); text-shadow: 0 0 12px rgba(196,152,42,0.7); }
-    }
-    .nav-logo span, .footer-logo span {
-      animation: dot-pulse 3s ease-in-out infinite;
-    }
-
-    /* ── STAGGERED CARD REVEAL ── */
-    .card-reveal {
-      opacity: 0;
-      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16,1,0.3,1);
-    }
-    .card-reveal[data-dir="left"]  { transform: translateX(-48px); }
-    .card-reveal[data-dir="right"] { transform: translateX(48px); }
-    .card-reveal[data-dir="up"]    { transform: translateY(40px); }
-    .card-reveal.visible { opacity: 1; transform: none; }
-
-    /* ── TYPEWRITER CURSOR ── */
-    .tw-cursor {
-      display: inline-block;
-      width: 2px;
-      background: var(--brass);
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: tw-blink 0.75s steps(1) infinite;
-    }
-    @keyframes tw-blink { 50% { opacity: 0; } }
-
-    /* ── COMPARE SECTION ── */
-    #compare {
-      padding: 120px 48px;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cmp-scroll { overflow-x: auto; }
-
-    .cmp-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin-top: 56px;
-    }
-
-    .cmp-table thead th {
-      padding: 14px 20px 18px;
-      text-align: center;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--text-3);
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-    }
-
-    .cmp-table thead th:first-child {
-      text-align: left;
-      width: 28%;
-    }
-
-    .cmp-table thead th.cmp-us {
-      color: var(--brass);
-      background: rgba(196,152,42,0.06);
-      border-top: 2px solid var(--brass);
-      border-left: 1px solid rgba(196,152,42,0.2);
-      border-right: 1px solid rgba(196,152,42,0.2);
-      border-bottom: 1px solid rgba(196,152,42,0.2);
-      border-radius: 6px 6px 0 0;
-      font-size: 13px;
-    }
-
-    .cmp-row {
-      opacity: 0;
-      transform: translateX(-16px);
-      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .cmp-row.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    .cmp-row td {
-      padding: 16px 20px;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text-2);
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-
-    .cmp-row td:first-child {
-      text-align: left;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: 0.3px;
-    }
-
-    .cmp-row td.cmp-us {
-      background: rgba(196,152,42,0.05);
-      border-left: 1px solid rgba(196,152,42,0.18);
-      border-right: 1px solid rgba(196,152,42,0.18);
-      border-bottom: 1px solid rgba(196,152,42,0.12);
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    .cmp-table tbody tr:last-child td.cmp-us {
-      border-bottom: 1px solid rgba(196,152,42,0.2);
-      border-radius: 0 0 6px 6px;
-    }
-
-    .cmp-check { color: var(--brass); font-size: 16px; }
-    .cmp-cross { color: var(--text-3); font-size: 14px; }
-    .cmp-partial { color: var(--text-3); font-size: 13px; letter-spacing: 1px; }
-    .cmp-val { font-size: 12px; line-height: 1.4; }
-    .cmp-val.good { color: var(--brass); font-weight: 500; }
-    .cmp-val.meh  { color: var(--text-3); }
-    .cmp-val.bad  { color: var(--text-3); }
-
-    /* ── DEMO SECTION ── */
-    #demo {
-      padding: 120px 48px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .demo-intro {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--text-2);
-      margin-top: 14px;
-      max-width: 520px;
-      line-height: 1.7;
-    }
-
-    .demo-switcher {
-      display: flex;
-      gap: 10px;
-      margin: 36px 0;
-      flex-wrap: wrap;
-    }
-
-    .demo-theme-btn {
-      padding: 10px 22px;
-      border-radius: 30px;
-      border: 1px solid var(--border-md);
-      background: transparent;
-      color: var(--text-3);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      transition: color 0.25s, border-color 0.25s, background 0.25s;
-    }
-
-    .demo-theme-btn:hover:not(.active) {
-      color: var(--text);
-      border-color: rgba(255,255,255,0.22);
-    }
-
-    .demo-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .demo-browser {
-      background: var(--bg3);
-      border: 1px solid var(--border-md);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .demo-browser-bar {
-      padding: 10px 14px;
-      background: #161614;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .demo-browser-dots { display: flex; gap: 5px; flex-shrink: 0; }
-
-    .demo-dot { width: 9px; height: 9px; border-radius: 50%; display: block; }
-
-    .demo-url-bar {
-      flex: 1;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 4px 10px;
-      font-size: 10px;
-      color: var(--text-3);
-      text-align: center;
-      transition: opacity 0.3s;
-    }
-
-    .demo-site-inner { transition: opacity 0.25s ease, transform 0.25s ease; }
-
-    .dm-nav {
-      padding: 10px 16px;
-      background: rgba(14,14,13,0.95);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .dm-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 2px;
-      color: var(--text);
-    }
-
-    .dm-nav-right { display: flex; align-items: center; gap: 12px; }
-
-    .dm-link { font-size: 10px; color: var(--text-3); }
-
-    .dm-cta-pill {
-      font-size: 9px;
-      font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 4px;
-      color: #0d0d0b;
-      transition: background 0.4s;
-    }
-
-    .dm-hero {
-      padding: 24px 16px 20px;
-      background: #141413;
-      min-height: 190px;
-    }
-
-    .dm-eyebrow {
-      font-size: 8px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      transition: color 0.4s;
-    }
-
-    .dm-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(22px, 2.8vw, 30px);
-      line-height: 1.05;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .dm-sub {
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--text-2);
-      line-height: 1.6;
-      margin-bottom: 14px;
-      max-width: 280px;
-    }
-
-    .dm-btn {
-      display: inline-block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      padding: 7px 16px;
-      border-radius: 4px;
-      border: none;
-      color: #0d0d0b;
-      margin-bottom: 14px;
-      transition: background 0.4s;
-      letter-spacing: 0.5px;
-    }
-
-    .dm-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .dm-tag {
-      font-size: 8px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-radius: 20px;
-      padding: 3px 9px;
-      opacity: 0.75;
-      transition: color 0.4s, border-color 0.4s;
-      border: 1px solid currentColor;
-    }
-
-    /* Playground */
-    .playground {
-      background: var(--bg3);
-      border: 1px solid var(--border-md);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .playground-tabs {
-      display: flex;
-      background: #161614;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .playground-tab {
-      flex: 1;
-      padding: 13px 8px;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-3);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      transition: color 0.2s, border-bottom-color 0.2s;
-      white-space: nowrap;
-    }
-
-    .playground-tab:hover:not(.active) { color: var(--text-2); }
-
-    .playground-panel {
-      display: none;
-      padding: 20px;
-      animation: fadeUp 0.3s ease;
-    }
-
-    .playground-panel.active { display: block; }
-
-    /* Menu grid */
-    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-    .menu-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.2s;
-    }
-
-    .menu-card:hover { border-color: rgba(255,255,255,0.18); }
-
-    .mc-emoji { font-size: 24px; margin-bottom: 6px; }
-    .mc-name { font-weight: 500; font-size: 12px; color: var(--text); margin-bottom: 3px; }
-    .mc-desc { font-size: 10px; color: var(--text-3); line-height: 1.5; flex: 1; }
-    .mc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
-    .mc-price { font-family: 'Bebas Neue', sans-serif; font-size: 17px; }
-
-    .mc-add {
-      width: 24px; height: 24px; border-radius: 50%; border: none;
-      color: #0d0d0b; font-size: 15px; display: flex; align-items: center; justify-content: center;
-      transition: transform 0.15s; flex-shrink: 0; font-weight: 300; line-height: 1;
-    }
-
-    /* Booking */
-    .bk-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--text); margin-bottom: 14px; }
-    .bk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
-    .bk-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
-    .bk-label { font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-3); }
-
-    .bk-input {
-      background: var(--bg2); border: 1px solid var(--border-md); border-radius: 5px;
-      padding: 9px 11px; font-family: 'DM Sans', sans-serif; font-size: 12px;
-      color: var(--text); outline: none; width: 100%; transition: border-color 0.2s;
-    }
-
-    .bk-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-
-    .bk-pill {
-      padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border-md);
-      background: transparent; font-family: 'DM Sans', sans-serif; font-size: 10px;
-      color: var(--text-3); transition: all 0.2s;
-    }
-
-    .bk-submit {
-      width: 100%; padding: 11px; font-family: 'DM Sans', sans-serif; font-size: 12px;
-      font-weight: 500; border: none; border-radius: 6px; margin-top: 14px;
-      color: #0d0d0b; transition: background 0.4s, transform 0.15s;
-    }
-
-    .bk-submit:hover { transform: translateY(-1px); }
-
-    /* Dashboard */
-    .dash-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
-    .dash-stat { background: var(--bg2); border: 1px solid var(--border); border-radius: 7px; padding: 12px 10px; }
-    .dash-stat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-3); margin-bottom: 4px; }
-    .dash-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); line-height: 1; margin-bottom: 3px; }
-    .dash-delta { font-size: 10px; font-weight: 500; }
-    .dash-delta.up { color: #4ade80; }
-    .dash-delta.dn { color: #f87171; }
-    .dash-table-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-3); margin-bottom: 8px; }
-    .dash-tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .dash-tbl th { text-align: left; color: var(--text-3); font-weight: 400; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 6px; border-bottom: 1px solid var(--border); }
-    .dash-tbl td { padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-2); }
-    .dash-tbl td:first-child { color: var(--text); font-size: 12px; }
-    .dash-pill { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 9px; font-weight: 500; }
-    .dash-pill.in-stock { background: rgba(74,222,128,0.12); color: #4ade80; }
-    .dash-pill.limited, .dash-pill.low-stock { background: rgba(251,191,36,0.12); color: #fbbf24; }
-    .dash-pill.available { background: rgba(96,165,250,0.12); color: #60a5fa; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      #hero, #services, #process, #why, #consult { padding-left: 24px; padding-right: 24px; }
-      footer { padding: 36px 24px; }
-      .why-layout { grid-template-columns: 1fr; gap: 40px; }
-      .form-row { grid-template-columns: 1fr; }
-      .hero-proof { gap: 32px; flex-wrap: wrap; }
-      .process-step:not(:last-child)::after { display: none; }
-      .process-step { padding: 0 0 32px 0; }
-      .footer-right { align-items: flex-start; }
-      .footer-contact { justify-content: flex-start; }
-      #demo { padding-left: 24px; padding-right: 24px; }
-      .demo-layout { grid-template-columns: 1fr; }
-      .menu-grid { grid-template-columns: 1fr; }
-      .dash-stats { grid-template-columns: 1fr 1fr; }
-      .bk-row { grid-template-columns: 1fr; }
-      .playground-tab { font-size: 10px; padding: 11px 4px; }
-      #compare { padding-left: 24px; padding-right: 24px; }
-      .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .cmp-table { min-width: 560px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">BRASS<span>.</span>TACKS</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="services.html">Services</a></li>
       <li><a href="work.html">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="contact.html" class="nav-cta">Book Free Consult</a></li>
+      <li><a href="#consult" class="nav-cta">Book Free Consult</a></li>
     </ul>
-    <button class="nav-hamburger" id="nav-open" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <div id="nav-progress"></div>
   </nav>
 
-  <!-- MOBILE NAV OVERLAY -->
-  <div class="nav-mobile" id="nav-mobile">
-    <button class="nav-mobile-close" id="nav-close" aria-label="Close menu">✕</button>
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="work.html">Work</a>
-    <a href="contact.html">Contact</a>
-    <a href="contact.html" class="nav-mobile-cta">Book Free Consult →</a>
-  </div>
-
   <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg-lines"></div>
-    <div class="hero-bg-glow"></div>
-    <canvas id="hero-canvas"></canvas>
-    <div id="hero-spotlight"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Custom tech for independent businesses</div>
-      <h1 class="hero-headline">Your business<br>deserves tech that<br><em>works for you</em></h1>
-      <p class="hero-sub">We build custom websites and POS systems for restaurants, shops, and service businesses — not templates, not shortcuts. Done in weeks, not months.</p>
-      <div class="hero-actions">
-        <a href="#consult" class="btn-primary">Book a Free Consult</a>
-        <a href="#services" class="btn-ghost">
-          See what we build
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+  <header id="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Custom websites + POS for independent business</span>
+      <h1 class="hero-h1">Your business isn't a <span class="strike">template</span>.<br /><em>Your website shouldn't be one either.</em></h1>
+      <p class="hero-sub">You didn't build your business from a kit. We design and build custom sites and operating systems for independent operators. <strong>No themes. No page builders. No platform ransom.</strong> Live in weeks, built for years.</p>
+      <div class="hero-ctas">
+        <a href="#consult" class="btn-solid">Book a Free Consult →</a>
+        <a href="work.html" class="btn-ghost">See the work</a>
       </div>
       <div class="hero-proof">
-        <div class="proof-item">
-          <span class="proof-num">2–4</span>
-          <span class="proof-label">Week launch</span>
+        <div class="proof-item"><b>10<i>.</i></b><span>live concept builds</span></div>
+        <div class="proof-item"><b>2–4<i> wk</i></b><span>typical launch</span></div>
+        <div class="proof-item"><b>$0<i>.</i></b><span>template fees, ever</span></div>
+        <div class="proof-item"><b>100<i>%</i></b><span>yours to own</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <a class="fan-card fan-1" href="demos/assay-brewing/" target="_blank" rel="noopener">
+        <div class="fc-bar"><i></i><i></i><i></i><span>assaybrewing.co</span></div>
+        <div class="fc-body fc-assay">
+          <div class="fc-mock-h">ASSAY</div>
+          <div class="fc-mock-s">BREWING CO.</div>
+          <div class="fc-taps"><i></i><i></i><i></i><i></i><i></i></div>
         </div>
-        <div class="proof-item">
-          <span class="proof-num">100%</span>
-          <span class="proof-label">Custom built</span>
+        <div class="fc-foot">Brewery concept <em>Live demo</em></div>
+      </a>
+      <a class="fan-card fan-2" href="demos/revival-construction/" target="_blank" rel="noopener">
+        <div class="fc-bar"><i></i><i></i><i></i><span>revival construction</span></div>
+        <div class="fc-body fc-revival">
+          <div class="fc-ba"><img src="demos/revival-construction/img/roof-after.jpg" alt="" loading="lazy" /></div>
+          <span class="fc-tag b">Before</span><span class="fc-tag a">After</span>
         </div>
-        <div class="proof-item">
-          <span class="proof-num">$0</span>
-          <span class="proof-label">Template fees</span>
+        <div class="fc-foot">Contractor concept <em>Live demo</em></div>
+      </a>
+      <a class="fan-card fan-3" href="demos/ossuary-tattoo/" target="_blank" rel="noopener">
+        <div class="fc-bar"><i></i><i></i><i></i><span>ossuarytattoo.co</span></div>
+        <div class="fc-body fc-ossuary">
+          <div class="fc-mock-h">OSSUARY<span>.</span></div>
+          <div class="fc-mock-s">Tattoo Co.</div>
+          <div class="fc-flash"><i>The Watcher <b>$180</b></i><i>Last Rites <b>$260</b></i><i>Grin <b>$240</b></i></div>
+        </div>
+        <div class="fc-foot">Tattoo studio concept <em>Live demo</em></div>
+      </a>
+      <div class="fan-hint">Real concepts, built from scratch. Hover to inspect</div>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span><i>◆</i>Restaurants</span><span><i>◆</i>Breweries</span><span><i>◆</i>Barbershops</span><span><i>◆</i>Coffee Shops</span><span><i>◆</i>Contractors</span><span><i>◆</i>Tattoo Studios</span><span><i>◆</i>Nail Salons</span><span><i>◆</i>Retail</span><span><i>◆</i>Dental</span><span><i>◆</i>Food Trucks</span>
+      <span><i>◆</i>Restaurants</span><span><i>◆</i>Breweries</span><span><i>◆</i>Barbershops</span><span><i>◆</i>Coffee Shops</span><span><i>◆</i>Contractors</span><span><i>◆</i>Tattoo Studios</span><span><i>◆</i>Nail Salons</span><span><i>◆</i>Retail</span><span><i>◆</i>Dental</span><span><i>◆</i>Food Trucks</span>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="block" id="why">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why custom</span>
+      <h2>Off-the-shelf <em>almost</em> fits.<br />Almost isn't good enough.</h2>
+      <p>Most small business owners end up with tech that was built for someone else. You spend more time fighting the tools than running the business. Here's what we refuse to ship:</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <span class="p-num">01</span>
+        <h3>Templates look like everyone else</h3>
+        <p>The shop three doors down is running the same theme. Customers can feel the sameness even when they can't name it. Your business has a personality. Your site should too.</p>
+      </div>
+      <div class="pain-card reveal">
+        <span class="p-num">02</span>
+        <h3>Platforms take a cut forever</h3>
+        <p>Monthly fees, transaction percentages, feature paywalls. You rent your own website and never own a byte of it. We build things you own outright, hosted wherever you want.</p>
+      </div>
+      <div class="pain-card reveal">
+        <span class="p-num">03</span>
+        <h3>Generic tools fight your workflow</h3>
+        <p>A food truck doesn't operate like a nail salon, and a solo trainer doesn't run like a restaurant. Software built for everyone fits no one. We build around how you actually work.</p>
+      </div>
+    </div>
+    <p class="pain-close reveal">Brass Tacks exists for one reason: <strong>tech that works for you,</strong> not the other way around.</p>
+  </section>
+
+  <!-- DEMO SWITCHER -->
+  <section id="demo">
+    <div class="block">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Proof, not promises</span>
+        <h2>One builder. Ten industries.<br /><em>Zero templates.</em></h2>
+        <p>Every preview below is a live concept we designed and built from scratch. Same builder, completely different result. Pick one and look around.</p>
+      </div>
+      <div class="demo-tabs reveal" role="tablist">
+        <button class="demo-tab active" data-demo="assay" role="tab">Assay Brewing</button>
+        <button class="demo-tab" data-demo="revival" role="tab">Revival Construction</button>
+        <button class="demo-tab" data-demo="ossuary" role="tab">Ossuary Tattoo</button>
+        <button class="demo-tab" data-demo="halfmoon" role="tab">Halfmoon Nails</button>
+      </div>
+      <div class="demo-stage reveal">
+        <div class="demo-browser">
+          <div class="db-bar"><i></i><i></i><i></i><span id="demo-url">assaybrewing.co</span></div>
+          <div class="demo-frame">
+            <div class="demo-panel dp-assay active" data-panel="assay">
+              <div class="dp-brand">ASSAY</div>
+              <div class="dp-sub">BREWING CO. · OLDE TOWN ARVADA</div>
+              <div class="dp-taps">
+                <div><b>Ore Test</b><span>IPA</span></div>
+                <div><b>Tailings</b><span>Stout</span></div>
+                <div><b>Paydirt</b><span>Pils</span></div>
+                <div><b>Motherlode</b><span>Hazy</span></div>
+                <div><b>Sluice</b><span>Sour</span></div>
+              </div>
+              <span class="dp-cta">BUILD A FLIGHT →</span>
+            </div>
+            <div class="demo-panel dp-revival" data-panel="revival">
+              <div class="dp-img"><img src="demos/revival-construction/img/roof-after.jpg" alt="Roof replacement" loading="lazy" /></div>
+              <span class="dp-tag b">Before</span><span class="dp-tag a">After</span>
+              <div class="dp-cap"><b>BUILT RIGHT. BUILT ONCE.</b><span>Drag the handle: full roof replacement, Andover.</span></div>
+            </div>
+            <div class="demo-panel dp-ossuary" data-panel="ossuary">
+              <div class="dp-brand">OSSUARY<span>.</span></div>
+              <div class="dp-sub">Tattoo Co. · Private Studio</div>
+              <div class="dp-flash">
+                <div><b>The Watcher</b><span>$180</span></div>
+                <div><b>Last Rites</b><span>$260</span></div>
+                <div><b>Grin</b><span>$240</span></div>
+              </div>
+              <div class="dp-note">Claim a piece of flash and the booking form pre-fills itself.</div>
+            </div>
+            <div class="demo-panel dp-halfmoon" data-panel="halfmoon">
+              <div class="dp-brand">Halfmoon</div>
+              <div class="dp-sub">Nail Boutique · Berkeley, Denver</div>
+              <div class="dp-shades">
+                <i style="background:#8e1c2e"></i><i style="background:#e8a3ae"></i><i style="background:#d9a441"></i><i style="background:#1f3a31"></i><i style="background:#e5c3b9"></i>
+              </div>
+              <div class="dp-svc">Classic Manicure <span>$38</span></div>
+              <div class="dp-svc">Gel Manicure <span>$52</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-info">
+          <div data-info="assay">
+            <span class="concept-pill">Concept</span>
+            <h3>Assay Brewing Co.</h3>
+            <div class="demo-loc">Brewery · Olde Town Arvada</div>
+            <ul>
+              <li><strong>Build-a-flight paddle</strong> with smart pour order, light to dark to sour</li>
+              <li><strong>Live tap list</strong> with a pouring-now counter and open/closed status</li>
+              <li>Events, kitchen hours, and visit details in a single honest page</li>
+            </ul>
+            <a href="demos/assay-brewing/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
+          </div>
+          <div data-info="revival" hidden>
+            <span class="concept-pill">Concept</span>
+            <h3>Revival Construction</h3>
+            <div class="demo-loc">Contractor · Wichita, KS</div>
+            <ul>
+              <li><strong>Auto-playing before/after hero slider</strong> that settles into your control</li>
+              <li><strong>Drag-to-compare photo gallery</strong> across roofing, decks, concrete, and fencing</li>
+              <li>Storm-damage section with a straight-talk insurance claim flow</li>
+            </ul>
+            <a href="demos/revival-construction/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
+          </div>
+          <div data-info="ossuary" hidden>
+            <span class="concept-pill">Concept</span>
+            <h3>Ossuary Tattoo Co.</h3>
+            <div class="demo-loc">Tattoo Studio · Private</div>
+            <ul>
+              <li><strong>One-and-done flash wall</strong> where claiming a piece pre-fills the booking form</li>
+              <li>Artist portfolios, aftercare guide, and live open/closed hours</li>
+              <li>Heavy, ritualistic brand built entirely from scratch</li>
+            </ul>
+            <a href="demos/ossuary-tattoo/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
+          </div>
+          <div data-info="halfmoon" hidden>
+            <span class="concept-pill">Concept</span>
+            <h3>Halfmoon Nail Boutique</h3>
+            <div class="demo-loc">Nail Salon · Berkeley, Denver</div>
+            <ul>
+              <li><strong>Shade studio</strong> for designing your set before you book</li>
+              <li>Service menu with honest pricing and real duration estimates</li>
+              <li>Soft, editorial brand with online booking built in</li>
+            </ul>
+            <a href="demos/halfmoon-nails/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span class="ticker-item"><span class="ticker-dot"></span>Restaurants</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Food Trucks</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Barbershops</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Nail Salons</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Tattoo Studios</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Personal Trainers</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Retail Shops</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Service Businesses</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Restaurants</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Food Trucks</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Barbershops</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Nail Salons</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Tattoo Studios</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Personal Trainers</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Retail Shops</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Service Businesses</span>
-    </div>
-  </div>
-
   <!-- SERVICES -->
-  <section id="services">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">What we build</div>
-      <h2 class="section-title">Pick your<br><em>starting point</em></h2>
+  <section class="block" id="services">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we build</span>
+      <h2>Pick your <em>starting point.</em></h2>
+      <p>Every engagement starts with a free consult and ends with something you own outright. No retainers required, no platform lock-in.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card card-reveal" data-dir="left">
-        <div class="card-glare"></div>
-        <div class="service-name">Solo Operator</div>
-        <p class="service-desc">A clean, branded online presence for independent professionals who need to be found and booked — fast.</p>
-        <ul class="service-features">
+    <div class="tier-grid">
+      <div class="tier reveal">
+        <h3>Solo Operator</h3>
+        <div class="t-price">$1,500+</div>
+        <p class="t-desc">A clean, branded online presence for independent pros who need to be found and booked, fast.</p>
+        <ul>
           <li>1–3 page custom site</li>
           <li>Booking widget integration</li>
           <li>Mobile responsive</li>
           <li>Contact form setup</li>
           <li>Up to 2 weeks turnaround</li>
         </ul>
-        <div class="service-footer">Best for: salons, barbershops, trainers, tattoo artists</div>
+        <a href="#consult" class="t-link">Start here →</a>
       </div>
-      <div class="service-card card-reveal" data-dir="up">
-        <div class="card-glare"></div>
-        <div class="service-name">Custom Website</div>
-        <p class="service-desc">A multi-page site designed from scratch around your brand — not a theme someone else already used 10,000 times.</p>
-        <ul class="service-features">
+      <div class="tier reveal">
+        <h3>Custom Website</h3>
+        <div class="t-price">$2,500+</div>
+        <p class="t-desc">A multi-page site designed from scratch around your brand. Not a theme 10,000 other businesses already used.</p>
+        <ul>
           <li>Multi-page custom design</li>
           <li>Database-driven content</li>
           <li>SEO optimization</li>
           <li>English / Spanish toggle</li>
           <li>3–4 week turnaround</li>
+          <li>90 days post-launch support</li>
         </ul>
-        <div class="service-footer">90 days post-launch support included</div>
+        <a href="#consult" class="t-link">Start here →</a>
       </div>
-      <div class="service-card card-reveal" data-dir="up">
-        <div class="card-glare"></div>
-        <div class="service-name">POS Integration</div>
-        <p class="service-desc">Custom ordering and management systems that connect your whole operation — front of house to back.</p>
-        <ul class="service-features">
+      <div class="tier reveal">
+        <h3>POS Integration</h3>
+        <div class="t-price">$5,000+</div>
+        <p class="t-desc">Custom ordering and management systems that connect your whole operation, front of house to back.</p>
+        <ul>
           <li>Custom POS build or integration</li>
           <li>Real-time inventory sync</li>
-          <li>Kitchen display & ticket routing</li>
+          <li>Kitchen display &amp; ticket routing</li>
           <li>Custom reporting dashboard</li>
-          <li>Staff training & onboarding</li>
+          <li>Staff training &amp; onboarding</li>
+          <li>90 days post-launch support</li>
         </ul>
-        <div class="service-footer">90 days post-launch support included</div>
+        <a href="#consult" class="t-link">Start here →</a>
       </div>
-      <div class="service-card featured card-reveal" data-dir="right">
-        <div class="card-glare"></div>
-        <div class="service-badge">Best Value</div>
-        <div class="service-name">Full Package</div>
-        <p class="service-desc">Site + POS engineered together from day one. One vendor, one unified system, one point of contact.</p>
-        <ul class="service-features">
+      <div class="tier hot reveal">
+        <span class="t-flag">Best value</span>
+        <h3>Full Package</h3>
+        <div class="t-price">$6,000+</div>
+        <p class="t-desc">Site + POS engineered together from day one. One vendor, one unified system, one point of contact.</p>
+        <ul>
           <li>Everything in both tiers</li>
-          <li>Unified design & data architecture</li>
+          <li>Unified design &amp; data architecture</li>
           <li>Priority support</li>
           <li>Quarterly check-ins</li>
           <li>6 months post-launch support</li>
         </ul>
-        <div class="service-footer">Complete solution, zero overlap</div>
+        <a href="#consult" class="t-link">Start here →</a>
       </div>
     </div>
   </section>
 
   <!-- PROCESS -->
   <section id="process">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">How it works</div>
-      <h2 class="section-title">From conversation<br>to <em>live in weeks</em></h2>
-    </div>
-    <div class="process-grid">
-      <div class="process-step reveal">
-        <div class="step-num">01</div>
-        <div class="step-title">Free Consult</div>
-        <p class="step-desc">We talk through your business, your goals, and what you actually need. No sales pitch, no upsell — just straight talk.</p>
+    <div class="block">
+      <div class="sec-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From conversation to live <em>in weeks.</em></h2>
       </div>
-      <div class="process-step reveal">
-        <div class="step-num">02</div>
-        <div class="step-title">Scoped & Priced</div>
-        <p class="step-desc">You get a clear proposal — what we're building, what it costs, and when it ships. No vague estimates.</p>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-num">03</div>
-        <div class="step-title">Built Custom</div>
-        <p class="step-desc">We build your site or system from scratch. You see progress weekly. No surprises.</p>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-num">04</div>
-        <div class="step-title">Launch & Support</div>
-        <p class="step-desc">We launch together and stick around. Every package includes post-launch support so you're never on your own.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEMO -->
-  <section id="demo">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">See it in action</div>
-      <h2 class="section-title">Built for your<br><em>industry</em></h2>
-      <p class="demo-intro">Switch industries below to see how the same platform transforms in real time — same builder, totally different result.</p>
-    </div>
-
-    <div class="demo-switcher">
-      <button class="demo-theme-btn active" data-theme="restaurant">🍽 Restaurant</button>
-      <button class="demo-theme-btn" data-theme="barbershop">💈 Barbershop</button>
-      <button class="demo-theme-btn" data-theme="retail">🛍 Retail</button>
-    </div>
-
-    <div class="demo-layout">
-      <!-- Left: Mini Site Preview -->
-      <div class="demo-browser reveal">
-        <div class="demo-browser-bar">
-          <div class="demo-browser-dots">
-            <span class="demo-dot" style="background:#ff5f57"></span>
-            <span class="demo-dot" style="background:#febc2e"></span>
-            <span class="demo-dot" style="background:#28c840"></span>
-          </div>
-          <div class="demo-url-bar" id="demo-url">laguna-denver.com</div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="s-num">01</span>
+          <h3>Free Consult</h3>
+          <p>We talk through your business, your goals, and what you actually need. No sales pitch, no upsell. Straight talk.</p>
         </div>
-        <div class="demo-site-inner" id="demo-site-content">
-          <div class="dm-nav">
-            <span class="dm-brand" id="demo-brand">Laguna</span>
-            <div class="dm-nav-right">
-              <span class="dm-link" id="demo-nav-l1">Menu</span>
-              <span class="dm-link" id="demo-nav-l2">Events</span>
-              <span class="dm-cta-pill" id="demo-nav-cta">Reserve</span>
-            </div>
-          </div>
-          <div class="dm-hero">
-            <div class="dm-eyebrow" id="demo-eyebrow">Denver, CO · Est. 2024</div>
-            <h3 class="dm-headline" id="demo-headline">Farm to Table,<br>Every Season</h3>
-            <p class="dm-sub" id="demo-sub">Fresh ingredients, bold flavors, unforgettable evenings.</p>
-            <button class="dm-btn" id="demo-cta">Reserve a Table</button>
-            <div class="dm-tags" id="demo-tags">
-              <span class="dm-tag">Dinner</span>
-              <span class="dm-tag">Brunch</span>
-              <span class="dm-tag">Private Events</span>
-              <span class="dm-tag">Catering</span>
-            </div>
-          </div>
+        <div class="step reveal">
+          <span class="s-num">02</span>
+          <h3>Scoped &amp; Priced</h3>
+          <p>A clear proposal: what we're building, what it costs, when it ships. No vague estimates, no surprise invoices.</p>
         </div>
-      </div>
-
-      <!-- Right: Component Playground -->
-      <div class="playground reveal">
-        <div class="playground-tabs">
-          <button class="playground-tab active" data-tab="menu">Menu / Catalog</button>
-          <button class="playground-tab" data-tab="booking">Booking Widget</button>
-          <button class="playground-tab" data-tab="dashboard">Dashboard</button>
+        <div class="step reveal">
+          <span class="s-num">03</span>
+          <h3>Built Custom</h3>
+          <p>Designed and built from scratch around your business. You see progress weekly. No surprises.</p>
         </div>
-        <div class="playground-panel active" id="panel-menu"></div>
-        <div class="playground-panel" id="panel-booking"></div>
-        <div class="playground-panel" id="panel-dashboard"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section id="why">
-    <div class="why-layout">
-      <div class="reveal">
-        <div class="section-eyebrow">Why we do this</div>
-        <h2 class="section-title" style="margin-bottom: 36px;">Tech should <em>work for you</em></h2>
-        <div class="why-body">
-          <p>Most small business owners end up with tech that was built for someone else — a generic template, a platform that takes a cut, a system that almost fits. You spend more time fighting the tools than running your business.</p>
-          <p>We build <strong>custom</strong> because every business is different. A food truck has different needs than a nail salon. A solo trainer operates differently than a multi-location restaurant. Off-the-shelf doesn't cut it.</p>
-          <p>Brass Tacks exists to give independent operators the same quality of tech that big chains have — without the enterprise price tag or the six-month timeline.</p>
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="why-callout">
-          <div class="callout-quote">"We built Laguna's full website and POS system in under four weeks — live on opening day."</div>
-          <div class="callout-attr">Laguna · Wichita, KS · In production now</div>
+        <div class="step reveal">
+          <span class="s-num">04</span>
+          <h3>Launch &amp; Support</h3>
+          <p>We launch together and stick around. Every package includes post-launch support, so you're never on your own.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- COMPARE -->
-  <section id="compare">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">Why Brass Tacks</div>
-      <h2 class="section-title">How we stack<br><em>up</em></h2>
+  <section class="block" id="compare">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why Brass Tacks</span>
+      <h2>How we <em>stack up.</em></h2>
     </div>
-    <div class="cmp-scroll">
-      <table class="cmp-table">
+    <div class="compare-wrap reveal">
+      <table class="compare">
         <thead>
-          <tr>
-            <th></th>
-            <th>Squarespace / Wix</th>
-            <th>Freelancer</th>
-            <th>Agency</th>
-            <th class="cmp-us">Brass Tacks</th>
-          </tr>
+          <tr><th></th><th>Squarespace / Wix</th><th>Freelancer</th><th>Agency</th><th class="us">Brass Tacks</th></tr>
         </thead>
         <tbody>
-          <tr class="cmp-row">
-            <td>Upfront cost</td>
-            <td><span class="cmp-val meh">$0 upfront<br>$20–50/mo forever</span></td>
-            <td><span class="cmp-val meh">Varies wildly</span></td>
-            <td><span class="cmp-val bad">$10K – $50K+</span></td>
-            <td class="cmp-us"><span class="cmp-val good">Custom quote</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>Time to launch</td>
-            <td><span class="cmp-val meh">Same day<br>(looks like it)</span></td>
-            <td><span class="cmp-val bad">2 – 6 months</span></td>
-            <td><span class="cmp-val bad">3 – 12 months</span></td>
-            <td class="cmp-us"><span class="cmp-val good">2 – 4 weeks</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>Custom built for you</td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-partial">~ depends</span></td>
-            <td><span class="cmp-check">✓</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>No platform fees ever</td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-check">✓</span></td>
-            <td><span class="cmp-check">✓</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>POS + website together</td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-partial">~ rarely</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>Post-launch support</td>
-            <td><span class="cmp-partial">~ FAQ only</span></td>
-            <td><span class="cmp-partial">~ sometimes</span></td>
-            <td><span class="cmp-val bad">Extra retainer</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓ Included</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>Knows your industry</td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-partial">~ maybe</span></td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓</span></td>
-          </tr>
-          <tr class="cmp-row">
-            <td>You own everything</td>
-            <td><span class="cmp-cross">✕</span></td>
-            <td><span class="cmp-check">✓</span></td>
-            <td><span class="cmp-check">✓</span></td>
-            <td class="cmp-us"><span class="cmp-check">✓</span></td>
-          </tr>
+          <tr><th>Upfront cost</th><td>$0 upfront, $20–50/mo forever</td><td>Varies wildly</td><td>$10K – $50K+</td><td class="us">Custom quote</td></tr>
+          <tr><th>Time to launch</th><td>Same day (looks like it)</td><td>2 – 6 months</td><td>3 – 12 months</td><td class="us">2 – 4 weeks</td></tr>
+          <tr><th>Custom built for you</th><td class="no">✕</td><td class="mid">~ depends</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><th>No platform fees ever</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><th>POS + website together</th><td class="no">✕</td><td class="no">✕</td><td class="mid">~ rarely</td><td class="us yes">✓</td></tr>
+          <tr><th>Post-launch support</th><td class="mid">~ FAQ only</td><td class="mid">~ sometimes</td><td>Extra retainer</td><td class="us yes">✓ Included</td></tr>
+          <tr><th>Knows your industry</th><td class="no">✕</td><td class="mid">~ maybe</td><td class="no">✕</td><td class="us yes">✓</td></tr>
+          <tr><th>You own everything</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
         </tbody>
       </table>
     </div>
@@ -1678,1379 +871,119 @@
 
   <!-- CONSULT -->
   <section id="consult">
-    <div class="consult-inner">
-      <div class="reveal">
-        <div class="section-eyebrow">Book a free consult</div>
-        <h2 class="section-title">Let's get down<br>to <em>brass tacks</em></h2>
-        <p class="consult-sub">No commitment, no pitch deck. Just a straight conversation about your business and what we can build for you.</p>
-      </div>
-      <div class="consult-form reveal">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Your name</label>
-            <input type="text" placeholder="First & last name" />
-          </div>
-          <div class="form-group">
-            <label>Business name</label>
-            <input type="text" placeholder="Your business" />
-          </div>
+    <div class="block">
+      <div class="consult-grid">
+        <div class="consult-copy reveal">
+          <span class="eyebrow">Free consult</span>
+          <h2>Let's get down to <em>brass tacks.</em></h2>
+          <p>No commitment, no pitch deck. A straight conversation about your business and what we can build for you. We'll tell you honestly if we're not the right fit.</p>
+          <p>Prefer to talk it through first? That's what the consult is for.</p>
+          <p class="direct">Or call directly:<br /><a href="tel:+13038183433">303-818-3433</a></p>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="you@yourbusiness.com" />
+        <form class="consult-form reveal" action="contact.html" method="get">
+          <div class="field-row">
+            <div class="field">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="cf-biz">Business name</label>
+              <input id="cf-biz" name="business" type="text" required autocomplete="organization" />
+            </div>
           </div>
-          <div class="form-group">
-            <label>Phone (optional)</label>
-            <input type="tel" placeholder="(303) 000-0000" />
+          <div class="field-row">
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone <span style="opacity:0.5">(optional)</span></label>
+              <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group full">
-            <label>Which plan interests you?</label>
-            <select>
-              <option value="" disabled selected>Select a plan...</option>
-              <option>Solo Operator ($1,500–$2,500)</option>
-              <option>Custom Website ($2,500–$3,500)</option>
-              <option>POS Integration ($3,500–$4,500)</option>
-              <option>Full Package ($5,000–$6,000)</option>
-              <option>Not sure yet — let's talk</option>
+          <div class="field">
+            <label for="cf-plan">Which plan interests you?</label>
+            <select id="cf-plan" name="plan">
+              <option>Not sure yet, let's talk</option>
+              <option>Solo Operator ($1,500+)</option>
+              <option>Custom Website ($2,500+)</option>
+              <option>POS Integration ($5,000+)</option>
+              <option>Full Package ($6,000+)</option>
             </select>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group full">
-            <label>Tell us about your business</label>
-            <textarea placeholder="What do you do, what do you need, and when are you hoping to launch?"></textarea>
+          <div class="field">
+            <label for="cf-msg">Tell us about your business</label>
+            <textarea id="cf-msg" name="message" placeholder="What do you do, what drives you crazy about your current setup, what would a perfect system look like?"></textarea>
           </div>
-        </div>
-        <button class="form-submit">Send my consult request →</button>
-        <div class="form-note">Or call us directly: <a href="tel:3038183433" style="color: var(--brass); text-decoration: none;">303-818-3433</a></div>
+          <button type="submit" class="btn-solid" style="width:100%;justify-content:center">Send my consult request →</button>
+        </form>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-left">
-      <div class="footer-logo">BRASS<span>.</span>TACKS</div>
-      <div class="footer-tagline">Business tech that actually works. · Denver, CO</div>
-    </div>
-    <div class="footer-right">
-      <div class="footer-contact">
-        <a href="https://brasstacks.space">brasstacks.space</a>
-        <a href="tel:3038183433">303-818-3433</a>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="nav-logo">BRASS<span>.</span>TACKS</a>
+        <p>Custom websites and POS systems for independent businesses. Built from scratch, owned outright, launched in weeks.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Site</h4>
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Demos</h4>
+        <a href="demos/assay-brewing/" target="_blank" rel="noopener">Assay Brewing</a>
+        <a href="demos/revival-construction/" target="_blank" rel="noopener">Revival Construction</a>
+        <a href="demos/ossuary-tattoo/" target="_blank" rel="noopener">Ossuary Tattoo</a>
+        <a href="demos/halfmoon-nails/" target="_blank" rel="noopener">Halfmoon Nails</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+13038183433">303-818-3433</a>
         <a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a>
       </div>
-      <div class="footer-social">
-        <a href="https://www.yelp.com/biz/cPsdfPciLkgb0gMI0-U6Qg" target="_blank" rel="noopener" aria-label="Brass Tacks on Yelp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041z"/></svg>
-          Yelp
-        </a>
-      </div>
-      <div class="footer-copy">© 2026 Brass Tacks. All rights reserved.</div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Brass Tacks. Built from scratch, obviously.</span>
+      <span>Denver, CO</span>
     </div>
   </footer>
 
   <script>
-    // ── SCROLL REVEAL (existing)
-    const reveals = document.querySelectorAll('.reveal');
-    const revealIO = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          revealIO.unobserve(e.target);
-        }
+    // mobile nav
+    document.querySelector('.nav-toggle').addEventListener('click', function () {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+
+    // demo switcher
+    var tabs = document.querySelectorAll('.demo-tab');
+    var urls = { assay: 'assaybrewing.co', revival: 'revival construction · wichita', ossuary: 'ossuarytattoo.co', halfmoon: 'halfmoonnails.co' };
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var key = tab.getAttribute('data-demo');
+        document.querySelectorAll('.demo-panel').forEach(function (p) {
+          p.classList.toggle('active', p.getAttribute('data-panel') === key);
+        });
+        document.querySelectorAll('.demo-info > div').forEach(function (d) {
+          var show = d.getAttribute('data-info') === key;
+          d.hidden = !show;
+        });
+        document.getElementById('demo-url').textContent = urls[key];
       });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => revealIO.observe(el));
-  </script>
+    });
 
-  <script>
-  (function () {
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
-    const isMobile = () => window.innerWidth <= 768 || ('ontouchstart' in window);
-
-    // ── GRAIN OVERLAY
-    (function initGrain() {
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.style.cssText = 'position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:997;opacity:0.038;';
-      svg.innerHTML = '<filter id="nt"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" seed="0"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#nt)"/>';
-      document.body.appendChild(svg);
-      const turb = svg.querySelector('feTurbulence');
-      let seed = 0;
-      setInterval(() => { turb.setAttribute('seed', seed = (seed + 1) % 600); }, 55);
-    })();
-
-    // ── HERO LETTER SETUP + SCRAMBLE
-    const heroLetters = (function () {
-      const headline = document.querySelector('.hero-headline');
-      if (!headline) return [];
-      const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#@$%&█▓░0123456789';
-
-      function wrap(node) {
-        if (node.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          for (const ch of node.textContent) {
-            if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); continue; }
-            const s = document.createElement('span');
-            s.className = 'hl';
-            s.dataset.ch = ch;
-            s.textContent = ch;
-            frag.appendChild(s);
-          }
-          node.parentNode.replaceChild(frag, node);
-        } else if (node.nodeType === 1 && node.nodeName !== 'BR') {
-          [...node.childNodes].forEach(wrap);
-        }
-      }
-
-      wrap(headline);
-      const spans = [...headline.querySelectorAll('.hl')];
-
-      // Scramble after fade-in completes (~950ms)
-      setTimeout(() => {
-        const TOTAL_MS = 1100;
-        spans.forEach((span, i) => {
-          const delay = (i / spans.length) * TOTAL_MS * 0.55;
-          let n = 0;
-          setTimeout(() => {
-            const iv = setInterval(() => {
-              if (n++ >= 7) { span.textContent = span.dataset.ch; clearInterval(iv); }
-              else span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-            }, 38);
-          }, delay);
-        });
-      }, 950);
-
-      return spans;
-    })();
-
-    // ── HERO LETTER PHYSICS (repel + color shift)
-    (function initLetterPhysics() {
-      if (isMobile() || !heroLetters.length) return;
-      const hero = document.getElementById('hero');
-      let mouse = { x: -9999, y: -9999 };
-      let origins = [];
-      const state = heroLetters.map(() => ({ dx: 0, dy: 0, vx: 0, vy: 0 }));
-
-      function cacheOrigins() {
-        const hr = hero.getBoundingClientRect();
-        origins = heroLetters.map(l => {
-          const r = l.getBoundingClientRect();
-          return { x: r.left + r.width / 2 - hr.left, y: r.top + r.height / 2 - hr.top };
-        });
-      }
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    // scroll reveal
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
-      const SPRING = 0.14, DAMP = 0.78, REPEL_R = 100, REPEL_F = 60;
-      const FRAME_MS = 1000 / 30; // cap at 30fps
-      let lastTick = 0, mouseActive = false, anyMoving = false;
-
-      hero.addEventListener('mouseenter', () => { mouseActive = true; });
-      hero.addEventListener('mouseleave', () => { mouseActive = false; });
-
-      function tick(now) {
-        requestAnimationFrame(tick);
-        if (now - lastTick < FRAME_MS) return; // throttle to 30fps
-        lastTick = now;
-
-        // If mouse is gone and nothing is moving, skip the whole loop
-        if (!mouseActive && !anyMoving) return;
-
-        anyMoving = false;
-        heroLetters.forEach((letter, i) => {
-          const o = origins[i];
-          if (!o) return;
-          const s = state[i];
-          const wx = o.x + s.dx, wy = o.y + s.dy;
-          const ddx = wx - mouse.x, ddy = wy - mouse.y;
-          const dist = Math.sqrt(ddx * ddx + ddy * ddy);
-
-          let fx = -s.dx * SPRING, fy = -s.dy * SPRING;
-
-          if (dist < REPEL_R && dist > 0) {
-            const f = Math.pow(1 - dist / REPEL_R, 1.5) * REPEL_F;
-            fx += (ddx / dist) * f * 0.09;
-            fy += (ddy / dist) * f * 0.09;
-          }
-
-          s.vx = (s.vx + fx) * DAMP;
-          s.vy = (s.vy + fy) * DAMP;
-          s.dx += s.vx; s.dy += s.vy;
-
-          if (Math.abs(s.dx) > 0.08 || Math.abs(s.dy) > 0.08) {
-            anyMoving = true;
-            letter.style.transform = `translate(${s.dx.toFixed(1)}px,${s.dy.toFixed(1)}px)`;
-          } else {
-            s.dx = s.dy = s.vx = s.vy = 0;
-            letter.style.transform = '';
-          }
-
-          const t = clamp(1 - dist / REPEL_R, 0, 1);
-          if (t > 0.02) {
-            const inEm = !!letter.closest('em');
-            const from = inEm ? [196, 152, 42] : [240, 237, 230];
-            const to   = inEm ? [232, 199, 106] : [196, 152, 42];
-            letter.style.color = `rgb(${Math.round(from[0]+(to[0]-from[0])*t)},${Math.round(from[1]+(to[1]-from[1])*t)},${Math.round(from[2]+(to[2]-from[2])*t)})`;
-          } else {
-            letter.style.color = '';
-          }
-        });
-      }
-
-      // Cache after all animations settle
-      setTimeout(cacheOrigins, 1200);
-      window.addEventListener('resize', () => setTimeout(cacheOrigins, 150));
-      requestAnimationFrame(tick);
-    })();
-
-    // ── HERO MOUSE PARALLAX
-    (function initParallax() {
-      if (isMobile()) return;
-      const hero = document.getElementById('hero');
-      const lines = hero.querySelector('.hero-bg-lines');
-      const glow = hero.querySelector('.hero-bg-glow');
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        lines.style.transform = `translate(${x * -22}px,${y * -18}px)`;
-        glow.style.transform = `translate(${x * 36}px,${y * 28}px)`;
-      });
-
-      hero.addEventListener('mouseleave', () => {
-        lines.style.transform = '';
-        glow.style.transform = '';
-      });
-    })();
-
-    // ── HERO PARTICLES (desktop + lighter mobile version)
-    (function initHeroParticles() {
-      const mobile = isMobile();
-      const PARTICLE_FPS = mobile ? 24 : 45;
-      const PARTICLE_MS  = 1000 / PARTICLE_FPS;
-      let lastParticleTick = 0;
-      const canvas = document.getElementById('hero-canvas');
-      const hero = document.getElementById('hero');
-      const ctx = canvas.getContext('2d');
-      let W, H, particles = [];
-      let mouse = { x: -999, y: -999 };
-
-      function resize() {
-        const r = hero.getBoundingClientRect();
-        W = canvas.width = r.width;
-        H = canvas.height = r.height;
-      }
-
-      function mkParticles() {
-        particles = [];
-        const density = mobile ? 20000 : 10000;
-        const count = Math.floor((W * H) / density);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            vx: (Math.random() - 0.5) * (mobile ? 0.22 : 0.35),
-            vy: (Math.random() - 0.5) * (mobile ? 0.22 : 0.35),
-            r: Math.random() * 1.2 + 0.4,
-            base: Math.random() * (mobile ? 0.28 : 0.35) + 0.08,
-          });
-        }
-      }
-
-      function draw(now) {
-        requestAnimationFrame(draw);
-        if (now - lastParticleTick < PARTICLE_MS) return;
-        lastParticleTick = now;
-        ctx.clearRect(0, 0, W, H);
-        const REPEL = 130, CONNECT = mobile ? 68 : 90;
-
-        particles.forEach(p => {
-          if (!mobile) {
-            const dx = p.x - mouse.x, dy = p.y - mouse.y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < REPEL && d > 0) {
-              const f = (1 - d / REPEL) * 2.5;
-              p.vx += (dx / d) * f * 0.25;
-              p.vy += (dy / d) * f * 0.25;
-            }
-          }
-          p.vx *= 0.97; p.vy *= 0.97;
-          if (Math.abs(p.vx) < 0.05) p.vx += (Math.random() - 0.5) * 0.03;
-          if (Math.abs(p.vy) < 0.05) p.vy += (Math.random() - 0.5) * 0.03;
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-        });
-
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            if (d < CONNECT) {
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = `rgba(196,152,42,${0.07 * (1 - d / CONNECT)})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
-          }
-        }
-
-        particles.forEach(p => {
-          const brightened = (!mobile && Math.hypot(p.x - mouse.x, p.y - mouse.y) < REPEL)
-            ? p.base + (1 - Math.hypot(p.x - mouse.x, p.y - mouse.y) / REPEL) * 0.5
-            : p.base;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(196,152,42,${brightened})`;
-          ctx.fill();
-        });
-
-      }
-
-      if (!mobile) {
-        hero.addEventListener('mousemove', e => {
-          const r = hero.getBoundingClientRect();
-          mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-        });
-        hero.addEventListener('mouseleave', () => { mouse.x = -999; mouse.y = -999; });
-      }
-
-      resize(); mkParticles(); draw();
-      window.addEventListener('resize', () => { resize(); mkParticles(); });
-    })();
-
-    // ── HERO SPOTLIGHT
-    (function initHeroSpotlight() {
-      if (isMobile()) return;
-      const spotlight = document.getElementById('hero-spotlight');
-      const hero = document.getElementById('hero');
-
-      hero.addEventListener('mousemove', e => {
-        const r = hero.getBoundingClientRect();
-        const x = e.clientX - r.left, y = e.clientY - r.top;
-        spotlight.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, rgba(196,152,42,0.07) 0%, rgba(196,152,42,0.025) 45%, transparent 70%)`;
-        spotlight.style.opacity = '1';
-      });
-
-      hero.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
-    })();
-
-    // ── HERO CLICK / TAP SHOCKWAVE
-    (function initHeroShockwave() {
-      const hero = document.getElementById('hero');
-
-      function spawnShockwave(x, y) {
-        [0, 1].forEach(i => {
-          const ring = document.createElement('div');
-          ring.className = 'shockwave' + (i ? ' shockwave-2' : '');
-          ring.style.cssText = `left:${x}px;top:${y}px`;
-          hero.appendChild(ring);
-          setTimeout(() => ring.remove(), 1400);
-        });
-      }
-
-      if (!isMobile()) {
-        hero.addEventListener('click', e => {
-          const r = hero.getBoundingClientRect();
-          spawnShockwave(e.clientX - r.left, e.clientY - r.top);
-        });
-      } else {
-        // Tap detection: only fire if touch didn't scroll (small movement, quick lift)
-        let touchStartX = 0, touchStartY = 0, touchStartT = 0;
-
-        hero.addEventListener('touchstart', e => {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-          touchStartT = Date.now();
-        }, { passive: true });
-
-        hero.addEventListener('touchend', e => {
-          const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-          const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-          const dt = Date.now() - touchStartT;
-          // Only treat as a tap if finger barely moved and lifted quickly
-          if (dx > 10 || dy > 10 || dt > 300) return;
-
-          const r = hero.getBoundingClientRect();
-          const t = e.changedTouches[0];
-          spawnShockwave(t.clientX - r.left, t.clientY - r.top);
-
-          const px = t.clientX, py = t.clientY;
-          for (let i = 0; i < 12; i++) {
-            const angle = (i / 12) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
-            const speed = 32 + Math.random() * 42;
-            const size  = 2 + Math.random() * 3;
-            const color = Math.random() > 0.5 ? '#c4982a' : '#e8c76a';
-            const p = document.createElement('div');
-            p.style.cssText = `position:fixed;width:${size}px;height:${size}px;border-radius:50%;background:${color};pointer-events:none;z-index:9996;left:${px}px;top:${py}px;transform:translate(-50%,-50%);`;
-            document.body.appendChild(p);
-            const vx = Math.cos(angle) * speed, vy = Math.sin(angle) * speed;
-            const dur = 440 + Math.random() * 280;
-            const t0 = performance.now();
-            (function anim(now) {
-              const prog = Math.min((now - t0) / dur, 1);
-              p.style.left    = (px + vx * prog) + 'px';
-              p.style.top     = (py + vy * prog + 44 * prog * prog) + 'px';
-              p.style.opacity = 1 - prog;
-              prog < 1 ? requestAnimationFrame(anim) : p.remove();
-            })(t0);
-          }
-        }, { passive: true });
-      }
-    })();
-
-    // ── GYROSCOPE PARALLAX (mobile)
-    (function initGyroParallax() {
-      if (!isMobile()) return;
-      const hero  = document.getElementById('hero');
-      const lines = hero.querySelector('.hero-bg-lines');
-      const glow  = hero.querySelector('.hero-bg-glow');
-      let tx = 0, ty = 0, cx = 0, cy = 0;
-
-      function onOrientation(e) {
-        // gamma = left/right tilt (-90→90), beta = front/back tilt (0→180 natural hold ~45°)
-        tx = clamp((e.gamma  || 0) / 30, -1, 1);
-        ty = clamp(((e.beta || 45) - 45) / 30, -1, 1);
-      }
-
-      function tick() {
-        cx = lerp(cx, tx, 0.06);
-        cy = lerp(cy, ty, 0.06);
-        lines.style.transform = `translate(${cx * -18}px,${cy * -14}px)`;
-        glow.style.transform  = `translate(${cx *  28}px,${cy *  22}px)`;
-        requestAnimationFrame(tick);
-      }
-
-      function setup() {
-        window.addEventListener('deviceorientation', onOrientation);
-        tick();
-      }
-
-      if (typeof DeviceOrientationEvent !== 'undefined' &&
-          typeof DeviceOrientationEvent.requestPermission === 'function') {
-        // iOS 13+ — need a user gesture first
-        hero.addEventListener('touchstart', () => {
-          DeviceOrientationEvent.requestPermission()
-            .then(s => { if (s === 'granted') setup(); })
-            .catch(() => {});
-        }, { once: true });
-      } else {
-        setup();
-      }
-    })();
-
-
-    // ── CARD TILT + GLARE
-    (function initCardTilt() {
-      if (isMobile()) return;
-      document.querySelectorAll('.service-card').forEach(card => {
-        const glare = card.querySelector('.card-glare');
-
-        card.addEventListener('mousemove', e => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width;
-          const y = (e.clientY - r.top) / r.height;
-          const rX = (y - 0.5) * -10;
-          const rY = (x - 0.5) * 10;
-          card.style.transform = `perspective(900px) rotateX(${rX}deg) rotateY(${rY}deg)`;
-          glare.style.opacity = '1';
-          glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(196,152,42,0.10) 0%, transparent 65%)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = '';
-          glare.style.opacity = '0';
-        });
-      });
-    })();
-
-    // ── MAGNETIC BUTTONS
-    (function initMagnetic() {
-      if (isMobile()) return;
-      document.querySelectorAll('.btn-primary, .nav-cta, .form-submit').forEach(btn => {
-        btn.addEventListener('mousemove', e => {
-          const r = btn.getBoundingClientRect();
-          const dx = (e.clientX - (r.left + r.width / 2)) * 0.28;
-          const dy = (e.clientY - (r.top + r.height / 2)) * 0.28;
-          btn.style.transform = `translate(${dx}px,${dy}px)`;
-        });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-      });
-    })();
-
-    // ── COUNT-UP PROOF NUMBERS
-    (function initCountUp() {
-      const nums = document.querySelectorAll('.proof-num');
-      const data = [
-        { raw: '2–4',  animate: false },
-        { raw: '100%', animate: true, from: 0, to: 100, suffix: '%' },
-        { raw: '$0',   animate: false },
-        { raw: '1',    animate: true, from: 0, to: 1, suffix: '' },
-      ];
-
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const idx = [...nums].indexOf(entry.target);
-          const d = data[idx];
-          io.unobserve(entry.target);
-
-          if (!d.animate) {
-            // Scramble non-numeric ones
-            let n = 0;
-            const iv = setInterval(() => {
-              if (n++ >= 10) { entry.target.textContent = d.raw; clearInterval(iv); return; }
-              entry.target.textContent = d.raw.split('').map(c =>
-                /[0-9]/.test(c) ? Math.floor(Math.random() * 10) : c
-              ).join('');
-            }, 60);
-            return;
-          }
-
-          const start = performance.now();
-          const dur = 900;
-          (function step(now) {
-            const p = clamp((now - start) / dur, 0, 1);
-            const ease = 1 - Math.pow(1 - p, 3);
-            entry.target.textContent = Math.round(d.from + (d.to - d.from) * ease) + d.suffix;
-            if (p < 1) requestAnimationFrame(step);
-          })(start);
-        });
-      }, { threshold: 0.6 });
-
-      nums.forEach(el => io.observe(el));
-    })();
-
-    // ── NAV SCROLL PROGRESS
-    (function initNavProgress() {
-      const bar = document.getElementById('nav-progress');
-      window.addEventListener('scroll', () => {
-        const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-        bar.style.width = clamp(pct * 100, 0, 100) + '%';
-      }, { passive: true });
-    })();
-
-    // ── ACTIVE NAV SECTION
-    (function initActiveNav() {
-      const sections = ['services', 'process', 'demo', 'why', 'compare', 'consult'].map(id => document.getElementById(id));
-      const links = document.querySelectorAll('.nav-links a[href^="#"]');
-
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const href = '#' + entry.target.id;
-          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === href));
-        });
-      }, { rootMargin: '-35% 0px -55% 0px' });
-
-      sections.forEach(s => s && io.observe(s));
-    })();
-
-    // ── SITE-WIDE SUBTLE TEXT PHYSICS
-    (function initSitePhysics() {
-      if (isMobile()) return;
-      let mouse = { x: -9999, y: -9999 };
-      const tracked = [];
-
-      function wrapEl(el, repelR, repelF, spring, damp) {
-        function walk(node) {
-          if (node.nodeType === 3) {
-            const frag = document.createDocumentFragment();
-            for (const ch of node.textContent) {
-              if (ch.trim() === '') { frag.appendChild(document.createTextNode(ch)); continue; }
-              const s = document.createElement('span');
-              s.className = 'hl';
-              s.textContent = ch;
-              tracked.push({ el: s, ox: 0, oy: 0, dx: 0, dy: 0, vx: 0, vy: 0, ready: false, repelR, repelF, spring, damp });
-              frag.appendChild(s);
-            }
-            node.parentNode.replaceChild(frag, node);
-          } else if (node.nodeType === 1 && node.nodeName !== 'BR') {
-            [...node.childNodes].forEach(walk);
-          }
-        }
-        walk(el);
-      }
-
-      document.querySelectorAll('.section-title').forEach(el => wrapEl(el, 68, 24, 0.18, 0.82));
-      document.querySelectorAll('.service-name').forEach(el => wrapEl(el, 52, 16, 0.20, 0.84));
-
-      // Cache origins lazily when sections scroll into view (after reveal animation)
-      const sIO = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          setTimeout(() => {
-            tracked.filter(t => entry.target.contains(t.el)).forEach(t => {
-              const r = t.el.getBoundingClientRect();
-              t.ox = r.left + r.width / 2 + window.scrollX;
-              t.oy = r.top + r.height / 2 + window.scrollY;
-              t.ready = true;
-            });
-          }, 700);
-          sIO.unobserve(entry.target);
-        });
-      }, { threshold: 0.1 });
-
-      ['services', 'process', 'why', 'consult'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) sIO.observe(el);
-      });
-
-      document.addEventListener('mousemove', e => {
-        mouse.x = e.clientX + window.scrollX;
-        mouse.y = e.clientY + window.scrollY;
-      });
-
-      window.addEventListener('resize', () => {
-        setTimeout(() => {
-          tracked.forEach(t => {
-            const r = t.el.getBoundingClientRect();
-            t.ox = r.left + r.width / 2 + window.scrollX;
-            t.oy = r.top + r.height / 2 + window.scrollY;
-          });
-        }, 200);
-      });
-
-      (function tick() {
-        tracked.forEach(t => {
-          if (!t.ready) return;
-          const wx = t.ox + t.dx, wy = t.oy + t.dy;
-          const ddx = wx - mouse.x, ddy = wy - mouse.y;
-          const dist = Math.sqrt(ddx * ddx + ddy * ddy);
-
-          let fx = -t.dx * t.spring, fy = -t.dy * t.spring;
-          if (dist < t.repelR && dist > 0) {
-            const f = Math.pow(1 - dist / t.repelR, 1.5) * t.repelF;
-            fx += (ddx / dist) * f * 0.09;
-            fy += (ddy / dist) * f * 0.09;
-          }
-          t.vx = (t.vx + fx) * t.damp;
-          t.vy = (t.vy + fy) * t.damp;
-          t.dx += t.vx; t.dy += t.vy;
-
-          if (Math.abs(t.dx) > 0.08 || Math.abs(t.dy) > 0.08) {
-            t.el.style.transform = `translate(${t.dx.toFixed(1)}px,${t.dy.toFixed(1)}px)`;
-          } else {
-            t.dx = t.dy = t.vx = t.vy = 0;
-            t.el.style.transform = '';
-          }
-        });
-        requestAnimationFrame(tick);
-      })();
-    })();
-
-    // ── BUTTON LIQUID FILL + SVG BORDER TRACE
-    (function initButtonEffects() {
-      if (isMobile()) return;
-      const ns = 'http://www.w3.org/2000/svg';
-
-      document.querySelectorAll('.btn-primary, .nav-cta, .form-submit').forEach(btn => {
-        // Liquid blob
-        const blob = document.createElement('span');
-        blob.className = 'btn-liquid';
-        const sz = Math.max(btn.offsetWidth, btn.offsetHeight) * 2.8;
-        blob.style.width = blob.style.height = sz + 'px';
-        btn.appendChild(blob);
-
-        btn.addEventListener('mouseenter', e => {
-          const r = btn.getBoundingClientRect();
-          blob.style.left = (e.clientX - r.left) + 'px';
-          blob.style.top  = (e.clientY - r.top)  + 'px';
-          blob.classList.add('active');
-        });
-        btn.addEventListener('mouseleave', () => blob.classList.remove('active'));
-
-        // SVG border trace
-        const w = btn.offsetWidth, h = btn.offsetHeight, rx = 6;
-        const perim = 2 * (w - 2 * rx) + 2 * (h - 2 * rx) + 2 * Math.PI * rx;
-        const svg = document.createElementNS(ns, 'svg');
-        svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible;';
-        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-        const rect = document.createElementNS(ns, 'rect');
-        rect.setAttribute('x', '1'); rect.setAttribute('y', '1');
-        rect.setAttribute('width', w - 2); rect.setAttribute('height', h - 2);
-        rect.setAttribute('rx', rx);
-        rect.setAttribute('fill', 'none');
-        rect.setAttribute('stroke', '#e8c76a');
-        rect.setAttribute('stroke-width', '1.5');
-        rect.setAttribute('stroke-dasharray', perim);
-        rect.setAttribute('stroke-dashoffset', perim);
-        svg.appendChild(rect);
-        btn.appendChild(svg);
-
-        btn.addEventListener('mouseenter', () => {
-          rect.style.transition = 'stroke-dashoffset 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
-          rect.setAttribute('stroke-dashoffset', '0');
-        });
-        btn.addEventListener('mouseleave', () => {
-          rect.style.transition = 'stroke-dashoffset 0.3s ease';
-          rect.setAttribute('stroke-dashoffset', perim);
-        });
-      });
-    })();
-
-    // ── CLICK PARTICLE BURST
-    (function initClickBurst() {
-      document.querySelectorAll('.btn-primary, .nav-cta, .form-submit').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const COUNT = 14;
-          for (let i = 0; i < COUNT; i++) {
-            const angle = (i / COUNT) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
-            const speed = 45 + Math.random() * 65;
-            const size  = 2.5 + Math.random() * 3;
-            const color = Math.random() > 0.5 ? '#c4982a' : '#e8c76a';
-            const p = document.createElement('div');
-            p.style.cssText = `position:fixed;width:${size}px;height:${size}px;border-radius:50%;background:${color};pointer-events:none;z-index:9996;left:${e.clientX}px;top:${e.clientY}px;transform:translate(-50%,-50%);`;
-            document.body.appendChild(p);
-            const ox = e.clientX, oy = e.clientY;
-            const vx = Math.cos(angle) * speed, vy = Math.sin(angle) * speed;
-            const dur = 480 + Math.random() * 380;
-            const t0 = performance.now();
-            (function anim(now) {
-              const t = Math.min((now - t0) / dur, 1);
-              p.style.left    = (ox + vx * t) + 'px';
-              p.style.top     = (oy + vy * t + 55 * t * t) + 'px';
-              p.style.opacity = 1 - t;
-              p.style.transform = `translate(-50%,-50%) scale(${1 - t * 0.5})`;
-              t < 1 ? requestAnimationFrame(anim) : p.remove();
-            })(t0);
-          }
-        });
-      });
-    })();
-
-    // ── FORM SUBMIT RIPPLE
-    (function initRipple() {
-      document.querySelectorAll('.form-submit').forEach(btn => {
-        btn.addEventListener('click', e => {
-          const r = btn.getBoundingClientRect();
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple';
-          ripple.style.left = (e.clientX - r.left) + 'px';
-          ripple.style.top = (e.clientY - r.top) + 'px';
-          btn.appendChild(ripple);
-          setTimeout(() => ripple.remove(), 700);
-        });
-      });
-    })();
-
-    // ── CALLOUT QUOTE TYPEWRITER
-    (function initTypewriter() {
-      const el = document.querySelector('.callout-quote');
-      if (!el) return;
-      const full = el.textContent.trim();
-      el.textContent = '';
-      const cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      cursor.style.height = '0.75em';
-      el.appendChild(cursor);
-      let fired = false;
-
-      new IntersectionObserver((entries, io) => {
-        if (!entries[0].isIntersecting || fired) return;
-        fired = true; io.disconnect();
-        let i = 0;
-        const iv = setInterval(() => {
-          if (i >= full.length) { clearInterval(iv); setTimeout(() => cursor.remove(), 1500); return; }
-          cursor.before(document.createTextNode(full[i++]));
-        }, 26);
-      }, { threshold: 0.6 }).observe(el);
-    })();
-
-    // ── STAGGERED SERVICE CARD REVEAL
-    (function initCardStagger() {
-      document.querySelectorAll('.service-card.card-reveal').forEach((card, i) => {
-        new IntersectionObserver((entries, io) => {
-          if (!entries[0].isIntersecting) return;
-          io.disconnect();
-          setTimeout(() => card.classList.add('visible'), i * 110);
-        }, { threshold: 0.12 }).observe(card);
-      });
-    })();
-
-    // ── SCROLL VELOCITY TILT
-    (function initScrollTilt() {
-      if (isMobile()) return;
-      const targets = document.querySelectorAll('#process, #why, #consult');
-      let lastY = window.scrollY, vel = 0, tilt = 0;
-      window.addEventListener('scroll', () => { vel = window.scrollY - lastY; lastY = window.scrollY; }, { passive: true });
-      (function tick() {
-        tilt = tilt * 0.84 + vel * 0.0018;
-        vel  *= 0.78;
-        const t = clamp(tilt, -0.45, 0.45);
-        targets.forEach(s => { s.style.transform = Math.abs(t) > 0.01 ? `perspective(1400px) rotateX(${t}deg)` : ''; });
-        requestAnimationFrame(tick);
-      })();
-    })();
-
-    // ── INDUSTRY DEMO
-    (function initDemo() {
-      const THEMES = {
-        restaurant: {
-          accent: '#c4982a', accentRgb: '196,152,42',
-          url: 'laguna-denver.com', brand: 'Laguna',
-          nav: ['Menu', 'Events', 'Reserve'],
-          eyebrow: 'Denver, CO · Est. 2024',
-          headline: 'Farm to Table,\nEvery Season',
-          sub: 'Fresh ingredients, bold flavors, unforgettable evenings.',
-          cta: 'Reserve a Table',
-          tags: ['Dinner', 'Brunch', 'Private Events', 'Catering'],
-          menu: [
-            { emoji: '🥩', name: 'Wagyu Ribeye',     desc: '14oz, roasted garlic butter, truffle frites', price: '$52' },
-            { emoji: '🍝', name: 'House Tagliatelle', desc: 'Wild boar ragù, aged parmigiano',             price: '$28' },
-            { emoji: '🦞', name: 'Maine Lobster',     desc: 'Butter poached, saffron bisque',              price: '$65' },
-            { emoji: '🥗', name: 'Harvest Salad',     desc: 'Roasted beets, goat cheese, walnuts',         price: '$18' },
-          ],
-          booking: { title: 'Reserve Your Table', namePh: 'Guest name', phonePh: '(303) 000-0000', services: ['Dinner', 'Brunch', 'Private Event', 'Catering'], submit: 'Request Reservation' },
-          dash: {
-            stats: [
-              { label: 'Covers Today', value: '142', delta: '+18%', up: true },
-              { label: 'Revenue',      value: '$4,218', delta: '+12%', up: true },
-              { label: 'Avg Check',    value: '$29.70', delta: '-3%',  up: false },
-            ],
-            tLabel: 'Top Menu Items',
-            rows: [
-              { name: 'Wagyu Ribeye',  sold: 34, status: 'In Stock', cls: 'in-stock' },
-              { name: 'Maine Lobster', sold: 22, status: 'Limited',  cls: 'limited'  },
-              { name: 'Tagliatelle',   sold: 51, status: 'In Stock', cls: 'in-stock' },
-              { name: 'Harvest Salad', sold: 40, status: 'In Stock', cls: 'in-stock' },
-            ],
-          },
-        },
-        barbershop: {
-          accent: '#3b7dd8', accentRgb: '59,125,216',
-          url: 'sharpandsons.co', brand: 'Sharp & Sons',
-          nav: ['Services', 'Pricing', 'Book'],
-          eyebrow: 'Denver, CO · Est. 2018',
-          headline: 'Fades, Cuts &\nClassic Shaves',
-          sub: 'Walk in looking good. Walk out feeling great.',
-          cta: 'Book a Cut',
-          tags: ['Fades', 'Beard Trims', 'Hot Towel Shave', 'Kids Cuts'],
-          menu: [
-            { emoji: '✂️', name: 'Classic Cut',     desc: 'Wash, cut, style, and finish',           price: '$35' },
-            { emoji: '🪒', name: 'Hot Towel Shave', desc: 'Straight razor, hot towel, aftershave',  price: '$45' },
-            { emoji: '💈', name: 'Full Service',     desc: 'Cut + shave + beard trim',               price: '$70' },
-            { emoji: '👦', name: 'Kids Cut',         desc: 'Under 12, quick and fun',                price: '$22' },
-          ],
-          booking: { title: 'Book Your Appointment', namePh: 'Your name', phonePh: '(303) 000-0000', services: ['Classic Cut', 'Hot Towel Shave', 'Full Service', 'Kids Cut'], submit: 'Book Appointment' },
-          dash: {
-            stats: [
-              { label: 'Bookings Today', value: '28',   delta: '+5%',  up: true },
-              { label: 'Revenue',        value: '$980',  delta: '+22%', up: true },
-              { label: 'Avg Service',    value: '$35',   delta: '+0%',  up: true },
-            ],
-            tLabel: 'Top Services',
-            rows: [
-              { name: 'Classic Cut',     sold: 14, status: 'Available', cls: 'available' },
-              { name: 'Full Service',    sold:  8, status: 'Available', cls: 'available' },
-              { name: 'Hot Towel Shave', sold:  5, status: 'Limited',   cls: 'limited'   },
-              { name: 'Kids Cut',        sold:  3, status: 'Available', cls: 'available' },
-            ],
-          },
-        },
-        retail: {
-          accent: '#2d9b5f', accentRgb: '45,155,95',
-          url: 'copperandco.shop', brand: 'Copper & Co.',
-          nav: ['Shop', 'Collections', 'Pickup'],
-          eyebrow: 'Denver, CO · Local Makers',
-          headline: 'Curated Goods,\nLocal Roots',
-          sub: 'Everything in this shop is hand-picked for a reason.',
-          cta: 'Shop Now',
-          tags: ['Home Goods', 'Gifts', 'Seasonal', 'Local Makers'],
-          menu: [
-            { emoji: '🕯️', name: 'Soy Candle Set',  desc: 'Set of 3, Colorado-made, various scents', price: '$48' },
-            { emoji: '🧴', name: 'Linen Face Wash',  desc: 'Natural, vegan, 8oz',                     price: '$26' },
-            { emoji: '🧶', name: 'Wool Throw',       desc: 'Hand-woven, 100% merino',                 price: '$95' },
-            { emoji: '🎁', name: 'Gift Bundle',      desc: 'Curated for gifting, wrapped and ready',  price: '$65' },
-          ],
-          booking: { title: 'Reserve for Pickup', namePh: 'Your name', phonePh: '(303) 000-0000', services: ['Curbside Pickup', 'In-Store Pickup', 'Gift Wrapping', 'Local Delivery'], submit: 'Reserve Items' },
-          dash: {
-            stats: [
-              { label: 'Orders Today', value: '63',    delta: '+31%', up: true },
-              { label: 'Revenue',      value: '$2,847', delta: '+19%', up: true },
-              { label: 'Avg Order',    value: '$45.20', delta: '+8%',  up: true },
-            ],
-            tLabel: 'Top Products',
-            rows: [
-              { name: 'Soy Candle Set',  sold: 24, status: 'In Stock',  cls: 'in-stock'  },
-              { name: 'Gift Bundle',     sold: 18, status: 'Low Stock', cls: 'low-stock' },
-              { name: 'Wool Throw',      sold: 12, status: 'In Stock',  cls: 'in-stock'  },
-              { name: 'Linen Face Wash', sold:  9, status: 'In Stock',  cls: 'in-stock'  },
-            ],
-          },
-        },
-      };
-
-      const section = document.getElementById('demo');
-      if (!section) return;
-
-      let currentTheme = 'restaurant';
-      let currentTab   = 'menu';
-
-      const themeBtns  = section.querySelectorAll('.demo-theme-btn');
-      const tabBtns    = section.querySelectorAll('.playground-tab');
-      const panels     = {
-        menu:      document.getElementById('panel-menu'),
-        booking:   document.getElementById('panel-booking'),
-        dashboard: document.getElementById('panel-dashboard'),
-      };
-      const siteEl     = document.getElementById('demo-site-content');
-      const urlEl      = document.getElementById('demo-url');
-      const brandEl    = document.getElementById('demo-brand');
-      const navCtaEl   = document.getElementById('demo-nav-cta');
-      const navL1El    = document.getElementById('demo-nav-l1');
-      const navL2El    = document.getElementById('demo-nav-l2');
-      const eyebrowEl  = document.getElementById('demo-eyebrow');
-      const headlineEl = document.getElementById('demo-headline');
-      const subEl      = document.getElementById('demo-sub');
-      const ctaEl      = document.getElementById('demo-cta');
-      const tagsEl     = document.getElementById('demo-tags');
-
-      function applyAccent(t) {
-        themeBtns.forEach(b => {
-          const active = b.dataset.theme === currentTheme;
-          b.classList.toggle('active', active);
-          b.style.background   = active ? t.accent : '';
-          b.style.borderColor  = active ? 'transparent' : '';
-          b.style.color        = active ? '#0d0d0b' : '';
-        });
-        tabBtns.forEach(b => {
-          if (b.classList.contains('active')) {
-            b.style.color            = t.accent;
-            b.style.borderBottomColor = t.accent;
-          }
-        });
-      }
-
-      function renderMenu(t) {
-        panels.menu.innerHTML = `<div class="menu-grid">${t.menu.map(item => `
-          <div class="menu-card">
-            <div class="mc-emoji">${item.emoji}</div>
-            <div class="mc-name">${item.name}</div>
-            <div class="mc-desc">${item.desc}</div>
-            <div class="mc-foot">
-              <span class="mc-price" style="color:${t.accent}">${item.price}</span>
-              <button class="mc-add" style="background:${t.accent}">+</button>
-            </div>
-          </div>`).join('')}</div>`;
-        panels.menu.querySelectorAll('.mc-add').forEach(btn => {
-          btn.addEventListener('click', () => {
-            btn.textContent = '✓'; btn.style.transform = 'scale(0.85)';
-            setTimeout(() => { btn.textContent = '+'; btn.style.transform = ''; }, 700);
-          });
-        });
-      }
-
-      function renderBooking(t) {
-        const b = t.booking;
-        panels.booking.innerHTML = `
-          <div class="bk-title">${b.title}</div>
-          <div class="bk-row">
-            <div class="bk-field"><div class="bk-label">Name</div><input class="bk-input" type="text" placeholder="${b.namePh}" /></div>
-            <div class="bk-field"><div class="bk-label">Phone</div><input class="bk-input" type="tel" placeholder="${b.phonePh}" /></div>
-          </div>
-          <div class="bk-row">
-            <div class="bk-field"><div class="bk-label">Date</div><input class="bk-input" type="date" /></div>
-            <div class="bk-field"><div class="bk-label">Time</div><input class="bk-input" type="time" /></div>
-          </div>
-          <div class="bk-field">
-            <div class="bk-label">Service</div>
-            <div class="bk-pills">${b.services.map((s, i) => `<button class="bk-pill${i === 0 ? ' active' : ''}" style="${i === 0 ? `border-color:${t.accent};color:${t.accent};background:rgba(${t.accentRgb},0.1)` : ''}">${s}</button>`).join('')}</div>
-          </div>
-          <button class="bk-submit" style="background:${t.accent}">${b.submit}</button>`;
-        const pills = panels.booking.querySelectorAll('.bk-pill');
-        pills.forEach(p => p.addEventListener('click', () => {
-          pills.forEach(x => { x.classList.remove('active'); x.style.cssText = ''; });
-          p.classList.add('active');
-          p.style.borderColor = t.accent; p.style.color = t.accent;
-          p.style.background = `rgba(${t.accentRgb},0.1)`;
-        }));
-        panels.booking.querySelectorAll('.bk-input').forEach(inp => {
-          inp.addEventListener('focus', () => { inp.style.borderColor = t.accent; });
-          inp.addEventListener('blur',  () => { inp.style.borderColor = ''; });
-        });
-      }
-
-      function renderDashboard(t) {
-        const d = t.dash;
-        panels.dashboard.innerHTML = `
-          <div class="dash-stats">${d.stats.map(s => `
-            <div class="dash-stat">
-              <div class="dash-stat-label">${s.label}</div>
-              <div class="dash-stat-val">${s.value}</div>
-              <div class="dash-delta ${s.up ? 'up' : 'dn'}">${s.delta} ${s.up ? '↑' : '↓'}</div>
-            </div>`).join('')}</div>
-          <div class="dash-table-lbl">${d.tLabel}</div>
-          <table class="dash-tbl">
-            <thead><tr><th>Item</th><th>Sold</th><th>Status</th></tr></thead>
-            <tbody>${d.rows.map(r => `
-              <tr>
-                <td>${r.name}</td>
-                <td>${r.sold}</td>
-                <td><span class="dash-pill ${r.cls}">${r.status}</span></td>
-              </tr>`).join('')}</tbody>
-          </table>`;
-      }
-
-      function renderAll(t) { renderMenu(t); renderBooking(t); renderDashboard(t); }
-
-      function updatePreview(t, animate) {
-        const doUpdate = () => {
-          urlEl.textContent      = t.url;
-          brandEl.textContent    = t.brand;
-          navL1El.textContent    = t.nav[0];
-          navL2El.textContent    = t.nav[1];
-          navCtaEl.textContent   = t.nav[2];
-          navCtaEl.style.background = t.accent;
-          eyebrowEl.textContent  = t.eyebrow;
-          eyebrowEl.style.color  = t.accent;
-          headlineEl.innerHTML   = t.headline.replace('\n', '<br>');
-          subEl.textContent      = t.sub;
-          ctaEl.textContent      = t.cta;
-          ctaEl.style.background = t.accent;
-          tagsEl.innerHTML       = t.tags.map(tag => `<span class="dm-tag" style="color:${t.accent};border-color:${t.accent}">${tag}</span>`).join('');
-        };
-        if (animate) {
-          siteEl.style.opacity = '0'; siteEl.style.transform = 'translateY(8px)';
-          setTimeout(() => { doUpdate(); siteEl.style.opacity = '1'; siteEl.style.transform = ''; }, 260);
-        } else { doUpdate(); }
-      }
-
-      function switchTheme(name, animate) {
-        currentTheme = name;
-        const t = THEMES[name];
-        applyAccent(t);
-        updatePreview(t, animate);
-        if (animate) {
-          const activePanel = panels[currentTab];
-          activePanel.style.opacity = '0';
-          setTimeout(() => { renderAll(t); activePanel.style.opacity = '1'; }, 230);
-        } else { renderAll(t); }
-      }
-
-      themeBtns.forEach(btn => btn.addEventListener('click', () => {
-        if (btn.dataset.theme !== currentTheme) switchTheme(btn.dataset.theme, true);
-      }));
-
-      tabBtns.forEach(btn => btn.addEventListener('click', () => {
-        if (btn.dataset.tab === currentTab) return;
-        const t = THEMES[currentTheme];
-        tabBtns.forEach(b => { b.classList.remove('active'); b.style.color = ''; b.style.borderBottomColor = ''; });
-        Object.values(panels).forEach(p => p.classList.remove('active'));
-        currentTab = btn.dataset.tab;
-        btn.classList.add('active'); btn.style.color = t.accent; btn.style.borderBottomColor = t.accent;
-        panels[currentTab].classList.add('active');
-      }));
-
-      switchTheme('restaurant', false);
-    })();
-
-    // ── COMPARE TABLE ROW REVEAL
-    (function initCompare() {
-      const rows = document.querySelectorAll('.cmp-row');
-      if (!rows.length) return;
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const idx = [...rows].indexOf(entry.target);
-          setTimeout(() => entry.target.classList.add('visible'), idx * 80);
-          io.unobserve(entry.target);
-        });
-      }, { threshold: 0.15 });
-      rows.forEach(r => io.observe(r));
-    })();
-
-    // ── EASTER EGG: BRASS ARCADE (click nav dot 3x)
-    (function initEasterEgg() {
-      const dot = document.querySelector('.nav-logo span');
-      if (!dot) return;
-      let clicks = 0, resetTimer = null, gameActive = false;
-
-      dot.addEventListener('click', e => {
-        if (gameActive) return;
-        e.stopPropagation();
-        clicks++;
-        clearTimeout(resetTimer);
-        dot.style.textShadow = `0 0 ${clicks * 6}px #e8c76a, 0 0 ${clicks * 2}px #c4982a`;
-        if (clicks >= 3) {
-          clicks = 0; dot.style.textShadow = '';
-          launchGame();
-        } else {
-          resetTimer = setTimeout(() => { clicks = 0; dot.style.textShadow = ''; }, 2200);
-        }
-      });
-
-      function rr(ctx, x, y, w, h, r) {
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + w - r, y);
-        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-        ctx.lineTo(x + w, y + h - r);
-        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        ctx.lineTo(x + r, y + h);
-        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-        ctx.lineTo(x, y + r);
-        ctx.quadraticCurveTo(x, y, x + r, y);
-        ctx.closePath();
-      }
-
-      function launchGame() {
-        gameActive = true;
-        const hero    = document.getElementById('hero');
-        const heroCvs = document.getElementById('hero-canvas');
-        const spotlight = document.getElementById('hero-spotlight');
-        if (heroCvs)   heroCvs.style.display   = 'none';
-        if (spotlight) spotlight.style.display = 'none';
-
-        const wrap = document.createElement('div');
-        wrap.style.cssText = 'position:absolute;inset:0;z-index:20;background:rgba(17,17,16,0.94);';
-        hero.appendChild(wrap);
-
-        const cvs = document.createElement('canvas');
-        const W = cvs.width  = hero.offsetWidth;
-        const H = cvs.height = hero.offsetHeight;
-        cvs.style.display = 'block';
-        wrap.appendChild(cvs);
-        const ctx = cvs.getContext('2d');
-
-        // Layout
-        const PAD = Math.min(48, W * 0.05);
-        const COLS = Math.max(8, Math.floor((W - PAD * 2) / 62));
-        const BW   = (W - PAD * 2) / COLS;
-        const BH   = 18, BGAP = 5, ROWS = 5, BTOP = 88;
-        const PADDLE_W = 120, PADDLE_H = 10, PADDLE_Y = H - 64;
-        const BALL_R = 7;
-        const BASE_SPEED = Math.max(4.5, W / 270);
-        const ROW_COLORS = ['#e8c76a','#d4ab40','#c4982a','#a07820','#7a5810'];
-
-        let mX = W / 2;
-        let paddle = { x: W / 2 };
-        let ball   = { x: W / 2, y: PADDLE_Y - 32, vx: BASE_SPEED * 0.6, vy: -BASE_SPEED };
-        let blocks = [], parts = [], trail = [];
-        let score = 0, lives = 3, destroyed = 0;
-        let phase = 'ready'; // ready | playing | dead | win | lose
-        let rafId;
-
-        for (let r = 0; r < ROWS; r++)
-          for (let c = 0; c < COLS; c++)
-            blocks.push({ x: PAD + c * BW, y: BTOP + r * (BH + BGAP), w: BW - BGAP, h: BH, color: ROW_COLORS[r], pts: (ROWS - r) * 10, alive: true });
-
-        function spawnParts(bx, by, color) {
-          for (let i = 0; i < 8; i++) {
-            const a = Math.random() * Math.PI * 2, sp = 1.5 + Math.random() * 3;
-            parts.push({ x: bx, y: by, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1, r: 1.5 + Math.random() * 2, color, life: 1 });
-          }
-        }
-
-        function resetBall() {
-          const a = -Math.PI / 2 + (Math.random() - 0.5) * 0.7;
-          const sp = Math.sqrt(ball.vx ** 2 + ball.vy ** 2) || BASE_SPEED;
-          ball.x = paddle.x; ball.y = PADDLE_Y - 32;
-          ball.vx = Math.cos(a) * sp; ball.vy = Math.sin(a) * sp;
-        }
-
-        function exitGame() {
-          cancelAnimationFrame(rafId);
-          wrap.remove();
-          if (heroCvs)   heroCvs.style.display   = '';
-          if (spotlight) spotlight.style.display = '';
-          gameActive = false;
-        }
-
-        wrap.addEventListener('mousemove', e => { const r = hero.getBoundingClientRect(); mX = e.clientX - r.left; });
-        wrap.addEventListener('click', () => {
-          if (phase === 'ready' || phase === 'dead') { phase = 'playing'; }
-          else if (phase === 'win' || phase === 'lose') exitGame();
-        });
-        const onKey = e => {
-          if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); exitGame(); }
-          if (e.key === ' ' && (phase === 'ready' || phase === 'dead')) phase = 'playing';
-        };
-        document.addEventListener('keydown', onKey);
-
-        function loop() {
-          ctx.clearRect(0, 0, W, H);
-
-          // Grid echo
-          ctx.strokeStyle = 'rgba(196,152,42,0.05)';
-          ctx.lineWidth = 1;
-          for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-          for (let y = 0; y < H; y += 60) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-
-          // Paddle
-          paddle.x = clamp(mX, PADDLE_W / 2, W - PADDLE_W / 2);
-
-          if (phase === 'playing') {
-            // Trail
-            trail.push({ x: ball.x, y: ball.y });
-            if (trail.length > 12) trail.shift();
-
-            ball.x += ball.vx; ball.y += ball.vy;
-
-            // Walls
-            if (ball.x - BALL_R < 0)  { ball.x = BALL_R; ball.vx =  Math.abs(ball.vx); }
-            if (ball.x + BALL_R > W)   { ball.x = W - BALL_R; ball.vx = -Math.abs(ball.vx); }
-            if (ball.y - BALL_R < 0)   { ball.y = BALL_R; ball.vy =  Math.abs(ball.vy); }
-
-            // Paddle
-            if (ball.vy > 0 && ball.y + BALL_R >= PADDLE_Y && ball.y - BALL_R <= PADDLE_Y + PADDLE_H &&
-                ball.x >= paddle.x - PADDLE_W / 2 && ball.x <= paddle.x + PADDLE_W / 2) {
-              const hit = (ball.x - paddle.x) / (PADDLE_W / 2);
-              const a = hit * (Math.PI / 3.5);
-              const sp = Math.sqrt(ball.vx ** 2 + ball.vy ** 2);
-              ball.vx = Math.sin(a) * sp;
-              ball.vy = -Math.abs(Math.cos(a) * sp);
-              ball.y  = PADDLE_Y - BALL_R;
-            }
-
-            // Fell off
-            if (ball.y - BALL_R > H) {
-              lives--;
-              if (lives <= 0) phase = 'lose';
-              else { phase = 'dead'; resetBall(); }
-            }
-
-            // Block collisions
-            for (const b of blocks) {
-              if (!b.alive) continue;
-              if (ball.x + BALL_R > b.x && ball.x - BALL_R < b.x + b.w &&
-                  ball.y + BALL_R > b.y && ball.y - BALL_R < b.y + b.h) {
-                const ol = Math.min(ball.x + BALL_R - b.x, b.x + b.w - (ball.x - BALL_R));
-                const ot = Math.min(ball.y + BALL_R - b.y, b.y + b.h - (ball.y - BALL_R));
-                if (ol < ot) ball.vx *= -1; else ball.vy *= -1;
-                b.alive = false; score += b.pts; destroyed++;
-                spawnParts(b.x + b.w / 2, b.y + b.h / 2, b.color);
-                // Speed up every 8 blocks
-                if (destroyed % 8 === 0) {
-                  const sp = Math.sqrt(ball.vx ** 2 + ball.vy ** 2);
-                  const f = Math.min(sp * 1.07, BASE_SPEED * 2.2) / sp;
-                  ball.vx *= f; ball.vy *= f;
-                }
-                break;
-              }
-            }
-            if (blocks.every(b => !b.alive)) phase = 'win';
-          }
-
-          // Particles
-          parts = parts.filter(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.life -= 0.025; return p.life > 0; });
-
-          // Draw blocks
-          for (const b of blocks) {
-            if (!b.alive) continue;
-            ctx.fillStyle = b.color + '18';
-            ctx.fillRect(b.x, b.y, b.w, b.h);
-            ctx.strokeStyle = b.color;
-            ctx.lineWidth = 1.5;
-            ctx.strokeRect(b.x + 0.75, b.y + 0.75, b.w - 1.5, b.h - 1.5);
-          }
-
-          // Particles
-          ctx.save();
-          parts.forEach(p => { ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); });
-          ctx.restore();
-
-          // Ball trail
-          trail.forEach((pt, i) => {
-            const t = i / trail.length;
-            ctx.beginPath(); ctx.arc(pt.x, pt.y, BALL_R * t * 0.65, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(196,152,42,${t * 0.2})`; ctx.fill();
-          });
-
-          // Ball glow
-          if (phase === 'playing') {
-            const g = ctx.createRadialGradient(ball.x, ball.y, 0, ball.x, ball.y, BALL_R * 4);
-            g.addColorStop(0, 'rgba(196,152,42,0.35)'); g.addColorStop(1, 'rgba(196,152,42,0)');
-            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(ball.x, ball.y, BALL_R * 4, 0, Math.PI * 2); ctx.fill();
-          }
-
-          // Ball
-          if (phase !== 'lose') {
-            ctx.fillStyle = '#c4982a'; ctx.beginPath(); ctx.arc(ball.x, ball.y, BALL_R, 0, Math.PI * 2); ctx.fill();
-            ctx.fillStyle = '#e8c76a'; ctx.beginPath(); ctx.arc(ball.x - 2, ball.y - 2, 2.5, 0, Math.PI * 2); ctx.fill();
-          }
-
-          // Paddle
-          const pg = ctx.createLinearGradient(paddle.x - PADDLE_W/2, 0, paddle.x + PADDLE_W/2, 0);
-          pg.addColorStop(0, '#7a5810'); pg.addColorStop(0.5, '#e8c76a'); pg.addColorStop(1, '#7a5810');
-          ctx.fillStyle = pg;
-          rr(ctx, paddle.x - PADDLE_W/2, PADDLE_Y, PADDLE_W, PADDLE_H, 4); ctx.fill();
-
-          // HUD
-          ctx.fillStyle = '#c4982a';
-          ctx.font = '500 11px "DM Sans", sans-serif';
-          ctx.textAlign = 'left'; ctx.fillText('SCORE', PAD, 46);
-          ctx.font = 'normal 28px "Bebas Neue", sans-serif';
-          ctx.fillText(score, PAD, 70);
-
-          ctx.textAlign = 'right';
-          ctx.font = '500 11px "DM Sans", sans-serif';
-          ctx.fillStyle = '#c4982a'; ctx.fillText('LIVES', W - PAD, 46);
-          for (let i = 0; i < lives; i++) {
-            ctx.beginPath(); ctx.arc(W - PAD - i * 18, 64, 5, 0, Math.PI * 2);
-            ctx.fillStyle = '#c4982a'; ctx.fill();
-          }
-
-          // Phase prompts
-          ctx.textAlign = 'center';
-          if (phase === 'ready') {
-            ctx.fillStyle = 'rgba(196,152,42,0.75)';
-            ctx.font = 'normal 20px "Bebas Neue", sans-serif';
-            ctx.fillText('CLICK OR PRESS SPACE TO LAUNCH', W / 2, PADDLE_Y - 48);
-          }
-          if (phase === 'dead' && lives > 0) {
-            ctx.fillStyle = 'rgba(196,152,42,0.75)';
-            ctx.font = 'normal 20px "Bebas Neue", sans-serif';
-            ctx.fillText(`${lives} LIVES LEFT — CLICK TO CONTINUE`, W / 2, PADDLE_Y - 48);
-          }
-          if (phase === 'win' || phase === 'lose') {
-            ctx.fillStyle = 'rgba(196,152,42,0.95)';
-            ctx.font = 'normal 80px "Bebas Neue", sans-serif';
-            ctx.fillText(phase === 'win' ? 'YOU CLEARED IT.' : 'GAME OVER.', W / 2, H / 2 - 16);
-            ctx.font = '300 14px "DM Sans", sans-serif';
-            ctx.fillStyle = 'rgba(168,164,156,0.7)';
-            ctx.fillText(`SCORE: ${score}  —  CLICK TO EXIT`, W / 2, H / 2 + 24);
-          }
-
-          // ESC hint
-          ctx.font = '300 10px "DM Sans", sans-serif';
-          ctx.fillStyle = 'rgba(94,92,87,0.5)';
-          ctx.textAlign = 'right';
-          ctx.fillText('ESC TO EXIT', W - PAD, H - 20);
-
-          rafId = requestAnimationFrame(loop);
-        }
-
-        rafId = requestAnimationFrame(loop);
-      }
-    })();
-
-  })();
-
-  // ── MOBILE NAV TOGGLE
-  (function() {
-    const openBtn  = document.getElementById('nav-open');
-    const closeBtn = document.getElementById('nav-close');
-    const menu     = document.getElementById('nav-mobile');
-    if (!openBtn) return;
-    const openMenu  = () => { menu.classList.add('open');    openBtn.classList.add('open');    document.body.style.overflow = 'hidden'; };
-    const closeMenu = () => { menu.classList.remove('open'); openBtn.classList.remove('open'); document.body.style.overflow = ''; };
-    openBtn.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  })();
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   </script>
 </body>
 </html>
