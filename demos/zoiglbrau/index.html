@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZoiglBräu — Tradition in Excellence | Aurora, CO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g950:#0c1f15; --g900:#10291b; --g800:#16351f; --g700:#1e4429; --g600:#2a5a36;
+  --cream:#f7f0dd; --cream2:#efe2c2; --creamdim:rgba(60,40,18,.62);
+  --gold:#c9a227; --goldlt:#e6c65c; --wood:#6b4423; --wooddk:#4a2e16; --ink:#191006;
+  --forest:#1f4d2e; --brown:#3a2a14; --golddk:#8a6a12;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+.blk{font-family:'Pirata One',serif;font-weight:400;letter-spacing:.02em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:84px 0}
+.kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--golddk);border:1px solid rgba(201,162,39,.45);padding:7px 16px;border-radius:999px;margin-bottom:18px}
+h2.sec{font-family:'Pirata One',serif;font-size:clamp(38px,5.5vw,60px);line-height:1.05;margin-bottom:10px;color:var(--brown)}
+p.sub{color:var(--creamdim);max-width:640px;font-size:17px;margin-bottom:38px}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);background:rgba(247,240,221,.92);border-bottom:1px solid rgba(201,162,39,.18)}
+.nav-in{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--brown)}
+.brand .blk{font-size:26px;color:var(--gold)}
+.nav-links{display:flex;gap:26px}
+.nav-links a{color:var(--creamdim);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.04em}
+.nav-links a:hover{color:var(--goldlt)}
+@media(max-width:760px){.nav-links{display:none}}
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;
+  background:radial-gradient(1200px 600px at 50% -10%, rgba(201,162,39,.25) 0%, rgba(201,162,39,.08) 45%, var(--cream) 100%)}
+.hero-bgword{position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);font-family:'Pirata One',serif;
+  font-size:clamp(120px,26vw,340px);color:transparent;-webkit-text-stroke:1.5px rgba(201,162,39,.16);white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
+.hero-inner{position:relative;z-index:2;padding:120px 22px 80px}
+.star{width:74px;height:74px;margin:0 auto 18px;filter:drop-shadow(0 4px 18px rgba(201,162,39,.35))}
+.hero h1{font-family:'Pirata One',serif;font-size:clamp(64px,11vw,132px);line-height:.95;color:var(--brown);text-shadow:0 4px 24px rgba(201,162,39,.25)}
+.hero h1 .a{color:var(--gold)}
+.hero .tag{margin-top:14px;font-size:15px;letter-spacing:.42em;text-transform:uppercase;color:var(--golddk);font-weight:600}
+.hero p.lede{max-width:560px;margin:22px auto 0;color:var(--creamdim);font-size:17px}
+.hero-cta{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 34px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:.03em;transition:transform .15s ease}
+.btn-gold{background:linear-gradient(180deg,var(--goldlt),var(--gold));color:#221604;box-shadow:0 8px 28px rgba(201,162,39,.35)}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(60,40,18,.4);color:var(--brown)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--golddk)}
+.hero-meta{margin-top:44px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;color:var(--creamdim);font-size:14px}
+.hero-meta b{color:var(--brown)}
+/* RAUTEN divider */
+.rauten{height:26px;background:
+  repeating-conic-gradient(var(--g700) 0 25%, transparent 0 50%) 0 0/52px 52px,
+  linear-gradient(180deg,#0c1f15,#16351f 50%,#0c1f15);border-top:1px solid rgba(201,162,39,.25);border-bottom:1px solid rgba(201,162,39,.25)}
+/* TAPS */
+.tap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(max-width:960px){.tap-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.tap-grid{grid-template-columns:1fr}}
+.beer{background:linear-gradient(180deg,#fffdf4,#f6ead0);border:1px solid rgba(201,162,39,.22);border-radius:20px;padding:28px 24px;text-align:center;transition:transform .18s ease,border-color .18s ease}
+.beer:hover{transform:translateY(-5px);border-color:rgba(230,198,92,.6)}
+.beer .tapno{font-size:11px;font-weight:800;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.beer svg.glass{height:170px;width:auto;margin:14px auto 6px;display:block;filter:drop-shadow(0 10px 22px rgba(0,0,0,.45))}
+.beer h3{font-family:'Pirata One',serif;font-size:30px;color:var(--brown);margin-top:6px}
+.beer .style{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);margin:4px 0 10px}
+.beer p.d{font-size:14.5px;color:var(--creamdim);min-height:88px}
+.specs{display:flex;justify-content:center;gap:10px;margin:14px 0}
+.spec{background:rgba(201,162,39,.1);border:1px solid rgba(201,162,39,.3);border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700}
+.spec b{color:var(--golddk)}
+.addbtn{width:100%;margin-top:6px;padding:13px;border-radius:12px;border:1.5px solid var(--gold);background:transparent;color:var(--forest);font-weight:800;font-size:14px;letter-spacing:.08em;cursor:pointer;transition:all .15s}
+.addbtn:hover{background:var(--gold);color:#221604}
+.addbtn.added{background:var(--gold);color:#221604}
+/* FLIGHT */
+.flight-sec{background:var(--cream2)}
+.flight-flex{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start}
+@media(max-width:900px){.flight-flex{grid-template-columns:1fr}}
+.paddle{background:linear-gradient(180deg,#7a4f27,#5a3618);border-radius:26px;padding:34px 26px;box-shadow:inset 0 2px 0 rgba(255,255,255,.15),0 20px 50px rgba(0,0,0,.5);border:1px solid #3a2210}
+.paddle h3{font-family:'Pirata One',serif;font-size:32px;text-align:center;color:#f7e8c8;margin-bottom:4px}
+.paddle .hint{text-align:center;color:rgba(247,232,200,.6);font-size:13.5px;margin-bottom:20px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.slot{background:rgba(255,255,255,.45);border:2px dashed rgba(60,40,18,.35);border-radius:16px;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 8px;cursor:pointer;transition:all .15s}
+.slot.filled{border-style:solid;border-color:var(--gold);background:rgba(201,162,39,.18)}
+.slot svg{height:120px;width:auto}
+.slot .sname{font-size:11.5px;font-weight:700;color:var(--brown);margin-top:8px;text-align:center;line-height:1.3}
+.slot .rm{margin-top:6px;font-size:11px;color:rgba(60,40,18,.55);text-decoration:underline;cursor:pointer}
+.slot .rm:hover{color:var(--brown)}
+.slot .empty{color:rgba(60,40,18,.5);font-size:13px}
+.flight-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.fbtn{flex:1;min-width:150px;padding:14px;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;border:none;letter-spacing:.04em}
+.fbtn.surprise{background:linear-gradient(180deg,var(--goldlt),var(--gold));color:#221604}
+.fbtn.clear{background:transparent;border:1.5px solid rgba(247,232,200,.4);color:#f7e8c8}
+/* coaster ticket */
+.coaster{background:var(--cream);color:#2a1c0c;border-radius:50%;width:340px;height:340px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:44px;box-shadow:0 18px 50px rgba(0,0,0,.5),inset 0 0 0 10px var(--cream),inset 0 0 0 12px var(--gold);position:relative}
+.coaster h4{font-family:'Pirata One',serif;font-size:30px;margin-bottom:2px}
+.coaster .ct{font-size:11px;letter-spacing:.28em;font-weight:800;color:#7a5c1e;text-transform:uppercase}
+.coaster ol{list-style:none;margin:10px 0;font-size:14px;font-weight:600}
+.coaster ol li{margin:3px 0}
+.coaster .cprice{font-size:26px;font-weight:800;color:#7a5c1e}
+.coaster .cnote{font-size:11.5px;color:#8a6f3a;margin-top:6px;font-style:italic}
+.ticket-wrap{text-align:center}
+.ticket-wrap .why{color:var(--creamdim);font-size:14px;margin-top:18px;max-width:340px;margin-left:auto;margin-right:auto}
+/* PAIR */
+.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media(max-width:900px){.pair-grid{grid-template-columns:1fr}}
+.beerchips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.beerchips{grid-template-columns:repeat(2,1fr)}}
+.chip{background:#fffdf4;border:1.5px solid rgba(201,162,39,.25);border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--goldlt)}
+.chip.sel{background:linear-gradient(180deg,#2a5f3a,#1f4d2e);border-color:var(--goldlt);box-shadow:0 6px 20px rgba(201,162,39,.25)}
+.chip svg{height:74px;width:auto}
+.chip .cn{font-size:13px;font-weight:800;margin-top:6px}
+.chip .cs{font-size:11px;color:var(--forest);
+.chip.sel .cn{color:#f7f0dd;}
+.chip.sel{color:#f7f0dd}letter-spacing:.08em;text-transform:uppercase}
+.plates{display:flex;flex-direction:column;gap:14px}
+.plate{background:#fffdf4;border:1px solid rgba(201,162,39,.25);border-radius:16px;padding:18px 20px;cursor:pointer;transition:all .15s}
+.plate:hover{border-color:var(--goldlt)}
+.plate .rank{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.plate h4{font-size:19px;margin:4px 0 6px}
+.plate p{font-size:14px;color:var(--creamdim)}
+.verdict{margin-top:6px;background:linear-gradient(180deg,#2a5f3a,#1f4d2e);border:1.5px solid var(--goldlt);border-radius:16px;padding:22px}
+.verdict h4{font-family:'Pirata One',serif;font-size:26px;color:var(--goldlt)}
+.verdict .vs{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,240,221,.72);margin:2px 0 10px}
+.verdict p{font-size:15px;color:#f7f0dd}
+/* MENU */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.tab{padding:12px 26px;border-radius:999px;border:1.5px solid rgba(201,162,39,.35);background:transparent;color:var(--creamdim);font-weight:700;font-size:14px;cursor:pointer;letter-spacing:.05em}
+.tab.on{background:var(--gold);border-color:var(--gold);color:#221604}
+.dishgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.dishgrid{grid-template-columns:1fr}}
+.dish{background:#fffdf4;border:1px solid rgba(201,162,39,.2);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.dish h4{font-size:17px}
+.dish p{font-size:13.5px;color:var(--creamdim)}
+.dish .pr{font-weight:800;color:var(--golddk);font-size:18px;white-space:nowrap}
+/* STORY */
+.story{background:var(--cream2)}
+.story-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+@media(max-width:900px){.story-grid{grid-template-columns:1fr}}
+.bigstar{width:min(340px,80%);margin:0 auto;display:block;filter:drop-shadow(0 10px 40px rgba(201,162,39,.3))}
+.story h2{font-family:'Pirata One',serif;font-size:clamp(34px,4.5vw,52px);margin-bottom:16px}
+.story p{color:var(--creamdim);margin-bottom:16px;font-size:16px}
+.story p b{color:var(--brown)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+@media(max-width:620px){.facts{grid-template-columns:1fr}}
+.fact{background:#fffdf4;border:1px solid rgba(201,162,39,.25);border-radius:14px;padding:16px;text-align:center}
+.fact .n{font-family:'Pirata One',serif;font-size:34px;color:var(--forest)}
+.fact .l{font-size:12.5px;color:var(--creamdim);letter-spacing:.06em}
+/* EVENTS */
+.evgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.evgrid{grid-template-columns:1fr}}
+.ev{background:#fffdf4;border:1px solid rgba(201,162,39,.25);border-radius:18px;padding:26px}
+.ev .d{font-size:12px;font-weight:800;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+.ev h3{font-family:'Pirata One',serif;font-size:30px;margin:8px 0}
+.ev p{font-size:14.5px;color:var(--creamdim)}
+/* VISIT */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:800px){.visit-grid{grid-template-columns:1fr}}
+.vcard{background:#fffdf4;border:1px solid rgba(201,162,39,.25);border-radius:18px;padding:30px}
+.vcard h3{font-family:'Pirata One',serif;font-size:32px;margin-bottom:14px;color:var(--forest)}
+.hours{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed rgba(201,162,39,.2);font-size:15px}
+.hours:last-child{border:none}
+.hours span:last-child{color:var(--creamdim)}
+/* FOOTER */
+footer{border-top:1px solid rgba(201,162,39,.2);padding:44px 0;text-align:center;color:var(--creamdim);font-size:13.5px}
+footer .blk{font-size:30px;color:var(--gold)}
+.disclose{max-width:720px;margin:16px auto 0;font-size:12.5px;color:rgba(60,40,18,.5);font-style:italic}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+<a class="brand" href="#top"><svg class="star" width="30" height="30" viewBox="0 0 100 100"><polygon points="50.0,2.0 40.5,33.5 8.4,26.0 31.0,50.0 8.4,74.0 40.5,66.5 50.0,98.0 59.5,66.5 91.6,74.0 69.0,50.0 91.6,26.0 59.5,33.5" fill="none" stroke="#c9a227" stroke-width="7" stroke-linejoin="round"/></svg><span class="blk">ZoiglBräu</span></a>
+<div class="nav-links"><a href="#taps">Bier</a><a href="#flight">Flight</a><a href="#pair">Pair It</a><a href="#menu">Speisekarte</a><a href="#story">Story</a><a href="#visit">Visit</a></div>
+</div></nav>
+
+<header class="hero" id="top">
+<div class="hero-bgword">ZoiglBräu</div>
+<div class="hero-inner">
+<svg class="star" width="74" height="74" viewBox="0 0 100 100"><polygon points="50.0,2.0 40.5,33.5 8.4,26.0 31.0,50.0 8.4,74.0 40.5,66.5 50.0,98.0 59.5,66.5 91.6,74.0 69.0,50.0 91.6,26.0 59.5,33.5" fill="none" stroke="#c9a227" stroke-width="7" stroke-linejoin="round"/></svg>
+<h1>Zoigl<span class="a">Bräu</span></h1>
+<div class="tag">Tradition in Excellence</div>
+<p class="lede">German brewing the old way — cloudy hefes, crisp kölsch, copper altbier — poured in the heart of Aurora, Colorado. Pull up a bench.</p>
+<div class="hero-cta">
+<a class="btn btn-gold" href="#flight">Build Your Flight</a>
+<a class="btn btn-ghost" href="#menu">Speisekarte</a>
+</div>
+<div class="hero-meta">
+<span><b>15120 E Hampden Ave</b> · Aurora, CO</span>
+<span><b>(720) 545-5289</b></span>
+<span>Kitchen open late</span>
+</div>
+</div>
+</header>
+<div class="rauten"></div>
+
+<section id="taps"><div class="wrap">
+<span class="kicker">Vom Fass · On Tap</span>
+<h2 class="sec">Sechs Biere, Kein Kompromiss</h2>
+<p class="sub">Six taps, zero shortcuts. Every glass drawn below is the shape it deserves — add any four to your flight board.</p>
+<div class="tap-grid"><div class="beer">
+<div class="tapno">Tap 1</div>
+<svg class="glass" viewBox="0 0 120 165"><path d="M44 44 C44 90 38 128 33 146 L87 146 C82 128 76 90 76 44 Z" fill="#e8a93d" opacity="0.88"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M42 40 C42 90 36 130 30 150 L90 150 C84 130 78 90 78 40" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>Nebelweiss</h3>
+<div class="style">Hefeweizen</div>
+<p class="d">Cloudy and unfiltered, bursting with banana and clove from a true Bavarian yeast strain. Soft, pillowy, endlessly drinkable.</p>
+<div class="specs"><span class="spec"><b>5.4%</b> ABV</span><span class="spec"><b>14</b> IBU</span></div>
+<button class="addbtn" data-beer="1">+ Add to Flight</button>
+</div><div class="beer">
+<div class="tapno">Tap 2</div>
+<svg class="glass" viewBox="0 0 120 165"><rect x="48" y="44" width="24" height="104" fill="#f0c94e" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M46 40 L46 152 M74 40 L74 152 M46 152 L74 152" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>Dom Stange</h3>
+<div class="style">Kölsch</div>
+<p class="d">Crisp, delicate, and impossibly clean. A whisper of fruit over crackery malt — Cologne’s gift to the world, brewed in Aurora.</p>
+<div class="specs"><span class="spec"><b>4.8%</b> ABV</span><span class="spec"><b>20</b> IBU</span></div>
+<button class="addbtn" data-beer="2">+ Add to Flight</button>
+</div><div class="beer">
+<div class="tapno">Tap 3</div>
+<svg class="glass" viewBox="0 0 120 165"><path d="M46 44 L74 44 L69 148 L51 148 Z" fill="#a35c1e" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M44 40 L76 40 M44 40 L50 152 M76 40 L70 152 M50 152 L70 152" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>Kupfer</h3>
+<div class="style">Altbier</div>
+<p class="d">Copper-colored Düsseldorf classic. Toasty malt up front, a firm noble-hop bite on the finish. Old beer, brewed the old way.</p>
+<div class="specs"><span class="spec"><b>5.0%</b> ABV</span><span class="spec"><b>28</b> IBU</span></div>
+<button class="addbtn" data-beer="3">+ Add to Flight</button>
+</div><div class="beer">
+<div class="tapno">Tap 4</div>
+<svg class="glass" viewBox="0 0 120 165"><path d="M41 44 C41 78 46 96 58 100 L58 100 C74 96 79 78 79 44 Z" fill="#d98e2b" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M38 40 C38 80 44 100 58 104 M82 40 C82 80 76 100 62 104 M58 104 L58 140 M44 152 L76 152 M50 140 L70 140" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>Frühling</h3>
+<div class="style">Maibock</div>
+<p class="d">A strong spring lager with deep honeyed malt and a warming finish. Brewed for the season when the biergartens reopen.</p>
+<div class="specs"><span class="spec"><b>6.8%</b> ABV</span><span class="spec"><b>24</b> IBU</span></div>
+<button class="addbtn" data-beer="4">+ Add to Flight</button>
+</div><div class="beer">
+<div class="tapno">Tap 5</div>
+<svg class="glass" viewBox="0 0 120 165"><path d="M37 56 L83 56 L80 148 L40 148 Z" fill="#2a1608" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M34 52 L38 152 M86 52 L82 152 M38 152 L82 152 M34 52 L86 52 M86 70 C104 70 104 120 84 122" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>Hafer</h3>
+<div class="style">Oat Stout</div>
+<p class="d">Dark, roasty, impossibly smooth. Oats give it a silky body that carries the chocolate malt straight through the finish.</p>
+<div class="specs"><span class="spec"><b>5.6%</b> ABV</span><span class="spec"><b>30</b> IBU</span></div>
+<button class="addbtn" data-beer="5">+ Add to Flight</button>
+</div><div class="beer">
+<div class="tapno">Tap 6</div>
+<svg class="glass" viewBox="0 0 120 165"><path d="M32 52 L88 52 L83 148 L37 148 Z" fill="#c97a1f" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M28 48 L34 152 M92 48 L86 152 M34 152 L86 152 M28 48 L92 48 M92 68 C114 68 114 126 90 128" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+<h3>The Weasel!</h3>
+<div class="style">Festbier</div>
+<p class="d">Our Oktoberfest lager — smooth, malty, and built for the tent. Toasted bread crust, a kiss of hops, gone too soon.</p>
+<div class="specs"><span class="spec"><b>5.8%</b> ABV</span><span class="spec"><b>22</b> IBU</span></div>
+<button class="addbtn" data-beer="6">+ Add to Flight</button>
+</div></div></div></section>
+<div class="rauten"></div>
+
+<section id="flight" class="flight-sec"><div class="wrap">
+<span class="kicker">Das Flight-Brett</span>
+<h2 class="sec">Build Your Flight</h2>
+<p class="sub">Pick any four pours — or let the brewmaster decide. Your flight arrives on a wooden paddle, coaster included.</p>
+<div class="flight-flex">
+<div class="paddle">
+<h3>Dein Flight</h3>
+<div class="hint">Tap a beer above, or tap an empty slot to clear one.</div>
+<div class="slots" id="slots"></div>
+<div class="flight-actions">
+<button class="fbtn surprise" id="surprise">🎲 Surprise Me</button>
+<button class="fbtn clear" id="clearflight">Clear</button>
+</div>
+</div>
+<div class="ticket-wrap">
+<div class="coaster" id="coaster">
+<div class="ct">ZoiglBräu · Bierdeckel</div>
+<h4>Dein Flight</h4>
+<ol id="ticketlist"><li style="color:#8a6f3a;font-style:italic">Noch kein Bier…</li></ol>
+<div class="cprice" id="ticketprice"></div>
+<div class="cnote">4 pours · 5 oz each · Prost!</div>
+</div>
+<p class="why" id="flightwhy">Add beers to see your flight ticket update live.</p>
+</div>
+</div></div></section>
+<div class="rauten"></div>
+<section id="pair"><div class="wrap">
+<span class="kicker">Bier &amp; Küche · Pair It</span>
+<h2 class="sec">Pick a Beer, Pick a Plate</h2>
+<p class="sub">German food and German beer grew up together. Pick a pour — we’ll tell you the three plates it was born to sit next to.</p>
+<div class="pair-grid">
+<div class="beerchips" id="beerchips"><div class="chip" data-beer="1"><svg class="glass" viewBox="0 0 120 165"><path d="M44 44 C44 90 38 128 33 146 L87 146 C82 128 76 90 76 44 Z" fill="#e8a93d" opacity="0.88"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M42 40 C42 90 36 130 30 150 L90 150 C84 130 78 90 78 40" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">Nebelweiss</div><div class="cs">Hefeweizen</div></div><div class="chip" data-beer="2"><svg class="glass" viewBox="0 0 120 165"><rect x="48" y="44" width="24" height="104" fill="#f0c94e" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M46 40 L46 152 M74 40 L74 152 M46 152 L74 152" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">Dom Stange</div><div class="cs">Kölsch</div></div><div class="chip" data-beer="3"><svg class="glass" viewBox="0 0 120 165"><path d="M46 44 L74 44 L69 148 L51 148 Z" fill="#a35c1e" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M44 40 L76 40 M44 40 L50 152 M76 40 L70 152 M50 152 L70 152" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">Kupfer</div><div class="cs">Altbier</div></div><div class="chip" data-beer="4"><svg class="glass" viewBox="0 0 120 165"><path d="M41 44 C41 78 46 96 58 100 L58 100 C74 96 79 78 79 44 Z" fill="#d98e2b" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M38 40 C38 80 44 100 58 104 M82 40 C82 80 76 100 62 104 M58 104 L58 140 M44 152 L76 152 M50 140 L70 140" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">Frühling</div><div class="cs">Maibock</div></div><div class="chip" data-beer="5"><svg class="glass" viewBox="0 0 120 165"><path d="M37 56 L83 56 L80 148 L40 148 Z" fill="#2a1608" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M34 52 L38 152 M86 52 L82 152 M38 152 L82 152 M34 52 L86 52 M86 70 C104 70 104 120 84 122" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">Hafer</div><div class="cs">Oat Stout</div></div><div class="chip" data-beer="6"><svg class="glass" viewBox="0 0 120 165"><path d="M32 52 L88 52 L83 148 L37 148 Z" fill="#c97a1f" opacity="0.96"/><ellipse cx="60" cy="34" rx="26" ry="9" fill="#fdf6e3"/><ellipse cx="44" cy="30" rx="10" ry="6" fill="#fdf6e3"/><ellipse cx="76" cy="30" rx="9" ry="5.5" fill="#fdf6e3"/><path d="M28 48 L34 152 M92 48 L86 152 M34 152 L86 152 M28 48 L92 48 M92 68 C114 68 114 126 90 128" fill="none" stroke="#e9d9b8" stroke-width="3.5"/><path d="M50 52 C48 80 46 110 44 140" stroke="rgba(255,255,255,.28)" stroke-width="5" fill="none" stroke-linecap="round"/></svg><div class="cn">The Weasel!</div><div class="cs">Festbier</div></div></div>
+<div>
+<div class="plates" id="plates"><p style="color:var(--creamdim)">← Choose a beer to see its three perfect plates.</p></div>
+<div class="verdict" id="verdict" style="display:none"></div>
+</div>
+</div></div></section>
+<div class="rauten"></div>
+
+<section id="menu"><div class="wrap">
+<span class="kicker">Speisekarte</span>
+<h2 class="sec">Aus der Küche</h2>
+<p class="sub">Bavarian comfort food, made for beer. Everything below pairs with something on tap — that’s not an accident.</p>
+<div class="tabs" id="menutabs"><button class="tab on" data-tab="0">Wurst & Bretzel</button><button class="tab" data-tab="1">Schnitzel & Braten</button><button class="tab" data-tab="2">Süßes</button></div><div class="dishgrid" id="dishes"></div></div></section>
+<div class="rauten"></div>
+<section id="story" class="story"><div class="wrap">
+<div class="story-grid">
+<div><svg class="star" width="300" height="300" viewBox="0 0 100 100"><polygon points="50.0,2.0 40.5,33.5 8.4,26.0 31.0,50.0 8.4,74.0 40.5,66.5 50.0,98.0 59.5,66.5 91.6,74.0 69.0,50.0 91.6,26.0 59.5,33.5" fill="none" stroke="#c9a227" stroke-width="7" stroke-linejoin="round"/></svg></div>
+<div>
+<span class="kicker">Die Geschichte</span>
+<h2>Five Centuries in a Star</h2>
+<p>In the Oberpfalz region of Bavaria, brewing was never a factory job — it was a <b>neighborhood ritual</b>. Families brewed together in the communal brewhouse, then served the fresh beer from their own front rooms.</p>
+<p>How did you know whose turn it was? The <b>Zoiglstern</b> — a six-pointed brewer’s star — hung outside the door. When the star was up, the beer was on. No star, no beer.</p>
+<p>ZoiglBräu carries that spirit to Aurora: <b>traditional German styles, brewed slowly, served fresh</b>, in a room that feels like the front parlor it is. Tradition in excellence isn’t a slogan — it’s the recipe.</p>
+<div class="facts">
+<div class="fact"><div class="n">500+</div><div class="l">years of Zoigl tradition</div></div>
+<div class="fact"><div class="n">6</div><div class="l">points on the brewer’s star</div></div>
+<div class="fact"><div class="n">1</div><div class="l">communal spirit, Aurora CO</div></div>
+</div>
+</div>
+</div></div></section>
+<div class="rauten"></div>
+
+<section id="events"><div class="wrap">
+<span class="kicker">Veranstaltungen</span>
+<h2 class="sec">Im Brauhaus</h2>
+<p class="sub">More than a taproom. Yoga, workshops, and one very good excuse to wear lederhosen.</p>
+<div class="evgrid">
+<div class="ev"><div class="d">Oktober · All Month</div><h3>Oktoberfest</h3><p>The Weasel! Festbier flows all month. Dirndl and lederhosen encouraged, stein-hoisting contests on Saturdays, Wiesn-Hendl specials every weekend.</p></div>
+<div class="ev"><div class="d">Sundays · 10 AM</div><h3>Brewery Yoga</h3><p>An all-levels flow in the taproom, then a well-earned Kölsch. Mats provided, pretzels optional but recommended.</p></div>
+<div class="ev"><div class="d">Monthly</div><h3>Craft Workshops</h3><p>From pretzel-making classes to beer-and-cheese nights — check the board by the bar for this month’s lineup.</p></div>
+</div></div></section>
+<div class="rauten"></div>
+
+<section id="visit"><div class="wrap">
+<span class="kicker">Besuch Uns</span>
+<h2 class="sec">Prost, Aurora</h2>
+<p class="sub">In the old Dry Dock spot on Hampden — same neighborhood, brand-new tradition.</p>
+<div class="visit-grid">
+<div class="vcard"><h3>Find Us</h3>
+<p style="font-size:17px;margin-bottom:6px"><b>15120 E Hampden Ave</b><br>Aurora, CO 80014</p>
+<p style="color:var(--creamdim);font-size:15px">(720) 545-5289<br>zoiglbrau.com</p>
+</div>
+<div class="vcard"><h3>Hours</h3>
+<div class="hours"><span>Mon – Thu</span><span>3 PM – 10 PM</span></div>
+<div class="hours"><span>Fri – Sat</span><span>12 PM – 11 PM</span></div>
+<div class="hours"><span>Sunday</span><span>12 PM – 8 PM</span></div>
+</div>
+</div></div></section>
+
+<footer><div class="wrap">
+<div class="blk">ZoiglBräu</div>
+<p style="margin-top:8px">Tradition in Excellence · Aurora, Colorado</p>
+<p class="disclose">Concept website built as a design pitch. Beer names, descriptions, menu items, prices, hours, and events shown here are illustrative — the real site would carry ZoiglBräu’s actual tap list, menu, and details. Built by Brass Tacks.</p>
+</div></footer>
+<script>
+const BEERS = [{"tap": 1, "name": "Nebelweiss", "style": "Hefeweizen", "abv": 5.4, "ibu": 14, "color": "#e8a93d", "haze": true, "glass": "weizen", "desc": "Cloudy and unfiltered, bursting with banana and clove from a true Bavarian yeast strain. Soft, pillowy, endlessly drinkable.", "pair": "Wei\u00dfwurst mit s\u00fc\u00dfem Senf", "pairings": [{"dish": "Wei\u00dfwurst mit s\u00fc\u00dfem Senf", "note": "The Munich classic \u2014 banana and clove love sweet mustard. This pairing is older than the state of Colorado."}, {"dish": "Riesenbrezel mit Obatzda", "note": "Soft wheat beer, soft pretzel. The Obatzda\u2019s richness melts right into the cloud."}, {"dish": "Kaiserschmarrn", "note": "Banana notes meet caramelized pancake. Alpine comfort, squared."}], "note": "The Munich classic \u2014 banana and clove love sweet mustard. This pairing is older than the state of Colorado."}, {"tap": 2, "name": "Dom Stange", "style": "K\u00f6lsch", "abv": 4.8, "ibu": 20, "color": "#f0c94e", "haze": false, "glass": "stange", "desc": "Crisp, delicate, and impossibly clean. A whisper of fruit over crackery malt \u2014 Cologne\u2019s gift to the world, brewed in Aurora.", "pair": "Riesenbrezel mit Obatzda", "pairings": [{"dish": "Riesenbrezel mit Obatzda", "note": "Delicate beer, delicate snack \u2014 the K\u00f6lsch\u2019s crispness lifts the rich cheese spread."}, {"dish": "Bratwurst mit Sauerkraut", "note": "Clean and snappy against the kraut\u2019s tang. Nothing fights, everything sings."}, {"dish": "Currywurst mit Pommes", "note": "Crisp lager cuts the fry grease while a little hop spice finds the curry."}], "note": "Delicate beer, delicate snack \u2014 the K\u00f6lsch\u2019s crispness lifts the rich cheese spread."}, {"tap": 3, "name": "Kupfer", "style": "Altbier", "abv": 5.0, "ibu": 28, "color": "#a35c1e", "haze": false, "glass": "becher", "desc": "Copper-colored D\u00fcsseldorf classic. Toasty malt up front, a firm noble-hop bite on the finish. Old beer, brewed the old way.", "pair": "Sauerbraten", "pairings": [{"dish": "Sauerbraten", "note": "Sweet-sour gravy meets copper malt. D\u00fcsseldorf meets Aurora, and they get along."}, {"dish": "Schweinshaxe", "note": "The bitter edge slices through pork fat while the malt echoes the crackling."}, {"dish": "Bratwurst mit Sauerkraut", "note": "Malt sweetness tames the kraut\u2019s bite."}], "note": "Sweet-sour gravy meets copper malt. D\u00fcsseldorf meets Aurora, and they get along."}, {"tap": 4, "name": "Fr\u00fchling", "style": "Maibock", "abv": 6.8, "ibu": 24, "color": "#d98e2b", "haze": false, "glass": "pokal", "desc": "A strong spring lager with deep honeyed malt and a warming finish. Brewed for the season when the biergartens reopen.", "pair": "Schweinshaxe", "pairings": [{"dish": "Schweinshaxe", "note": "Big honeyed malt for big roasted pork. This is the pairing the brewmaster drinks."}, {"dish": "J\u00e4gerschnitzel", "note": "A strong lager stands up to mushroom gravy without breaking a sweat."}, {"dish": "Apfelstrudel", "note": "Honey malt plus apple and cinnamon. Prost."}], "note": "Big honeyed malt for big roasted pork. This is the pairing the brewmaster drinks."}, {"tap": 5, "name": "Hafer", "style": "Oat Stout", "abv": 5.6, "ibu": 30, "color": "#2a1608", "haze": false, "glass": "krug", "desc": "Dark, roasty, impossibly smooth. Oats give it a silky body that carries the chocolate malt straight through the finish.", "pair": "Sauerbraten", "pairings": [{"dish": "Sauerbraten", "note": "Roast meets roast \u2014 the stout finds the dark edges of the gravy and settles in."}, {"dish": "Kaiserschmarrn", "note": "Chocolate malt plus caramelized sugar. Dessert with dessert."}, {"dish": "Schweinshaxe", "note": "Silky oatmeal body against crackling skin. Contrast is the whole point."}], "note": "Roast meets roast \u2014 the stout finds the dark edges of the gravy and settles in."}, {"tap": 6, "name": "The Weasel!", "style": "Festbier", "abv": 5.8, "ibu": 22, "color": "#c97a1f", "haze": false, "glass": "masskrug", "desc": "Our Oktoberfest lager \u2014 smooth, malty, and built for the tent. Toasted bread crust, a kiss of hops, gone too soon.", "pair": "Wiesn-Hendl", "pairings": [{"dish": "Wiesn-Hendl", "note": "The Oktoberfest tent classic \u2014 malty lager and roast chicken, shoulder to shoulder."}, {"dish": "Schweinshaxe", "note": "Malt loves pork. Simple as that."}, {"dish": "Bratwurst mit Sauerkraut", "note": "Smooth and malty against the snap of the wurst."}], "note": "The Oktoberfest tent classic \u2014 malty lager and roast chicken, shoulder to shoulder."}];
+const MENU = [{"tab": "Wurst & Bretzel", "items": [{"n": "Riesenbrezel mit Obatzda", "d": "Giant lye pretzel, camembert-onion spread", "p": 9}, {"n": "Bratwurst mit Sauerkraut", "d": "N\u00fcrnberger rostbratwurst, house kraut, mustard", "p": 14}, {"n": "Wei\u00dfwurst mit s\u00fc\u00dfem Senf", "d": "Traditional veal sausage, sweet Bavarian mustard", "p": 13}, {"n": "Currywurst mit Pommes", "d": "Sliced bratwurst, curry ketchup, crispy fries", "p": 13}]}, {"tab": "Schnitzel & Braten", "items": [{"n": "J\u00e4gerschnitzel", "d": "Breaded pork, mushroom-cream gravy, sp\u00e4tzle", "p": 22}, {"n": "Schweinshaxe", "d": "Slow-roasted pork knuckle, crackling skin, kraut", "p": 26}, {"n": "Sauerbraten", "d": "Marinated beef, sweet-sour gravy, red cabbage", "p": 24}, {"n": "Wiesn-Hendl", "d": "Half roast chicken, Wiesn seasoning, fries", "p": 21}]}, {"tab": "S\u00fc\u00dfes", "items": [{"n": "Kaiserschmarrn", "d": "Torn caramelized pancake, plum compote", "p": 12}, {"n": "Apfelstrudel", "d": "Warm apple strudel, vanilla sauce", "p": 10}, {"n": "Dampfnudel", "d": "Steamed yeast dumpling, vanilla custard", "p": 11}]}];
+
+const FLIGHT_PRICE = 16;
+let flight = [];
+const slotsEl = document.getElementById('slots');
+const ticketlist = document.getElementById('ticketlist');
+const ticketprice = document.getElementById('ticketprice');
+const flightwhy = document.getElementById('flightwhy');
+
+function glassMini(b, h){
+  // reuse server-rendered glass by cloning: find by tap number
+  const src = document.querySelector('.beer .addbtn[data-beer="'+b.tap+'"]');
+  return '';
+}
+function renderSlots(){
+  slotsEl.innerHTML = '';
+  for(let i=0;i<4;i++){
+    const d = document.createElement('div');
+    d.className = 'slot' + (flight[i] ? ' filled' : '');
+    if(flight[i]){
+      const b = flight[i];
+      d.innerHTML = '<div style="font-size:11px;font-weight:800;color:#1f4d2e;letter-spacing:.15em">POUR '+(i+1)+'</div>'
+        + '<div class="sname">'+b.name+'<br><span style="color:rgba(60,40,18,.6);font-weight:500">'+b.style+'</span></div>'
+        + '<div class="rm">remove</div>';
+      d.querySelector('.rm').onclick = (e)=>{ e.stopPropagation(); flight.splice(i,1); renderSlots(); renderTicket(); syncAddBtns(); };
+    } else {
+      d.innerHTML = '<div class="empty">Empty pour<br>tap a beer above</div>';
+    }
+    slotsEl.appendChild(d);
+  }
+}
+function renderTicket(){
+  if(!flight.length){
+    ticketlist.innerHTML = '<li style="color:#8a6f3a;font-style:italic">Noch kein Bier\u2026</li>';
+    ticketprice.textContent = '';
+    flightwhy.textContent = 'Add beers to see your flight ticket update live.';
+    return;
+  }
+  ticketlist.innerHTML = flight.map(b=>'<li>'+b.name+' \u00b7 '+b.style+'</li>').join('');
+  ticketprice.textContent = '$'+FLIGHT_PRICE;
+  const styles = [...new Set(flight.map(b=>b.style))];
+  flightwhy.innerHTML = flight.length===4
+    ? 'A proper <b>German tour</b>: '+styles.join(', ')+'. The coaster doesn\u2019t lie \u2014 show it at the bar.'
+    : (4-flight.length)+' pour'+(4-flight.length>1?'s':'')+' to go. Mix light and dark \u2014 that\u2019s the fun of it.';
+}
+function syncAddBtns(){
+  document.querySelectorAll('.addbtn').forEach(btn=>{
+    const tap = +btn.dataset.beer;
+    const inFlight = flight.some(b=>b.tap===tap);
+    btn.classList.toggle('added', inFlight);
+    btn.textContent = inFlight ? '\u2713 In Your Flight' : '+ Add to Flight';
+  });
+}
+document.querySelectorAll('.addbtn').forEach(btn=>{
+  btn.onclick = ()=>{
+    const tap = +btn.dataset.beer;
+    const b = BEERS.find(x=>x.tap===tap);
+    const idx = flight.findIndex(x=>x.tap===tap);
+    if(idx>=0){ flight.splice(idx,1); }
+    else {
+      if(flight.length>=4){ flight.shift(); }
+      flight.push(b);
+    }
+    renderSlots(); renderTicket(); syncAddBtns();
+  };
+});
+document.getElementById('surprise').onclick = ()=>{
+  const pool = [...BEERS];
+  flight = [];
+  while(flight.length<4 && pool.length){
+    flight.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+  }
+  renderSlots(); renderTicket(); syncAddBtns();
+};
+document.getElementById('clearflight').onclick = ()=>{ flight=[]; renderSlots(); renderTicket(); syncAddBtns(); };
+renderSlots(); renderTicket();
+
+/* PAIR IT */
+const chips = document.querySelectorAll('.chip');
+const platesEl = document.getElementById('plates');
+const verdictEl = document.getElementById('verdict');
+const RANKS = ['Top Pick','Runner-Up','Dark Horse'];
+chips.forEach(ch=>{
+  ch.onclick = ()=>{
+    chips.forEach(c=>c.classList.remove('sel'));
+    ch.classList.add('sel');
+    const b = BEERS.find(x=>x.tap===+ch.dataset.beer);
+    verdictEl.style.display='none';
+    platesEl.innerHTML = b.pairings.map((p,i)=>
+      '<div class="plate" data-i="'+i+'"><div class="rank">'+RANKS[i]+'</div><h4>'+p.dish+'</h4><p>'+p.note+'</p></div>'
+    ).join('');
+    platesEl.querySelectorAll('.plate').forEach(pl=>{
+      pl.onclick = ()=>{
+        const p = b.pairings[+pl.dataset.i];
+        verdictEl.style.display='block';
+        verdictEl.innerHTML = '<h4>'+b.name+' + '+p.dish+'</h4><div class="vs">'+b.style+' \u00d7 K\u00fcche</div><p>'+p.note+'</p><p style="margin-top:10px;color:var(--creamdim);font-size:14px">Order the pair, thank us later. <b>Prost!</b></p>';
+        verdictEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+      };
+    });
+  };
+});
+
+/* MENU TABS */
+const tabsEl = document.getElementById('menutabs');
+const dishesEl = document.getElementById('dishes');
+function renderMenu(i){
+  tabsEl.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on', j===i));
+  dishesEl.innerHTML = MENU[i].items.map(d=>
+    '<div class="dish"><div><h4>'+d.n+'</h4><p>'+d.d+'</p></div><div class="pr">$'+d.p+'</div></div>'
+  ).join('');
+}
+tabsEl.querySelectorAll('.tab').forEach(t=>{ t.onclick = ()=>renderMenu(+t.dataset.tab); });
+renderMenu(0);
+</script>
+</body>
+</html>
