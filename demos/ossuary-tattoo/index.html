@@ -12,20 +12,21 @@
 <style>
 /* ============ TOKENS ============ */
 :root {
-  --void: #0b0a09;
-  --ink: #131110;
-  --panel: #1a1715;
-  --blood: #a4161a;
-  --blood-hi: #d0202a;
-  --blood-text: #e2393f;
-  --bone: #e9e2d4;
-  --ash: #948b7e;
-  --line: rgba(233, 226, 212, .13);
-  --line-hi: rgba(233, 226, 212, .32);
+  --void: #f1e7d0;
+  --ink: #141210;
+  --panel: #faf3e2;
+  --blood: #8f1d22;
+  --blood-hi: #a8262b;
+  --blood-text: #8f1d22;
+  --bone: #141210;
+  --ash: #6e6252;
+  --line: rgba(20, 18, 16, .14);
+  --line-hi: rgba(20, 18, 16, .32);
   --ease: cubic-bezier(.7, 0, .2, 1);
   --display: 'Anton', 'Impact', sans-serif;
   --body: 'Archivo', system-ui, sans-serif;
   --black: 'UnifrakturCook', serif;
+  --gold: #b98a2f;
 }
 
 /* ============ BASE (mobile first) ============ */
@@ -351,6 +352,14 @@ dialog h3 { font-size: clamp(2.6rem, 11vw, 4.4rem); margin: 8px 0 12px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal, .hero-title, .hero-row, .hero-strip { opacity: 1 !important; transform: none !important; }
 }
+
+/* ============ LIGHT THEME overrides (aged paper / oxblood / gold) ============ */
+.btn-red { color: #f1e7d0; }
+.alt { color: #f1e7d0; }
+.alt .label { color: var(--gold); }
+.foot { color: #cfc4ab; }
+.foot h4 { color: var(--gold); }
+.foot a { color: #f1e7d0; }
 </style>
 </head>
 <body>
