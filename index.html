@@ -3,22 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Your business isn't a template. Brass Tacks designs and builds custom websites and POS systems for independent businesses. No themes, no page builders, no platform fees." />
-  <title>Brass Tacks | Your Business Isn't a Template</title>
+  <meta name="description" content="Brass Tacks designs and builds custom websites and operating systems for independent operators in Aurora, Colorado. No templates, no themes, no page builders. Built from scratch, live in weeks, yours to own." />
+  <title>Brass Tacks — Custom Websites & POS for Independent Businesses | Aurora, CO</title>
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Brass Tacks" />
-  <meta property="og:title" content="Brass Tacks | Your Business Isn't a Template" />
-  <meta property="og:description" content="Custom websites and POS systems for independent businesses. No themes, no page builders, no platform fees. Live in weeks, built for years." />
+  <meta property="og:title" content="Brass Tacks — Custom Websites & POS for Independent Businesses | Aurora, CO" />
+  <meta property="og:description" content="Custom websites and operating systems for independent operators in Aurora, Colorado. No templates, no themes, no page builders. Built from scratch." />
   <meta property="og:url" content="https://brasstacks.space/" />
   <meta property="og:image" content="https://brasstacks.space/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Brass Tacks | Your Business Isn't a Template" />
-  <meta name="twitter:description" content="Custom websites and POS systems for independent businesses. No themes, no page builders, no platform fees." />
+  <meta name="twitter:title" content="Brass Tacks — Custom Websites & POS for Independent Businesses | Aurora, CO" />
+  <meta name="twitter:description" content="Custom websites and operating systems for independent operators in Aurora, Colorado. No templates, no themes, no page builders. Built from scratch." />
   <meta name="twitter:image" content="https://brasstacks.space/og-image.png" />
   <link rel="canonical" href="https://brasstacks.space/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Brass Tacks LLC",
+    "url": "https://brasstacks.space/",
+    "image": "https://brasstacks.space/og-image.png",
+    "description": "Custom websites and operating systems for independent businesses. No templates, no themes, no page builders. Designed and built from scratch in Aurora, Colorado.",
+    "areaServed": { "@type": "City", "name": "Aurora, CO" },
+    "priceRange": "$750-$6,000+",
+    "telephone": "+1-303-818-3433"
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&family=Roboto+Slab:wght@700;900&family=Special+Elite&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -61,10 +74,8 @@
       justify-content: space-between;
       padding: 0 48px;
       height: 68px;
-      background: rgba(17,17,16,0.86);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      background: #1a1512;
+      border-bottom: 1px solid rgba(0,0,0,0.4);
     }
 
     .nav-logo {
@@ -97,165 +108,84 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 48px;
-      align-items: center;
-      padding: 140px 48px 90px;
+      background: #f2ead8;
+      color: #1a1512;
+      padding: 132px 48px 88px;
       position: relative;
       overflow: hidden;
-      max-width: 1440px;
-      margin: 0 auto;
     }
-
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(900px 500px at 12% 18%, rgba(196,152,42,0.10), transparent 60%),
-        radial-gradient(700px 500px at 88% 82%, rgba(196,152,42,0.06), transparent 60%);
-      pointer-events: none;
+    .hero-inner { max-width: 1120px; margin: 0 auto; }
+    #hero .label-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      border-top: 5px double #1a1512;
+      border-bottom: 5px double #1a1512;
+      padding: 10px 2px; margin-bottom: 40px;
     }
-    #hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
-      pointer-events: none;
+    #hero .label-row span {
+      font-family: 'Special Elite', monospace; font-size: 13px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: #1a1512;
     }
-
-    .hero-copy { position: relative; z-index: 2; }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
-      color: var(--brass-light); text-transform: uppercase;
-      margin-bottom: 26px;
+    .hero-top { position: relative; }
+    #hero .hero-giant {
+      font-family: 'Roboto Slab', serif; font-weight: 900;
+      font-size: clamp(60px, 11vw, 148px);
+      line-height: 0.94; letter-spacing: -0.015em;
+      color: #1a1512;
+      text-shadow: 0.045em 0.045em 0 #c9a227;
+      max-width: 10ch; margin: 0;
     }
-    .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--brass); }
-
-    .hero-h1 {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: clamp(48px, 6.2vw, 92px);
-      line-height: 1.02;
-      letter-spacing: -1px;
-      margin-bottom: 28px;
+    #hero .badge {
+      position: absolute; top: 8px; right: 0; width: 172px; height: 172px;
+      transform: rotate(8deg);
     }
-    .hero-h1 em { font-style: italic; color: var(--brass-light); }
-    .hero-h1 .strike {
-      position: relative; white-space: nowrap; color: var(--text-3);
+    #hero .badge svg { width: 100%; height: 100%; display: block; }
+    #hero .rule-row {
+      display: flex; align-items: center; gap: 26px; margin: 36px 0 30px;
     }
-    .hero-h1 .strike::after {
-      content: ''; position: absolute; left: -2%; right: -2%; top: 54%;
-      height: 3px; background: var(--brass);
-      transform: rotate(-2deg); border-radius: 2px;
+    #hero .rule-row::before, #hero .rule-row::after {
+      content: ""; flex: 1; height: 5px;
+      border-top: 1px solid #1a1512; border-bottom: 1px solid #1a1512;
     }
-
-    .hero-sub {
-      font-size: 18px; color: var(--text-2); max-width: 520px;
-      margin-bottom: 38px; font-weight: 300;
+    #hero .rule-row strong {
+      font-family: 'Roboto Slab', serif; font-weight: 900;
+      font-size: clamp(26px, 4.2vw, 52px); letter-spacing: 0.02em; white-space: nowrap;
     }
-    .hero-sub strong { color: var(--text); font-weight: 500; }
-
-    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 52px; }
-
-    .btn-solid {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--brass); color: #0d0d0b;
-      font-weight: 600; font-size: 15px; letter-spacing: 0.3px;
-      padding: 16px 30px; border-radius: var(--radius);
-      text-decoration: none; transition: background 0.2s, transform 0.2s;
-      border: 0; cursor: pointer;
+    #hero .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 19px; color: #5c5546; max-width: 52ch; margin: 0 0 32px;
+      line-height: 1.6;
     }
-    .btn-solid:hover { background: var(--brass-light); transform: translateY(-2px); }
-
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 10px;
-      color: var(--text); font-weight: 500; font-size: 15px;
-      padding: 16px 30px; border-radius: var(--radius);
-      text-decoration: none; border: 1px solid var(--border-md);
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    #hero .hero-sub strong { color: #1a1512; }
+    #hero .hero-ctas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    #hero .hbtn-solid {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 16px;
+      background: #1a1512; color: #f2ead8;
+      border-radius: 6px; padding: 15px 30px; text-decoration: none; display: inline-block;
+      transition: background 0.2s, transform 0.2s;
     }
-    .btn-ghost:hover { border-color: var(--brass); background: rgba(196,152,42,0.08); transform: translateY(-2px); }
-
-    .hero-proof { display: flex; gap: 34px; flex-wrap: wrap; }
-    .proof-item { display: flex; flex-direction: column; gap: 2px; }
-    .proof-item b { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: var(--text); }
-    .proof-item b i { font-style: normal; color: var(--brass); }
-    .proof-item span { font-size: 12px; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; }
-
-    /* hero visual: fanned demo cards */
-    .hero-visual { position: relative; z-index: 2; height: 560px; perspective: 1400px; }
-    .fan-card {
-      position: absolute; width: 300px; border-radius: 10px; overflow: hidden;
-      background: var(--bg3); border: 1px solid var(--border-md);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-      text-decoration: none; color: inherit; display: block;
+    #hero .hbtn-solid:hover { background: #000; transform: translateY(-2px); }
+    #hero .hbtn-line {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 16px;
+      color: #1a1512; border: 2px solid #1a1512;
+      border-radius: 6px; padding: 13px 28px; text-decoration: none; display: inline-block; background: transparent;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
     }
-    .fan-card:hover { transform: translateY(-14px) rotate(0deg) !important; z-index: 5; }
-    .fan-card .fc-bar {
-      display: flex; align-items: center; gap: 6px;
-      padding: 10px 12px; background: rgba(0,0,0,0.35);
-      border-bottom: 1px solid var(--border);
+    #hero .hbtn-line:hover { background: #1a1512; color: #f2ead8; transform: translateY(-2px); }
+    #hero .infobar {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid #1a1512; margin-top: 48px;
     }
-    .fan-card .fc-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--text-3); }
-    .fan-card .fc-bar i:first-child { background: #ff5f57; }
-    .fan-card .fc-bar i:nth-child(2) { background: #febc2e; }
-    .fan-card .fc-bar i:nth-child(3) { background: #28c840; }
-    .fan-card .fc-bar span { font-size: 9px; color: var(--text-3); letter-spacing: 0.5px; margin-left: 4px; }
-    .fan-card .fc-body { height: 190px; position: relative; overflow: hidden; }
-    .fan-card .fc-foot {
-      padding: 12px 14px; font-size: 11px; letter-spacing: 1px;
-      color: var(--text-2); text-transform: uppercase;
-      display: flex; justify-content: space-between; align-items: center;
+    #hero .infobar .cell { padding: 20px 26px; border-left: 1px solid #1a1512; }
+    #hero .infobar .cell:first-child { border-left: 0; }
+    #hero .infobar .cell b {
+      display: block; font-family: 'Roboto Slab', serif; font-weight: 900;
+      font-size: 30px; line-height: 1.1; margin-bottom: 6px;
     }
-    .fan-card .fc-foot em { font-style: normal; color: var(--brass-light); font-size: 10px; border: 1px solid var(--brass-dim); padding: 2px 8px; border-radius: 20px; }
-
-    .fan-1 { top: 40px; left: 4%; transform: rotate(-7deg); z-index: 1; }
-    .fan-2 { top: 130px; left: 30%; transform: rotate(2deg); z-index: 3; }
-    .fan-3 { top: 60px; left: 58%; transform: rotate(8deg); z-index: 2; }
-
-    .fc-assay { background: linear-gradient(160deg, #1f3a31 0%, #151411 70%); }
-    .fc-assay .fc-mock-h { font-family: 'Bebas Neue'; color: #d9a441; font-size: 34px; letter-spacing: 2px; padding: 18px 16px 0; }
-    .fc-assay .fc-mock-s { color: #f7efdf; font-size: 10px; letter-spacing: 3px; padding: 0 16px; opacity: 0.7; }
-    .fc-assay .fc-taps { display: flex; gap: 6px; padding: 14px 16px; }
-    .fc-assay .fc-taps i { flex: 1; height: 34px; border-radius: 4px; background: rgba(217,164,65,0.16); border: 1px solid rgba(217,164,65,0.4); }
-
-    .fc-revival { background: linear-gradient(160deg, #2a2a26 0%, #171715 70%); }
-    .fc-revival .fc-ba { position: absolute; inset: 14px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-md); }
-    .fc-revival .fc-ba img { width: 100%; height: 100%; object-fit: cover; }
-    .fc-revival .fc-ba::after {
-      content: ''; position: absolute; top: 0; bottom: 0; left: 55%; width: 3px;
-      background: #ff6b1a; box-shadow: 0 0 12px rgba(255,107,26,0.8);
-    }
-    .fc-revival .fc-tag {
-      position: absolute; top: 22px; font-size: 9px; font-weight: 700; letter-spacing: 1px;
-      padding: 3px 8px; border-radius: 3px; z-index: 2;
-    }
-    .fc-revival .fc-tag.b { left: 22px; background: rgba(0,0,0,0.7); color: #fff; }
-    .fc-revival .fc-tag.a { right: 22px; background: #ff6b1a; color: #111; }
-
-    .fc-ossuary { background: linear-gradient(160deg, #1a1512 0%, #0e0c0a 70%); }
-    .fc-ossuary .fc-mock-h { font-family: 'Bebas Neue'; color: #e9e2d4; font-size: 36px; letter-spacing: 3px; padding: 18px 16px 0; }
-    .fc-ossuary .fc-mock-h span { color: #a4161a; }
-    .fc-ossuary .fc-mock-s { color: #e9e2d4; font-size: 10px; letter-spacing: 4px; padding: 0 16px; opacity: 0.6; text-transform: uppercase; }
-    .fc-ossuary .fc-flash { padding: 14px 16px; display: flex; flex-direction: column; gap: 7px; }
-    .fc-ossuary .fc-flash i {
-      display: flex; justify-content: space-between; font-style: normal;
-      font-size: 11px; color: #e9e2d4; border: 1px solid rgba(233,226,212,0.2);
-      border-radius: 4px; padding: 7px 10px;
-    }
-    .fc-ossuary .fc-flash i b { color: #a4161a; }
-
-    .fan-hint {
-      position: absolute; bottom: 6px; left: 0; right: 0; text-align: center;
-      font-size: 11px; letter-spacing: 2px; color: var(--text-3); text-transform: uppercase;
+    #hero .infobar .cell span {
+      font-family: 'Special Elite', monospace; font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #5c5546;
     }
 
     /* ── MARQUEE ── */
@@ -542,8 +472,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1080px) {
-      #hero { grid-template-columns: 1fr; padding: 130px 32px 70px; min-height: auto; }
-      .hero-visual { height: 480px; max-width: 560px; }
+      #hero { padding: 120px 32px 70px; }
+      #hero .badge { width: 140px; height: 140px; }
       .tier-grid { grid-template-columns: repeat(2, 1fr); }
       .steps { grid-template-columns: repeat(2, 1fr); }
       .demo-stage { grid-template-columns: 1fr; }
@@ -563,10 +493,13 @@
       .nav-links a { display: block; padding: 14px; }
       .nav-links .nav-cta { margin: 10px 24px 0; text-align: center; }
       .nav-toggle { display: block; }
-      #hero { padding: 120px 20px 60px; }
-      .hero-visual { height: 420px; }
-      .fan-card { width: 240px; }
-      .fan-1 { left: 0; } .fan-2 { left: 22%; top: 110px; } .fan-3 { left: 46%; }
+      #hero { padding: 110px 20px 56px; }
+      .hero-top { display: flex; flex-direction: column; }
+      #hero .badge { position: static; width: 128px; height: 128px; margin: 28px 0 0; }
+      #hero .rule-row strong { white-space: normal; text-align: center; }
+      #hero .infobar { grid-template-columns: 1fr; }
+      #hero .infobar .cell { border-left: 0; border-top: 1px solid #1a1512; }
+      #hero .infobar .cell:first-child { border-top: 0; }
       .block { padding: 70px 20px; }
       .tier-grid, .steps, .pain-grid { grid-template-columns: 1fr; }
       .demo-stage { padding: 24px; }
@@ -599,49 +532,44 @@
 
   <!-- HERO -->
   <header id="hero">
-    <div class="hero-copy">
-      <span class="eyebrow">Custom websites + POS for independent business</span>
-      <h1 class="hero-h1">Your business isn't a <span class="strike">template</span>.<br /><em>Your website shouldn't be one either.</em></h1>
-      <p class="hero-sub">You didn't build your business from a kit. We design and build custom sites and operating systems for independent operators. <strong>No themes. No page builders. No platform ransom.</strong> Live in weeks, built for years.</p>
-      <div class="hero-ctas">
-        <a href="#consult" class="btn-solid">Book a Free Consult →</a>
-        <a href="work.html" class="btn-ghost">See the work</a>
+    <div class="hero-inner">
+      <div class="label-row reveal" aria-label="Location and established">
+        <span>Aurora, Colorado</span>
+        <span>Est. 2026</span>
       </div>
-      <div class="hero-proof">
-        <div class="proof-item"><b>7<i>.</i></b><span>live concept builds</span></div>
-        <div class="proof-item"><b>2–4<i> wk</i></b><span>typical launch</span></div>
-        <div class="proof-item"><b>$0<i>.</i></b><span>template fees, ever</span></div>
-        <div class="proof-item"><b>100<i>%</i></b><span>yours to own</span></div>
+
+      <div class="hero-top">
+        <h1 class="hero-giant reveal">Built from<br />scratch.</h1>
+        <div class="badge reveal" aria-label="No templates. Built from scratch.">
+          <svg viewBox="0 0 200 200" role="img" aria-hidden="true">
+            <defs>
+              <path id="badge-circle" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" fill="none"/>
+            </defs>
+            <circle cx="100" cy="100" r="97" fill="#f2ead8" stroke="#6b1f1f" stroke-width="2.5"/>
+            <circle cx="100" cy="100" r="58" fill="none" stroke="#6b1f1f" stroke-width="1.25"/>
+            <text font-family="'Bebas Neue', sans-serif" font-size="21" letter-spacing="2" fill="#6b1f1f">
+              <textPath href="#badge-circle" textLength="460" lengthAdjust="spacingAndGlyphs">NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226; NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226;</textPath>
+            </text>
+            <circle cx="100" cy="100" r="24" fill="#b8860b" stroke="#7a5c06" stroke-width="2"/>
+            <circle cx="92" cy="92" r="6" fill="#e8c96a" opacity="0.85"/>
+          </svg>
+        </div>
       </div>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <a class="fan-card fan-1" href="demos/assay-brewing/" target="_blank" rel="noopener">
-        <div class="fc-bar"><i></i><i></i><i></i><span>assaybrewing.co</span></div>
-        <div class="fc-body fc-assay">
-          <div class="fc-mock-h">ASSAY</div>
-          <div class="fc-mock-s">BREWING CO.</div>
-          <div class="fc-taps"><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="fc-foot">Brewery concept <em>Live demo</em></div>
-      </a>
-      <a class="fan-card fan-2" href="demos/revival-construction/" target="_blank" rel="noopener">
-        <div class="fc-bar"><i></i><i></i><i></i><span>revival construction</span></div>
-        <div class="fc-body fc-revival">
-          <div class="fc-ba"><img src="demos/revival-construction/img/roof-after.jpg" alt="" loading="lazy" /></div>
-          <span class="fc-tag b">Before</span><span class="fc-tag a">After</span>
-        </div>
-        <div class="fc-foot">Contractor concept <em>Live demo</em></div>
-      </a>
-      <a class="fan-card fan-3" href="demos/ossuary-tattoo/" target="_blank" rel="noopener">
-        <div class="fc-bar"><i></i><i></i><i></i><span>ossuarytattoo.co</span></div>
-        <div class="fc-body fc-ossuary">
-          <div class="fc-mock-h">OSSUARY<span>.</span></div>
-          <div class="fc-mock-s">Tattoo Co.</div>
-          <div class="fc-flash"><i>The Watcher <b>$180</b></i><i>Last Rites <b>$260</b></i><i>Grin <b>$240</b></i></div>
-        </div>
-        <div class="fc-foot">Tattoo studio concept <em>Live demo</em></div>
-      </a>
-      <div class="fan-hint">Real concepts, built from scratch. Hover to inspect</div>
+
+      <div class="rule-row reveal"><strong>Like your business was.</strong></div>
+
+      <p class="hero-sub reveal">Custom websites and operating systems for independent operators. <strong>No themes. No page builders. No platform ransom.</strong> Live in weeks, built for years.</p>
+
+      <div class="hero-ctas reveal">
+        <a href="#consult" class="hbtn-solid">Book a Free Consult</a>
+        <a href="work.html" class="hbtn-line">See the work</a>
+      </div>
+
+      <div class="infobar reveal" aria-label="Key facts">
+        <div class="cell"><b>7 concept builds</b><span>Live now</span></div>
+        <div class="cell"><b>From $1,500</b><span>Custom sites</span></div>
+        <div class="cell"><b>2-4 weeks</b><span>Typical launch</span></div>
+      </div>
     </div>
   </header>
 
