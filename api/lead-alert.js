@@ -132,14 +132,22 @@ module.exports = async (req, res) => {
       return res.status(500).send('server not configured');
     }
 
-    await sendSms({
-      sid: TWILIO_ACCOUNT_SID,
-      token: TWILIO_AUTH_TOKEN,
-      from: TWILIO_FROM_NUMBER,
-      to: ALERT_TO_NUMBER,
-      body: text,
-    });
-    return res.status(200).send('sent');
+    try {
+      await sendSms({
+        sid: TWILIO_ACCOUNT_SID,
+        token: TWILIO_AUTH_TOKEN,
+        from: TWILIO_FROM_NUMBER,
+        to: ALERT_TO_NUMBER,
+        body: text,
+      });
+      return res.status(200).send('sent');
+    } catch (err) {
+      // Twilio rejected the send (e.g. 20003: messaging compliance profile not
+      // approved). That is a provider/account issue, not a server error: log it
+      // clearly and return 200 so Retell does not retry the webhook.
+      console.error('lead-alert: twilio rejected send:', err.message);
+      return res.status(200).send('twilio-rejected');
+    }
   } catch (err) {
     console.error('lead-alert error:', err.message);
     return res.status(500).send('error');
