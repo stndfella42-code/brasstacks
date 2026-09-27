@@ -288,7 +288,7 @@
       margin-left: 8px; font-size: 11px; color: var(--text-3); letter-spacing: 0.5px;
       background: rgba(255,255,255,0.05); padding: 4px 14px; border-radius: 20px; flex: 1; text-align: center;
     }
-    .demo-frame { height: 340px; position: relative; overflow: hidden; }
+    .demo-frame { height: 340px; position: relative; overflow: hidden; cursor: pointer; }
     .demo-panel { position: absolute; inset: 0; opacity: 0; transform: translateY(12px); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
     .demo-panel.active { opacity: 1; transform: none; pointer-events: auto; }
 
@@ -360,25 +360,6 @@
     .dp-redline .dp-prices b { display: block; font-size: 12px; margin-bottom: 4px; }
     .dp-redline .dp-prices span { color: #ff4d1c; font-size: 14px; font-weight: 700; }
     .dp-redline .dp-cta { display: inline-block; margin-top: 16px; background: #1a1a1c; color: #f6f1e8; font-weight: 600; font-size: 12px; letter-spacing: 1px; padding: 10px 20px; border-radius: 6px; }
-
-    .dp-sixcapital { background: linear-gradient(165deg, #f8f3e7 0%, #e7d8b8 75%); padding: 28px; color: #16294d; }
-    .dp-sixcapital .dp-brand { font-family: 'Fraunces'; font-weight: 600; font-size: 30px; }
-    .dp-sixcapital .dp-brand span { color: #c9a227; }
-    .dp-sixcapital .dp-sub { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.6; margin-bottom: 20px; }
-    .dp-sixcapital .dp-taps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .dp-sixcapital .dp-taps div { border: 1px solid rgba(22,41,77,0.25); background: rgba(255,255,255,0.5); border-radius: 6px; padding: 10px 6px; text-align: center; }
-    .dp-sixcapital .dp-taps b { display: block; font-size: 11px; }
-    .dp-sixcapital .dp-taps span { font-size: 9px; opacity: 0.6; }
-    .dp-sixcapital .dp-cta { display: inline-block; margin-top: 16px; background: #16294d; color: #f8f3e7; font-weight: 600; font-size: 12px; letter-spacing: 1px; padding: 10px 20px; border-radius: 6px; }
-
-    .dp-zoiglbrau { background: linear-gradient(165deg, #f7f0dd 0%, #e3d1a6 75%); padding: 28px; color: #3a2a1a; }
-    .dp-zoiglbrau .dp-brand { font-family: 'Pirata One', serif; font-size: 44px; color: #1f4d2e; line-height: 1; }
-    .dp-zoiglbrau .dp-sub { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; opacity: 0.6; margin: 8px 0 20px; }
-    .dp-zoiglbrau .dp-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .dp-zoiglbrau .dp-row div { border: 1px solid rgba(31,77,46,0.3); background: rgba(255,255,255,0.5); border-radius: 6px; padding: 10px 6px; text-align: center; }
-    .dp-zoiglbrau .dp-row b { display: block; font-size: 11px; color: #1f4d2e; }
-    .dp-zoiglbrau .dp-row span { font-size: 9px; opacity: 0.6; }
-    .dp-zoiglbrau .dp-cta { display: inline-block; margin-top: 16px; background: #1f4d2e; color: #f7f0dd; font-weight: 600; font-size: 12px; letter-spacing: 1px; padding: 10px 20px; border-radius: 6px; }
 
     .demo-info h3 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 6px; }
     .demo-info .demo-loc { color: var(--text-3); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
@@ -593,7 +574,7 @@
       <div class="hero-pitch reveal"><span class="service-badge">New</span>Our AI receptionist answers your business line 24/7. <a href="tel:+17207199794">Call (720) 719-9794</a> right now and hear it yourself, <a href="demos/ai-receptionist/#live-demo">or try the live demo &rarr;</a></div>
 
       <div class="infobar reveal" aria-label="Key facts">
-        <div class="cell"><b>7 concept builds</b><span>Live now</span></div>
+        <div class="cell"><b>5 concept builds</b><span>Live now</span></div>
         <div class="cell"><b>From $1,500</b><span>Custom sites</span></div>
         <div class="cell"><b>2-4 weeks</b><span>Typical launch</span></div>
       </div>
@@ -640,7 +621,7 @@
     <div class="block">
       <div class="sec-head reveal">
         <span class="eyebrow">Proof, not promises</span>
-        <h2>One builder. Seven concepts.<br /><em>Zero templates.</em></h2>
+        <h2>One builder. Five concepts.<br /><em>Zero templates.</em></h2>
         <p>Every preview below is a live concept we designed and built from scratch. Same builder, completely different result. Pick one and look around.</p>
       </div>
       <div class="demo-tabs reveal" role="tablist">
@@ -649,8 +630,6 @@
         <button class="demo-tab" data-demo="ossuary" role="tab">Ossuary Tattoo</button>
         <button class="demo-tab" data-demo="halfmoon" role="tab">Halfmoon Nails</button>
         <button class="demo-tab" data-demo="redline" role="tab">Redline Auto</button>
-        <button class="demo-tab" data-demo="sixcapital" role="tab">Six Capital</button>
-        <button class="demo-tab" data-demo="zoiglbrau" role="tab">ZoiglBr&auml;u</button>
       </div>
       <div class="demo-stage reveal">
         <div class="demo-browser">
@@ -701,28 +680,6 @@
                 <div><b>Diagnostic</b><span>$129</span></div>
               </div>
               <span class="dp-cta">BOOK AN APPOINTMENT →</span>
-            </div>
-            <div class="demo-panel dp-sixcapital" data-panel="sixcapital">
-              <div class="dp-brand">SIX <span>CAPITAL</span></div>
-              <div class="dp-sub">Brewing &amp; BBQ · Aurora, CO</div>
-              <div class="dp-taps">
-                <div><b>Amber Ale</b><span>5.6%</span></div>
-                <div><b>Brown IPA</b><span>6.4%</span></div>
-                <div><b>English Porter</b><span>5.9%</span></div>
-                <div><b>Vanilla Stout</b><span>6.8%</span></div>
-              </div>
-              <span class="dp-cta">BUILD A FLIGHT →</span>
-            </div>
-            <div class="demo-panel dp-zoiglbrau" data-panel="zoiglbrau">
-              <div class="dp-brand">ZoiglBr&auml;u</div>
-              <div class="dp-sub">German Beer Hall · Aurora, CO</div>
-              <div class="dp-row">
-                <div><b>Altbier</b><span>4.8%</span></div>
-                <div><b>Festbier</b><span>5.8%</span></div>
-                <div><b>Maibock</b><span>6.5%</span></div>
-                <div><b>Nebelweiss</b><span>5.2%</span></div>
-              </div>
-              <span class="dp-cta">PLAN A FLIGHT →</span>
             </div>
           </div>
         </div>
@@ -781,28 +738,6 @@
               <li>Online booking with real-time open and closed shop status</li>
             </ul>
             <a href="demos/redline-auto/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
-          </div>
-          <div data-info="sixcapital" hidden>
-            <span class="concept-pill">Concept</span>
-            <h3>Six Capital Brewing &amp; BBQ</h3>
-            <div class="demo-loc">Brewery · Aurora, CO · Unsolicited concept</div>
-            <ul>
-              <li><strong>Interactive tap list</strong> with ABV and IBU plus a build-your-own flight picker</li>
-              <li><strong>Beer and BBQ pairing board</strong> with flavor-based recommendations</li>
-              <li>Tabbed menu, events calendar, and taproom info in a single page</li>
-            </ul>
-            <a href="demos/sixcapital/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
-          </div>
-          <div data-info="zoiglbrau" hidden>
-            <span class="concept-pill">Concept</span>
-            <h3>ZoiglBr&auml;u</h3>
-            <div class="demo-loc">German Beer Hall · Aurora, CO · Unsolicited concept</div>
-            <ul>
-              <li><strong>Four-pour flight builder</strong> with a surprise-me option</li>
-              <li><strong>German food pairing board</strong> with a top pick, runner-up, and dark horse</li>
-              <li>Bavarian-styled menu tabs, Zoigl history, and events section</li>
-            </ul>
-            <a href="demos/zoiglbrau/" target="_blank" rel="noopener" class="btn-ghost">Open the live demo →</a>
           </div>
         </div>
       </div>
@@ -1050,7 +985,9 @@
 
     // demo switcher
     var tabs = document.querySelectorAll('.demo-tab');
-    var urls = { assay: 'assaybrewing.co', revival: 'revival construction · wichita', ossuary: 'ossuarytattoo.co', halfmoon: 'halfmoonnails.co', redline: 'redlineauto.co', sixcapital: 'six capital brewing · aurora', zoiglbrau: 'zoiglbrau · aurora' };
+    var urls = { assay: 'assaybrewing.co', revival: 'revival construction · wichita', ossuary: 'ossuarytattoo.co', halfmoon: 'halfmoonnails.co', redline: 'redlineauto.co' };
+    var demoHrefs = { assay: 'demos/assay-brewing/', revival: 'demos/revival-construction/', ossuary: 'demos/ossuary-tattoo/', halfmoon: 'demos/halfmoon-nails/', redline: 'demos/redline-auto/' };
+    var currentDemo = 'assay';
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         tabs.forEach(function (t) { t.classList.remove('active'); });
@@ -1063,8 +1000,14 @@
           var show = d.getAttribute('data-info') === key;
           d.hidden = !show;
         });
+        currentDemo = key;
         document.getElementById('demo-url').textContent = urls[key];
       });
+    });
+
+    // click the preview to open the full demo
+    document.querySelector('.demo-frame').addEventListener('click', function () {
+      window.open(demoHrefs[currentDemo], '_blank', 'noopener');
     });
 
     // scroll reveal
