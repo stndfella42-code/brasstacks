@@ -384,6 +384,7 @@
 
     /* ── SERVICES ── */
     .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    #receptionist-cta .tier-grid { grid-template-columns: repeat(2, 1fr); max-width: 880px; margin: 36px auto 0; }
     .tier {
       background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
       padding: 36px 28px; display: flex; flex-direction: column;
@@ -507,6 +508,7 @@
       #hero .infobar .cell:first-child { border-top: 0; }
       .block { padding: 70px 20px; }
       .tier-grid, .steps, .pain-grid { grid-template-columns: 1fr; }
+      #receptionist-cta .tier-grid { grid-template-columns: 1fr; }
       .demo-stage { padding: 24px; }
       .consult-form { padding: 28px 22px; }
       .field-row { grid-template-columns: 1fr; }
@@ -531,6 +533,7 @@
     <ul class="nav-links">
       <li><a href="services.html">Services</a></li>
       <li><a href="work.html">Work</a></li>
+      <li><a href="services.html#ai-receptionist">AI Receptionist</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="#consult" class="nav-cta">Book Free Consult</a></li>
     </ul>
@@ -971,9 +974,21 @@
       <div class="sec-head reveal">
         <span class="eyebrow">AI receptionist</span>
         <h2>Never miss <em>another call.</em></h2>
-        <p>Our AI receptionist answers every call 24/7, qualifies the lead, and texts us the details instantly. Try it right now:</p>
-        <p style="margin-top:26px;"><a href="tel:+17207199794" style="color:var(--brass-light);font-weight:700;text-decoration:none;font-size:30px;">(720) 719-9794</a></p>
-        <p style="margin-top:12px;"><a href="demos/ai-receptionist/" style="color:var(--text-2);font-size:15px;">See how it works &rarr;</a></p>
+        <p>Our AI receptionist answers every call 24/7, qualifies the lead, and texts us the details instantly. Two ways to try it right now:</p>
+      </div>
+      <div class="tier-grid">
+        <div class="tier reveal">
+          <h3>Call the live agent</h3>
+          <div class="t-price">(720) 719-9794</div>
+          <p class="t-desc">A real AI receptionist answers 24/7. Ask it anything.</p>
+          <a class="t-link" href="tel:+17207199794">Call now &rarr;</a>
+        </div>
+        <div class="tier reveal">
+          <h3>Run the interactive demo</h3>
+          <div class="t-price">Guided walkthrough</div>
+          <p class="t-desc">Watch a real call unfold: the conversation, the lead alert, the transcript.</p>
+          <a class="t-link" href="demos/ai-receptionist/">Try the demo &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
