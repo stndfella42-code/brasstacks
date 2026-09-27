@@ -131,6 +131,24 @@
       grid-template-columns: repeat(3, 1fr);
       border-bottom: 1px solid var(--line);
     }
+    .live-call-band {
+      border: 2px solid var(--signal);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 20px 28px;
+      margin-top: 26px;
+      text-align: center;
+    }
+    .live-call-band p { margin: 0; font-size: 17px; }
+    .live-call-band a.tel {
+      color: var(--signal-strong);
+      font-weight: 800;
+      font-size: 22px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .live-call-band a.tel:hover { text-decoration: underline; }
     .proof {
       padding: 20px 28px;
       border-right: 1px solid var(--line);
@@ -413,6 +431,10 @@
         </div>
       </div>
     </header>
+
+    <div class="wrap live-call-band" role="note">
+      <p><strong>This is the real thing.</strong> The demo below is a simulation &mdash; the live agent is answering right now. Call <a class="tel" href="tel:+17207199794">(720) 719-9794</a> and talk to it yourself.</p>
+    </div>
 
     <div class="wrap proof-strip" aria-label="Core benefits">
       <div class="proof"><strong>Answers when crews cannot</strong><span>On a roof, under a sink, or after hours</span></div>
