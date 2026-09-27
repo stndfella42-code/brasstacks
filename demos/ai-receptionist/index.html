@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f2f0e9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#101820" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:," />
+  <title>Contractor AI Receptionist Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #f2f0e9;
+      --surface: #fbfaf6;
+      --surface-2: #e5e3db;
+      --ink: #101820;
+      --muted: #4c5861;
+      --line: #b8b8b2;
+      --signal: #f45b24;
+      --signal-strong: #cf3e0d;
+      --green: #176b45;
+      --blue: #1a5f88;
+      --shadow: rgba(16,24,32,.12);
+      --grid: rgba(16,24,32,.045);
+      --radius: 10px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #101820;
+        --surface: #17222b;
+        --surface-2: #202e39;
+        --ink: #f2f0e9;
+        --muted: #b5bec4;
+        --line: #40505b;
+        --signal: #ff6a32;
+        --signal-strong: #ff8a5e;
+        --green: #53bd85;
+        --blue: #66b1da;
+        --shadow: rgba(0,0,0,.28);
+        --grid: rgba(255,255,255,.035);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--paper);
+      background-size: 24px 24px;
+      color: var(--ink);
+      font-family: "Public Sans", sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .mono { font-family: "IBM Plex Mono", monospace; }
+
+    .hero {
+      padding: 76px 0 50px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr);
+      gap: 64px;
+      align-items: end;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      font: 600 12px/1 "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .eyebrow::before { content:""; width: 30px; height: 3px; background: var(--signal); }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(46px, 7.2vw, 98px);
+      line-height: .92;
+      letter-spacing: -.065em;
+      font-weight: 800;
+    }
+    h1 em { display: block; color: var(--signal); font-style: italic; }
+    .hero-side { padding-bottom: 6px; }
+    .hero-side p {
+      margin: 0 0 28px;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .hero-side small { color: var(--muted); font-size: 13px; display: block; margin-top: 13px; }
+    .button {
+      appearance: none;
+      border: 0;
+      border-radius: 4px;
+      background: var(--signal);
+      color: #fff;
+      min-height: 52px;
+      padding: 0 20px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+    }
+    .button:hover { background: var(--signal-strong); transform: translate(-1px,-1px); box-shadow: 6px 6px 0 var(--ink); }
+    .button:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 var(--ink); }
+    .button.secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+    .arrow { font-size: 20px; line-height: 1; }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .proof {
+      padding: 20px 28px;
+      border-right: 1px solid var(--line);
+    }
+    .proof:last-child { border-right: 0; }
+    .proof strong { display: block; font-size: 17px; margin-bottom: 3px; }
+    .proof span { color: var(--muted); font-size: 13px; }
+
+    section { padding: 72px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+    .section-head h2 { margin: 0; font-size: clamp(32px, 4.6vw, 58px); line-height: .98; letter-spacing: -.045em; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 17px; max-width: 570px; justify-self: end; }
+
+    .demo-shell {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 10px 10px 0 var(--shadow);
+    }
+    .demo-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+    .status { display: flex; align-items: center; gap: 10px; font: 600 12px/1 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 18%, transparent); }
+    .status-dot.live { background: var(--signal); animation: pulse 1.1s infinite; }
+    @keyframes pulse { 50% { transform: scale(.75); opacity: .65; } }
+    .timer { color: var(--muted); font: 500 12px/1 "IBM Plex Mono", monospace; }
+    .trade-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .trade-tab {
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-bottom: 4px solid transparent;
+      padding: 16px 10px 13px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .trade-tab:last-child { border-right: 0; }
+    .trade-tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--signal); background: color-mix(in srgb, var(--signal) 7%, transparent); }
+    .demo-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); min-height: 570px; }
+    .call-pane { padding: 26px; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+    .call-meta { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 22px; }
+    .caller { display: flex; align-items: center; gap: 14px; }
+    .phone-icon { width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; background: var(--paper); }
+    .caller strong { display: block; }
+    .caller span { color: var(--muted); font-size: 13px; }
+    .call-type { font: 600 11px/1 "IBM Plex Mono", monospace; color: var(--signal-strong); background: color-mix(in srgb, var(--signal) 12%, transparent); padding: 8px 10px; border-radius: 3px; text-transform: uppercase; }
+    .transcript { flex: 1; min-height: 365px; display: flex; flex-direction: column; gap: 13px; padding: 4px 2px 20px; }
+    .message { display: none; max-width: 88%; animation: appear .25s ease both; }
+    .message.visible { display: block; }
+    @keyframes appear { from { opacity: 0; transform: translateY(4px); } }
+    .message .who { font: 600 10px/1 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 5px; }
+    .message .bubble { padding: 11px 13px; border-radius: 3px 12px 12px 12px; background: var(--surface-2); font-size: 14px; line-height: 1.45; }
+    .message.bot { align-self: flex-end; }
+    .message.bot .who { text-align: right; }
+    .message.bot .bubble { background: var(--ink); color: var(--paper); border-radius: 12px 3px 12px 12px; }
+    .call-controls { display: flex; gap: 10px; align-items: stretch; }
+    .call-controls .button { flex: 1; box-shadow: none; }
+    .reset-button { display: none; flex: 0 0 52px; border: 1px solid var(--line); color: var(--ink); background: transparent; border-radius: 4px; cursor: pointer; font-size: 22px; }
+
+    .lead-pane { padding: 26px; background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+    .panel-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font: 600 11px/1 "IBM Plex Mono", monospace; text-transform: uppercase; color: var(--muted); }
+    .panel-label b { color: var(--green); }
+    .lead-title { font-size: 25px; line-height: 1.1; letter-spacing: -.025em; margin: 0 0 8px; }
+    .lead-sub { margin: 0 0 24px; color: var(--muted); }
+    .lead-fields { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .lead-field { min-height: 86px; padding: 13px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .lead-field.full { grid-column: 1 / -1; }
+    .lead-field span { display: block; color: var(--muted); text-transform: uppercase; font: 500 10px/1.2 "IBM Plex Mono", monospace; margin-bottom: 8px; }
+    .lead-field strong { display: block; font-size: 14px; line-height: 1.35; }
+    .appointment { margin-top: 18px; padding: 16px; background: color-mix(in srgb, var(--green) 11%, transparent); border: 1px solid var(--green); }
+    .appointment .date { color: var(--green); font-size: 20px; font-weight: 800; margin-top: 3px; }
+    .appointment small { display: block; color: var(--muted); margin-top: 5px; }
+    .activity { margin-top: 18px; color: var(--muted); font-size: 12px; display: grid; gap: 8px; }
+    .activity div { display: flex; gap: 8px; align-items: center; }
+    .check { color: var(--green); font-weight: 800; }
+
+    .roi { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink); color: var(--paper); }
+    .roi .section-head p { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+    .roi-card { display: grid; grid-template-columns: 1.05fr .95fr; border: 1px solid color-mix(in srgb, var(--paper) 28%, transparent); }
+    .calculator { padding: 28px; border-right: 1px solid color-mix(in srgb, var(--paper) 28%, transparent); }
+    .field { margin-bottom: 24px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-top { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+    .field label { font-size: 14px; font-weight: 600; }
+    .field output { font: 600 13px/1 "IBM Plex Mono", monospace; color: var(--signal); }
+    input[type="range"] { width: 100%; accent-color: var(--signal); }
+    .money-input { display: flex; align-items: center; border: 1px solid color-mix(in srgb, var(--paper) 30%, transparent); background: rgba(255,255,255,.05); }
+    .money-input span { padding: 0 0 0 13px; color: var(--signal); font-weight: 800; }
+    .money-input input { width: 100%; padding: 12px 12px 12px 4px; border: 0; outline: 0; color: var(--paper); background: transparent; font-weight: 700; }
+    .roi-result { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .result-label { font: 600 11px/1 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .05em; color: color-mix(in srgb, var(--paper) 65%, transparent); }
+    .big-number { margin: 12px 0 8px; color: var(--signal); font-size: clamp(45px, 7vw, 82px); line-height: .95; letter-spacing: -.055em; font-weight: 800; }
+    .result-copy { font-size: 18px; max-width: 420px; }
+    .result-copy strong { color: var(--signal); }
+    .assumption { margin-top: 22px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); font-size: 11px; line-height: 1.5; color: color-mix(in srgb, var(--paper) 60%, transparent); }
+
+    .capture-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .capture-item { padding: 24px 20px 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .capture-num { color: var(--signal); font: 600 12px/1 "IBM Plex Mono", monospace; margin-bottom: 38px; }
+    .capture-item h3 { font-size: 19px; margin: 0 0 8px; }
+    .capture-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: step; }
+    .flow-step { position: relative; padding: 22px 24px 30px 0; border-top: 4px solid var(--line); }
+    .flow-step:not(:last-child)::after { content:""; position: absolute; top: -7px; right: 14px; width: 10px; height: 10px; border-top: 2px solid var(--muted); border-right: 2px solid var(--muted); transform: rotate(45deg); }
+    .flow-step.active { border-top-color: var(--signal); }
+    .flow-step .step-id { font: 600 11px/1 "IBM Plex Mono", monospace; color: var(--muted); }
+    .flow-step h3 { margin: 14px 0 6px; font-size: 18px; }
+    .flow-step p { margin: 0; color: var(--muted); font-size: 14px; max-width: 230px; }
+
+    .blueprint { border-top: 1px solid var(--line); }
+    .blueprint-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 56px; align-items: start; }
+    .blueprint-nav { position: sticky; top: 22px; }
+    .blueprint-nav h2 { font-size: clamp(34px, 4.8vw, 62px); line-height: .98; letter-spacing: -.045em; margin: 0 0 18px; }
+    .blueprint-nav p { color: var(--muted); margin: 0; max-width: 420px; }
+    .spec-stack { display: grid; gap: 14px; }
+    .spec-block { background: var(--surface); border: 1px solid var(--line); padding: 22px; }
+    .spec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 18px; }
+    .spec-head h3 { margin: 0; font-size: 22px; }
+    .spec-head span { font: 600 10px/1 "IBM Plex Mono", monospace; color: var(--signal-strong); text-transform: uppercase; }
+    .arch { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .arch-node { min-height: 104px; padding: 12px; background: var(--surface-2); display: flex; flex-direction: column; justify-content: space-between; }
+    .arch-node b { font-size: 14px; }
+    .arch-node small { color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .arch-arrow { color: var(--signal); font: 600 11px/1 "IBM Plex Mono", monospace; margin-bottom: 7px; }
+    .tier-table { border-top: 1px solid var(--line); }
+    .tier-row { display: grid; grid-template-columns: 1fr .7fr 1.3fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .tier-row b { font-size: 14px; }
+    .tier-row strong { color: var(--signal-strong); white-space: nowrap; }
+    .tier-row span { color: var(--muted); font-size: 12px; }
+    .cost-box { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cost-math { background: var(--ink); color: var(--paper); padding: 18px; }
+    .cost-math span { color: color-mix(in srgb, var(--paper) 65%, transparent); font: 500 10px/1 "IBM Plex Mono", monospace; text-transform: uppercase; }
+    .cost-math strong { display: block; color: var(--signal); font-size: 30px; margin: 8px 0 4px; letter-spacing: -.03em; }
+    .cost-math small { color: color-mix(in srgb, var(--paper) 68%, transparent); line-height: 1.4; }
+    .spec-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .spec-list li { position: relative; padding-left: 24px; font-size: 13px; }
+    .spec-list li::before { content:"→"; position: absolute; left: 0; color: var(--signal); font-weight: 800; }
+    .script-table { display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .script-row { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .script-row b { font: 600 11px/1.4 "IBM Plex Mono", monospace; color: var(--signal-strong); text-transform: uppercase; }
+    .script-row span { font-size: 13px; }
+    .offer { background: var(--surface); border-top: 1px solid var(--line); }
+    .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+    .offer h2 { font-size: clamp(36px, 5vw, 64px); line-height: .98; letter-spacing: -.045em; margin: 0 0 22px; }
+    .offer-copy > p { color: var(--muted); font-size: 18px; max-width: 540px; }
+    .principles { margin: 32px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .principles li { padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; gap: 12px; font-weight: 600; }
+    .principles li span { color: var(--signal); font-family: "IBM Plex Mono", monospace; }
+    .package { border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--signal); padding: 26px; }
+    .package-head { display: flex; align-items: start; justify-content: space-between; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .package h3 { margin: 0; font-size: 25px; }
+    .price { text-align: right; }
+    .price strong { display: block; font-size: 28px; letter-spacing: -.03em; }
+    .price span { color: var(--muted); font-size: 12px; }
+    .package ul { list-style: none; padding: 0; margin: 20px 0 24px; display: grid; gap: 12px; }
+    .package li { padding-left: 24px; position: relative; font-size: 14px; }
+    .package li::before { content:"✓"; color: var(--green); position: absolute; left: 0; font-weight: 800; }
+    .package-note { color: var(--muted); font-size: 11px; margin-top: 15px; }
+    .package .button { width: 100%; }
+
+    footer { padding: 34px 0 44px; }
+    .footer-line { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--muted); font-size: 12px; }
+    .footer-line a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+    @media (max-width: 840px) {
+      .wrap { width: min(100% - 28px, 700px); }
+      .hero { padding-top: 54px; }
+      .hero-grid, .section-head, .offer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-side { max-width: 600px; }
+      .section-head p { justify-self: start; }
+      .proof-strip { grid-template-columns: 1fr; }
+      .proof { border-right: 0; border-bottom: 1px solid var(--line); padding-left: 14px; padding-right: 14px; }
+      .proof:last-child { border-bottom: 0; }
+      .trade-tabs { grid-template-columns: repeat(3, 1fr); }
+      .trade-tab:nth-child(3) { border-right: 0; }
+      .trade-tab:nth-child(n+4) { border-top: 1px solid var(--line); }
+      .demo-grid { grid-template-columns: 1fr; }
+      .call-pane { border-right: 0; border-bottom: 1px solid var(--line); }
+      .lead-pane { min-height: 500px; }
+      .roi-card { grid-template-columns: 1fr; }
+      .calculator { border-right: 0; border-bottom: 1px solid color-mix(in srgb, var(--paper) 28%, transparent); }
+      .capture-grid { grid-template-columns: 1fr 1fr; }
+      .flow { grid-template-columns: 1fr 1fr; gap: 24px 0; }
+      .flow-step:nth-child(2)::after { display: none; }
+      .blueprint-grid { grid-template-columns: 1fr; gap: 34px; }
+      .blueprint-nav { position: static; }
+    }
+    @media (max-width: 520px) {
+      section { padding: 54px 0; }
+      .hero { padding: 40px 0 34px; }
+      h1 { font-size: clamp(44px, 15vw, 66px); }
+      .hero-side p { font-size: 18px; }
+      .button { width: 100%; }
+      .trade-tabs { grid-template-columns: 1fr 1fr; }
+      .trade-tab:nth-child(n) { border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
+      .trade-tab:nth-child(2n) { border-right: 0; }
+      .trade-tab:first-child, .trade-tab:nth-child(2) { border-top: 0; }
+      .trade-tab:last-child { grid-column: 1 / -1; border-right: 0; }
+      .demo-toolbar { align-items: flex-start; }
+      .timer { white-space: nowrap; }
+      .call-pane, .lead-pane { padding: 18px; }
+      .call-meta { align-items: flex-start; }
+      .call-type { display: none; }
+      .transcript { min-height: 420px; }
+      .message { max-width: 94%; }
+      .message .bubble { font-size: 13px; }
+      .lead-fields { grid-template-columns: 1fr; }
+      .lead-field.full, .lead-field { grid-column: 1; min-height: 76px; }
+      .roi-card, .capture-grid, .flow { grid-template-columns: 1fr; }
+      .calculator, .roi-result { padding: 22px 18px; }
+      .capture-item { min-height: 170px; }
+      .capture-num { margin-bottom: 24px; }
+      .flow { gap: 0; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .offer-grid { gap: 40px; }
+      .blueprint-grid { grid-template-columns: 1fr; gap: 34px; }
+      .blueprint-nav { position: static; }
+      .arch { grid-template-columns: 1fr 1fr; }
+      .tier-row { grid-template-columns: 1fr; gap: 4px; }
+      .cost-box { grid-template-columns: 1fr; }
+      .script-row { grid-template-columns: 82px 1fr; }
+      .package { padding: 20px; box-shadow: 5px 5px 0 var(--signal); }
+      .package-head { display: block; }
+      .price { text-align: left; margin-top: 12px; }
+      .footer-line { display: block; }
+      .footer-line a { display: inline-block; margin-top: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Built for residential trades</div>
+          <h1>Every qualified call you miss <em>could become somebody else’s job.</em></h1>
+        </div>
+        <div class="hero-side">
+          <p>An AI receptionist answers in seconds, qualifies the homeowner, and puts a real estimate on your calendar.</p>
+          <a class="button" href="#live-demo">Run the call demo <span class="arrow" aria-hidden="true">↓</span></a>
+          <small>Roofing, HVAC, plumbing, electrical, and remodeling.</small>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap proof-strip" aria-label="Core benefits">
+      <div class="proof"><strong>Answers when crews cannot</strong><span>On a roof, under a sink, or after hours</span></div>
+      <div class="proof"><strong>Qualifies before it books</strong><span>Address, project, urgency, and availability</span></div>
+      <div class="proof"><strong>Hands off a complete lead</strong><span>Summary, transcript, and estimate time</span></div>
+    </div>
+
+    <section id="live-demo">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Watch one call become an estimate.</h2>
+          <p>Pick a trade and run the simulated conversation. The AI changes its questions for the job, then produces a structured lead for the contractor.</p>
+        </div>
+
+        <div class="demo-shell">
+          <div class="demo-toolbar">
+            <div class="status"><span class="status-dot" id="statusDot"></span><span id="statusText">Ready for inbound call</span></div>
+            <div class="timer mono" id="timer">00:00</div>
+          </div>
+          <div class="trade-tabs" role="tablist" aria-label="Choose a contractor trade">
+            <button class="trade-tab" role="tab" aria-selected="true" data-trade="roofing">Roofing</button>
+            <button class="trade-tab" role="tab" aria-selected="false" data-trade="hvac">HVAC</button>
+            <button class="trade-tab" role="tab" aria-selected="false" data-trade="plumbing">Plumbing</button>
+            <button class="trade-tab" role="tab" aria-selected="false" data-trade="electrical">Electrical</button>
+            <button class="trade-tab" role="tab" aria-selected="false" data-trade="remodeling">Remodeling</button>
+          </div>
+          <div class="demo-grid">
+            <div class="call-pane">
+              <div class="call-meta">
+                <div class="caller">
+                  <div class="phone-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div><strong>Inbound homeowner</strong><span id="callerLocation">Aurora, CO · mobile</span></div>
+                </div>
+                <span class="call-type" id="callType">Roof leak</span>
+              </div>
+              <div class="transcript" id="transcript" aria-live="polite"></div>
+              <div class="call-controls">
+                <button class="button" id="playButton" type="button"><span aria-hidden="true">▶</span> Answer the call</button>
+                <button class="reset-button" id="resetButton" type="button" aria-label="Reset call">↻</button>
+              </div>
+            </div>
+
+            <aside class="lead-pane" aria-label="Structured lead record">
+              <div class="panel-label"><span>Lead record</span><b id="leadState">Waiting</b></div>
+              <h3 class="lead-title" id="leadTitle">No lead captured yet</h3>
+              <p class="lead-sub" id="leadSub">The call summary will build here in real time.</p>
+              <div class="lead-fields">
+                <div class="lead-field"><span>Name</span><strong id="leadName">—</strong></div>
+                <div class="lead-field"><span>Phone</span><strong id="leadPhone">—</strong></div>
+                <div class="lead-field full"><span>Service address</span><strong id="leadAddress">—</strong></div>
+                <div class="lead-field"><span>Project</span><strong id="leadProject">—</strong></div>
+                <div class="lead-field"><span>Urgency</span><strong id="leadUrgency">—</strong></div>
+                <div class="lead-field full"><span>Qualification note</span><strong id="leadNote">—</strong></div>
+              </div>
+              <div class="appointment">
+                <span class="mono" style="font-size:10px;text-transform:uppercase;">Estimate appointment</span>
+                <div class="date" id="appointmentDate">Not scheduled</div>
+                <small id="appointmentWindow">Calendar checked after qualification</small>
+              </div>
+              <div class="activity" id="activity">
+                <div><span>○</span> Call transcript pending</div>
+                <div><span>○</span> Contractor notification pending</div>
+                <div><span>○</span> Calendar booking pending</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="roi" id="roi">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>One recovered job can erase the cost.</h2>
+          <p>Use your own numbers. The calculator estimates potential booked revenue from calls that would otherwise go unanswered.</p>
+        </div>
+        <div class="roi-card">
+          <div class="calculator">
+            <div class="field">
+              <div class="field-top"><label for="missed">Missed calls per week</label><output id="missedOut">5</output></div>
+              <input type="range" id="missed" min="1" max="30" value="5" />
+            </div>
+            <div class="field">
+              <div class="field-top"><label for="qualified">Qualified leads that become jobs</label><output id="qualifiedOut">30%</output></div>
+              <input type="range" id="qualified" min="5" max="75" step="5" value="30" />
+            </div>
+            <div class="field">
+              <div class="field-top"><label for="jobValue">Average job value</label></div>
+              <div class="money-input"><span>$</span><input id="jobValue" inputmode="numeric" type="number" min="100" step="100" value="6000" aria-label="Average job value in dollars" /></div>
+            </div>
+          </div>
+          <div class="roi-result">
+            <div class="result-label">Potential recovered revenue / month</div>
+            <div class="big-number" id="revenueResult">$36,000</div>
+            <div class="result-copy">That is about <strong id="jobsResult">6 booked jobs</strong> from calls you already paid to generate.</div>
+            <div class="assumption">Illustrative projection, not a guarantee. Uses 4 weeks per month and assumes every missed call becomes a qualified opportunity once answered. Actual results depend on call quality, close rate, job value, capacity, and seasonality.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>It captures what the office needs.</h2>
+          <p>Not a generic message-taking bot. Each call follows the contractor's service area, job types, urgency rules, and booking availability.</p>
+        </div>
+        <div class="capture-grid">
+          <article class="capture-item"><div class="capture-num">01 / IDENTIFY</div><h3>Contact details</h3><p>Name, callback number, service address, and preferred contact method.</p></article>
+          <article class="capture-item"><div class="capture-num">02 / QUALIFY</div><h3>Job details</h3><p>Project type, symptoms, scope, age of equipment or roof, and useful context.</p></article>
+          <article class="capture-item"><div class="capture-num">03 / TRIAGE</div><h3>Urgency and fit</h3><p>Emergency signals, service-area match, ownership, timeline, and decision readiness.</p></article>
+          <article class="capture-item"><div class="capture-num">04 / BOOK</div><h3>Estimate window</h3><p>Matches a qualified caller to an available slot and confirms the next step.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 10px;">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>From ring to routed lead.</h2>
+          <p>The receptionist handles the repeatable front-door work. Your team stays in control of pricing, diagnosis, dispatch, and the customer relationship.</p>
+        </div>
+        <div class="flow" aria-label="Call handling workflow">
+          <article class="flow-step active"><div class="step-id">STEP 01</div><h3>Answer</h3><p>Greets the caller under your business name and identifies itself as a virtual receptionist.</p></article>
+          <article class="flow-step active"><div class="step-id">STEP 02</div><h3>Qualify</h3><p>Asks the approved questions for that trade and checks service-area fit.</p></article>
+          <article class="flow-step active"><div class="step-id">STEP 03</div><h3>Book</h3><p>Offers approved estimate windows without inventing prices or making promises.</p></article>
+          <article class="flow-step active"><div class="step-id">STEP 04</div><h3>Notify</h3><p>Sends the lead summary and transcript to the owner or office for follow-through.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="blueprint" id="blueprint">
+      <div class="wrap blueprint-grid">
+        <div class="blueprint-nav">
+          <div class="eyebrow">Product blueprint</div>
+          <h2>The system behind the voice.</h2>
+          <p>A contractor-ready reference plan for the stack, offer, call logic, onboarding, and ongoing operating work. Costs below are planning assumptions, not provider quotes.</p>
+        </div>
+        <div class="spec-stack">
+          <article class="spec-block">
+            <div class="spec-head"><h3>Reference architecture</h3><span>Four-part stack</span></div>
+            <div class="arch">
+              <div class="arch-node"><div class="arch-arrow">01 →</div><b>Twilio</b><small>Local number, call routing, recording controls, and telephony usage.</small></div>
+              <div class="arch-node"><div class="arch-arrow">02 →</div><b>Voice AI layer</b><small>Vapi or a comparable platform for speech, turn-taking, tools, and prompts.</small></div>
+              <div class="arch-node"><div class="arch-arrow">03 →</div><b>Business tools</b><small>Calendar, CRM, SMS, and email through approved integrations.</small></div>
+              <div class="arch-node"><div class="arch-arrow">04 ✓</div><b>Human owner</b><small>Gets the lead, reviews the call, handles exceptions, and closes the work.</small></div>
+            </div>
+          </article>
+
+          <article class="spec-block">
+            <div class="spec-head"><h3>Sellable tiers</h3><span>Concept pricing</span></div>
+            <div class="tier-table">
+              <div class="tier-row"><b>Missed-call catcher</b><strong>$399/mo</strong><span>After-hours and overflow answering, structured message capture, transcript, and instant owner notification.</span></div>
+              <div class="tier-row"><b>Estimate booker</b><strong>$599/mo</strong><span>Everything above plus trade-specific qualification, service-area rules, and calendar booking.</span></div>
+              <div class="tier-row"><b>Dispatch desk</b><strong>$999/mo</strong><span>Multi-location or higher-volume routing, urgent escalation, CRM handoff, and deeper monthly tuning.</span></div>
+            </div>
+            <p class="package-note">A one-time setup fee should cover discovery, prompt design, number configuration, integrations, testing, and launch. Usage is billed separately or included with a clearly stated monthly allowance.</p>
+          </article>
+
+          <article class="spec-block">
+            <div class="spec-head"><h3>Unit economics</h3><span>Planning model</span></div>
+            <div class="cost-box">
+              <div class="cost-math"><span>Example monthly account</span><strong>$599 revenue</strong><small>At 500 minutes, assume $100–$200 in telephony and voice-AI usage, leaving roughly $399–$499 before support, software, taxes, and overhead.</small></div>
+              <ul class="spec-list">
+                <li>Do not promise a fixed margin until a real call sample establishes duration and volume.</li>
+                <li>Pass through unusually high usage or set an overage rate in the client agreement.</li>
+                <li>Price for monitoring and tuning, not only the underlying AI minutes.</li>
+                <li>A recovered high-ticket job can outweigh a month of service, but the client’s real close rate decides ROI.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="spec-block">
+            <div class="spec-head"><h3>Contractor call script</h3><span>Approved sequence</span></div>
+            <div class="script-table">
+              <div class="script-row"><b>Disclose</b><span>“Thanks for calling [Business]. I’m the virtual receptionist. Are you calling about a new project, existing job, or urgent service issue?”</span></div>
+              <div class="script-row"><b>Safety</b><span>Ask only the approved emergency screen for the trade. Route life-safety issues to emergency services or the contractor’s on-call path. Never diagnose.</span></div>
+              <div class="script-row"><b>Identify</b><span>Collect full name, callback number, service address, ownership status, and preferred contact method.</span></div>
+              <div class="script-row"><b>Qualify</b><span>Capture project type, symptoms or scope, timeline, equipment or property context, service-area fit, and agreed budget qualifier when appropriate.</span></div>
+              <div class="script-row"><b>Book</b><span>Offer only approved calendar windows. Confirm who will be present, access instructions, and the exact next step.</span></div>
+              <div class="script-row"><b>Close</b><span>Repeat the date and arrival window, say what the contractor will receive, and avoid promising price, diagnosis, or same-day completion.</span></div>
+            </div>
+          </article>
+
+          <article class="spec-block">
+            <div class="spec-head"><h3>Client onboarding</h3><span>Launch checklist</span></div>
+            <ul class="spec-list">
+              <li>Map service areas, job types, disqualifiers, business hours, holidays, and escalation contacts.</li>
+              <li>Write one call flow per major intent: new estimate, existing customer, emergency, vendor, and wrong number.</li>
+              <li>Connect the calendar with protected buffers, travel zones, and owner-approved appointment types.</li>
+              <li>Confirm call recording, consent, privacy, retention, and AI disclosure requirements with qualified counsel for the client’s jurisdictions.</li>
+              <li>Run scripted test calls, adversarial edge cases, voicemail fallback, transfer failure, and duplicate-booking tests.</li>
+              <li>Launch after hours first, review every call for two weeks, then expand only after acceptance criteria are met.</li>
+            </ul>
+          </article>
+
+          <article class="spec-block">
+            <div class="spec-head"><h3>Ongoing operator workload</h3><span>Per client / month</span></div>
+            <div class="tier-table">
+              <div class="tier-row"><b>Call review</b><strong>1–2 hrs</strong><span>Sample transcripts, score qualification quality, and inspect escalations and failed bookings.</span></div>
+              <div class="tier-row"><b>Prompt tuning</b><strong>0.5–1 hr</strong><span>Update questions, phrasing, service rules, seasonal offers, and newly observed edge cases.</span></div>
+              <div class="tier-row"><b>Reporting</b><strong>0.5 hr</strong><span>Share call volume, qualified leads, booked estimates, exceptions, and client-reported outcomes.</span></div>
+              <div class="tier-row"><b>Support reserve</b><strong>1 hr</strong><span>Budget time for calendar changes, routing updates, number issues, and integration maintenance.</span></div>
+            </div>
+            <p class="package-note">A reasonable planning reserve is 3–4.5 hours per client each month during a stable period, with more time during launch. Track the real number before promising “passive” revenue.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer">
+      <div class="wrap offer-grid">
+        <div class="offer-copy">
+          <div class="eyebrow">A practical first version</div>
+          <h2>Start after hours. Prove it. Expand from there.</h2>
+          <p>The safest rollout is narrow and measurable: missed calls and after-hours first, one trade-specific script, clear escalation rules, then broader coverage after real calls show what needs tuning.</p>
+          <ul class="principles">
+            <li><span>01</span> AI identifies itself clearly</li>
+            <li><span>02</span> Emergencies follow an approved escalation path</li>
+            <li><span>03</span> Humans review transcripts and outcomes</li>
+            <li><span>04</span> No diagnosis, price promises, or unsafe advice</li>
+          </ul>
+        </div>
+        <aside class="package">
+          <div class="package-head">
+            <div><span class="mono" style="font-size:10px;color:var(--muted);text-transform:uppercase;">Pilot offer</span><h3>After-hours lead capture</h3></div>
+            <div class="price"><strong>$599/mo</strong><span>plus call usage</span></div>
+          </div>
+          <ul>
+            <li>Custom greeting and contractor-specific call flow</li>
+            <li>Name, number, address, project details, and urgency</li>
+            <li>Estimate booking against approved availability</li>
+            <li>Call transcript and structured lead summary</li>
+            <li>Service-area and emergency routing rules</li>
+            <li>Monthly call review and script tuning</li>
+          </ul>
+          <a class="button" href="#live-demo">Replay the demo <span class="arrow" aria-hidden="true">↑</span></a>
+          <div class="package-note">Concept pricing for a sellable pilot. Telephony and AI usage vary by call volume and provider. Final scope should be priced after a call-volume review.</div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-line">
+      <span>Contractor AI receptionist · interactive concept demo</span>
+      <a href="https://brasstacks.space/" target="_blank" rel="noopener noreferrer">Built by Brass Tacks</a>
+    </div>
+  </footer>
+
+  <script>
+    const scenarios = {
+      roofing: {
+        location: "Aurora, CO · mobile", type: "Roof leak", name: "Maya Thompson", phone: "(303) 555-0148", address: "2467 S Fraser St, Aurora", project: "Active roof leak", urgency: "Within 24 hours", note: "Homeowner. Water spot growing near upstairs hallway after last storm.", date: "Monday · 10:00–12:00", window: "On-site roofing estimate · homeowner confirmed",
+        messages: [
+          ["bot","Thanks for calling. I’m the virtual receptionist. Are you calling about a new estimate or an existing job?"],
+          ["caller","A new estimate. We found a water spot upstairs after the storm."],
+          ["bot","I can help get this in front of the roofing team. Is water actively entering the home right now?"],
+          ["caller","It dripped last night, but it has stopped. The spot is getting bigger."],
+          ["bot","Understood. I’ll mark it urgent. May I get your name, callback number, and the property address?"],
+          ["caller","Maya Thompson. I’m at 2467 South Fraser in Aurora. This number is best."],
+          ["bot","Thank you, Maya. The next estimate window is Monday from 10 to noon. Will the homeowner be available?"],
+          ["caller","Yes, that works."],
+          ["bot","You’re booked. The team will receive your details and a summary of this call. If active water returns, protect the area and contact emergency services for any electrical hazard."]
+        ]
+      },
+      hvac: {
+        location: "Centennial, CO · mobile", type: "No cooling", name: "Daniel Ruiz", phone: "(720) 555-0183", address: "5871 S Killarney Way, Centennial", project: "AC not cooling", urgency: "Today if possible", note: "Homeowner. System runs but blows warm air. Equipment is approximately 12 years old.", date: "Today · 3:00–5:00", window: "HVAC diagnostic window · homeowner confirmed",
+        messages: [
+          ["bot","Thanks for calling. I’m the virtual receptionist. Are you looking for HVAC service at your home?"],
+          ["caller","Yes. The AC is running but the house keeps getting hotter."],
+          ["bot","I can help schedule a diagnostic visit. Is there any burning smell, smoke, or sparking from the equipment?"],
+          ["caller","No. It just blows warm air."],
+          ["bot","Thank you. About how old is the system, and when did the cooling stop?"],
+          ["caller","About twelve years old. It started yesterday afternoon."],
+          ["bot","May I get your name, callback number, and service address?"],
+          ["caller","Daniel Ruiz, 5871 South Killarney Way in Centennial. Call me at this number."],
+          ["bot","I have an arrival window today from 3 to 5. Would that work?"],
+          ["caller","Yes, please."],
+          ["bot","You’re booked. The technician will receive the system details and this call summary."]
+        ]
+      },
+      plumbing: {
+        location: "Lakewood, CO · mobile", type: "Water heater", name: "Erin Wallace", phone: "(303) 555-0116", address: "940 S Cody St, Lakewood", project: "Replace water heater", urgency: "This week", note: "Homeowner. 50-gallon gas unit is leaking at base. Water supply has been shut off.", date: "Tuesday · 8:00–10:00", window: "Replacement estimate · homeowner confirmed",
+        messages: [
+          ["bot","Thanks for calling. I’m the virtual receptionist. What plumbing issue can I help you with?"],
+          ["caller","Our water heater is leaking from the bottom. I think we need a new one."],
+          ["bot","I can get the right information to the plumbing team. Is water still flowing, and do you smell gas?"],
+          ["caller","No gas smell. We shut the water off."],
+          ["bot","Good. Please leave the unit off. Is it a gas or electric water heater, and what size is it?"],
+          ["caller","Gas, 50 gallons."],
+          ["bot","May I get your name, callback number, and service address?"],
+          ["caller","Erin Wallace, 940 South Cody in Lakewood. This number is best."],
+          ["bot","I can schedule a replacement estimate Tuesday from 8 to 10. Does that work?"],
+          ["caller","Yes."],
+          ["bot","You’re booked. The team will receive the unit details and call summary."]
+        ]
+      },
+      electrical: {
+        location: "Denver, CO · mobile", type: "Panel upgrade", name: "Chris Bennett", phone: "(720) 555-0161", address: "1734 N Adams St, Denver", project: "200-amp panel upgrade", urgency: "Within 2 weeks", note: "Homeowner. Planning EV charger install. Existing 100-amp panel; no active fault reported.", date: "Wednesday · 1:00–3:00", window: "Electrical estimate · homeowner confirmed",
+        messages: [
+          ["bot","Thanks for calling. I’m the virtual receptionist. What electrical project are you planning?"],
+          ["caller","We want an EV charger, but I think our old panel needs an upgrade first."],
+          ["bot","I can help book an estimate. Is there any active sparking, smoke, heat, or repeated breaker tripping?"],
+          ["caller","No, nothing like that."],
+          ["bot","Do you know the current panel size and the service size you’re considering?"],
+          ["caller","It’s a 100-amp panel. We were told we might need 200 amps."],
+          ["bot","May I get your name, callback number, and property address?"],
+          ["caller","Chris Bennett, 1734 North Adams in Denver. This number is good."],
+          ["bot","The next estimate window is Wednesday from 1 to 3. Will the homeowner be there?"],
+          ["caller","Yes."],
+          ["bot","You’re booked. The electrician will receive your project details and call summary."]
+        ]
+      },
+      remodeling: {
+        location: "Parker, CO · mobile", type: "Kitchen remodel", name: "Nina Patel", phone: "(303) 555-0195", address: "11238 Blackwolf Dr, Parker", project: "Full kitchen remodel", urgency: "Planning for winter", note: "Homeowner. New layout, cabinets, counters, lighting. Budget range discussed: $60k–$90k.", date: "Thursday · 4:00–5:30", window: "In-home project consultation · both homeowners confirmed",
+        messages: [
+          ["bot","Thanks for calling. I’m the virtual receptionist. What kind of remodeling project are you considering?"],
+          ["caller","A full kitchen remodel. We want to change the layout, not just the finishes."],
+          ["bot","Great. Are you the homeowner, and do you have a target timeline for construction?"],
+          ["caller","Yes. We’d like to start this winter if possible."],
+          ["bot","Will the project include cabinets, counters, lighting, and moving plumbing or walls?"],
+          ["caller","All of that. We may open one wall to the dining room."],
+          ["bot","To match the project to the right team, is your working investment range under $50,000, $50,000 to $100,000, or above $100,000?"],
+          ["caller","Probably $60,000 to $90,000."],
+          ["bot","May I get your name, callback number, and property address?"],
+          ["caller","Nina Patel, 11238 Blackwolf Drive in Parker. This number is best."],
+          ["bot","I have a consultation Thursday from 4 to 5:30. Can all decision-makers attend?"],
+          ["caller","Yes, we’ll both be there."],
+          ["bot","You’re booked. The remodeler will receive your scope, budget range, and call summary."]
+        ]
+      }
+    };
+
+    let activeTrade = "roofing";
+    let running = false;
+    let revealTimer = null;
+    let clockTimer = null;
+    let elapsed = 0;
+
+    const el = id => document.getElementById(id);
+    const transcript = el("transcript");
+    const playButton = el("playButton");
+    const resetButton = el("resetButton");
+
+    function renderMessages() {
+      transcript.innerHTML = scenarios[activeTrade].messages.map((m, i) => `
+        <div class="message ${m[0] === "bot" ? "bot" : ""}" data-index="${i}">
+          <div class="who">${m[0] === "bot" ? "Virtual receptionist" : "Homeowner"}</div>
+          <div class="bubble">${m[1]}</div>
+        </div>`).join("");
+    }
+
+    function updateScenario() {
+      const s = scenarios[activeTrade];
+      el("callerLocation").textContent = s.location;
+      el("callType").textContent = s.type;
+      renderMessages();
+      resetCall();
+    }
+
+    function setLead(stage) {
+      const s = scenarios[activeTrade];
+      if (stage >= 1) {
+        el("leadState").textContent = "Capturing";
+        el("leadTitle").textContent = `${s.type} inquiry`;
+        el("leadSub").textContent = "Qualification in progress.";
+        el("leadName").textContent = s.name;
+        el("leadPhone").textContent = s.phone;
+      }
+      if (stage >= 2) {
+        el("leadAddress").textContent = s.address;
+        el("leadProject").textContent = s.project;
+        el("leadUrgency").textContent = s.urgency;
+        el("leadNote").textContent = s.note;
+      }
+      if (stage >= 3) {
+        el("leadState").textContent = "Qualified";
+        el("leadTitle").textContent = `${s.name} · qualified lead`;
+        el("leadSub").textContent = "Homeowner matched to service area and project rules.";
+        el("appointmentDate").textContent = s.date;
+        el("appointmentWindow").textContent = s.window;
+        el("activity").innerHTML = `<div><span class="check">✓</span> Call transcript attached</div><div><span class="check">✓</span> Contractor notification ready</div><div><span class="check">✓</span> Calendar estimate booked</div>`;
+      }
+    }
+
+    function resetCall() {
+      running = false;
+      clearTimeout(revealTimer);
+      clearInterval(clockTimer);
+      elapsed = 0;
+      el("timer").textContent = "00:00";
+      el("statusText").textContent = "Ready for inbound call";
+      el("statusDot").classList.remove("live");
+      playButton.innerHTML = `<span aria-hidden="true">▶</span> Answer the call`;
+      playButton.disabled = false;
+      resetButton.style.display = "none";
+      transcript.querySelectorAll(".message").forEach(m => m.classList.remove("visible"));
+      el("leadState").textContent = "Waiting";
+      el("leadTitle").textContent = "No lead captured yet";
+      el("leadSub").textContent = "The call summary will build here in real time.";
+      ["leadName","leadPhone","leadAddress","leadProject","leadUrgency","leadNote"].forEach(id => el(id).textContent = "—");
+      el("appointmentDate").textContent = "Not scheduled";
+      el("appointmentWindow").textContent = "Calendar checked after qualification";
+      el("activity").innerHTML = `<div><span>○</span> Call transcript pending</div><div><span>○</span> Contractor notification pending</div><div><span>○</span> Calendar booking pending</div>`;
+    }
+
+    function tickClock() {
+      elapsed++;
+      const mm = String(Math.floor(elapsed / 60)).padStart(2,"0");
+      const ss = String(elapsed % 60).padStart(2,"0");
+      el("timer").textContent = `${mm}:${ss}`;
+    }
+
+    function runCall() {
+      if (running) return;
+      running = true;
+      playButton.disabled = true;
+      playButton.textContent = "Call in progress";
+      resetButton.style.display = "block";
+      el("statusText").textContent = "Call in progress";
+      el("statusDot").classList.add("live");
+      clockTimer = setInterval(tickClock, 1000);
+      const messages = Array.from(transcript.querySelectorAll(".message"));
+      let i = 0;
+      function reveal() {
+        if (i >= messages.length) {
+          running = false;
+          clearInterval(clockTimer);
+          el("statusText").textContent = "Estimate booked";
+          el("statusDot").classList.remove("live");
+          playButton.textContent = "Lead captured";
+          setLead(3);
+          return;
+        }
+        messages[i].classList.add("visible");
+        messages[i].scrollIntoView({ block: "nearest", behavior: "smooth" });
+        const pct = (i + 1) / messages.length;
+        if (pct > .35 && pct <= .68) setLead(1);
+        if (pct > .68 && pct < 1) setLead(2);
+        i++;
+        revealTimer = setTimeout(reveal, 720);
+      }
+      reveal();
+    }
+
+    document.querySelectorAll(".trade-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".trade-tab").forEach(t => t.setAttribute("aria-selected","false"));
+        tab.setAttribute("aria-selected","true");
+        activeTrade = tab.dataset.trade;
+        updateScenario();
+      });
+    });
+    playButton.addEventListener("click", runCall);
+    resetButton.addEventListener("click", resetCall);
+
+    const missed = el("missed");
+    const qualified = el("qualified");
+    const jobValue = el("jobValue");
+    function calcROI() {
+      const missedVal = Number(missed.value);
+      const qualifiedVal = Number(qualified.value);
+      const jobVal = Math.max(0, Number(jobValue.value) || 0);
+      const jobs = missedVal * 4 * (qualifiedVal / 100);
+      const revenue = jobs * jobVal;
+      el("missedOut").textContent = missedVal;
+      el("qualifiedOut").textContent = `${qualifiedVal}%`;
+      el("revenueResult").textContent = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits:0 }).format(revenue);
+      el("jobsResult").textContent = `${Number.isInteger(jobs) ? jobs : jobs.toFixed(1)} booked ${jobs === 1 ? "job" : "jobs"}`;
+    }
+    [missed, qualified, jobValue].forEach(input => input.addEventListener("input", calcROI));
+
+    renderMessages();
+    calcROI();
+  </script>
+</body>
+</html>
