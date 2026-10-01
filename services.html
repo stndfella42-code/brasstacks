@@ -760,6 +760,10 @@
     }
     #ava-call-status { color: var(--text-2); font-size: 15px; margin-bottom: 16px; }
     #ava-call-status.live { color: var(--brass-light); font-weight: 600; }
+    .ava-wave { display: flex; align-items: center; gap: 5px; height: 64px; margin: 2px 0 14px; }
+    .ava-wave span { width: 6px; border-radius: 3px; background: linear-gradient(to top, var(--brass-dim), var(--brass-light)); transform-origin: center; transform: scaleY(.3); opacity: .45; animation: avaWave 1.6s ease-in-out infinite; animation-play-state: paused; }
+    #ava-call-panel.live .ava-wave span { animation-play-state: running; opacity: 1; }
+    @keyframes avaWave { 0%,100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
     #ava-call-status.error { color: #e08080; }
     .ava-call-controls { display: flex; gap: 12px; }
     .ava-ctl-btn {
@@ -775,8 +779,38 @@
   </style>
   <!-- AI RECEPTIONIST SPOTLIGHT -->
   <section class="section alt" id="ai-receptionist">
-    <div class="section-eyebrow reveal"><span class="service-badge" style="margin-right:10px;">New</span>Flagship service</div>
-    <div class="section-title reveal">Never miss<br><em>another call.</em></div>
+    <div class="reveal" style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:6px;">
+      <svg width="76" height="76" viewBox="0 0 183 190" role="img" aria-label="Ava voice mark" style="flex:none;">
+          <defs><linearGradient id="avaBrass" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#8a6a1a"/><stop offset="1" stop-color="#e8c76a"/>
+          </linearGradient></defs>
+          <rect x="0" y="90.0" width="7" height="10" rx="3.5" fill="url(#avaBrass)" opacity="0.58"/>
+          <rect x="12" y="87.0" width="7" height="16" rx="3.5" fill="url(#avaBrass)" opacity="0.59"/>
+          <rect x="24" y="82.0" width="7" height="26" rx="3.5" fill="url(#avaBrass)" opacity="0.62"/>
+          <rect x="36" y="75.0" width="7" height="40" rx="3.5" fill="url(#avaBrass)" opacity="0.65"/>
+          <rect x="48" y="67.0" width="7" height="56" rx="3.5" fill="url(#avaBrass)" opacity="0.70"/>
+          <rect x="60" y="58.0" width="7" height="74" rx="3.5" fill="url(#avaBrass)" opacity="0.74"/>
+          <rect x="72" y="48.0" width="7" height="94" rx="3.5" fill="url(#avaBrass)" opacity="0.80"/>
+          <rect x="84" y="37.0" width="7" height="116" rx="3.5" fill="url(#avaBrass)" opacity="0.85"/>
+          <rect x="96" y="26.0" width="7" height="138" rx="3.5" fill="url(#avaBrass)" opacity="0.91"/>
+          <rect x="108" y="16.0" width="7" height="158" rx="3.5" fill="url(#avaBrass)" opacity="0.96"/>
+          <rect x="120" y="9.0" width="7" height="172" rx="3.5" fill="url(#avaBrass)" opacity="1.00"/>
+          <rect x="132" y="16.0" width="7" height="158" rx="3.5" fill="url(#avaBrass)" opacity="0.96"/>
+          <rect x="144" y="26.0" width="7" height="138" rx="3.5" fill="url(#avaBrass)" opacity="0.91"/>
+          <rect x="156" y="37.0" width="7" height="116" rx="3.5" fill="url(#avaBrass)" opacity="0.85"/>
+          <rect x="168" y="48.0" width="7" height="94" rx="3.5" fill="url(#avaBrass)" opacity="0.80"/>
+          <rect x="180" y="58.0" width="7" height="74" rx="3.5" fill="url(#avaBrass)" opacity="0.74"/>
+          <rect x="192" y="67.0" width="7" height="56" rx="3.5" fill="url(#avaBrass)" opacity="0.70"/>
+          <rect x="204" y="75.0" width="7" height="40" rx="3.5" fill="url(#avaBrass)" opacity="0.65"/>
+          <rect x="216" y="82.0" width="7" height="26" rx="3.5" fill="url(#avaBrass)" opacity="0.62"/>
+          <rect x="228" y="87.0" width="7" height="16" rx="3.5" fill="url(#avaBrass)" opacity="0.59"/>
+          <rect x="240" y="90.0" width="7" height="10" rx="3.5" fill="url(#avaBrass)" opacity="0.58"/>
+        </svg>
+      <div>
+        <div class="section-eyebrow"><span class="service-badge" style="margin-right:10px;">New</span>Flagship service</div>
+        <div class="section-title">Never miss<br><em>another call.</em></div>
+      </div>
+    </div>
     <p class="reveal" style="max-width:640px;color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin-bottom:44px;">A voice AI on your business number. It answers every call 24/7, runs your intake, and texts you the lead summary seconds after hangup. Don&rsquo;t take our word for it &mdash; run the interactive demo, call the live agent, or talk to Ava right in your browser.</p>
 
     <div class="services-grid">
@@ -858,6 +892,29 @@
 
     <div id="ava-call-panel" hidden>
       <div id="ava-call-status">Ready.</div>
+      <div class="ava-wave" aria-hidden="true">
+        <span style="height:6px;animation-delay:0.0s"></span>
+        <span style="height:6px;animation-delay:0.09s"></span>
+        <span style="height:8px;animation-delay:0.18s"></span>
+        <span style="height:13px;animation-delay:0.27s"></span>
+        <span style="height:18px;animation-delay:0.36s"></span>
+        <span style="height:24px;animation-delay:0.45s"></span>
+        <span style="height:31px;animation-delay:0.54s"></span>
+        <span style="height:38px;animation-delay:0.63s"></span>
+        <span style="height:45px;animation-delay:0.72s"></span>
+        <span style="height:51px;animation-delay:0.81s"></span>
+        <span style="height:56px;animation-delay:0.9s"></span>
+        <span style="height:51px;animation-delay:0.99s"></span>
+        <span style="height:45px;animation-delay:1.08s"></span>
+        <span style="height:38px;animation-delay:1.17s"></span>
+        <span style="height:31px;animation-delay:1.26s"></span>
+        <span style="height:24px;animation-delay:1.35s"></span>
+        <span style="height:18px;animation-delay:1.44s"></span>
+        <span style="height:13px;animation-delay:1.53s"></span>
+        <span style="height:8px;animation-delay:0.02s"></span>
+        <span style="height:6px;animation-delay:0.11s"></span>
+        <span style="height:6px;animation-delay:0.2s"></span>
+      </div>
       <div class="ava-call-controls">
         <button id="ava-mute-btn" class="ava-ctl-btn" disabled>Mute</button>
         <button id="ava-end-btn" class="ava-ctl-btn ava-ctl-danger" disabled>End call</button>
@@ -888,6 +945,7 @@
     function setStatus(text, cls) {
       statusEl.textContent = text;
       statusEl.className = cls || "";
+      panel.classList.toggle("live", cls === "live");
     }
 
     function resetUI() {
