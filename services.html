@@ -743,11 +743,41 @@
     <p class="page-hero-sub" style="opacity:0;animation:fadeUp 0.7s ease forwards 0.35s">Every project is scoped, designed, and built specifically for your business. Here's how we break it down.</p>
   </section>
 
+  <!-- AVA BROWSER CALL -->
+  <style>
+    .ava-text-btn {
+      background: none; border: none; cursor: pointer; padding: 0;
+      color: var(--brass-light); font-size: 13px; font-weight: 600;
+      letter-spacing: 1px; font-family: inherit;
+    }
+    .ava-text-btn:hover { text-decoration: underline; }
+    #ava-call-panel {
+      margin-top: 28px; max-width: 520px;
+      border: 1px solid rgba(232,199,106,0.28);
+      border-radius: var(--radius, 10px);
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.02);
+    }
+    #ava-call-status { color: var(--text-2); font-size: 15px; margin-bottom: 16px; }
+    #ava-call-status.live { color: var(--brass-light); font-weight: 600; }
+    #ava-call-status.error { color: #e08080; }
+    .ava-call-controls { display: flex; gap: 12px; }
+    .ava-ctl-btn {
+      background: transparent; color: var(--text-2);
+      border: 1px solid rgba(255,255,255,0.25); border-radius: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 10px 22px; cursor: pointer; font-family: inherit;
+    }
+    .ava-ctl-btn:hover:not(:disabled) { border-color: var(--brass-light); color: var(--brass-light); }
+    .ava-ctl-btn:disabled { opacity: 0.35; cursor: default; }
+    .ava-ctl-danger:hover:not(:disabled) { border-color: #e08080; color: #e08080; }
+    .ava-fineprint { color: var(--text-3); font-size: 12px; margin: 14px 0 0; line-height: 1.6; }
+  </style>
   <!-- AI RECEPTIONIST SPOTLIGHT -->
   <section class="section alt" id="ai-receptionist">
     <div class="section-eyebrow reveal"><span class="service-badge" style="margin-right:10px;">New</span>Flagship service</div>
     <div class="section-title reveal">Never miss<br><em>another call.</em></div>
-    <p class="reveal" style="max-width:640px;color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin-bottom:44px;">A voice AI on your business number. It answers every call 24/7, runs your intake, and texts you the lead summary seconds after hangup. Don&rsquo;t take our word for it &mdash; run the interactive demo or call the live agent yourself right now.</p>
+    <p class="reveal" style="max-width:640px;color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin-bottom:44px;">A voice AI on your business number. It answers every call 24/7, runs your intake, and texts you the lead summary seconds after hangup. Don&rsquo;t take our word for it &mdash; run the interactive demo, call the live agent, or talk to Ava right in your browser.</p>
 
     <div class="services-grid">
       <div class="service-card card-reveal" data-dir="left">
@@ -789,7 +819,116 @@
     <div class="reveal" style="margin-top:44px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
       <a href="demos/ai-receptionist/#live-demo" class="btn-primary">Try the interactive demo</a>
       <a href="tel:+17207199794" style="color:var(--brass-light);font-size:13px;font-weight:600;letter-spacing:1px;text-decoration:none;">CALL THE LIVE AGENT: (720) 719-9794 &rarr;</a>
+      <button id="ava-browser-btn" class="ava-text-btn">TALK TO AVA IN YOUR BROWSER &rarr;</button>
     </div>
+
+    <div id="ava-call-panel" hidden>
+      <div id="ava-call-status">Ready.</div>
+      <div class="ava-call-controls">
+        <button id="ava-mute-btn" class="ava-ctl-btn" disabled>Mute</button>
+        <button id="ava-end-btn" class="ava-ctl-btn ava-ctl-danger" disabled>End call</button>
+      </div>
+      <p class="ava-fineprint">Live voice call with Ava through your browser. Your browser will ask for microphone permission.</p>
+    </div>
+
+    <script type="module">
+    import { RetellClient } from "https://esm.sh/retell-client-js-sdk";
+
+    // ── CONFIG ──────────────────────────────────────────────────────────────
+    // 1. In the Retell dashboard go to Settings → API Keys → create a PUBLIC key.
+    //    Restrict its allowed domains to brasstacks.space (and localhost for testing).
+    // 2. Paste it below. Public keys are designed to be visible in page source.
+    const RETELL_PUBLIC_KEY = "PASTE_PUBLIC_KEY_HERE";
+    const AVA_AGENT_ID = "agent_0c8680533138f7de0cb90f26f7"; // Ava (production)
+    // ─────────────────────────────────────────────────────────────────────────
+
+    const btn = document.getElementById("ava-browser-btn");
+    const panel = document.getElementById("ava-call-panel");
+    const statusEl = document.getElementById("ava-call-status");
+    const muteBtn = document.getElementById("ava-mute-btn");
+    const endBtn = document.getElementById("ava-end-btn");
+
+    let call = null;
+    let muted = false;
+
+    function setStatus(text, cls) {
+      statusEl.textContent = text;
+      statusEl.className = cls || "";
+    }
+
+    function resetUI() {
+      call = null;
+      muted = false;
+      muteBtn.disabled = true;
+      muteBtn.textContent = "Mute";
+      endBtn.disabled = true;
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }
+
+    btn.addEventListener("click", async () => {
+      if (RETELL_PUBLIC_KEY === "PASTE_PUBLIC_KEY_HERE") {
+        panel.hidden = false;
+        setStatus("Voice demo is not wired up yet — a Retell public key still needs to be pasted into this page (see the CONFIG comment in the source).", "error");
+        return;
+      }
+      if (call) return;
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      btn.disabled = true;
+      btn.style.opacity = "0.4";
+      setStatus("Connecting to Ava…");
+
+      try {
+        const client = new RetellClient({ key: RETELL_PUBLIC_KEY });
+        call = client.createWebCall({
+          agent_id: AVA_AGENT_ID,
+          hooks: {
+            onStatus: (s) => {
+              if (s === "live") {
+                setStatus("Live — you are talking to Ava.", "live");
+                muteBtn.disabled = false;
+                endBtn.disabled = false;
+              } else if (s === "ended") {
+                setStatus("Call ended.");
+                resetUI();
+              }
+            },
+            onEnd: () => {
+              setStatus("Call ended.");
+              resetUI();
+            },
+            onError: (err) => {
+              console.error("Ava web call error:", err);
+              const msg = err && err.message ? err.message : String(err);
+              setStatus("Could not start the call: " + msg, "error");
+              resetUI();
+            },
+          },
+        });
+        await call.ready;
+      } catch (err) {
+        console.error("Ava web call failed:", err);
+        const msg = err && err.message ? err.message : String(err);
+        setStatus("Could not start the call: " + msg, "error");
+        resetUI();
+      }
+    });
+
+    muteBtn.addEventListener("click", () => {
+      if (!call) return;
+      if (muted) { call.unmute(); muted = false; muteBtn.textContent = "Mute"; }
+      else { call.mute(); muted = true; muteBtn.textContent = "Unmute"; }
+    });
+
+    endBtn.addEventListener("click", async () => {
+      if (!call) return;
+      setStatus("Ending call…");
+      try { await call.end(); } catch (e) { console.error(e); }
+      setStatus("Call ended.");
+      resetUI();
+    });
+    </script>
 
     <div class="reveal" style="margin-top:56px;max-width:680px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.08);">
       <div class="section-eyebrow">Why Brass Tacks</div>
