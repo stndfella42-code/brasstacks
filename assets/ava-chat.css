@@ -1,0 +1,108 @@
+/* Ava web-chat widget styles — Brass Tacks brass-on-dark brand */
+.ava-fab {
+  position: fixed; right: 20px; bottom: 20px; z-index: 9998;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #171715; color: #e8c76a;
+  border: 2px solid #c4982a; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,.45);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.ava-fab:hover { transform: scale(1.07); border-color: #e8c76a; box-shadow: 0 4px 24px rgba(196,152,42,.35); }
+.ava-fab.ava-open { transform: rotate(0deg); }
+
+.ava-panel {
+  position: fixed; right: 20px; bottom: 92px; z-index: 9999;
+  width: 370px; max-width: calc(100vw - 40px);
+  height: 520px; max-height: calc(100vh - 130px);
+  background: #141310; border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 12px 44px rgba(0,0,0,.55);
+  border: 1px solid #8a6a1a;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.ava-panel.ava-hidden { opacity: 0; transform: translateY(12px); pointer-events: none; }
+
+.ava-head {
+  background: #1a1512; color: #f0ede6; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  border-bottom: 1px solid #8a6a1a;
+}
+.ava-head-mark {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(196,152,42,.16); color: #e8c76a;
+  border: 1px solid #8a6a1a;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ava-head-text { display: flex; flex-direction: column; line-height: 1.25; flex: 1; }
+.ava-head-text strong { font-size: 1.02rem; color: #e8c76a; letter-spacing: .02em; }
+.ava-head-text span { font-size: .76rem; color: #a8a49c; }
+.ava-close {
+  background: none; border: none; color: #a8a49c; font-size: 1.5rem;
+  cursor: pointer; line-height: 1; padding: 4px 6px; opacity: .85;
+}
+.ava-close:hover { opacity: 1; color: #e8c76a; }
+
+.ava-msgs { flex: 1; overflow-y: auto; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.ava-msg { display: flex; flex-direction: column; }
+.ava-user { align-items: flex-end; }
+.ava-assistant { align-items: flex-start; }
+.ava-bubble {
+  max-width: 82%; padding: 9px 13px; border-radius: 15px;
+  font-size: .92rem; line-height: 1.45; word-wrap: break-word;
+}
+.ava-user .ava-bubble { background: #c4982a; color: #1a1512; border-bottom-right-radius: 5px; font-weight: 500; }
+.ava-assistant .ava-bubble { background: #232019; color: #f0ede6; border: 1px solid #3a3226; border-bottom-left-radius: 5px; }
+.ava-assistant .ava-bubble strong { color: #e8c76a; }
+
+/* Take-me-there button rendered under Ava's reply */
+.ava-go {
+  margin-top: 8px; align-self: flex-start;
+  background: transparent; color: #e8c76a;
+  border: 1px solid #c4982a; border-radius: 22px;
+  padding: 8px 16px; font-size: .85rem; font-weight: 600;
+  cursor: pointer; transition: background .15s ease, color .15s ease;
+}
+.ava-go:hover { background: #c4982a; color: #1a1512; }
+
+/* Highlight pulse for in-page scroll targets */
+.ava-flash {
+  animation: ava-flash 2.2s ease;
+  border-radius: 6px;
+}
+@keyframes ava-flash {
+  0%, 100% { box-shadow: none; }
+  20%, 60% { box-shadow: 0 0 0 3px rgba(232,199,106,.75); }
+}
+
+.ava-typing { display: inline-flex; gap: 5px; padding: 4px 2px; }
+.ava-typing i {
+  width: 7px; height: 7px; border-radius: 50%; background: #8a6a1a;
+  animation: ava-blink 1.2s infinite;
+}
+.ava-typing i:nth-child(2) { animation-delay: .2s; }
+.ava-typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes ava-blink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+
+.ava-form {
+  display: flex; gap: 8px; padding: 10px 12px;
+  border-top: 1px solid #3a3226; background: #1a1512; flex-shrink: 0;
+}
+.ava-input {
+  flex: 1; border: 1px solid #3a3226; border-radius: 22px;
+  padding: 10px 15px; font-size: .92rem; outline: none;
+  background: #141310; color: #f0ede6;
+}
+.ava-input::placeholder { color: #5e5c57; }
+.ava-input:focus { border-color: #c4982a; }
+.ava-send {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  background: #c4982a; color: #1a1512; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.ava-send:hover { background: #e8c76a; }
+
+@media (max-width: 480px) {
+  .ava-panel { right: 12px; bottom: 88px; width: calc(100vw - 24px); }
+  .ava-fab { right: 12px; bottom: 16px; }
+}
