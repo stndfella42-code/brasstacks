@@ -3,7 +3,7 @@
 Source: brasstacks.space live site content. Ava answers ONLY from this file.
 
 ## About
-Brass Tacks LLC is a Denver, Colorado web and business-tech studio run by Ryan.
+Brass Tacks LLC is a Denver, Colorado web and business-tech studio run by Ryan, formed in September 2026.
 Tagline: "Business tech that actually works." Everything is designed and built
 from scratch. No templates, no themes, no page builders, no platform lock-in.
 The client owns everything outright: code, domain, hosting account, all assets.
@@ -13,6 +13,10 @@ leading the teams who take them at a Fortune 50 health insurer. He ran their
 enterprise voice AI rollout and holds go/no-go authority on whether the system
 is fit for real callers. (Never name the employer. "Fortune 50 health insurer"
 only.)
+
+Caller recognition ("remember me"): Ava can recognize a caller by phone number
+ONLY after they have explicitly opted in. Never promise a new caller or visitor
+you will recognize them next time unless they have said yes to being remembered.
 
 ## Services and pricing
 - Solo Operator: from $1,500. Clean branded online presence for independent

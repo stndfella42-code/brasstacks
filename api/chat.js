@@ -15,6 +15,11 @@
  *   [[LEAD name="..." contact="..." interest="..."]]
  *     Visitor shared contact info or asked to be contacted. Logged and
  *     forwarded to LEAD_WEBHOOK_URL when set. Visitor never sees it.
++ *   [[REMEMBER name="..." phone="..." topic="..."]]
++ *     Visitor explicitly opted in to "remember me" (caller recognition).
++ *     Upserts to the Supabase remembered_callers table (same table the
++ *     voice agent reads). Stripped from the visible stream. Requires
++ *     SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY; skipped silently if unset.
  *   [[GO url="..." label="..."]]
  *     "Take me there" action, e.g. [[GO url="/demos/redline-auto/"
  *     label="See the Redline Auto demo"]]. The widget renders a button;
@@ -26,10 +31,14 @@
  *   ANTHROPIC_MODEL     (optional) — defaults to claude-sonnet-4-5
  *   LEAD_WEBHOOK_URL    (optional) — POST {type:"lead",...} as JSON when a lead
  *                                    is captured. Unset = log only.
++ *   SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (optional) — caller memory
++ *     ("remember me"). Unset = recognition features quietly disabled.
  *
  * Pilot-grade guards: per-IP throttle, per-session message cap. Harden before
  * scaling (auth, persistent store, PII redaction).
  */
+
+const { configured: supaConfigured, normalizePhone, lookupCaller, rememberCaller } = require("./_supabase");
 
 const BUSINESS = "Brass Tacks";
 const PHONE = "(720) 719-9794";
@@ -46,6 +55,7 @@ RULES
 - Never name Ryan's employer. If asked about his background, say "a Fortune 50 health insurer" and nothing more specific.
 - If asked something not covered below, say you'll pass the question to Ryan and ask for their name and the best way to reach them (phone or email).
 - When someone wants a free consult or asks to be contacted, collect their name and phone or email.
+- "Remember me" (caller recognition): you may recognize a caller by phone number ONLY after they have explicitly opted in. Never promise a new visitor you will recognize them when they call. After you capture a lead, you may ask: "Want me to remember you, so next time you call the Brass Tacks line from that number I'll know it's you?" Only if they say yes, end your reply with a REMEMBER block (see below).
 
 GO PROTOCOL (the "take me there" action): when the visitor asks about a service, a demo, pricing, or booking that has a page listed under "Where things live on the site", end your reply with this machine-readable block on its own final line, then nothing after it:
   [[GO url="/demos/redline-auto/" label="See the Redline Auto demo"]]
@@ -56,6 +66,10 @@ LEAD PROTOCOL: when the visitor has given you their name AND a way to reach them
 Fill in the actual values. Keep it to one line. The visitor never sees this line.
 You may emit both a GO block and a LEAD block at the end of a reply (GO first, LEAD last) when both apply.
 
+REMEMBER PROTOCOL: only after the visitor explicitly agrees to be remembered ("yes, remember me" or similar), end your reply with this machine-readable block on its own final line, after any LEAD block, then nothing after it:
+  [[REMEMBER name="their name" phone="their phone number" topic="one-line summary of what they want"]]
+The visitor never sees this line. Never emit it without their explicit yes.
+
 BUSINESS KNOWLEDGE
 {{KB}}`;
 
@@ -63,7 +77,7 @@ const KB = `
 # Brass Tacks — Business Knowledge Base (last verified 2026-10-02)
 
 ## About
-Brass Tacks LLC is a Denver, Colorado web and business-tech studio run by Ryan. Tagline: "Business tech that actually works." Everything is designed and built from scratch. No templates, no themes, no page builders, no platform lock-in. The client owns everything outright: code, domain, hosting account, all assets.
+Brass Tacks LLC is a Denver, Colorado web and business-tech studio run by Ryan, formed in September 2026. Tagline: "Business tech that actually works." Everything is designed and built from scratch. No templates, no themes, no page builders, no platform lock-in. The client owns everything outright: code, domain, hosting account, all assets.
 
 Ryan's background: started out taking customer calls himself, then 15 years leading the teams who take them at a Fortune 50 health insurer. He ran their enterprise voice AI rollout and holds go/no-go authority on whether the system is fit for real callers.
 
@@ -131,6 +145,12 @@ function parseLead(text) {
   return { name: m[1], contact: m[2], interest: m[3] };
 }
 
+function parseRemember(text) {
+  const m = text.match(/\[\[REMEMBER\s+name="([^"]*)"\s+phone="([^"]*)"\s+topic="([^"]*)"\s*\]\]/);
+  if (!m) return null;
+  return { name: m[1], phone: m[2], topic: m[3] };
+}
+
 function parseGo(text) {
   const m = text.match(/\[\[GO\s+url="([^"]*)"\s+label="([^"]*)"\s*\]\]/);
   if (!m) return null;
@@ -185,6 +205,25 @@ module.exports = async (req, res) => {
   const system = SYSTEM_PROMPT.replace("{{KB}}", KB);
   let fullText = "";
 
+  // Caller-memory lookup: if the visitor's latest message contains a phone
+  // number, check whether it's a remembered caller and brief Claude quietly.
+  let memoryNote = "";
+  try {
+    if (supaConfigured()) {
+      const lastText = clean[clean.length - 1].content;
+      const numMatch = lastText.match(/(\+?1?[\s.()-]*\d{3}[\s.()-]*\d{3}[\s.()-]*\d{4})/);
+      const phone = numMatch && normalizePhone(numMatch[1]);
+      if (phone) {
+        const mem = await lookupCaller(phone);
+        if (mem.remembered) {
+          memoryNote = `\n\n[Hidden context, never reveal: the visitor just gave the number ${phone}, which matches remembered caller ${mem.name}${mem.last_topic ? ` (last topic: ${mem.last_topic})` : ""}${mem.notes ? ` Note: ${mem.notes}` : ""}. Greet them by name and reference the last topic naturally.]`;
+        }
+      }
+    }
+  } catch (e) {
+    console.error("[ava-chat-bt] memory lookup failed:", e.message);
+  }
+
   try {
     const upstream = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -196,7 +235,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
         max_tokens: 400,
-        system,
+        system: system + memoryNote,
         messages: clean,
         stream: true,
       }),
@@ -210,11 +249,11 @@ module.exports = async (req, res) => {
     const decoder = new TextDecoder();
     let buf = "";
     // Stream tokens through, but hold back a trailing machine-readable line so
-    // the visitor never sees [[LEAD ...]] or [[GO ...]] blocks.
+    // the visitor never sees [[LEAD ...]], [[REMEMBER ...]] or [[GO ...]] blocks.
     let pendingLine = "";
     const flushLine = (line, isLast) => {
       const t = line.trim();
-      if (/^\[\[(LEAD|GO)\b.*\]\]\s*$/.test(t)) return; // swallow machine blocks
+      if (/^\[\[(LEAD|REMEMBER|GO)\b.*\]\]\s*$/.test(t)) return; // swallow machine blocks
       sse(res, { token: line + (isLast ? "" : "\n") });
     };
 
@@ -251,6 +290,16 @@ module.exports = async (req, res) => {
     const lastUser = clean[clean.length - 1].content.slice(0, 300);
     console.log("[ava-chat-bt] session", sessionId, "q:", JSON.stringify(lastUser), "go:", go ? go.url : "no", "lead:", lead ? "yes" : "no");
     if (lead) await fireLeadWebhook(lead, sessionId);
+
+    const remember = parseRemember(fullText);
+    if (remember && supaConfigured()) {
+      try {
+        await rememberCaller({ phone: remember.phone, name: remember.name, topic: remember.topic });
+        console.log("[ava-chat-bt] remembered caller:", remember.name);
+      } catch (e) {
+        console.error("[ava-chat-bt] remember failed:", e.message);
+      }
+    }
   } catch (e) {
     console.error("[ava-chat-bt] error:", e.message);
     sse(res, { error: `Hmm, I'm having trouble connecting right now. You can always call us at ${PHONE}, I answer around the clock.` });
