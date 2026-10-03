@@ -449,6 +449,12 @@
           <p>Pick a scenario, press play, and listen. Left phone is the customer call. Right phone is the owner's, and it stays dark until the call ends.</p>
         </div>
 
+        <div class="tsd2-biz">
+          <label for="tsd2BizInput">Make it yours:</label>
+          <input id="tsd2BizInput" type="text" maxlength="40" placeholder="Your business name" autocomplete="off">
+          <button id="tsd2BizGo" type="button">Use my business</button>
+        </div>
+
         <div class="tsd2-scen" id="tsd2Scen">
           <button data-s="heater" class="active">Water heater</button>
           <button data-s="leak">Kitchen leak</button>
@@ -459,8 +465,8 @@
           <div class="tsd2-ph" id="tsd2CxPhone">
             <div class="tsd2-phtag">Customer</div>
             <div class="tsd2-calltop">
-              <div class="tsd2-avatar">C</div>
-              <div class="tsd2-name">Copperline Plumbing</div>
+              <div class="tsd2-avatar" id="tsd2Avatar">C</div>
+              <div class="tsd2-name" id="tsd2BizName">Copperline Plumbing</div>
               <div class="tsd2-timer" id="tsd2Timer">0:00</div>
             </div>
             <div class="tsd2-wave" id="tsd2Wave" aria-hidden="true">
@@ -510,7 +516,7 @@
             <div class="tsd2-reader">
               <div class="tsd2-stepn">Website</div>
               <div class="tsd2-webcard">
-                <div class="tsd2-webhead">copperlineplumbing.com/services</div>
+                <div class="tsd2-webhead" id="tsd2WebHead">copperlineplumbing.com/services</div>
                 <div class="tsd2-webbody">Brake job &nbsp;<span id="tsd2WebPrice">$189</span></div>
               </div>
               <div class="tsd2-check" id="tsd2WebCheck">✓ Website updated</div>
@@ -560,6 +566,10 @@
         </div>
 
 <style>
+.tsd2-biz{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.tsd2-biz label{font:600 13px/1 "IBM Plex Mono",monospace;color:var(--muted)}
+.tsd2-biz input{font:600 15px/1 "Public Sans",sans-serif;padding:11px 14px;border:2px solid var(--ink);border-radius:10px;background:var(--surface);color:var(--ink);width:230px}
+.tsd2-biz button{appearance:none;background:var(--ink);color:var(--surface);border:0;border-radius:10px;padding:12px 20px;font:700 14px/1 "Public Sans",sans-serif;cursor:pointer;box-shadow:3px 3px 0 rgba(16,24,32,.25)}
 .tsd2-scen{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
 .tsd2-scen button{appearance:none;background:var(--surface);border:2px solid var(--ink);border-radius:999px;padding:10px 20px;font:700 14px/1 "Public Sans",sans-serif;cursor:pointer;box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
 .tsd2-scen button.active{background:var(--ink);color:var(--surface)}
@@ -672,7 +682,7 @@ var transcript=document.getElementById('tsd2Transcript'),
 var SCEN={
 heater:{
  seq:[
-  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling Copperline Plumbing. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
+  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
   {f:'cx_01',who:'cx',label:'Sarah',text:"My water heater went out this morning. No hot water.",pause:.4},
   {f:'ava_02',who:'ava',label:'Ava',text:"No hot water is the worst. Is it not heating at all, or is it leaking?",pause:.5},
   {f:'cx_02',who:'cx',label:'Sarah',text:"Not heating at all.",pause:.4},
@@ -696,7 +706,7 @@ heater:{
 },
 leak:{
  seq:[
-  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling Copperline Plumbing. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
+  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
   {f:'cx_leak_01',who:'cx',label:'Mike',text:"There's a leak under my kitchen sink.",pause:.4},
   {f:'ava_leak_01',who:'ava',label:'Ava',text:"We can stop that today. I have 2 to 4 this afternoon or 8 to 10 tomorrow morning. Which works for you?",pause:.6},
   {f:'cx_leak_02',who:'cx',label:'Mike',text:"Today 2 to 4.",pause:.4},
@@ -714,17 +724,33 @@ leak:{
 },
 price:{
  seq:[
-  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling Copperline Plumbing. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
+  {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
   {f:'cx_price_01',who:'cx',label:'Jordan',text:"What do you charge for a service call?",pause:.4},
   {f:'ava_price_01',who:'ava',label:'Ava',text:"Our diagnostic visit is 89 dollars, and that goes toward the repair if you move forward. Want me to get you on the schedule?",pause:.6},
   {f:'cx_price_02',who:'cx',label:'Jordan',text:"Not right now.",pause:.4},
   {f:'ava_price_02',who:'ava',label:'Ava',text:"No problem. We're here Monday through Saturday if you need us.",pause:0}
  ],
- sms:{h:"Copperline Plumbing",b:["Price shopper, no booking.","Ava logged the number for follow-up."]},
+ sms:{nobooking:true,b:["Price shopper, no booking.","Ava logged the number for follow-up."]},
  cal:null,
  stack:[["9:04","Price shopper","No booking","number logged"],["9:31","Sarah Miller","Water heater","today 2-4 PM"],["10:15","Mike D.","Kitchen sink leak","today 2-4 PM"]]
 }};
 
+var bizName='Copperline Plumbing',bizSlug='copperlineplumbing';
+function slugify(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'');}
+function applyBiz(){
+  document.getElementById('tsd2BizName').textContent=bizName;
+  document.getElementById('tsd2Avatar').textContent=(bizName.trim().charAt(0)||'C').toUpperCase();
+  document.getElementById('tsd2WebHead').textContent=bizSlug+'.com/services';
+}
+document.getElementById('tsd2BizGo').addEventListener('click',function(){
+  var v=document.getElementById('tsd2BizInput').value.trim();
+  if(!v)return;
+  bizName=v;bizSlug=slugify(v)||'copperlineplumbing';
+  applyBiz();resetAll();startCall();
+});
+document.getElementById('tsd2BizInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter')document.getElementById('tsd2BizGo').click();
+});
 var cur='heater',SEQ=SCEN[cur].seq,audios={},durations={},totalDur=0,
     idx=0,playing=false,callT=0,tickInt=null,afterTimer=null;
 
@@ -810,8 +836,8 @@ function ownerSequence(){
   var D=SCEN[cur];
   setTimeout(function(){
     owShow('<div class="tsd2-otime">9:04 AM · text message</div>'+
-      '<div class="tsd2-sms"><b>'+D.sms.h+'</b><br>'+D.sms.b.join('<br>')+
-      '<br><span style="color:var(--blue);text-decoration:underline">Transcript: copperline transcript</span></div>');
+      '<div class="tsd2-sms"><b>'+(D.sms.nobooking?bizName:'New booking, '+bizName)+'</b><br>'+D.sms.b.join('<br>')+
+      '<br><span style="color:var(--blue);text-decoration:underline">Transcript: '+bizSlug+' transcript</span></div>');
   },600);
   setTimeout(function(){
     if(D.cal){
@@ -919,6 +945,7 @@ loadAll(function(){cap.textContent='Ready. Pick a scenario and press play.';});
 </script>
       </div>
     </section>
+
 
 
 
