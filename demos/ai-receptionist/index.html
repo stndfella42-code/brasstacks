@@ -445,69 +445,396 @@
     <section id="live-demo">
       <div class="wrap">
         <div class="section-head">
-          <h2>Watch one call become an estimate.</h2>
-          <p>Pick a trade and run the simulated conversation. The AI changes its questions for the job, then produces a structured lead for the contractor.</p>
+          <h2>One call. Two sides of the counter.</h2>
+          <p>Start as the customer. Tap through a real call with Ava. Then flip it and see what the owner saw.</p>
         </div>
 
-        <div class="demo-shell">
-          <div class="demo-toolbar">
-            <div class="status"><span class="status-dot" id="statusDot"></span><span id="statusText">Ready for inbound call</span></div>
-            <button class="audio-button" id="audioButton" type="button" aria-label="Play the recorded call audio"><span aria-hidden="true">&#9834;</span><span id="audioButtonLabel">Play call</span></button>
-            <audio id="callAudio" preload="none"></audio>
-            <div class="timer mono" id="timer">00:00</div>
-          </div>
-          <div class="trade-tabs" role="tablist" aria-label="Choose a contractor trade">
-            <button class="trade-tab" role="tab" aria-selected="true" data-trade="roofing">Roofing</button>
-            <button class="trade-tab" role="tab" aria-selected="false" data-trade="hvac">HVAC</button>
-            <button class="trade-tab" role="tab" aria-selected="false" data-trade="plumbing">Plumbing</button>
-            <button class="trade-tab" role="tab" aria-selected="false" data-trade="electrical">Electrical</button>
-            <button class="trade-tab" role="tab" aria-selected="false" data-trade="remodeling">Remodeling</button>
-          </div>
-          <div class="demo-grid">
-            <div class="call-pane">
-              <div class="call-meta">
-                <div class="caller">
-                  <div class="phone-icon" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
-                  </div>
-                  <div><strong>Inbound homeowner</strong><span id="callerLocation">Aurora, CO · mobile</span></div>
-                </div>
-                <span class="call-type" id="callType">Roof leak</span>
-              </div>
-              <div class="transcript" id="transcript" aria-live="polite"></div>
-              <div class="call-controls">
-                <button class="button" id="playButton" type="button"><span aria-hidden="true">▶</span> Answer the call</button>
-                <button class="reset-button" id="resetButton" type="button" aria-label="Reset call">↻</button>
-              </div>
+        <div class="tsd" id="tsd">
+          <div class="tsd-phone" id="tsdPhone" role="region" aria-label="Demo phone">
+            <div class="tsd-callhead" id="tsdCallhead" hidden>
+              <span class="tsd-callname">Copperline Plumbing</span>
+              <span class="tsd-timer" id="tsdTimer">0:00</span>
             </div>
-
-            <aside class="lead-pane" aria-label="Structured lead record">
-              <div class="panel-label"><span>Lead record</span><b id="leadState">Waiting</b></div>
-              <h3 class="lead-title" id="leadTitle">No lead captured yet</h3>
-              <p class="lead-sub" id="leadSub">The call summary will build here in real time.</p>
-              <div class="lead-fields">
-                <div class="lead-field"><span>Name</span><strong id="leadName">—</strong></div>
-                <div class="lead-field"><span>Phone</span><strong id="leadPhone">—</strong></div>
-                <div class="lead-field full"><span>Service address</span><strong id="leadAddress">—</strong></div>
-                <div class="lead-field"><span>Project</span><strong id="leadProject">—</strong></div>
-                <div class="lead-field"><span>Urgency</span><strong id="leadUrgency">—</strong></div>
-                <div class="lead-field full"><span>Qualification note</span><strong id="leadNote">—</strong></div>
-              </div>
-              <div class="appointment">
-                <span class="mono" style="font-size:10px;text-transform:uppercase;">Estimate appointment</span>
-                <div class="date" id="appointmentDate">Not scheduled</div>
-                <small id="appointmentWindow">Calendar checked after qualification</small>
-              </div>
-              <div class="activity" id="activity">
-                <div><span>○</span> Call transcript pending</div>
-                <div><span>○</span> Contractor notification pending</div>
-                <div><span>○</span> Calendar booking pending</div>
-              </div>
-            </aside>
+            <div class="tsd-screen" id="tsdScreen"></div>
+            <div class="tsd-hint" id="tsdHint">tap to continue</div>
+          </div>
+          <div class="tsd-side">
+            <div class="tsd-caption" id="tsdCaption"></div>
+            <div class="tsd-actions" id="tsdActions"></div>
           </div>
         </div>
+
+        <noscript>
+          <p>This demo is interactive and needs JavaScript. The short version: a customer calls Copperline Plumbing, Ava answers, books a water-heater visit for the 2-to-4 window, and the owner gets a text, a calendar event, and a transcript without ever picking up the phone. Call (720) 719-9794 to hear the real thing.</p>
+        </noscript>
+
+        <!-- hidden stubs: the legacy walkthrough script binds to these IDs at init -->
+        <div hidden aria-hidden="true">
+          <div id="activity"></div><div id="appointmentDate"></div><div id="appointmentWindow"></div>
+          <button id="audioButton"></button><span id="audioButtonLabel"></span><audio id="callAudio"></audio>
+          <div id="callType"></div><div id="callerLocation"></div>
+          <div id="leadAddress"></div><div id="leadName"></div><div id="leadNote"></div>
+          <div id="leadPhone"></div><div id="leadProject"></div><div id="leadState"></div>
+          <div id="leadSub"></div><div id="leadTitle"></div><div id="leadUrgency"></div>
+          <button id="playButton"></button><button id="resetButton"></button>
+          <span id="statusDot"></span><span id="statusText"></span><div id="timer"></div>
+          <div id="transcript"></div>
+        </div>
+
+<style>
+.tsd{display:flex;gap:36px;align-items:flex-start;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.tsd-phone{width:340px;max-width:100%;height:600px;max-height:78vh;background:#101820;border-radius:38px;padding:12px;position:relative;flex:none;box-shadow:6px 6px 0 rgba(16,24,32,.18);cursor:pointer;display:flex;flex-direction:column}
+.tsd-callhead{display:flex;justify-content:space-between;align-items:center;padding:10px 14px 6px;color:#fbfaf6;font:600 13px/1 "IBM Plex Mono",monospace}
+.tsd-callhead[hidden]{display:none}
+.tsd-timer{color:#f45b24}
+.tsd-screen{background:#fbfaf6;border-radius:26px;flex:1;overflow-y:auto;padding:16px 12px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.tsd-hint{text-align:center;color:#8a94a0;font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:10px 0 4px;opacity:0;transition:opacity .3s}
+.tsd-hint.on{opacity:1;animation:tsdPulse 1.6s ease-in-out infinite}
+@keyframes tsdPulse{0%,100%{opacity:.35}50%{opacity:1}}
+.tsd-incoming{margin:auto;text-align:center;color:#101820}
+.tsd-avatar{width:84px;height:84px;border-radius:50%;background:#101820;color:#fbfaf6;font:700 34px/84px "Public Sans",sans-serif;margin:0 auto 14px}
+.tsd-inname{font:800 20px/1.2 "Public Sans",sans-serif}
+.tsd-insub{color:#4c5861;font-size:14px;margin:6px 0 18px}
+.tsd-msg{max-width:88%;opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+.tsd-msg.show{opacity:1;transform:none}
+.tsd-ava{align-self:flex-start}
+.tsd-cx{align-self:flex-end}
+.tsd-who{display:block;font:600 10px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#4c5861;margin:0 0 4px 2px}
+.tsd-bubble{display:inline-block;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.tsd-ava .tsd-bubble{background:#fff;border:1px solid #b8b8b2;border-bottom-left-radius:4px;color:#101820;box-shadow:2px 2px 0 rgba(16,24,32,.08)}
+.tsd-cx .tsd-bubble{background:#101820;color:#fbfaf6;border-bottom-right-radius:4px}
+.tsd-typing span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4c5861;margin-right:4px;animation:tsdBlink 1s infinite}
+.tsd-typing span:nth-child(2){animation-delay:.15s}
+.tsd-typing span:nth-child(3){animation-delay:.3s;margin-right:0}
+@keyframes tsdBlink{0%,100%{opacity:.25}50%{opacity:1}}
+.tsd-choices{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.tsd-choice{appearance:none;background:#f2f0e9;border:2px solid #101820;border-radius:12px;padding:12px 14px;font:600 14px/1.35 "Public Sans",sans-serif;color:#101820;cursor:pointer;text-align:left;box-shadow:3px 3px 0 #101820;transition:transform .12s ease,box-shadow .12s ease}
+.tsd-choice:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #101820}
+.tsd-choice:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #101820}
+.tsd-ocard{background:#fff;border:1px solid #b8b8b2;border-radius:14px;padding:14px;box-shadow:3px 3px 0 rgba(16,24,32,.1);opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}
+.tsd-ocard.show{opacity:1;transform:none}
+.tsd-otime{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:#f45b24;margin-bottom:6px}
+.tsd-otitle{font:800 16px/1.3 "Public Sans",sans-serif;margin-bottom:4px}
+.tsd-obody{font-size:14px;line-height:1.5;color:#4c5861}
+.tsd-sms{background:#e9f5ec;border:1px solid #176b45;border-radius:14px;border-top-left-radius:4px;padding:12px 14px;font-size:14px;line-height:1.55;margin-top:8px}
+.tsd-scal{background:#fff8e8;border:1px solid #b8b8b2;border-radius:14px;padding:12px 14px;margin-top:8px;display:flex;gap:12px;align-items:center}
+.tsd-scaldate{background:#101820;color:#fbfaf6;border-radius:10px;text-align:center;padding:8px 10px;font:700 12px/1.3 "IBM Plex Mono",monospace;flex:none}
+.tsd-scaldate b{display:block;font-size:20px}
+.tsd-scalbody{font-size:14px;line-height:1.45}
+.tsd-link{color:#1a5f88;text-decoration:underline}
+.tsd-stackrow{display:flex;gap:10px;align-items:baseline;background:#fff;border:1px solid #b8b8b2;border-radius:12px;padding:10px 12px;font-size:13.5px;box-shadow:2px 2px 0 rgba(16,24,32,.08);opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
+.tsd-stackrow.show{opacity:1;transform:none}
+.tsd-stackrow .t{font:600 11px/1 "IBM Plex Mono",monospace;color:#f45b24;flex:none;width:44px}
+.tsd-stackhead{font:800 17px/1.3 "Public Sans",sans-serif;margin:2px 0 4px}
+.tsd-side{flex:1;min-width:260px;max-width:380px;padding-top:12px}
+.tsd-caption{font-size:18px;line-height:1.55;color:#101820;margin-bottom:18px;min-height:56px}
+.tsd-caption strong{font-weight:800}
+.tsd-actions{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.tsd-answer,.tsd-flip{appearance:none;border:0;border-radius:999px;background:#176b45;color:#fff;font:700 15px/1 "Public Sans",sans-serif;padding:16px 28px;cursor:pointer;box-shadow:4px 4px 0 #101820;transition:transform .14s ease,box-shadow .14s ease}
+.tsd-answer:hover,.tsd-flip:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #101820}
+.tsd-flip{background:#f45b24;font-size:16px}
+.tsd-btn{display:inline-block;background:#101820;color:#fbfaf6;font:700 15px/1.4 "Public Sans",sans-serif;padding:14px 24px;border-radius:12px;text-decoration:none;box-shadow:4px 4px 0 rgba(16,24,32,.2)}
+.tsd-btn-ghost{background:#fbfaf6;color:#101820;border:2px solid #101820}
+.tsd-replay{appearance:none;background:none;border:0;color:#1a5f88;font:600 14px/1 "Public Sans",sans-serif;cursor:pointer;text-decoration:underline;padding:4px 0}
+.tsd-fine{font-size:12.5px;color:#4c5861;font-style:italic;margin-top:4px}
+@media (max-width:720px){
+  .tsd{gap:20px}
+  .tsd-side{max-width:100%}
+  .tsd-caption{min-height:0}
+  .tsd-phone{height:560px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tsd-hint.on{animation:none;opacity:1}
+  .tsd-msg,.tsd-ocard,.tsd-stackrow{transition:none}
+}
+</style>
+
+<script>
+(function(){
+"use strict";
+var screen=document.getElementById('tsdScreen'),
+    hint=document.getElementById('tsdHint'),
+    captionEl=document.getElementById('tsdCaption'),
+    actionsEl=document.getElementById('tsdActions'),
+    callhead=document.getElementById('tsdCallhead'),
+    timerEl=document.getElementById('tsdTimer'),
+    phone=document.getElementById('tsdPhone');
+var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var FLOW={
+start:[
+ {f:'ava',t:"Hi, thanks for calling Copperline Plumbing. I'm Ava. Are you calling about a repair, an install, or something else?"},
+ {choice:[
+  {t:"My water heater went out.",go:'wh'},
+  {t:"I have a leak under my kitchen sink.",go:'leak'},
+  {t:"What do you charge for a service call?",go:'price'}]}
+],
+wh:[
+ {f:'cx',t:"My water heater went out this morning. No hot water."},
+ {f:'ava',t:"No hot water is the worst. Is it not heating at all, or is it leaking?"},
+ {choice:[
+  {t:"Not heating at all.",go:'wh_heat'},
+  {t:"It's leaking.",go:'wh_leak'}]}
+],
+wh_heat:[
+ {f:'cx',t:"Not heating at all."},
+ {f:'ava',t:"That's usually the heating element or the thermostat. Either way we can get someone out today."},
+ {f:'ava',t:"I have a window between 2 and 4 this afternoon. Want me to book that?"},
+ {choice:[{t:"Yes, book it.",go:'bk'},{t:"Anything tomorrow morning?",go:'bk2'}]}
+],
+wh_leak:[
+ {f:'cx',t:"It's leaking."},
+ {f:'ava',t:"A leak needs eyes on it. Let's get a tech out today to take a look."},
+ {f:'ava',t:"I have a window between 2 and 4 this afternoon. Want me to book that?"},
+ {choice:[{t:"Yes, book it.",go:'bk'},{t:"Anything tomorrow morning?",go:'bk2'}]}
+],
+bk:[
+ {f:'cx',t:"Yes, book it."},
+ {f:'ava',t:"Great. Can I get your name?"},
+ {f:'cx',t:"Sarah Miller."},
+ {f:'ava',t:"And the best number to reach you?"},
+ {f:'cx',t:"555-014-2288."},
+ {f:'ava',t:"What's the service address?"},
+ {f:'cx',t:"1234 Elm Street."},
+ {f:'ava',t:"And your email, so we can send the confirmation? If you spell it out letter by letter, I'll read it back."},
+ {f:'cx',t:"S-A-R-A-H-M at gmail dot com."},
+ {f:'ava',t:"S-A-R-A-H-M at gmail dot com. Got it."},
+ {f:'ava',t:"You're all booked, Sarah. Today between 2 and 4 for the water heater. We'll text you when the tech is on the way."},
+ {end:'wh',caption:"That took two minutes. You never waited on hold.",
+  lead:{name:"Sarah Miller",when:"today 2-4 PM",job:"Water heater, no heat",phone:"555-014-2288",addr:"1234 Elm St"}}
+],
+bk2:[
+ {f:'cx',t:"Anything tomorrow morning?"},
+ {f:'ava',t:"I have 8 to 10 tomorrow morning. Which works better, today 2 to 4 or tomorrow 8 to 10?"},
+ {choice:[{t:"Today 2 to 4.",go:'bk'},{t:"Tomorrow 8 to 10.",go:'bk3'}]}
+],
+bk3:[
+ {f:'cx',t:"Tomorrow 8 to 10."},
+ {f:'ava',t:"Great. Can I get your name?"},
+ {f:'cx',t:"Sarah Miller."},
+ {f:'ava',t:"And the best number to reach you?"},
+ {f:'cx',t:"555-014-2288."},
+ {f:'ava',t:"What's the service address?"},
+ {f:'cx',t:"1234 Elm Street."},
+ {f:'ava',t:"And your email, so we can send the confirmation? If you spell it out letter by letter, I'll read it back."},
+ {f:'cx',t:"S-A-R-A-H-M at gmail dot com."},
+ {f:'ava',t:"S-A-R-A-H-M at gmail dot com. Got it."},
+ {f:'ava',t:"You're all booked, Sarah. Tomorrow between 8 and 10 for the water heater. We'll text you when the tech is on the way."},
+ {end:'wh',caption:"That took two minutes. You never waited on hold.",
+  lead:{name:"Sarah Miller",when:"tomorrow 8-10 AM",job:"Water heater, no heat",phone:"555-014-2288",addr:"1234 Elm St"}}
+],
+leak:[
+ {f:'cx',t:"There's a leak under my kitchen sink."},
+ {f:'ava',t:"We can stop that today. I have 2 to 4 this afternoon or 8 to 10 tomorrow morning. Which works for you?"},
+ {choice:[{t:"Today 2 to 4.",go:'bkL'},{t:"Tomorrow 8 to 10.",go:'bkL2'}]}
+],
+bkL:[
+ {f:'cx',t:"Today 2 to 4."},
+ {f:'ava',t:"Great. Can I get your name?"},
+ {f:'cx',t:"Mike Dalton."},
+ {f:'ava',t:"And the best number to reach you?"},
+ {f:'cx',t:"555-882-0134."},
+ {f:'ava',t:"What's the service address?"},
+ {f:'cx',t:"78 Birch Ave."},
+ {f:'ava',t:"You're booked, Mike. Today between 2 and 4 for the leak. We'll text you when the tech is on the way."},
+ {end:'leak',caption:"Two minutes. No hold music.",
+  lead:{name:"Mike Dalton",when:"today 2-4 PM",job:"Kitchen sink leak",phone:"555-882-0134",addr:"78 Birch Ave"}}
+],
+bkL2:[
+ {f:'cx',t:"Tomorrow 8 to 10."},
+ {f:'ava',t:"Great. Can I get your name?"},
+ {f:'cx',t:"Mike Dalton."},
+ {f:'ava',t:"And the best number to reach you?"},
+ {f:'cx',t:"555-882-0134."},
+ {f:'ava',t:"What's the service address?"},
+ {f:'cx',t:"78 Birch Ave."},
+ {f:'ava',t:"You're booked, Mike. Tomorrow between 8 and 10 for the leak. We'll text you when the tech is on the way."},
+ {end:'leak',caption:"Two minutes. No hold music.",
+  lead:{name:"Mike Dalton",when:"tomorrow 8-10 AM",job:"Kitchen sink leak",phone:"555-882-0134",addr:"78 Birch Ave"}}
+],
+price:[
+ {f:'cx',t:"What do you charge for a service call?"},
+ {f:'ava',t:"Our diagnostic visit is $89, and that goes toward the repair if you move forward. Want me to get you on the schedule?"},
+ {choice:[{t:"Yes, let's do it.",go:'bkP'},{t:"Not right now.",go:'priceNo'}]}
+],
+bkP:[
+ {f:'cx',t:"Yes, let's do it."},
+ {f:'ava',t:"Great. Can I get your name?"},
+ {f:'cx',t:"Jordan Ellis."},
+ {f:'ava',t:"And the best number to reach you?"},
+ {f:'cx',t:"555-207-9918."},
+ {f:'ava',t:"What's the service address?"},
+ {f:'cx',t:"45 Cedar Lane."},
+ {f:'ava',t:"You're booked, Jordan. Today between 2 and 4 for the diagnostic. We'll text you when the tech is on the way."},
+ {end:'price',caption:"She answered the question and made the offer. That's the job.",
+  lead:{name:"Jordan Ellis",when:"today 2-4 PM",job:"Diagnostic visit",phone:"555-207-9918",addr:"45 Cedar Ln"}}
+],
+priceNo:[
+ {f:'cx',t:"Not right now."},
+ {f:'ava',t:"No problem. We're here Monday through Saturday if you need us."},
+ {end:'priceNo',caption:"She answered the question and made the offer. That's the job.",nolead:true}
+]
+};
+
+var queue=[],qi=0,timerInt=null,secs=0,lead=null,armedFn=null;
+
+function scrollDown(){screen.scrollTop=screen.scrollHeight;}
+function setCaption(h){captionEl.innerHTML=h;}
+function setActions(h){actionsEl.innerHTML=h;}
+
+function addMsg(who,text){
+  var d=document.createElement('div');
+  d.className='tsd-msg tsd-'+who;
+  var inner=who==='ava'?'<span class="tsd-who">Ava</span>':'';
+  d.innerHTML=inner+'<div class="tsd-bubble"></div>';
+  d.querySelector('.tsd-bubble').textContent=text;
+  screen.appendChild(d);
+  requestAnimationFrame(function(){d.classList.add('show');});
+  scrollDown();
+}
+function avaSay(text,then){
+  var d=document.createElement('div');
+  d.className='tsd-msg tsd-ava show';
+  d.innerHTML='<span class="tsd-who">Ava</span><div class="tsd-bubble tsd-typing"><span></span><span></span><span></span></div>';
+  screen.appendChild(d);scrollDown();
+  setTimeout(function(){d.parentNode.removeChild(d);addMsg('ava',text);then();},reduceMotion?60:900);
+}
+function disarm(){armedFn=null;hint.classList.remove('on');}
+function arm(fn){
+  disarm();armedFn=fn;hint.classList.add('on');
+}
+phone.addEventListener('click',function(){if(armedFn){var f=armedFn;disarm();f();}});
+document.addEventListener('keydown',function(e){
+  if((e.key===' '||e.key==='ArrowRight')&&armedFn){e.preventDefault();var f=armedFn;disarm();f();}
+});
+
+function showChoices(list){
+  var wrap=document.createElement('div');
+  wrap.className='tsd-choices';
+  list.forEach(function(c){
+    var b=document.createElement('button');
+    b.type='button';b.className='tsd-choice';b.textContent=c.t;
+    b.addEventListener('click',function(e){e.stopPropagation();addMsg('cx',c.t);runNode(c.go);});
+    wrap.appendChild(b);
+  });
+  screen.appendChild(wrap);scrollDown();
+}
+function startTimer(){stopTimer();secs=0;timerEl.textContent='0:00';
+  timerInt=setInterval(function(){secs++;timerEl.textContent=Math.floor(secs/60)+':'+('0'+(secs%60)).slice(-2);},1000);}
+function stopTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;}}
+
+function runNode(name){setActions('');queue=FLOW[name].slice();qi=0;step();}
+function step(){
+  if(qi>=queue.length)return;
+  var s=queue[qi++];
+  if(s.f==='ava'){avaSay(s.t,function(){arm(step);});}
+  else if(s.f==='cx'){addMsg('cx',s.t);arm(step);}
+  else if(s.choice){showChoices(s.choice);}
+  else if(s.end){finishCall(s);}
+}
+
+function finishCall(s){
+  stopTimer();lead=s.lead||null;disarm();
+  setCaption(s.caption);
+  setActions('<button type="button" class="tsd-flip" id="tsdFlip">Now see what the owner saw &darr;</button>');
+  document.getElementById('tsdFlip').addEventListener('click',ownerView);
+}
+
+function ocard(time,title,body){
+  var d=document.createElement('div');d.className='tsd-ocard';
+  var h='<div class="tsd-otime">'+time+'</div><div class="tsd-otitle">'+title+'</div>';
+  if(body)h+='<div class="tsd-obody">'+body+'</div>';
+  d.innerHTML=h;
+  requestAnimationFrame(function(){d.classList.add('show');});
+  return d;
+}
+function smsHTML(){
+  if(lead){
+    return '<b>New booking, Copperline Plumbing</b><br>'+lead.name+', '+lead.when+'<br>'+
+      lead.job+'<br>'+lead.phone+', '+lead.addr+'<br><span class="tsd-link">Transcript: copperline transcript</span>';
+  }
+  return '<b>Copperline Plumbing</b><br>Price shopper, no booking.<br>Ava logged the number for follow-up.';
+}
+function calHTML(){
+  if(!lead)return null;
+  return '<div class="tsd-scal"><div class="tsd-scaldate"><b>10</b>TUE</div>'+
+    '<div class="tsd-scalbody"><b>'+lead.name+' &mdash; '+lead.job+'</b><br>'+lead.when+' &middot; '+lead.addr+'</div></div>';
+}
+function ownerView(){
+  callhead.hidden=true;screen.innerHTML='';setActions('');
+  setCaption('Same two minutes. Other side of the counter.');
+  var steps=[
+    ocard('9:02 AM','The call starts.',"You're under a sink across town. Your phone stays in your pocket."),
+    (function(){var d=ocard('9:04 AM','The call ends. A text slides in.');d.insertAdjacentHTML('beforeend','<div class="tsd-sms">'+smsHTML()+'</div>');return d;})(),
+    (function(){
+      var cal=calHTML();
+      var d=ocard('9:04 AM','The calendar fills.',cal?null:"No booking this time. But the number's logged, and Ava flagged it for follow-up.");
+      if(cal)d.insertAdjacentHTML('beforeend',cal);
+      return d;
+    })(),
+    ocard('9:05 AM','The full picture.',"Transcript and call recording, ready whenever you wash your hands.")
+  ];
+  var i=0;
+  function adv(){
+    if(i>=steps.length){stackView();return;}
+    screen.appendChild(steps[i++]);scrollDown();arm(adv);
+  }
+  adv();
+}
+function stackView(){
+  screen.innerHTML='';setActions('');
+  var h=document.createElement('div');h.className='tsd-stackhead';h.textContent='The morning stacks up.';
+  screen.appendChild(h);
+  var rows=[
+    ['9:04','Sarah Miller','Water heater','today 2-4 PM'],
+    ['9:31','Mike D.','Kitchen sink leak','today 2-4 PM'],
+    ['10:15','Price shopper','No booking','number logged']
+  ];
+  var i=0;
+  function adv(){
+    if(i>=rows.length){
+      setCaption('Three calls. Zero interruptions. One Tuesday that&rsquo;s already paying for the month.');
+      closeView();return;
+    }
+    var r=rows[i++];
+    var d=document.createElement('div');d.className='tsd-stackrow';
+    d.innerHTML='<span class="t">'+r[0]+'</span><span><b>'+r[1]+'</b> &mdash; '+r[2]+'<br><span style="color:#4c5861">'+r[3]+'</span></span>';
+    screen.appendChild(d);
+    requestAnimationFrame(function(){d.classList.add('show');});
+    scrollDown();arm(adv);
+  }
+  adv();
+}
+function closeView(){
+  disarm();
+  setCaption('<strong>Your customers get answered. You get your day back.</strong><br>That&rsquo;s the whole pitch.');
+  setActions(
+    '<a class="tsd-btn" href="tel:+17207199794">Call Ava live: (720) 719-9794</a>'+
+    '<a class="tsd-btn tsd-btn-ghost" href="https://brasstacks.space/contact.html">Book a free consult</a>'+
+    '<button type="button" class="tsd-replay" id="tsdReplay">Replay the demo</button>'+
+    '<div class="tsd-fine">This demo is scripted. The live line isn&rsquo;t. Call it.</div>'
+  );
+  document.getElementById('tsdReplay').addEventListener('click',entry);
+}
+
+function entry(){
+  stopTimer();disarm();lead=null;
+  callhead.hidden=true;screen.innerHTML='';
+  screen.innerHTML='<div class="tsd-incoming"><div class="tsd-avatar">C</div>'+
+    '<div class="tsd-inname">Copperline Plumbing</div><div class="tsd-insub">Incoming call&hellip;</div></div>';
+  setCaption('You need a plumber. It&rsquo;s Tuesday morning and the water heater just died.');
+  setActions('<button type="button" class="tsd-answer" id="tsdAnswer">Answer the call</button>');
+  document.getElementById('tsdAnswer').addEventListener('click',function(){
+    callhead.hidden=false;startTimer();runNode('start');
+    setCaption('Tap the phone to move the call along. You pick what the customer says.');
+  });
+}
+entry();
+})();
+</script>
       </div>
     </section>
+
 
     <section class="roi" id="roi">
       <div class="wrap">
