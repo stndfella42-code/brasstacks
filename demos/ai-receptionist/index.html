@@ -566,6 +566,15 @@
         </div>
 
 <style>
+/* Pin the demo to its designed light palette even when the OS/browser is in dark mode */
+#live-demo,.tsd2-sync{
+  --paper:#f2f0e9;--surface:#fbfaf6;--surface-2:#ece7d9;
+  --ink:#101820;--muted:#55606c;--line:#d8d2c2;
+  --signal:#ff5a1f;--signal-strong:#e04a12;
+  --green:#1f9d5c;--blue:#2a7fbf;
+  --shadow:rgba(16,24,32,.14);--grid:rgba(16,24,32,.05);
+  color-scheme:light;
+}
 .tsd2-biz{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:18px}
 .tsd2-biz label{font:600 13px/1 "IBM Plex Mono",monospace;color:var(--muted)}
 .tsd2-biz input{font:600 15px/1 "Public Sans",sans-serif;padding:11px 14px;border:2px solid var(--ink);border-radius:10px;background:var(--surface);color:var(--ink);width:230px}
@@ -945,6 +954,7 @@ loadAll(function(){cap.textContent='Ready. Pick a scenario and press play.';});
 </script>
       </div>
     </section>
+
 
 
 
