@@ -15,10 +15,11 @@
   ::selection { background: var(--brass); color: var(--ink); }
 
   /* ---- paper grain (toggleable) ---- */
-  .grain { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .6s ease;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-    mix-blend-mode: overlay; }
-  body.grain-on .grain { opacity: .5; }
+  .grain { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .6s ease; mix-blend-mode: overlay; }
+  body.grain-film .grain { opacity: .5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); }
+  body.grain-paper .grain { opacity: .55;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.11' numOctaves='3' seed='7' result='fib'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' seed='3' result='fn'/%3E%3CfeMerge%3E%3CfeMergeNode in='fib'/%3E%3CfeMergeNode in='fn'/%3E%3C/feMerge%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.42'/%3E%3C/svg%3E"); }
 
   .wrap { max-width: 880px; margin: 0 auto; padding: 64px 24px 120px; }
   .lab-eyebrow { font-size: 12px; letter-spacing: .25em; color: var(--brass-light); text-transform: uppercase; }
@@ -94,8 +95,12 @@
 
   <section class="demo">
     <div class="demo-label">01 — Paper grain</div>
-    <p class="demo-desc">A whisper of film grain over everything, like paper stock. Toggle it and look at any flat surface.</p>
-    <div class="stage"><button class="toggle" id="grainToggle" aria-pressed="false">Turn grain on</button></div>
+    <p class="demo-desc">Two grains, one idea: change the whole feel of the page like a paper stock. <b>Paper</b> is fibrous and warm. <b>Film</b> is the digital noise from before, for comparison.</p>
+    <div class="stage">
+      <button class="toggle" data-grain="" aria-pressed="true">Clean</button>
+      <button class="toggle" data-grain="grain-paper" aria-pressed="false">Paper</button>
+      <button class="toggle" data-grain="grain-film" aria-pressed="false">Film</button>
+    </div>
   </section>
 
   <section class="demo">
@@ -146,11 +151,14 @@
   <footer>Brass Tacks motion &amp; texture lab. Draft for review, October 2026.</footer>
 </div>
 <script>
-  var t = document.getElementById('grainToggle');
-  t.addEventListener('click', function () {
-    var on = document.body.classList.toggle('grain-on');
-    t.setAttribute('aria-pressed', on);
-    t.textContent = on ? 'Turn grain off' : 'Turn grain on';
+  var gtoggles = document.querySelectorAll('[data-grain]');
+  gtoggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.body.classList.remove('grain-paper', 'grain-film');
+      gtoggles.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      if (btn.getAttribute('data-grain')) document.body.classList.add(btn.getAttribute('data-grain'));
+      btn.setAttribute('aria-pressed', 'true');
+    });
   });
 </script>
 </body>
