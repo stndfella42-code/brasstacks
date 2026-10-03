@@ -148,6 +148,18 @@
     <div class="stage"><p style="color:#b9b2a0; font-size:14px;">Select me. Tab through the page. It's the details nobody notices until they're missing.</p></div>
   </section>
 
+  <section class="demo">
+    <div class="demo-label">07 — Button sounds</div>
+    <p class="demo-desc">Five subtle ticks, all synthesized live, no audio files. Click each one to hear it. Whichever you pick becomes the sound for every button in this lab.</p>
+    <div class="stage">
+      <button class="toggle sound-opt" data-sound="tick" aria-pressed="true">Tick</button>
+      <button class="toggle sound-opt" data-sound="blip" aria-pressed="false">Blip</button>
+      <button class="toggle sound-opt" data-sound="knock" aria-pressed="false">Knock</button>
+      <button class="toggle sound-opt" data-sound="pop" aria-pressed="false">Pop</button>
+      <button class="toggle sound-opt" data-sound="thock" aria-pressed="false">Thock</button>
+    </div>
+  </section>
+
   <footer>Brass Tacks motion &amp; texture lab. Draft for review, October 2026.</footer>
 </div>
 <script>
@@ -161,25 +173,60 @@
     });
   });
 
-  // subtle UI tick, synthesized: instant, quiet, soft. No audio files.
+  // five subtle UI sounds, synthesized live. No audio files.
   var actx = null;
-  function uiTick() {
+  var currentSound = 'tick';
+  function ensureCtx() {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    return actx;
+  }
+  function noiseBurst(c, t, freq, q, dur, gain, type) {
+    var buf = c.createBuffer(1, Math.floor(c.sampleRate * dur), c.sampleRate);
+    var d = buf.getChannelData(0);
+    for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2.5);
+    var src = c.createBufferSource(); src.buffer = buf;
+    var f = c.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
+    var g = c.createGain(); g.gain.value = gain;
+    src.connect(f); f.connect(g); g.connect(c.destination);
+    src.start(t);
+  }
+  function tone(c, t, f0, f1, dur, gain, type) {
+    var o = c.createOscillator(); o.type = type;
+    o.frequency.setValueAtTime(f0, t);
+    o.frequency.exponentialRampToValueAtTime(Math.max(f1, 1), t + dur);
+    var g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.03);
+  }
+  var SOUNDS = {
+    tick:  function (c, t) { noiseBurst(c, t, 2400, 1.1, 0.045, 0.10, 'bandpass'); },
+    blip:  function (c, t) { tone(c, t, 990, 620, 0.06, 0.055, 'sine'); },
+    knock: function (c, t) { tone(c, t, 320, 165, 0.07, 0.13, 'triangle'); },
+    pop:   function (c, t) { tone(c, t, 470, 930, 0.05, 0.065, 'sine'); },
+    thock: function (c, t) { noiseBurst(c, t, 850, 0.8, 0.06, 0.15, 'lowpass'); }
+  };
+  function playSound(name) {
     try {
-      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-      if (actx.state === 'suspended') actx.resume();
-      var t = actx.currentTime, dur = 0.045;
-      var buf = actx.createBuffer(1, Math.floor(actx.sampleRate * dur), actx.sampleRate);
-      var d = buf.getChannelData(0);
-      for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2.5);
-      var src = actx.createBufferSource(); src.buffer = buf;
-      var f = actx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 2400; f.Q.value = 1.1;
-      var g = actx.createGain(); g.gain.value = 0.10;
-      src.connect(f); f.connect(g); g.connect(actx.destination);
-      src.start(t);
+      var c = ensureCtx();
+      SOUNDS[name || currentSound](c, c.currentTime);
     } catch (e) {}
   }
   document.querySelectorAll('button').forEach(function (b) {
-    b.addEventListener('click', uiTick);
+    if (b.classList.contains('sound-opt')) return;
+    b.addEventListener('click', function () { playSound(); });
+  });
+  var soundOpts = document.querySelectorAll('.sound-opt');
+  soundOpts.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentSound = btn.getAttribute('data-sound');
+      soundOpts.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+      btn.setAttribute('aria-pressed', 'true');
+      playSound(currentSound);
+    });
   });
 
 </script>
