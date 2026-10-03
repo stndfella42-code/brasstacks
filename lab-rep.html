@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Voice Rep Prototype — Brass Tacks (draft)</title>
+<style>
+  :root { --brass: #c4982a; --brass-dim: #8a6a1a; --brass-light: #e8c76a; --ink: #141412; --paper: #f4eedd; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: var(--paper); font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.6; }
+  ::selection { background: var(--brass); color: var(--ink); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 64px 24px 120px; }
+  .lab-eyebrow { font-size: 12px; letter-spacing: .25em; color: var(--brass-light); text-transform: uppercase; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 7vw, 64px); margin: 8px 0 12px; }
+  h1 em { font-family: 'Fraunces', serif; font-style: italic; color: var(--brass-light); }
+  .lede { color: #b9b2a0; max-width: 62ch; }
+  .lab-note { display: inline-block; margin-top: 16px; font-size: 13px; border: 1px dashed var(--brass-dim); color: var(--brass-light); padding: 8px 16px; border-radius: 8px; }
+
+  /* rep console */
+  .console { margin-top: 40px; background: #181410; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 32px; position: sticky; top: 16px; z-index: 10; }
+  .rep-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .rep-toggle { background: var(--brass); color: var(--ink); border: 0; border-radius: 999px; padding: 16px 32px;
+    font-size: 17px; font-weight: 700; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+  .rep-toggle:hover { transform: translateY(-2px); background: var(--brass-light); }
+  .rep-toggle.on { background: #e05252; color: #fff; }
+  .rep-toggle.on:hover { background: #f06666; }
+  .listen-pill { display: none; align-items: center; gap: 10px; font-size: 13px; letter-spacing: .18em; color: #e05252; font-weight: 700; }
+  .listen-pill.live { display: inline-flex; }
+  .listen-pill .rec { width: 11px; height: 11px; border-radius: 50%; background: #e05252; animation: blink 1.2s ease-in-out infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+  .rep-status { margin-top: 14px; font-size: 14px; color: #b9b2a0; min-height: 22px; }
+  .transcript { margin-top: 18px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .bubble { max-width: 85%; padding: 10px 16px; border-radius: 14px; font-size: 15px; }
+  .bubble.you { align-self: flex-end; background: rgba(196,152,42,.16); border: 1px solid rgba(196,152,42,.35); }
+  .bubble.rep { align-self: flex-start; background: #22201c; border: 1px solid rgba(255,255,255,.08); }
+  .bubble .who { display: block; font-size: 11px; letter-spacing: .15em; color: var(--brass-light); margin-bottom: 4px; text-transform: uppercase; }
+  .lead-card { margin-top: 18px; display: none; border: 1px solid rgba(74,222,128,.4); background: rgba(74,222,128,.07);
+    border-radius: 12px; padding: 16px 20px; }
+  .lead-card.show { display: block; }
+  .lead-card b { color: #4ade80; letter-spacing: .1em; font-size: 12px; text-transform: uppercase; }
+
+  /* browsable content */
+  .content-sec { margin-top: 64px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 40px; }
+  .content-sec .kicker { font-size: 12px; letter-spacing: .22em; color: var(--brass-light); text-transform: uppercase; margin-bottom: 8px; }
+  .content-sec h2 { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 400; margin-bottom: 14px; }
+  .content-sec p { color: #b9b2a0; max-width: 62ch; margin-bottom: 12px; }
+  .content-sec .price { color: var(--paper); font-weight: 700; font-size: 18px; }
+  .hint { margin-top: 8px; font-size: 13px; color: #6b655a; font-style: italic; }
+  footer { margin-top: 96px; color: #6b655a; font-size: 13px; }
+  .nomic { margin-top: 24px; padding: 16px 20px; border: 1px solid rgba(224,82,82,.4); border-radius: 12px; color: #d8a0a0; font-size: 14px; display: none; }
+  .nomic.show { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="lab-eyebrow">Prototype, not live</div>
+  <h1>The <em>voice rep</em></h1>
+  <p class="lede">Flip the rep on and browse the sections below. Muse out loud about whatever catches your eye, like "oh, the AI receptionist looks interesting, tell me more about that." It hears you and answers in voice, knowing what you're looking at.</p>
+  <span class="lab-note">Unlisted prototype. Chrome or Edge recommended. Nothing is recorded.</span>
+  <div class="nomic" id="noMic"></div>
+
+  <div class="console" id="console">
+    <div class="rep-row">
+      <button class="rep-toggle" id="repToggle">Turn on the rep</button>
+      <span class="listen-pill" id="listenPill"><span class="rec"></span>LISTENING</span>
+    </div>
+    <div class="rep-status" id="repStatus">The rep is off. Turn it on and just start talking.</div>
+    <div class="transcript" id="transcript"></div>
+    <div class="lead-card" id="leadCard"><b>Details captured</b><div id="leadBody"></div></div>
+  </div>
+
+  <div class="content-sec" data-rep-section="AI Receptionist">
+    <div class="kicker">Section one</div>
+    <h2>Ava, the AI receptionist</h2>
+    <p>She answers your business line around the clock, qualifies callers, books appointments straight into your calendar, and texts you a summary the second each call ends.</p>
+    <p class="price">$599 setup, then $469 a month. Month to month.</p>
+    <p class="hint">Try saying: "the AI receptionist looks interesting, tell me more about that"</p>
+  </div>
+
+  <div class="content-sec" data-rep-section="Custom websites">
+    <div class="kicker">Section two</div>
+    <h2>Websites built from scratch</h2>
+    <p>Every site is designed and built for one business. No templates, no themes, no page builders. You own everything outright when it's done.</p>
+    <p class="hint">Try saying: "what about the websites"</p>
+  </div>
+
+  <div class="content-sec" data-rep-section="Free consult">
+    <div class="kicker">Section three</div>
+    <h2>Free consult</h2>
+    <p>Thirty minutes, no commitment, no pitch. Just a straight conversation about what your business needs. If you want one, just tell the rep your name and the best number to reach you. No form.</p>
+    <p class="hint">Try saying: "yeah I'd like to book a consult, I'm Mike and my number is 303..."</p>
+  </div>
+
+  <footer>Brass Tacks voice rep prototype. Draft for review, October 2026.</footer>
+</div>
+
+<script>
+(function () {
+  var toggle = document.getElementById('repToggle');
+  var pill = document.getElementById('listenPill');
+  var status = document.getElementById('repStatus');
+  var transcript = document.getElementById('transcript');
+  var leadCard = document.getElementById('leadCard');
+  var leadBody = document.getElementById('leadBody');
+  var noMic = document.getElementById('noMic');
+
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    noMic.textContent = "Voice input isn't supported in this browser. Open this page in Chrome or Edge to try the rep.";
+    noMic.classList.add('show');
+    toggle.disabled = true;
+    return;
+  }
+
+  var sessionId = "rep-" + Math.random().toString(36).slice(2, 10);
+  var messages = [];
+  var repOn = false;
+  var rec = null;
+  var speaking = false;
+  var currentSection = "top of the page";
+
+  // track which section is in view, so "tell me more about that" resolves
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) currentSection = e.target.getAttribute('data-rep-section');
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-rep-section]').forEach(function (el) { io.observe(el); });
+
+  function say(text) {
+    return new Promise(function (resolve) {
+      var u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.02;
+      var voices = speechSynthesis.getVoices();
+      var v = voices.find(function (x) { return /en-US/i.test(x.lang) && /female|samantha|zira|google us english/i.test(x.name); })
+           || voices.find(function (x) { return /^en/i.test(x.lang); });
+      if (v) u.voice = v;
+      u.onend = resolve; u.onerror = resolve;
+      speaking = true;
+      setStatus("Rep is speaking...");
+      speechSynthesis.speak(u);
+    }).then(function () {
+      speaking = false;
+      if (repOn) { setStatus("Listening..."); startRec(); }
+    });
+  }
+  if (speechSynthesis.getVoices) speechSynthesis.getVoices();
+
+  function bubble(who, text) {
+    var d = document.createElement('div');
+    d.className = 'bubble ' + who;
+    var w = document.createElement('span');
+    w.className = 'who'; w.textContent = who === 'you' ? 'You' : 'Rep';
+    d.appendChild(w);
+    d.appendChild(document.createTextNode(text));
+    transcript.appendChild(d);
+    transcript.scrollTop = transcript.scrollHeight;
+  }
+
+  function setStatus(t) { status.textContent = t; }
+
+  function startRec() {
+    if (!repOn || speaking) return;
+    try {
+      rec = new SR();
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.lang = 'en-US';
+      var finalText = '';
+      rec.onresult = function (e) {
+        if (speaking) return;
+        var interim = '';
+        for (var i = e.resultIndex; i < e.results.length; i++) {
+          var t = e.results[i][0].transcript;
+          if (e.results[i].isFinal) finalText += t + ' ';
+          else interim += t;
+        }
+        if (interim) setStatus('Hearing: "' + interim.trim() + '"');
+        if (finalText.trim()) {
+          var said = finalText.trim();
+          finalText = '';
+          stopRec();
+          handleSaid(said);
+        }
+      };
+      rec.onend = function () {
+        // Chrome stops continuous recognition on its own; restart while the rep is on
+        if (repOn && !speaking) startRec();
+      };
+      rec.onerror = function (e) {
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+          setStatus('Mic blocked. Allow microphone access and toggle the rep back on.');
+          setRep(false);
+        }
+      };
+      rec.start();
+    } catch (err) { /* already started */ }
+  }
+
+  function stopRec() {
+    try { rec && rec.stop(); } catch (err) {}
+    rec = null;
+  }
+
+  async function handleSaid(text) {
+    bubble('you', text);
+    messages.push({ role: 'user', content: text });
+    setStatus('Thinking...');
+    try {
+      var r = await fetch('/api/rep', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          messages: messages.slice(-20),
+          page: { path: '/lab-rep.html', title: 'Voice Rep Prototype', section: currentSection }
+        })
+      });
+      var data = await r.json();
+      if (!data.ok) throw new Error(data.error || 'rep error');
+      messages.push({ role: 'assistant', content: data.reply });
+      bubble('rep', data.reply);
+      if (data.lead) {
+        leadBody.textContent = data.lead.name + " · " + data.lead.contact + " · " + data.lead.interest;
+        leadCard.classList.add('show');
+      }
+      await say(data.reply);
+    } catch (err) {
+      setStatus('Hmm, missed that. Say it again?');
+      if (repOn && !speaking) startRec();
+    }
+  }
+
+  function setRep(on) {
+    repOn = on;
+    toggle.textContent = on ? 'Turn off the rep' : 'Turn on the rep';
+    toggle.classList.toggle('on', on);
+    pill.classList.toggle('live', on);
+    if (on) {
+      setStatus('Listening...');
+      var greet = "Hey, I'm here. Browse around and just think out loud, I'll chime in.";
+      messages.push({ role: 'assistant', content: greet });
+      bubble('rep', greet);
+      say(greet);
+    } else {
+      stopRec();
+      speechSynthesis.cancel();
+      speaking = false;
+      setStatus('The rep is off. Turn it on and just start talking.');
+    }
+  }
+
+  toggle.addEventListener('click', function () { setRep(!repOn); if (repOn) startRec(); });
+})();
+</script>
+</body>
+</html>
