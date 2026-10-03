@@ -517,10 +517,15 @@
   .hiw-body { background: #f2ead8; color: #1a1512; }
   .hiw-wrap { max-width: 880px; margin: 0 auto; padding: 24px 24px 0; }
 
-  .stack-zone { position: relative; padding: 40px 0 4vh; }
-  .layer-card { width: 100%; background: #faf6e9; border: 1px solid #1a1512; border-radius: 14px; padding: 34px 34px 30px; box-shadow: 0 18px 44px rgba(26,21,18,0.12); margin-bottom: 28px; }
+  .stack-zone { position: relative; padding: 40px 0 70vh; }
+  .rail { position: absolute; left: -46px; top: 40px; bottom: 70vh; width: 2px; background: #d8cfae; display: none; }
+  @media (min-width: 1000px) { .rail { display: block; } }
+  .rail .fill { width: 100%; background: #8a6a1a; height: 0%; }
+  .layer-card { position: sticky; width: 100%; background: #faf6e9; border: 1px solid #1a1512; border-radius: 14px; padding: 30px 32px 28px; box-shadow: 0 18px 44px rgba(26,21,18,0.12); margin-bottom: 16px; }
+  .stack-zone.compact .layer-card { padding: 18px 20px 16px; }
+  .stack-zone.compact .layer-card p { display: none; }
+  .stack-zone.compact .layer-card h2 { font-size: 24px; }
   .layer-card:last-child { margin-bottom: 0; }
-  .stack-zone { padding-bottom: 4vh; }
   .layer-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.2em; color: #8a6a1a; margin-bottom: 8px; }
   .layer-card h2 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 10px; }
   .layer-card h2 .role { font-style: italic; font-weight: 400; color: #8a6a1a; font-size: 24px; }
@@ -580,7 +585,9 @@
   .js .rv.in { opacity: 1; transform: none; }
   @media (max-width: 640px) {
     .hiw-hero { padding: 120px 24px 32px; }
-    .layer-card { padding: 26px 22px; }
+    .layer-card { padding: 22px 20px; }
+    .layer-card h2 { font-size: 28px; }
+    .layer-card h2 .role { font-size: 21px; }
   }
 </style>
 </head>
@@ -605,41 +612,42 @@
   <div class="hiw-wrap">
     <div class="eyebrow rv">How it works</div>
     <h1 class="rv">Three layers. One business<br>that <em>runs itself.</em></h1>
-    <p class="lede rv">Most businesses buy technology in pieces that never talk to each other. We build three layers designed as one system, each one doing its job.</p>
+    <p class="lede rv">Most businesses buy technology in pieces that never talk to each other. We build three layers designed as one system. Scroll, and watch them fall into place.</p>
   </div>
 </header>
 
 <section class="hiw-wrap">
   <div class="stack-zone">
+    <div class="rail"><div class="fill" id="railFill"></div></div>
 
-    <div class="layer-card rv">
+    <div class="layer-card">
       <div class="num">Layer 01</div>
       <h2>The Face <span class="role">Your website</span></h2>
-      <p>Custom-built, no templates. What customers find, what convinces them, and what everything else learns from.</p>
+      <p>Custom-built, no templates. What customers find, and what convinces them.</p>
       <ul>
         <li>Designed from scratch around your business</li>
         <li>Online booking, menus, pricing, real content</li>
       </ul>
     </div>
 
-    <div class="layer-card rv">
+    <div class="layer-card">
       <div class="num">Layer 02</div>
       <h2>The Backbone <span class="role">Your operating system</span></h2>
-      <p>Ordering, inventory, scheduling, the day-to-day machinery. The single source of truth everything else reads from.</p>
+      <p>Ordering, inventory, scheduling. One source of truth everything else reads from.</p>
       <ul>
         <li>POS, bookings, and business data in one place</li>
         <li>Update it once, and the website and Ava just know</li>
       </ul>
     </div>
 
-    <div class="layer-card rv">
+    <div class="layer-card">
       <div class="num">Layer 03</div>
       <h2>The Voice <span class="role">Ava</span></h2>
-      <p>One receptionist on every channel. She answers your business line and chats on your website, trained on both layers above.</p>
+      <p>One receptionist on every channel, trained on your business.</p>
       <ul>
-        <li>Answers every call 24/7, books appointments, qualifies callers</li>
-        <li>Chats with website visitors. Same brain, same memory.</li>
-        <li>Knows your services, prices, and availability cold</li>
+        <li>Answers every call 24/7</li>
+        <li>Books, qualifies, and knows your prices cold</li>
+        <li>Chats on your site. Same brain, same memory.</li>
         <li>Texts you a summary the second each call ends</li>
       </ul>
     </div>
@@ -693,7 +701,7 @@
       <h4>Ava</h4>
       <ul>
         <li>$469 / month</li>
-        <li>Trained on your business in days</li>
+        <li>Trained on your business in hours</li>
         <li>Never sleeps, never quits</li>
         <li>Every call and chat, every time</li>
       </ul>
@@ -747,6 +755,38 @@
   document.querySelector('.nav-toggle').addEventListener('click', function () {
     document.querySelector('.nav-links').classList.toggle('open');
   });
+  // layer cards: pin below each other (never overlapping), then hold as a readable stack
+  function pinLayers() {
+    var zone = document.querySelector('.stack-zone');
+    if (!zone) return;
+    var cards = zone.querySelectorAll('.layer-card');
+    var base = window.innerWidth <= 640 ? 84 : 96;
+    var gap = 16;
+    zone.classList.remove('compact');
+    function heights() {
+      return Array.prototype.map.call(cards, function (c) { return c.offsetHeight; });
+    }
+    var hs = heights();
+    var total = base + hs.reduce(function (a, h) { return a + h; }, 0) + gap * (hs.length - 1) + 32;
+    if (total > window.innerHeight) { zone.classList.add('compact'); hs = heights(); }
+    var top = base;
+    Array.prototype.forEach.call(cards, function (c, i) { c.style.top = top + 'px'; top += hs[i] + gap; });
+  }
+  window.addEventListener('load', pinLayers);
+  window.addEventListener('resize', pinLayers);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(pinLayers); }
+  pinLayers();
+  // progress rail
+  var zone = document.querySelector('.stack-zone');
+  var fill = document.getElementById('railFill');
+  function onScroll() {
+    var r = zone.getBoundingClientRect();
+    var total = r.height - window.innerHeight;
+    var done = Math.min(Math.max(-r.top / total, 0), 1);
+    fill.style.height = (done * 100).toFixed(1) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
   // scroll reveal
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
