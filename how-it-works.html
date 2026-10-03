@@ -521,7 +521,7 @@
   .rail { position: absolute; left: -46px; top: 40px; bottom: 12vh; width: 2px; background: #d8cfae; display: none; }
   @media (min-width: 1000px) { .rail { display: block; } }
   .rail .fill { width: 100%; background: #8a6a1a; height: 0%; }
-  .layer-card { position: sticky; top: calc(96px + var(--i) * 30px); width: 100%; background: #faf6e9; border: 1px solid #1a1512; border-radius: 14px; padding: 34px 34px 30px; box-shadow: 0 18px 44px rgba(26,21,18,0.12); margin-bottom: 62vh; }
+  .layer-card { position: sticky; top: calc(96px + var(--i) * 172px); width: 100%; background: #faf6e9; border: 1px solid #1a1512; border-radius: 14px; padding: 34px 34px 30px; box-shadow: 0 18px 44px rgba(26,21,18,0.12); margin-bottom: 62vh; transform-origin: center top; transition: transform 0.25s ease-out, filter 0.25s ease-out; }
   .layer-card:last-child { margin-bottom: 0; }
   .layer-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.2em; color: #8a6a1a; margin-bottom: 8px; }
   .layer-card h2 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 10px; }
@@ -582,7 +582,7 @@
   .js .rv.in { opacity: 1; transform: none; }
   @media (max-width: 640px) {
     .hiw-hero { padding: 120px 24px 32px; }
-    .layer-card { padding: 26px 22px; top: calc(84px + var(--i) * 18px); }
+    .layer-card { padding: 26px 22px; top: calc(84px + var(--i) * 118px); }
   }
 </style>
 </head>
@@ -766,6 +766,24 @@
     var done = Math.min(Math.max(-r.top / total, 0), 1);
     fill.style.height = (done * 100).toFixed(1) + '%';
   }
+  // fanned deck: buried cards scale down + dim so every layer stays readable
+  var deck = Array.prototype.slice.call(document.querySelectorAll('.layer-card'));
+  function fanDeck() {
+    var tops = deck.map(function (c) { return c.getBoundingClientRect().top; });
+    deck.forEach(function (c, i) {
+      var base = parseFloat(getComputedStyle(c).top) || 0;
+      var depth = 0;
+      for (var j = i + 1; j < deck.length; j++) { if (tops[j] <= base + 8) depth++; }
+      c.style.transform = depth ? 'scale(' + (1 - depth * 0.035).toFixed(3) + ')' : '';
+      c.style.filter = depth ? 'brightness(' + (1 - depth * 0.05).toFixed(3) + ')' : '';
+    });
+  }
+  var deckTick = false;
+  window.addEventListener('scroll', function () {
+    if (deckTick) return; deckTick = true;
+    requestAnimationFrame(function () { fanDeck(); deckTick = false; });
+  }, { passive: true });
+  fanDeck();
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 </script>
