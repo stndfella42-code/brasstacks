@@ -107,7 +107,7 @@ async function speak(text) {
     });
     if (!r.ok) {
       console.error("[rep] elevenlabs TTS failed:", r.status);
-      return null;
+      return "HTTP_" + r.status;
     }
     const buf = Buffer.from(await r.arrayBuffer());
     return buf.toString("base64");
@@ -171,6 +171,7 @@ module.exports = async (req, res) => {
   if (lead) await fireLeadWebhook(lead, sessionId);
 
   const audio = await speak(reply);
+  const ttsStatus = typeof audio === "string" && audio.startsWith("HTTP_") ? audio : (audio ? "OK" : "NO_KEY");
 
-  return res.status(200).json({ ok: true, reply, audio, lead });
+  return res.status(200).json({ ok: true, reply, audio: ttsStatus === "OK" ? audio : null, tts_status: ttsStatus, lead });
 };
