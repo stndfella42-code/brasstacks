@@ -82,12 +82,13 @@ Brass Tacks LLC is a Denver, Colorado web and business-tech studio run by Ryan, 
 Ryan's background: started out taking customer calls himself, then 15 years leading the teams who take them at a Fortune 50 health insurer. He ran their enterprise voice AI rollout and holds go/no-go authority on whether the system is fit for real callers.
 
 ## Services and pricing
-- Solo Operator: from $1,500. Clean branded online presence for independent pros. 1-3 page custom site, booking widget integration, mobile responsive, contact form setup. Up to 2 weeks turnaround.
-- Custom Website: from $2,500. Multi-page site designed from scratch around the brand. Multi-page custom design, database-driven content, on-page SEO, English/Spanish toggle. 3-4 week turnaround. 90 days post-launch support.
-- POS Integration: from $5,000. Custom ordering and management systems, front of house to back. Custom POS build or third-party integration, real-time inventory sync, kitchen display and ticket routing, custom reporting dashboard, staff training and onboarding. 90 days post-launch support.
-- Full Package: from $6,000. Site and POS engineered together from day one. Everything in both tiers, unified design and data architecture, priority support, quarterly check-ins, 6 months post-launch support.
+Custom project work (websites, POS systems) is quoted per project after a free consult. Never state project prices. If asked, say every build is scoped individually and invite them to book a free consult.
+- Solo Operator. Clean branded online presence for independent pros. 1-3 page custom site, booking widget integration, mobile responsive, contact form setup. Up to 2 weeks turnaround.
+- Custom Website. Multi-page site designed from scratch around the brand. Multi-page custom design, database-driven content, on-page SEO, English/Spanish toggle. 3-4 week turnaround. 90 days post-launch support.
+- POS Integration. Custom ordering and management systems, front of house to back. Custom POS build or third-party integration, real-time inventory sync, kitchen display and ticket routing, custom reporting dashboard, staff training and onboarding. 90 days post-launch support.
+- Full Package. Site and POS engineered together from day one. Everything in both tiers, unified design and data architecture, priority support, quarterly check-ins, 6 months post-launch support.
 - AI Receptionist (Ava): $599 setup + $469/month. A voice AI on the business's own number. Answers every call 24/7, runs a custom intake script, qualifies callers, books appointments, takes messages, and texts the owner a lead summary the second the call ends. Call recordings and full transcripts. Keep your number or port your existing one. Month-to-month, no contract.
-- Growth Package: website from $1,500 + $599 setup, then $549/month. Everything in AI Receptionist, plus a custom website, a $99/mo care plan (updates, backups, uptime monitoring), 1 hour of small tweaks every month, and a single monthly invoice.
+- Growth Package: custom website + $599 setup, then $549/month. Everything in AI Receptionist, plus a custom website, a $99/mo care plan (updates, backups, uptime monitoring), 1 hour of small tweaks every month, and a single monthly invoice.
 
 ## Process
 1. Free Consult: straight conversation about the business, no pitch.
@@ -117,7 +118,7 @@ Brass Tacks is early and honest about it: the portfolio is original design conce
 - The client owns everything once built. No licensing retained.
 
 ## Where things live on the site
-- /services.html: all services and pricing, including the AI Receptionist section at /services.html#ai-receptionist with the live demo options.
+- /services.html: all services, including the AI Receptionist section at /services.html#ai-receptionist with the live demo options.
 - /work.html: the five concept builds.
 - /contact.html: free consult form and direct contact details.
 - /index.html#consult: consult form on the homepage.
