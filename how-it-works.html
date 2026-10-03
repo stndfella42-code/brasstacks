@@ -525,6 +525,10 @@
   .stack-zone.compact .layer-card { padding: 18px 20px 16px; }
   .stack-zone.compact .layer-card p { display: none; }
   .stack-zone.compact .layer-card h2 { font-size: 24px; }
+  .layer-card .node { position: absolute; left: 7px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; border: 2px solid #8a6a1a; background: #faf6e9; transition: background 0.4s ease, box-shadow 0.4s ease; }
+  .layer-card .node.lit { background: #8a6a1a; box-shadow: 0 0 0 4px rgba(138,106,26,0.20); }
+  .spine { position: fixed; width: 2px; background: #8a6a1a; border-radius: 2px; transform: scaleY(0); transform-origin: top center; opacity: 0; transition: transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease; z-index: 5; pointer-events: none; }
+  .spine.connected { transform: scaleY(1); opacity: 1; }
   .layer-card:last-child { margin-bottom: 0; }
   .layer-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.2em; color: #8a6a1a; margin-bottom: 8px; }
   .layer-card h2 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 10px; }
@@ -612,7 +616,7 @@
   <div class="hiw-wrap">
     <div class="eyebrow rv">How it works</div>
     <h1 class="rv">Three layers. One business<br>that <em>runs itself.</em></h1>
-    <p class="lede rv">Most businesses buy technology in pieces that never talk to each other. We build three layers designed as one system. Scroll, and watch them fall into place.</p>
+    <p class="lede rv">Most businesses buy technology in pieces that never talk to each other. We build three layers designed as one system. Scroll, and watch them connect.</p>
   </div>
 </header>
 
@@ -621,6 +625,7 @@
     <div class="rail"><div class="fill" id="railFill"></div></div>
 
     <div class="layer-card">
+      <span class="node" aria-hidden="true"></span>
       <div class="num">Layer 01</div>
       <h2>The Face <span class="role">Your website</span></h2>
       <p>Custom-built, no templates. What customers find, and what convinces them.</p>
@@ -631,6 +636,7 @@
     </div>
 
     <div class="layer-card">
+      <span class="node" aria-hidden="true"></span>
       <div class="num">Layer 02</div>
       <h2>The Backbone <span class="role">Your operating system</span></h2>
       <p>Ordering, inventory, scheduling. One source of truth everything else reads from.</p>
@@ -641,6 +647,7 @@
     </div>
 
     <div class="layer-card">
+      <span class="node" aria-hidden="true"></span>
       <div class="num">Layer 03</div>
       <h2>The Voice <span class="role">Ava</span></h2>
       <p>One receptionist on every channel, trained on your business.</p>
@@ -755,7 +762,12 @@
   document.querySelector('.nav-toggle').addEventListener('click', function () {
     document.querySelector('.nav-links').classList.toggle('open');
   });
-  // layer cards: pin below each other (never overlapping), then hold as a readable stack
+  // layer cards: stage in (1, then 2 fades in, then 3), pin below each other, then connect via spine
+  var pinTops = [];
+  var spine = document.createElement('div');
+  spine.className = 'spine';
+  spine.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(spine);
   function pinLayers() {
     var zone = document.querySelector('.stack-zone');
     if (!zone) return;
@@ -769,24 +781,52 @@
     var hs = heights();
     var total = base + hs.reduce(function (a, h) { return a + h; }, 0) + gap * (hs.length - 1) + 32;
     if (total > window.innerHeight) { zone.classList.add('compact'); hs = heights(); }
+    pinTops = [];
     var top = base;
-    Array.prototype.forEach.call(cards, function (c, i) { c.style.top = top + 'px'; top += hs[i] + gap; });
+    Array.prototype.forEach.call(cards, function (c, i) {
+      c.style.top = top + 'px';
+      pinTops.push(top);
+      top += hs[i] + gap;
+    });
+    var zr = zone.getBoundingClientRect();
+    var sTop = pinTops[0] + 14;
+    var sBottom = pinTops[pinTops.length - 1] + hs[hs.length - 1] - 14;
+    spine.style.left = (zr.left + 11) + 'px';
+    spine.style.top = sTop + 'px';
+    spine.style.height = Math.max(sBottom - sTop, 0) + 'px';
   }
-  window.addEventListener('load', pinLayers);
-  window.addEventListener('resize', pinLayers);
-  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(pinLayers); }
-  pinLayers();
-  // progress rail
-  var zone = document.querySelector('.stack-zone');
-  var fill = document.getElementById('railFill');
-  function onScroll() {
+  function zoneScroll() {
+    var zone = document.querySelector('.stack-zone');
+    if (!zone) return;
+    var cards = zone.querySelectorAll('.layer-card');
+    var fill = document.getElementById('railFill');
     var r = zone.getBoundingClientRect();
     var total = r.height - window.innerHeight;
     var done = Math.min(Math.max(-r.top / total, 0), 1);
-    fill.style.height = (done * 100).toFixed(1) + '%';
+    if (fill) fill.style.height = (done * 100).toFixed(1) + '%';
+    Array.prototype.forEach.call(cards, function (c, i) {
+      var cr = c.getBoundingClientRect();
+      if (i > 0 && pinTops[i] !== undefined) {
+        var op = 1 - (cr.top - pinTops[i] - 40) / 260;
+        c.style.opacity = Math.min(Math.max(op, 0), 1).toFixed(3);
+      }
+      var node = c.querySelector('.node');
+      if (node && pinTops[i] !== undefined) node.classList.toggle('lit', cr.top <= pinTops[i] + 4);
+    });
+    var c3r = cards[2].getBoundingClientRect();
+    var hold = pinTops[2] !== undefined && c3r.top <= pinTops[2] + 2 && r.bottom > window.innerHeight * 0.85;
+    spine.classList.toggle('connected', hold);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  var zTick = false;
+  window.addEventListener('scroll', function () {
+    if (zTick) return; zTick = true;
+    requestAnimationFrame(function () { zoneScroll(); zTick = false; });
+  }, { passive: true });
+  window.addEventListener('load', function () { pinLayers(); zoneScroll(); });
+  window.addEventListener('resize', function () { pinLayers(); zoneScroll(); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { pinLayers(); zoneScroll(); }); }
+  pinLayers();
+  zoneScroll();
   // scroll reveal
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
