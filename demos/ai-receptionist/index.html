@@ -714,7 +714,7 @@ function showChoices(list){
   list.forEach(function(c){
     var b=document.createElement('button');
     b.type='button';b.className='tsd-choice';b.textContent=c.t;
-    b.addEventListener('click',function(e){e.stopPropagation();addMsg('cx',c.t);runNode(c.go);});
+    b.addEventListener('click',function(e){e.stopPropagation();runNode(c.go);});
     wrap.appendChild(b);
   });
   screen.appendChild(wrap);scrollDown();
