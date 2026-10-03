@@ -529,6 +529,11 @@
       .reveal { opacity: 1; transform: none; }
       #hero .badge .badge-ring { animation: none; }
     }
+  
+    .eyebrow { display: block; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--brass-light, #e8c76a); margin-bottom: 16px; font-weight: 600; }
+    .button { display: inline-block; background: var(--brass, #c4982a); color: #141412; padding: 16px 34px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 16px; border: 0; cursor: pointer; }
+    .button:hover { background: var(--brass-light, #e8c76a); }
+
   </style>
 </head>
 <body>
@@ -566,7 +571,7 @@
             <circle cx="100" cy="100" r="58" fill="none" stroke="#6b1f1f" stroke-width="1.25"/>
             <g class="badge-ring">
             <text font-family="'Bebas Neue', sans-serif" font-size="21" letter-spacing="2" fill="#6b1f1f">
-              <textPath href="#badge-circle" textLength="460" lengthAdjust="spacingAndGlyphs">NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226; NO TEMPLATES &#8226; BUILT FROM SCRATCH &#8226;</textPath>
+              <textPath href="#badge-circle" textLength="460" lengthAdjust="spacingAndGlyphs">NO TEMPLATES &#8226; NO THEMES &#8226; NO PAGE BUILDERS &#8226; BUILT FROM SCRATCH &#8226;</textPath>
             </text>
             </g>
             <circle cx="100" cy="100" r="24" fill="#b8860b" stroke="#7a5c06" stroke-width="2"/>
@@ -639,10 +644,9 @@
       <div class="demo-tabs reveal" role="tablist">
         <button class="demo-tab active" data-demo="assay" role="tab">Assay Brewing</button>
         <button class="demo-tab" data-demo="revival" role="tab">Revival Construction</button>
-        <button class="demo-tab" data-demo="ossuary" role="tab">Ossuary Tattoo</button>
-        <button class="demo-tab" data-demo="halfmoon" role="tab">Halfmoon Nails</button>
         <button class="demo-tab" data-demo="redline" role="tab">Redline Auto</button>
       </div>
+      <p style="margin:18px 0 0;"><a href="work.html" class="t-link">See all five concepts &rarr;</a></p>
       <div class="demo-stage reveal">
         <div class="demo-browser">
           <div class="db-bar"><i></i><i></i><i></i><span id="demo-url">assaybrewing.co</span></div>
@@ -664,25 +668,8 @@
               <span class="dp-tag b">Before</span><span class="dp-tag a">After</span>
               <div class="dp-cap"><b>BUILT RIGHT. BUILT ONCE.</b><span>Drag the handle: full roof replacement, Andover.</span></div>
             </div>
-            <div class="demo-panel dp-ossuary" data-panel="ossuary">
-              <div class="dp-brand">OSSUARY<span>.</span></div>
-              <div class="dp-sub">Tattoo Co. · Private Studio</div>
-              <div class="dp-flash">
-                <div><b>The Watcher</b><span>$180</span></div>
-                <div><b>Last Rites</b><span>$260</span></div>
-                <div><b>Grin</b><span>$240</span></div>
-              </div>
-              <div class="dp-note">Claim a piece of flash and the booking form pre-fills itself.</div>
-            </div>
-            <div class="demo-panel dp-halfmoon" data-panel="halfmoon">
-              <div class="dp-brand">Halfmoon</div>
-              <div class="dp-sub">Nail Boutique · Berkeley, Denver</div>
-              <div class="dp-shades">
-                <i style="background:#8e1c2e"></i><i style="background:#e8a3ae"></i><i style="background:#d9a441"></i><i style="background:#1f3a31"></i><i style="background:#e5c3b9"></i>
-              </div>
-              <div class="dp-svc">Classic Manicure <span>$38</span></div>
-              <div class="dp-svc">Gel Manicure <span>$52</span></div>
-            </div>
+            
+            
             <div class="demo-panel dp-redline" data-panel="redline">
               <div class="dp-brand">FIXED RIGHT<span>.</span></div>
               <div class="dp-sub">Redline Auto Co. · Baker, Denver</div>
@@ -765,55 +752,25 @@
     </div>
     <div class="tier-grid">
       <div class="tier reveal">
-        <h3>Solo Operator</h3>
-        <p class="t-desc">A clean, branded online presence for independent pros who need to be found and booked, fast.</p>
-        <ul>
-          <li>1–3 page custom site</li>
-          <li>Booking widget integration</li>
-          <li>Mobile responsive</li>
-          <li>Contact form setup</li>
-          <li>Up to 2 weeks turnaround</li>
-        </ul>
-        <a href="#consult" class="t-link">Start here →</a>
+        <h3>Starter Site</h3>
+        <p class="t-desc">A clean one-to-three page site that gets you found and booked.</p>
+        <a href="services.html#starter" class="t-link">See details &rarr;</a>
       </div>
       <div class="tier reveal">
         <h3>Custom Website</h3>
-        <p class="t-desc">A multi-page site designed from scratch around your brand. Not a theme 10,000 other businesses already used.</p>
-        <ul>
-          <li>Multi-page custom design</li>
-          <li>Database-driven content</li>
-          <li>SEO optimization</li>
-          <li>English / Spanish toggle</li>
-          <li>3–4 week turnaround</li>
-          <li>90 days post-launch support</li>
-        </ul>
-        <a href="#consult" class="t-link">Start here →</a>
+        <p class="t-desc">A multi-page site designed from scratch around your brand.</p>
+        <a href="services.html#custom" class="t-link">See details &rarr;</a>
       </div>
       <div class="tier reveal">
-        <h3>POS Integration</h3>
-        <p class="t-desc">Custom ordering and management systems that connect your whole operation, front of house to back.</p>
-        <ul>
-          <li>Custom POS build or integration</li>
-          <li>Real-time inventory sync</li>
-          <li>Kitchen display &amp; ticket routing</li>
-          <li>Custom reporting dashboard</li>
-          <li>Staff training &amp; onboarding</li>
-          <li>90 days post-launch support</li>
-        </ul>
-        <a href="#consult" class="t-link">Start here →</a>
+        <h3>POS System</h3>
+        <p class="t-desc">A register and back-office system that runs your whole shop.</p>
+        <a href="services.html#pos" class="t-link">See details &rarr;</a>
       </div>
       <div class="tier hot reveal">
         <span class="t-flag">Best value</span>
         <h3>Full Package</h3>
-        <p class="t-desc">Site + POS engineered together from day one. One vendor, one unified system, one point of contact.</p>
-        <ul>
-          <li>Everything in both tiers</li>
-          <li>Unified design &amp; data architecture</li>
-          <li>Priority support</li>
-          <li>Quarterly check-ins</li>
-          <li>6 months post-launch support</li>
-        </ul>
-        <a href="#consult" class="t-link">Start here →</a>
+        <p class="t-desc">Site and POS engineered together from day one. One vendor, one system.</p>
+        <a href="services.html#full" class="t-link">See details &rarr;</a>
       </div>
     </div>
   </section>
@@ -828,103 +785,42 @@
       <div class="steps">
         <div class="step reveal">
           <span class="s-num">01</span>
-          <h3>Free Consult</h3>
-          <p>We talk through your business, your goals, and what you actually need. No sales pitch, no upsell. Straight talk.</p>
+          <h3>Free consult</h3>
+          <p>We talk through your business, your goals, and what you actually need. No sales pitch, no upsell.</p>
         </div>
         <div class="step reveal">
           <span class="s-num">02</span>
-          <h3>Scoped &amp; Priced</h3>
-          <p>A clear proposal: what we're building, what it costs, when it ships. No vague estimates, no surprise invoices.</p>
+          <h3>Clear proposal</h3>
+          <p>What we're building, what it costs, and when it ships. No vague estimates.</p>
         </div>
         <div class="step reveal">
           <span class="s-num">03</span>
-          <h3>Built Custom</h3>
-          <p>Designed and built from scratch around your business. You see progress weekly. No surprises.</p>
+          <h3>We build, you review</h3>
+          <p>Designed and built from scratch around your business. You see progress weekly.</p>
         </div>
         <div class="step reveal">
           <span class="s-num">04</span>
-          <h3>Launch &amp; Support</h3>
-          <p>We launch together and stick around. Every package includes post-launch support, so you're never on your own.</p>
+          <h3>Launch + support</h3>
+          <p>We launch together and stick around. Support is included, so you're never on your own.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- COMPARE -->
-  <section class="block" id="compare">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Why Brass Tacks</span>
-      <h2>How we <em>stack up.</em></h2>
-    </div>
-    <div class="compare-wrap reveal">
-      <table class="compare">
-        <thead>
-          <tr><th></th><th>Squarespace / Wix</th><th>Freelancer</th><th>Agency</th><th class="us">Brass Tacks</th></tr>
-        </thead>
-        <tbody>
-          <tr><th>Upfront cost</th><td>$0 upfront, $20–50/mo forever</td><td>Varies wildly</td><td>$10K – $50K+</td><td class="us">Custom quote</td></tr>
-          <tr><th>Time to launch</th><td>Same day (looks like it)</td><td>2 – 6 months</td><td>3 – 12 months</td><td class="us">2 – 4 weeks</td></tr>
-          <tr><th>Custom built for you</th><td class="no">✕</td><td class="mid">~ depends</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
-          <tr><th>No platform fees ever</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
-          <tr><th>POS + website together</th><td class="no">✕</td><td class="no">✕</td><td class="mid">~ rarely</td><td class="us yes">✓</td></tr>
-          <tr><th>Post-launch support</th><td class="mid">~ FAQ only</td><td class="mid">~ sometimes</td><td>Extra retainer</td><td class="us yes">✓ Included</td></tr>
-          <tr><th>Knows your industry</th><td class="no">✕</td><td class="mid">~ maybe</td><td class="no">✕</td><td class="us yes">✓</td></tr>
-          <tr><th>You own everything</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  
 
   
 
   <!-- CONSULT -->
   <section id="consult">
     <div class="block">
-      <div class="consult-grid">
-        <div class="consult-copy reveal">
-          <span class="eyebrow">Free consult</span>
-          <h2>Let's get down to <em>brass tacks.</em></h2>
-          <p>No commitment, no pitch deck. A straight conversation about your business and what we can build for you. We'll tell you honestly if we're not the right fit.</p>
-          <p>Prefer to talk it through first? That's what the consult is for.</p>
-          <p class="direct">Or call directly:<br /><a href="tel:+17207199794">(720) 719-9794</a></p>
-        </div>
-        <form class="consult-form reveal" action="contact.html" method="get">
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-name">Your name</label>
-              <input id="cf-name" name="name" type="text" required autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="cf-biz">Business name</label>
-              <input id="cf-biz" name="business" type="text" required autocomplete="organization" />
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="cf-email">Email</label>
-              <input id="cf-email" name="email" type="email" required autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="cf-phone">Phone <span style="opacity:0.5">(optional)</span></label>
-              <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="cf-plan">Which plan interests you?</label>
-            <select id="cf-plan" name="plan">
-              <option>Not sure yet, let's talk</option>
-              <option>Solo Operator: simple site, fast launch</option>
-              <option>Custom Website: multi-page, built from scratch</option>
-              <option>POS Integration: ordering and management systems</option>
-              <option>Full Package: site + POS together</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="cf-msg">Tell us about your business</label>
-            <textarea id="cf-msg" name="message" placeholder="What do you do, what drives you crazy about your current setup, what would a perfect system look like?"></textarea>
-          </div>
-          <button type="submit" class="btn-solid" style="width:100%;justify-content:center">Send my consult request →</button>
-        </form>
+      <div class="sec-head reveal" style="text-align:center;max-width:640px;margin:0 auto;">
+        <span class="eyebrow">Free consult</span>
+        <h2>Let&apos;s get down to <em>brass tacks.</em></h2>
+        <p>No commitment, no pitch deck. A straight conversation about your business and what we can build for you. We will tell you honestly if we are not the right fit.</p>
+        <p style="margin-top:28px;"><a class="button" href="contact.html">Book a free consult</a></p>
+        <p class="direct" style="margin-top:16px;">Or call directly: <a href="tel:+17207199794">(720) 719-9794</a></p>
       </div>
     </div>
   </section>
@@ -932,24 +828,12 @@
   <!-- AI RECEPTIONIST CTA -->
   <section id="receptionist-cta">
     <div class="block">
-      <div class="sec-head reveal">
+      <div class="sec-head reveal" style="text-align:center;max-width:640px;margin:0 auto;">
         <span class="eyebrow">AI receptionist</span>
         <h2>Never miss <em>another call.</em></h2>
-        <p>Our AI receptionist answers every call 24/7, qualifies the lead, and texts us the details instantly. Our newest service — two ways to try it right now:</p>
-      </div>
-      <div class="tier-grid">
-        <div class="tier reveal">
-          <h3>Call the live agent</h3>
-          <div class="t-price">(720) 719-9794</div>
-          <p class="t-desc">A real AI receptionist answers 24/7. Ask it anything.</p>
-          <a class="t-link" href="tel:+17207199794">Call now &rarr;</a>
-        </div>
-        <div class="tier reveal">
-          <h3>Run the interactive demo</h3>
-          <div class="t-price">Guided walkthrough</div>
-          <p class="t-desc">Watch a real call unfold: the conversation, the lead alert, the transcript.</p>
-          <a class="t-link" href="demos/ai-receptionist/#live-demo">Try the demo &rarr;</a>
-        </div>
+        <p>Ava answers every call 24/7, qualifies the caller, and texts you the details instantly.</p>
+        <p style="margin-top:28px;"><a class="button" href="tel:+17207199794">Call (720) 719-9794 and hear Ava yourself</a></p>
+        <p style="margin-top:14px;"><a href="demos/ai-receptionist/#live-demo" style="font-size:14px;opacity:.7;">or watch the interactive demo</a></p>
       </div>
     </div>
   </section>

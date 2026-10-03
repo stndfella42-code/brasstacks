@@ -704,6 +704,22 @@
       .footer-contact { justify-content: flex-start; }
       .cta-strip { padding: 56px 24px; flex-direction: column; }
     }
+  
+    .compare-wrap { overflow-x: auto; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+    table.compare { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+    .compare th, .compare td { padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .compare thead th { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+    .compare thead th.us { color: var(--brass-light); }
+    .compare tbody th { font-weight: 500; color: var(--text-2); }
+    .compare td { color: var(--text-3); text-align: center; }
+    .compare td.us { color: var(--text); background: rgba(196,152,42,0.06); text-align: center; font-weight: 600; }
+    .compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
+    .compare .yes { color: #4ade80; }
+    .compare .no { color: #f87171; }
+    .compare .mid { color: var(--brass-light); }
+
+  
+    .t-link { color: var(--brass-light, #e8c76a); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -819,7 +835,7 @@
         <div class="service-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.7 2.05z"/></svg>
         </div>
-        <div class="service-name">AI Receptionist</div>
+        <div class="service-name" id="receptionist">AI Receptionist</div>
         <p class="service-desc"><strong>$599 setup + $469/mo.</strong> Your business line, answered like you never left the office.</p>
         <ul class="service-features">
           <li>Custom intake script for your business</li>
@@ -961,7 +977,7 @@
     btn.addEventListener("click", async () => {
       if (RETELL_PUBLIC_KEY === "PASTE_PUBLIC_KEY_HERE") {
         panel.hidden = false;
-        setStatus("Voice demo is not wired up yet — a Retell public key still needs to be pasted into this page (see the CONFIG comment in the source).", "error");
+        setStatus("Voice demo is not wired up yet: a Retell public key still needs to be pasted into this page (see the CONFIG comment in the source).", "error");
         return;
       }
       if (call) return;
@@ -978,7 +994,7 @@
           hooks: {
             onStatus: (s) => {
               if (s === "live") {
-                setStatus("Live — you are talking to Ava.", "live");
+                setStatus("Live: you are talking to Ava.", "live");
                 muteBtn.disabled = false;
                 endBtn.disabled = false;
               } else if (s === "ended") {
@@ -1024,11 +1040,36 @@
 
     <div class="reveal" style="margin-top:56px;max-width:680px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.08);">
       <div class="section-eyebrow">Why Brass Tacks</div>
-      <p style="color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin-bottom:16px;">I&rsquo;m Ryan. I started out taking customer calls myself, then spent 15 years leading the teams who take them at a Fortune 50 health insurer. I ran their enterprise voice AI rollout, and I hold go/no-go authority on whether the system is fit for real callers.</p>
-      <p style="color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin:0;">Now I build AI agents that take calls, with everything those years taught me about what callers actually want. This is not tech looking for a problem. It is 15 years of problems, finally built right.</p>
+      <p style="color:var(--text-2);font-size:17px;font-weight:300;line-height:1.7;margin:0;">Built by someone who ran enterprise voice AI at a Fortune 50 health insurer. <a href="about.html" style="color:var(--brass-light);">Read the story &rarr;</a></p>
     </div>
   </section>
 
+
+  <!-- 3-DOOR CHOOSER -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="section-eyebrow reveal">Start here</div>
+    <div class="section-title reveal" style="margin-bottom:32px;">What&apos;s the <em>problem?</em></div>
+    <div class="services-grid" style="grid-template-columns:repeat(3,1fr);">
+      <a href="#ai-receptionist" class="service-card card-reveal" data-dir="up" style="text-decoration:none;color:inherit;">
+        <div class="card-glare"></div>
+        <div class="service-name">Missed calls are costing me jobs</div>
+        <p class="service-desc">Ava answers every call, qualifies the caller, and books the job.</p>
+        <div class="t-link" style="margin-top:12px;">AI Receptionist &rarr;</div>
+      </a>
+      <a href="#starter" class="service-card card-reveal" data-dir="up" style="text-decoration:none;color:inherit;">
+        <div class="card-glare"></div>
+        <div class="service-name">I need a website that brings in work</div>
+        <p class="service-desc">Custom-built sites, from a clean starter to a full multi-page build. We will recommend the right one on your free consult.</p>
+        <div class="t-link" style="margin-top:12px;">Websites &rarr;</div>
+      </a>
+      <a href="#full" class="service-card card-reveal" data-dir="up" style="text-decoration:none;color:inherit;">
+        <div class="card-glare"></div>
+        <div class="service-name">I need my systems to talk to each other</div>
+        <p class="service-desc">Website and POS sharing one set of books. Update once, everything knows.</p>
+        <div class="t-link" style="margin-top:12px;">Website + POS &rarr;</div>
+      </a>
+    </div>
+  </section>
 
   <!-- SERVICE CARDS -->
   <section class="section">
@@ -1052,7 +1093,7 @@
           <li>Your own local number, or port your existing one</li>
           <li>Month-to-month, no contract</li>
         </ul>
-        <div class="service-footer">Best for: contractors, shops, salons — any business that misses calls</div>
+        <div class="service-footer">Best for: contractors, shops, salons: any business that misses calls</div>
       </div>
 
       <div class="service-card card-reveal" data-dir="left">
@@ -1060,8 +1101,8 @@
         <div class="service-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z"/></svg>
         </div>
-        <div class="service-name">Solo Operator</div>
-        <p class="service-desc">A clean, branded online presence for independent professionals who need to be found and booked — fast. Built for you, not repurposed from a template someone else already used.</p>
+        <div class="service-name" id="starter">Starter Site</div>
+        <p class="service-desc">A clean, branded online presence for independent professionals who need to be found and booked, fast. Built for you, not repurposed from a template someone else already used.</p>
         <ul class="service-features">
           <li>1–3 page custom site</li>
           <li>Booking widget integration</li>
@@ -1078,11 +1119,11 @@
         <div class="service-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <div class="service-name">Custom Website</div>
-        <p class="service-desc">A multi-page site designed from scratch around your brand — not a theme someone else already used 10,000 times. Built to reflect who you actually are and convert visitors into customers.</p>
+        <div class="service-name" id="custom">Custom Website</div>
+        <p class="service-desc">A multi-page site designed from scratch around your brand, not a theme someone else already used 10,000 times. Built to reflect who you actually are and convert visitors into customers.</p>
         <ul class="service-features">
           <li>Multi-page custom design</li>
-          <li>Database-driven content management</li>
+          <li>Pages you can update yourself</li>
           <li>On-page SEO optimization</li>
           <li>English / Spanish bilingual toggle</li>
           <li>Online ordering or reservation flow</li>
@@ -1096,8 +1137,8 @@
         <div class="service-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <div class="service-name">POS Integration</div>
-        <p class="service-desc">Custom ordering and management systems that connect your whole operation — front of house to back. Purpose-built for your workflow, not retrofitted from a generic SaaS product.</p>
+        <div class="service-name" id="pos">POS Integration</div>
+        <p class="service-desc">Custom ordering and management systems that connect your whole operation, front of house to back. Purpose-built for your workflow, not retrofitted from a generic SaaS product.</p>
         <ul class="service-features">
           <li>Custom POS build or third-party integration</li>
           <li>Real-time inventory tracking and sync</li>
@@ -1115,11 +1156,11 @@
         <div class="service-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </div>
-        <div class="service-name">Full Package</div>
+        <div class="service-name" id="full">Full Package</div>
         <p class="service-desc">Site and POS engineered together from day one. One vendor, one unified system, one point of contact. When your website and your POS share the same data architecture, everything just works.</p>
         <ul class="service-features">
           <li>Everything in Custom Website and POS Integration</li>
-          <li>Unified design and data architecture</li>
+          <li>One shared design and one shared set of books</li>
           <li>Online ordering feeding directly to POS</li>
           <li>Priority build queue and dedicated support</li>
           <li>Quarterly performance check-ins</li>
@@ -1131,7 +1172,30 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="section alt">
+    <section class="section">
+    <div class="section-eyebrow reveal">Why Brass Tacks</div>
+    <div class="section-title reveal">How we <em>stack up</em></div>
+<div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr><th></th><th>Squarespace / Wix</th><th>Freelancer</th><th>Agency</th><th class="us">Brass Tacks</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Upfront cost</th><td>$0 upfront, $20–50/mo forever</td><td>Varies wildly</td><td>$10K – $50K+</td><td class="us">Custom quote</td></tr>
+          <tr><th>Time to launch</th><td>Same day (looks like it)</td><td>2 – 6 months</td><td>3 – 12 months</td><td class="us">2 – 4 weeks</td></tr>
+          <tr><th>Custom built for you</th><td class="no">✕</td><td class="mid">~ depends</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><th>No platform fees ever</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><th>POS + website together</th><td class="no">✕</td><td class="no">✕</td><td class="mid">~ rarely</td><td class="us yes">✓</td></tr>
+          <tr><th>Post-launch support</th><td class="mid">~ FAQ only</td><td class="mid">~ sometimes</td><td>Extra retainer</td><td class="us yes">✓ Included</td></tr>
+          <tr><th>Knows your industry</th><td class="no">✕</td><td class="mid">~ maybe</td><td class="no">✕</td><td class="us yes">✓</td></tr>
+          <tr><th>You own everything</th><td class="no">✕</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </section>
+
+<section class="section alt">
     <div class="section-eyebrow reveal">The process</div>
     <div class="section-title reveal">How it works</div>
 
@@ -1140,24 +1204,32 @@
         <div class="step-num-wrap">
           <div class="step-circle">01</div>
         </div>
-        <div class="step-title">Free Consult</div>
-        <p class="step-desc">We talk through your business, your goals, and what you actually need. No sales pitch, no pressure. Just a straight conversation about whether we're the right fit and what building together would look like.</p>
+        <div class="step-title">Free consult</div>
+        <p class="step-desc">We talk through your business, your goals, and what you actually need. No sales pitch, no upsell.</p>
       </div>
 
       <div class="process-step reveal">
         <div class="step-num-wrap">
           <div class="step-circle">02</div>
         </div>
-        <div class="step-title">Scoped and Built</div>
-        <p class="step-desc">You get a clear proposal — what we're building, what it costs, and when it ships. No vague estimates. We build from scratch and check in weekly so you always know where things stand.</p>
+        <div class="step-title">Clear proposal</div>
+        <p class="step-desc">What we're building, what it costs, and when it ships. No vague estimates.</p>
       </div>
 
       <div class="process-step reveal">
         <div class="step-num-wrap">
           <div class="step-circle">03</div>
         </div>
-        <div class="step-title">Launch and Support</div>
-        <p class="step-desc">We launch together — and stick around. Every package includes post-launch support so you're never handed off to a help desk. You have a direct line to the person who built it.</p>
+        <div class="step-title">We build, you review</div>
+        <p class="step-desc">Designed and built from scratch around your business. You see progress weekly.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-num-wrap">
+          <div class="step-circle">04</div>
+        </div>
+        <div class="step-title">Launch + support</div>
+        <p class="step-desc">We launch together and stick around. Support is included, so you're never on your own.</p>
       </div>
     </div>
   </section>
@@ -1176,7 +1248,7 @@
           </span>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">We are based in Aurora and work with Denver-metro businesses first, but we build remotely for anyone in Colorado and beyond. The consult, design review, and launch can all happen over video — no in-person required. That said, we do prefer local clients for POS installs when hands-on setup is needed.</div>
+          <div class="faq-a-inner">We are based in Aurora and work with Denver-metro businesses first, but we build remotely for anyone in Colorado and beyond. The consult, design review, and launch can all happen over video, no in-person required. That said, we do prefer local clients for POS installs when hands-on setup is needed.</div>
         </div>
       </div>
 
@@ -1188,7 +1260,7 @@
           </span>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Solo Operator sites typically ship in 1–2 weeks. Custom websites take 3–4 weeks. POS integrations run 3–5 weeks depending on complexity. Full Package projects typically land at 4–6 weeks. These timelines assume reasonably quick feedback from your end — the faster you review, the faster we move.</div>
+          <div class="faq-a-inner">Starter Site sites typically ship in 1–2 weeks. Custom websites take 3–4 weeks. POS integrations run 3–5 weeks depending on complexity. Full Package projects typically land at 4–6 weeks. These timelines assume reasonably quick feedback from your end: the faster you review, the faster we move.</div>
         </div>
       </div>
 
@@ -1200,7 +1272,7 @@
           </span>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Not at all. You bring the business expertise; we bring the tech. We explain everything in plain language — no jargon, no assuming you know what we know. If you can tell us how your business runs, we can build the right thing for it.</div>
+          <div class="faq-a-inner">Not at all. You bring the business expertise; we bring the tech. We explain everything in plain language: no jargon, no assuming you know what we know. If you can tell us how your business runs, we can build the right thing for it.</div>
         </div>
       </div>
 
@@ -1212,7 +1284,7 @@
           </span>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Every package includes post-launch support — 90 days for most projects, 6 months for Full Package. During that window you can report bugs, request small adjustments, and ask questions. We stay reachable. After the support period, ongoing retainers are available if you want continued hands-on help.</div>
+          <div class="faq-a-inner">Every package includes post-launch support: 90 days for most projects, 6 months for Full Package. During that window you can report bugs, request small adjustments, and ask questions. We stay reachable. After the support period, ongoing retainers are available if you want continued hands-on help.</div>
         </div>
       </div>
 
@@ -1224,7 +1296,7 @@
           </span>
         </div>
         <div class="faq-a">
-          <div class="faq-a-inner">Yes — completely. You own the code, the domain, the hosting account, and every asset we produce. We don't lock you into a platform or retain any licensing rights. If you ever want to hand the project to another developer down the road, it's all yours to do so.</div>
+          <div class="faq-a-inner">Yes, completely. You own the code, the domain, the hosting account, and every asset we produce. We don't lock you into a platform or retain any licensing rights. If you ever want to hand the project to another developer down the road, it's all yours to do so.</div>
         </div>
       </div>
     </div>
@@ -1241,23 +1313,35 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-left">
-      <div class="footer-logo">BRASS<span>.</span>TACKS</div>
-      <div class="footer-tagline">Business tech that actually works. · Denver, CO</div>
-    </div>
-    <div class="footer-right">
-      <div class="footer-contact">
-        <a href="https://brasstacks.space">brasstacks.space</a>
-        <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><a href="tel:+17207199794">(720) 719-9794</a><span style="font-size:11px;color:var(--text-3);">AI receptionist answers 24/7</span></span>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="nav-logo">BRASS<span>.</span>TACKS</a>
+        <p>Custom websites, POS systems, and AI receptionists for independent businesses. Built from scratch, owned outright, launched in weeks.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Site</h4>
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Demos</h4>
+        <a href="demos/assay-brewing/" target="_blank" rel="noopener">Assay Brewing</a>
+        <a href="demos/revival-construction/" target="_blank" rel="noopener">Revival Construction</a>
+        <a href="demos/ossuary-tattoo/" target="_blank" rel="noopener">Ossuary Tattoo</a>
+        <a href="demos/halfmoon-nails/" target="_blank" rel="noopener">Halfmoon Nails</a>
+        <a href="demos/ai-receptionist/#live-demo" target="_blank" rel="noopener">AI Receptionist</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="tel:+17207199794">(720) 719-9794</a>
+        <span style="display:block;font-size:12px;color:var(--text-3);margin:-4px 0 10px;">AI receptionist answers 24/7</span>
         <a href="mailto:hi.brasstacks@gmail.com">hi.brasstacks@gmail.com</a>
       </div>
-      <div class="footer-social">
-        <a href="https://www.yelp.com/biz/cPsdfPciLkgb0gMI0-U6Qg" target="_blank" rel="noopener" aria-label="Brass Tacks on Yelp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041z"/></svg>
-          Yelp
-        </a>
-      </div>
-      <div class="footer-copy">© 2026 Brass Tacks. All rights reserved.</div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Brass Tacks LLC. Built from scratch, obviously.</span>
+      <span>Denver, CO</span>
     </div>
   </footer>
 
