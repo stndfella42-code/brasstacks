@@ -510,7 +510,7 @@
 .tsd-choices{display:flex;flex-direction:column;gap:8px;margin-top:2px}
 .tsd-choice{appearance:none;background:#f2f0e9;border:2px solid #101820;border-radius:12px;padding:12px 14px;font:600 14px/1.35 "Public Sans",sans-serif;color:#101820;cursor:pointer;text-align:left;box-shadow:3px 3px 0 #101820;transition:transform .12s ease,box-shadow .12s ease}
 .tsd-choice:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #101820}
-.tsd-choice:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #101820}
+.tsd-choice:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #101820}.tsd-choice.spent{opacity:.45;cursor:default;transform:none;box-shadow:2px 2px 0 #101820}
 .tsd-ocard{background:#fff;border:1px solid #b8b8b2;border-radius:14px;padding:14px;box-shadow:3px 3px 0 rgba(16,24,32,.1);opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}
 .tsd-ocard.show{opacity:1;transform:none}
 .tsd-otime{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:#f45b24;margin-bottom:6px}
@@ -714,7 +714,7 @@ function showChoices(list){
   list.forEach(function(c){
     var b=document.createElement('button');
     b.type='button';b.className='tsd-choice';b.textContent=c.t;
-    b.addEventListener('click',function(e){e.stopPropagation();runNode(c.go);});
+    b.addEventListener('click',function(e){e.stopPropagation();wrap.querySelectorAll('button').forEach(function(x){x.disabled=true;x.classList.add('spent');});runNode(c.go);});
     wrap.appendChild(b);
   });
   screen.appendChild(wrap);scrollDown();
