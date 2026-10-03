@@ -525,10 +525,14 @@
   .stack-zone.compact .layer-card { padding: 18px 20px 16px; }
   .stack-zone.compact .layer-card p { display: none; }
   .stack-zone.compact .layer-card h2 { font-size: 24px; }
-  .layer-card .node { position: absolute; left: 7px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; border: 2px solid #8a6a1a; background: #faf6e9; transition: background 0.4s ease, box-shadow 0.4s ease; }
-  .layer-card .node.lit { background: #8a6a1a; box-shadow: 0 0 0 4px rgba(138,106,26,0.20); }
-  .spine { position: fixed; width: 2px; background: #8a6a1a; border-radius: 2px; transform: scaleY(0); transform-origin: top center; opacity: 0; transition: transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease; z-index: 5; pointer-events: none; }
-  .spine.connected { transform: scaleY(1); opacity: 1; }
+  .layer-card { transition: transform 0.65s cubic-bezier(0.22,1,0.36,1), border-radius 0.65s ease; }
+  .stack-zone.packaged .layer-card[data-i="1"] { transform: translateY(-16px); }
+  .stack-zone.packaged .layer-card[data-i="2"] { transform: translateY(-32px); }
+  .stack-zone.packaged .layer-card[data-i="0"] { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .stack-zone.packaged .layer-card[data-i="1"] { border-radius: 0; }
+  .stack-zone.packaged .layer-card[data-i="2"] { border-top-left-radius: 0; border-top-right-radius: 0; }
+  .package-tab { position: absolute; top: -15px; left: 24px; background: #1a1512; color: #e8c76a; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.2em; padding: 7px 16px 5px; border-radius: 20px; opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s; pointer-events: none; white-space: nowrap; }
+  .stack-zone.packaged .package-tab { opacity: 1; transform: none; }
   .layer-card:last-child { margin-bottom: 0; }
   .layer-card .num { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.2em; color: #8a6a1a; margin-bottom: 8px; }
   .layer-card h2 { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin-bottom: 10px; }
@@ -625,7 +629,7 @@
     <div class="rail"><div class="fill" id="railFill"></div></div>
 
     <div class="layer-card">
-      <span class="node" aria-hidden="true"></span>
+      <span class="package-tab" aria-hidden="true">The full package</span>
       <div class="num">Layer 01</div>
       <h2>The Face <span class="role">Your website</span></h2>
       <p>Custom-built, no templates. What customers find, and what convinces them.</p>
@@ -636,7 +640,6 @@
     </div>
 
     <div class="layer-card">
-      <span class="node" aria-hidden="true"></span>
       <div class="num">Layer 02</div>
       <h2>The Backbone <span class="role">Your operating system</span></h2>
       <p>Ordering, inventory, scheduling. One source of truth everything else reads from.</p>
@@ -647,7 +650,6 @@
     </div>
 
     <div class="layer-card">
-      <span class="node" aria-hidden="true"></span>
       <div class="num">Layer 03</div>
       <h2>The Voice <span class="role">Ava</span></h2>
       <p>One receptionist on every channel, trained on your business.</p>
@@ -762,12 +764,8 @@
   document.querySelector('.nav-toggle').addEventListener('click', function () {
     document.querySelector('.nav-links').classList.toggle('open');
   });
-  // layer cards: stage in (1, then 2 fades in, then 3), pin below each other, then connect via spine
+  // layer cards: stage in (1, then 2 fades in, then 3), pin below each other, then merge into one package
   var pinTops = [];
-  var spine = document.createElement('div');
-  spine.className = 'spine';
-  spine.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(spine);
   function pinLayers() {
     var zone = document.querySelector('.stack-zone');
     if (!zone) return;
@@ -785,15 +783,10 @@
     var top = base;
     Array.prototype.forEach.call(cards, function (c, i) {
       c.style.top = top + 'px';
+      c.setAttribute('data-i', i);
       pinTops.push(top);
       top += hs[i] + gap;
     });
-    var zr = zone.getBoundingClientRect();
-    var sTop = pinTops[0] + 14;
-    var sBottom = pinTops[pinTops.length - 1] + hs[hs.length - 1] - 14;
-    spine.style.left = (zr.left + 11) + 'px';
-    spine.style.top = sTop + 'px';
-    spine.style.height = Math.max(sBottom - sTop, 0) + 'px';
   }
   function zoneScroll() {
     var zone = document.querySelector('.stack-zone');
@@ -810,12 +803,10 @@
         var op = 1 - (cr.top - pinTops[i] - 40) / 260;
         c.style.opacity = Math.min(Math.max(op, 0), 1).toFixed(3);
       }
-      var node = c.querySelector('.node');
-      if (node && pinTops[i] !== undefined) node.classList.toggle('lit', cr.top <= pinTops[i] + 4);
     });
     var c3r = cards[2].getBoundingClientRect();
-    var hold = pinTops[2] !== undefined && c3r.top <= pinTops[2] + 2 && r.bottom > window.innerHeight * 0.85;
-    spine.classList.toggle('connected', hold);
+    var placed = pinTops[2] !== undefined && c3r.top <= pinTops[2] + 2 && r.bottom > window.innerHeight * 0.85;
+    if (placed) zone.classList.add('packaged');
   }
   var zTick = false;
   window.addEventListener('scroll', function () {
