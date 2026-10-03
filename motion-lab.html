@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Motion &amp; Texture Lab — Brass Tacks (draft)</title>
+<style>
+  :root {
+    --brass: #c4982a; --brass-dim: #8a6a1a; --brass-light: #e8c76a;
+    --ink: #141412; --paper: #f4eedd; --dark: #1a1512;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: var(--paper); font-family: 'DM Sans', system-ui, sans-serif; line-height: 1.6; }
+  ::selection { background: var(--brass); color: var(--ink); }
+
+  /* ---- paper grain (toggleable) ---- */
+  .grain { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity .6s ease;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay; }
+  body.grain-on .grain { opacity: .5; }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 64px 24px 120px; }
+  .lab-eyebrow { font-size: 12px; letter-spacing: .25em; color: var(--brass-light); text-transform: uppercase; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 7vw, 64px); letter-spacing: .02em; margin: 8px 0 12px; }
+  h1 em { font-family: 'Fraunces', serif; font-style: italic; color: var(--brass-light); }
+  .lede { color: #b9b2a0; max-width: 60ch; }
+  .lab-note { display: inline-block; margin-top: 16px; font-size: 13px; border: 1px dashed var(--brass-dim); color: var(--brass-light); padding: 8px 16px; border-radius: 8px; }
+
+  section.demo { margin-top: 72px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 32px; }
+  .demo-label { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--brass-light); margin-bottom: 6px; }
+  .demo-desc { color: #b9b2a0; font-size: 14px; margin-bottom: 28px; max-width: 62ch; }
+  .stage { background: #181410; border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 40px 32px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .stage.light { background: var(--paper); }
+
+  /* ---- buttons ---- */
+  .button { display: inline-block; background: var(--brass); color: var(--ink); padding: 16px 34px; border-radius: 8px;
+    font-weight: 600; text-decoration: none; font-size: 16px; border: 0; cursor: pointer; position: relative; overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+  .button::after { content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: skewX(-20deg); transition: left .5s ease; }
+  .button:hover { background: var(--brass-light); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(196,152,42,.35); }
+  .button:hover::after { left: 130%; }
+  .button:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(196,152,42,.3); }
+  .button:focus-visible { outline: 2px solid var(--brass-light); outline-offset: 3px; }
+
+  .btn-ghost { display: inline-block; padding: 15px 32px; border-radius: 8px; border: 1px solid rgba(232,199,106,.4);
+    color: var(--paper); text-decoration: none; font-weight: 600; font-size: 16px;
+    transition: border-color .25s ease, background .25s ease, transform .25s ease; }
+  .btn-ghost:hover { border-color: var(--brass-light); background: rgba(196,152,42,.08); transform: translateY(-2px); }
+
+  .phone-cta { display: inline-flex; align-items: center; gap: 10px; color: var(--brass-light); font-size: 20px; font-weight: 700; text-decoration: none; }
+  .phone-cta .dot { width: 9px; height: 9px; border-radius: 50%; background: #4ade80; animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,.5); } 50% { box-shadow: 0 0 0 7px rgba(74,222,128,0); } }
+
+  /* ---- cards ---- */
+  .demo-card { width: 300px; background: #1e1a16; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden;
+    text-decoration: none; color: var(--paper); transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+  .demo-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.5); border-color: rgba(196,152,42,.45); }
+  .demo-card .shot { height: 150px; overflow: hidden; background: linear-gradient(135deg, #2a2318, #4a3a1c); }
+  .demo-card .shot div { width: 100%; height: 100%; background: radial-gradient(circle at 30% 20%, var(--brass-dim), transparent 60%); transition: transform .5s ease; }
+  .demo-card:hover .shot div { transform: scale(1.06); }
+  .demo-card .meta { padding: 18px 20px; }
+  .demo-card .meta b { font-family: 'Fraunces', serif; font-size: 19px; }
+  .demo-card .meta p { font-size: 13px; color: #b9b2a0; margin-top: 6px; }
+
+  /* ---- links ---- */
+  .u-link { color: var(--paper); text-decoration: none;
+    background-image: linear-gradient(var(--brass-light), var(--brass-light));
+    background-size: 0% 1px; background-repeat: no-repeat; background-position: left calc(100% - 1px);
+    transition: background-size .3s ease, color .3s ease; padding-bottom: 2px; }
+  .u-link:hover { background-size: 100% 1px; color: var(--brass-light); }
+  .navlink { color: #b9b2a0; text-decoration: none; font-size: 15px; padding: 6px 2px; position: relative; transition: color .25s ease; }
+  .navlink::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; background: var(--brass-light);
+    transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  .navlink:hover { color: var(--paper); }
+  .navlink:hover::after { transform: scaleX(1); }
+
+  .toggle { background: none; border: 1px solid var(--brass-dim); color: var(--brass-light); padding: 10px 22px; border-radius: 8px;
+    cursor: pointer; font-size: 14px; font-weight: 600; transition: background .25s ease; }
+  .toggle:hover { background: rgba(196,152,42,.12); }
+  .toggle[aria-pressed="true"] { background: var(--brass); color: var(--ink); border-color: var(--brass); }
+  footer { margin-top: 96px; color: #6b655a; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="wrap">
+  <div class="lab-eyebrow">Draft, not live</div>
+  <h1>Motion &amp; <em>texture</em> lab</h1>
+  <p class="lede">Proposed treatments to give the site a human touch. Nothing flashy, just tactile. Hover everything below and feel it.</p>
+  <span class="lab-note">Unlisted draft page. Nothing here is on the live site yet.</span>
+
+  <section class="demo">
+    <div class="demo-label">01 — Paper grain</div>
+    <p class="demo-desc">A whisper of film grain over everything, like paper stock. Toggle it and look at any flat surface.</p>
+    <div class="stage"><button class="toggle" id="grainToggle" aria-pressed="false">Turn grain on</button></div>
+  </section>
+
+  <section class="demo">
+    <div class="demo-label">02 — Buttons with weight</div>
+    <p class="demo-desc">Primary buttons lift with a shadow and a light sheen sweeps across. Ghost buttons warm up. Press one and it settles back down, like a real button.</p>
+    <div class="stage">
+      <a class="button" href="#" onclick="return false">Book a free consult</a>
+      <a class="btn-ghost" href="#" onclick="return false">See the work</a>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="demo-label">03 — Phone CTA with a pulse</div>
+    <p class="demo-desc">The call number gets a soft green pulse, a quiet signal that a real line is on the other end.</p>
+    <div class="stage"><a class="phone-cta" href="#" onclick="return false"><span class="dot"></span>(720) 719-9794</a></div>
+  </section>
+
+  <section class="demo">
+    <div class="demo-label">04 — Cards that respond</div>
+    <p class="demo-desc">Concept cards lift, deepen their shadow, warm their border, and the preview image drifts closer. Like picking a card up off the table.</p>
+    <div class="stage">
+      <a class="demo-card" href="#" onclick="return false">
+        <div class="shot"><div></div></div>
+        <div class="meta"><b>Redline Auto Co.</b><p>Auto repair concept. Posted prices, text-a-tech approvals, online booking.</p></div>
+      </a>
+      <a class="demo-card" href="#" onclick="return false">
+        <div class="shot"><div></div></div>
+        <div class="meta"><b>Halfmoon Nails</b><p>Salon concept. Booking-first layout, service menu, gift cards.</p></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="demo-label">05 — Links that draw themselves</div>
+    <p class="demo-desc">Underlines draw in from the left instead of just appearing. Nav links do the same, with a color warm-up.</p>
+    <div class="stage" style="flex-direction:column; align-items:flex-start;">
+      <p style="color:#b9b2a0">Read the <a class="u-link" href="#" onclick="return false">founder story</a> or browse <a class="u-link" href="#" onclick="return false">the concept work</a>.</p>
+      <p><a class="navlink" href="#" onclick="return false">Services</a> &nbsp; <a class="navlink" href="#" onclick="return false">Work</a> &nbsp; <a class="navlink" href="#" onclick="return false">About</a></p>
+    </div>
+  </section>
+
+  <section class="demo">
+    <div class="demo-label">06 — Small human details</div>
+    <p class="demo-desc">Try selecting this text: the highlight is brass, not default blue. Tab through the buttons above with your keyboard: every focus ring is brass and visible. Tiny, but it's the difference between a template and something someone cared about.</p>
+    <div class="stage"><p style="color:#b9b2a0; font-size:14px;">Select me. Tab through the page. It's the details nobody notices until they're missing.</p></div>
+  </section>
+
+  <footer>Brass Tacks motion &amp; texture lab. Draft for review, October 2026.</footer>
+</div>
+<script>
+  var t = document.getElementById('grainToggle');
+  t.addEventListener('click', function () {
+    var on = document.body.classList.toggle('grain-on');
+    t.setAttribute('aria-pressed', on);
+    t.textContent = on ? 'Turn grain off' : 'Turn grain on';
+  });
+</script>
+</body>
+</html>
