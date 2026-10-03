@@ -256,7 +256,7 @@
     pill.classList.toggle('live', on);
     if (on) {
       setStatus('Waking the guide up...');
-      messages.push({ role: 'user', content: '[The visitor just turned you on. Greet them briefly, like a friendly floor rep.]' });
+      messages.push({ role: 'user', content: '[The visitor just turned you on. One short casual line only, something like: just let me know if something catches your eye and you want to talk about it. No formal intro, do not ask what brought them here.]' });
       fetchReply();
     } else {
       stopRec();
