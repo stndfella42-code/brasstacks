@@ -160,6 +160,28 @@
       btn.setAttribute('aria-pressed', 'true');
     });
   });
+
+  // subtle UI tick, synthesized: instant, quiet, soft. No audio files.
+  var actx = null;
+  function uiTick() {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      var t = actx.currentTime, dur = 0.045;
+      var buf = actx.createBuffer(1, Math.floor(actx.sampleRate * dur), actx.sampleRate);
+      var d = buf.getChannelData(0);
+      for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2.5);
+      var src = actx.createBufferSource(); src.buffer = buf;
+      var f = actx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 2400; f.Q.value = 1.1;
+      var g = actx.createGain(); g.gain.value = 0.10;
+      src.connect(f); f.connect(g); g.connect(actx.destination);
+      src.start(t);
+    } catch (e) {}
+  }
+  document.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', uiTick);
+  });
+
 </script>
 </body>
 </html>
