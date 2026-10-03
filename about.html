@@ -867,5 +867,12 @@ a[href^="tel:"]::before { content: ""; display: inline-block; width: 8px; height
   </script>
 
   <script src="/assets/ava-chat.js" defer></script>
+
+<script>
+// subtle button blip, synthesized live. No audio files.
+(function(){var c=null;function ac(){c=c||new(window.AudioContext||window.webkitAudioContext)();if(c.state==='suspended')c.resume();return c;}
+function blip(){try{var a=ac(),t=a.currentTime,o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(990,t);o.frequency.exponentialRampToValueAtTime(620,t+0.06);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(0.055,t+0.006);g.gain.exponentialRampToValueAtTime(0.0001,t+0.06);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+0.09);}catch(e){}}
+document.querySelectorAll('button, a[class*="btn"]').forEach(function(b){b.addEventListener('click',blip);});})();
+</script>
 </body>
 </html>
