@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Voice Rep Prototype — Brass Tacks (draft)</title>
+<title>Voice Guide Prototype — Brass Tacks (draft)</title>
 <style>
   :root { --brass: #c4982a; --brass-dim: #8a6a1a; --brass-light: #e8c76a; --ink: #141412; --paper: #f4eedd; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,18 +55,23 @@
 <body>
 <div class="wrap">
   <div class="lab-eyebrow">Prototype, not live</div>
-  <h1>The <em>voice rep</em></h1>
-  <p class="lede">Flip the rep on and browse the sections below. Muse out loud about whatever catches your eye, like "oh, the AI receptionist looks interesting, tell me more about that." It hears you and answers in voice, knowing what you're looking at.</p>
+  <h1>The <em>voice guide</em></h1>
+  <p class="lede">Flip the guide on and browse the sections below. Muse out loud about whatever catches your eye, like "oh, the AI receptionist looks interesting, tell me more about that." It hears you and answers in voice, knowing what you're looking at.</p>
   <span class="lab-note">Unlisted prototype. Chrome or Edge recommended. Nothing is recorded.</span>
   <div class="nomic" id="noMic"></div>
 
   <div class="console" id="console">
     <div class="rep-row">
-      <button class="rep-toggle" id="repToggle">Turn on the rep</button>
+      <button class="rep-toggle" id="repToggle">Turn on the guide</button>
       <span class="listen-pill" id="listenPill"><span class="rec"></span>LISTENING</span>
     </div>
     <div class="rep-status" id="repStatus">The rep is off. Turn it on and just start talking.</div>
     <div class="transcript" id="transcript"></div>
+    <form id="typeForm" style="margin-top:14px; display:flex; gap:10px;">
+      <input id="typeInput" type="text" placeholder="Or type to the guide..." autocomplete="off"
+        style="flex:1; background:#22201c; border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:12px 20px; color:var(--paper); font-size:15px; outline:none; font-family:inherit;">
+      <button type="submit" class="rep-toggle" style="padding:12px 24px; font-size:15px;">Send</button>
+    </form>
     <div class="lead-card" id="leadCard"><b>Details captured</b><div id="leadBody"></div></div>
   </div>
 
@@ -88,11 +93,11 @@
   <div class="content-sec" data-rep-section="Free consult">
     <div class="kicker">Section three</div>
     <h2>Free consult</h2>
-    <p>Thirty minutes, no commitment, no pitch. Just a straight conversation about what your business needs. If you want one, just tell the rep your name and the best number to reach you. No form.</p>
+    <p>Thirty minutes, no commitment, no pitch. Just a straight conversation about what your business needs. If you want one, just tell the guide your name and the best number to reach you. No form.</p>
     <p class="hint">Try saying: "yeah I'd like to book a consult, I'm Mike and my number is 303..."</p>
   </div>
 
-  <footer>Brass Tacks voice rep prototype. Draft for review, October 2026.</footer>
+  <footer>Brass Tacks voice guide prototype. Draft for review, October 2026.</footer>
 </div>
 
 <script>
@@ -128,30 +133,38 @@
   }, { threshold: 0.4 });
   document.querySelectorAll('[data-rep-section]').forEach(function (el) { io.observe(el); });
 
-  function say(text) {
+  var audioEl = null;
+  function afterSpeech(resolve) {
+    speaking = false;
+    resolve();
+    if (repOn) { setStatus("Listening..."); startRec(); }
+  }
+  function say(text, audioB64) {
     return new Promise(function (resolve) {
-      var u = new SpeechSynthesisUtterance(text);
-      u.rate = 1.02;
-      var voices = speechSynthesis.getVoices();
-      var v = voices.find(function (x) { return /en-US/i.test(x.lang) && /female|samantha|zira|google us english/i.test(x.name); })
-           || voices.find(function (x) { return /^en/i.test(x.lang); });
-      if (v) u.voice = v;
-      u.onend = resolve; u.onerror = resolve;
+      stopRec();
+      if (audioEl) { try { audioEl.pause(); } catch (e) {} audioEl = null; }
       speaking = true;
-      setStatus("Rep is speaking...");
-      speechSynthesis.speak(u);
-    }).then(function () {
-      speaking = false;
-      if (repOn) { setStatus("Listening..."); startRec(); }
+      setStatus("Guide is speaking...");
+      if (audioB64) {
+        audioEl = new Audio("data:audio/mpeg;base64," + audioB64);
+        audioEl.onended = function () { afterSpeech(resolve); };
+        audioEl.onerror = function () { afterSpeech(resolve); };
+        audioEl.play().catch(function () { afterSpeech(resolve); });
+      } else {
+        var u = new SpeechSynthesisUtterance(text);
+        u.rate = 1.02;
+        u.onend = function () { afterSpeech(resolve); };
+        u.onerror = function () { afterSpeech(resolve); };
+        speechSynthesis.speak(u);
+      }
     });
   }
-  if (speechSynthesis.getVoices) speechSynthesis.getVoices();
 
   function bubble(who, text) {
     var d = document.createElement('div');
     d.className = 'bubble ' + who;
     var w = document.createElement('span');
-    w.className = 'who'; w.textContent = who === 'you' ? 'You' : 'Rep';
+    w.className = 'who'; w.textContent = who === 'you' ? 'You' : 'Guide';
     d.appendChild(w);
     d.appendChild(document.createTextNode(text));
     transcript.appendChild(d);
@@ -203,9 +216,7 @@
     rec = null;
   }
 
-  async function handleSaid(text) {
-    bubble('you', text);
-    messages.push({ role: 'user', content: text });
+  async function fetchReply() {
     setStatus('Thinking...');
     try {
       var r = await fetch('/api/rep', {
@@ -214,44 +225,61 @@
         body: JSON.stringify({
           sessionId: sessionId,
           messages: messages.slice(-20),
-          page: { path: '/lab-rep.html', title: 'Voice Rep Prototype', section: currentSection }
+          page: { path: '/lab-rep.html', title: 'Voice Guide Prototype', section: currentSection }
         })
       });
       var data = await r.json();
-      if (!data.ok) throw new Error(data.error || 'rep error');
+      if (!data.ok) throw new Error(data.error || 'guide error');
       messages.push({ role: 'assistant', content: data.reply });
-      bubble('rep', data.reply);
+      bubble('guide', data.reply);
       if (data.lead) {
         leadBody.textContent = data.lead.name + " · " + data.lead.contact + " · " + data.lead.interest;
         leadCard.classList.add('show');
       }
-      await say(data.reply);
+      await say(data.reply, data.audio);
     } catch (err) {
       setStatus('Hmm, missed that. Say it again?');
       if (repOn && !speaking) startRec();
     }
   }
 
+  async function handleSaid(text) {
+    bubble('you', text);
+    messages.push({ role: 'user', content: text });
+    fetchReply();
+  }
+
   function setRep(on) {
     repOn = on;
-    toggle.textContent = on ? 'Turn off the rep' : 'Turn on the rep';
+    toggle.textContent = on ? 'Turn off the guide' : 'Turn on the guide';
     toggle.classList.toggle('on', on);
     pill.classList.toggle('live', on);
     if (on) {
-      setStatus('Listening...');
-      var greet = "Hey, I'm here. Browse around and just think out loud, I'll chime in.";
-      messages.push({ role: 'assistant', content: greet });
-      bubble('rep', greet);
-      say(greet);
+      setStatus('Waking the guide up...');
+      messages.push({ role: 'user', content: '[The visitor just turned you on. Greet them briefly, like a friendly floor rep.]' });
+      fetchReply();
     } else {
       stopRec();
-      speechSynthesis.cancel();
+      if (audioEl) { try { audioEl.pause(); } catch (e) {} audioEl = null; }
+      try { speechSynthesis.cancel(); } catch (e) {}
       speaking = false;
-      setStatus('The rep is off. Turn it on and just start talking.');
+      setStatus('The guide is off. Turn it on and just start talking.');
     }
   }
 
-  toggle.addEventListener('click', function () { setRep(!repOn); if (repOn) startRec(); });
+  document.getElementById('typeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (speaking) return;
+    if (!repOn) { setStatus('Turn the guide on first, then type away.'); return; }
+    var inp = document.getElementById('typeInput');
+    var t = inp.value.trim();
+    if (!t) return;
+    inp.value = '';
+    stopRec();
+    handleSaid(t);
+  });
+
+  toggle.addEventListener('click', function () { setRep(!repOn); });
 })();
 
   // subtle UI tick, synthesized: instant, quiet, soft. No audio files.
