@@ -456,9 +456,11 @@
         </div>
 
         <div class="tsd2-scen" id="tsd2Scen">
-          <button data-s="heater" class="active">Water heater</button>
-          <button data-s="leak">Kitchen leak</button>
-          <button data-s="price">Price shopper</button>
+          <button data-ind="plumbing" class="active">Plumbing</button>
+          <button data-ind="hvac">HVAC</button>
+          <button data-ind="auto">Auto repair</button>
+          <button data-ind="salon">Salon</button>
+          <button data-ind="restaurant">Restaurant</button>
         </div>
 
         <div class="tsd2-stage">
@@ -498,14 +500,10 @@
 
         <div class="tsd2-sync" id="tsd2Sync">
           <h3>Now it's your turn. You're the owner.</h3>
-          <p class="tsd2-syncsub">Everything Ava knows comes from one place: the backbone. Change the brake job price there, and watch it propagate.</p>
+          <p class="tsd2-syncsub">Everything Ava knows comes from one place: the backbone. Change the <span id="tsd2SyncItem2">water heater install</span> price there, and watch it propagate.</p>
           <div class="tsd2-backbone">
             <div class="tsd2-stepn">The backbone — the single source of truth</div>
-            <div class="tsd2-pricebtns" id="tsd2PriceBtns">
-              <button data-p="189" class="current">$189</button>
-              <button data-p="210">$210</button>
-              <button data-p="249">$249</button>
-            </div>
+            <div class="tsd2-pricebtns" id="tsd2PriceBtns"></div>
             <div class="tsd2-hintline" id="tsd2PriceHint"></div>
           </div>
           <div class="tsd2-prop">
@@ -517,14 +515,14 @@
               <div class="tsd2-stepn">Website</div>
               <div class="tsd2-webcard">
                 <div class="tsd2-webhead" id="tsd2WebHead">copperlineplumbing.com/services</div>
-                <div class="tsd2-webbody">Brake job &nbsp;<span id="tsd2WebPrice">$189</span></div>
+                <div class="tsd2-webbody"><span id="tsd2SyncItem">Water heater install</span> &nbsp;<span id="tsd2WebPrice">$1,199</span></div>
               </div>
               <div class="tsd2-check" id="tsd2WebCheck">✓ Website updated</div>
             </div>
             <div class="tsd2-reader">
               <div class="tsd2-stepn">Ava's brain</div>
               <div class="tsd2-braincard" id="tsd2Brain">
-                <div class="tsd2-bline"><span>brake job</span><b id="tsd2BrainPrice">$189</b></div>
+                <div class="tsd2-bline"><span id="tsd2BrainItem">water heater install</span><b id="tsd2BrainPrice">$1,199</b></div>
                 <div class="tsd2-bline"><span>hours</span><b>Mon–Sat</b></div>
                 <div class="tsd2-bline"><span>service area</span><b>Denver</b></div>
               </div>
@@ -688,8 +686,8 @@ var transcript=document.getElementById('tsd2Transcript'),
     cap=document.getElementById('tsd2Cap'),
     closeEl=document.getElementById('tsd2Close');
 
-var SCEN={
-heater:{
+var IND={
+plumbing:{label:'Plumbing',biz:'Copperline Plumbing',lock:"You're under a sink across town.",
  seq:[
   {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
   {f:'cx_01',who:'cx',label:'Sarah',text:"My water heater went out this morning. No hot water.",pause:.4},
@@ -709,42 +707,83 @@ heater:{
   {f:'ava_09',who:'ava',label:'Ava',text:"S. A. R. A. H. M. at gmail dot com. Got it.",pause:.4},
   {f:'ava_10',who:'ava',label:'Ava',text:"You're all booked, Sarah. Today between 2 and 4 for the water heater. We'll text you when the tech is on the way.",pause:0}
  ],
- sms:{h:"New booking, Copperline Plumbing",b:["Sarah Miller, today 2-4 PM","Water heater, no heat","555-014-2288, 1234 Elm St"]},
+ sms:{b:["Sarah Miller, today 2-4 PM","Water heater, no heat","555-014-2288, 1234 Elm St"]},
  cal:{day:"10",dow:"TUE",t:"Sarah Miller — water heater, no heat",s:"today 2-4 PM · 1234 Elm St"},
- stack:[["9:04","Sarah Miller","Water heater","today 2-4 PM"],["9:31","Mike D.","Kitchen sink leak","today 2-4 PM"],["10:15","Price shopper","No booking","number logged"]]
-},
-leak:{
+ stack:[["9:04","Sarah Miller","Water heater","today 2-4 PM"],["9:31","Mike D.","Kitchen sink leak","today 2-4 PM"],["10:15","Price shopper","No booking","number logged"]],
+ sync:{item:"Water heater install",prices:[1199,1349,1499],q:"sync_q_plumb",a:{1199:"sync_a_plumb_1199",1349:"sync_a_plumb_1349",1499:"sync_a_plumb_1499"}}},
+hvac:{label:'HVAC',biz:'Peak Air HVAC',lock:"You're on a roof with a condenser.",
  seq:[
   {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
-  {f:'cx_leak_01',who:'cx',label:'Mike',text:"There's a leak under my kitchen sink.",pause:.4},
-  {f:'ava_leak_01',who:'ava',label:'Ava',text:"We can stop that today. I have 2 to 4 this afternoon or 8 to 10 tomorrow morning. Which works for you?",pause:.6},
-  {f:'cx_leak_02',who:'cx',label:'Mike',text:"Today 2 to 4.",pause:.4},
+  {f:'hvac_01',who:'cx',label:'Dave',text:"My AC just quit on me. It's ninety degrees in here.",pause:.4},
+  {f:'hvac_02',who:'ava',label:'Ava',text:"That's miserable. Is it not running at all, or is it blowing warm air?",pause:.5},
+  {f:'hvac_03',who:'cx',label:'Dave',text:"It's running, but the air is warm.",pause:.4},
+  {f:'hvac_04',who:'ava',label:'Ava',text:"That's usually low refrigerant or a capacitor. Either way, we can get a tech out today. I have two to four this afternoon. Does that work?",pause:.6},
+  {f:'hvac_05',who:'cx',label:'Dave',text:"Yes, please.",pause:.4},
   {f:'ava_05',who:'ava',label:'Ava',text:"Great. Can I get your name?",pause:.4},
-  {f:'cx_leak_03',who:'cx',label:'Mike',text:"Mike Dalton.",pause:.3},
+  {f:'hvac_06',who:'cx',label:'Dave',text:"Dave Reynolds.",pause:.3},
   {f:'ava_06',who:'ava',label:'Ava',text:"And the best number to reach you?",pause:.4},
-  {f:'cx_leak_04',who:'cx',label:'Mike',text:"555 882 0134.",pause:.4},
+  {f:'hvac_07',who:'cx',label:'Dave',text:"555 340 7712.",pause:.4},
   {f:'ava_07',who:'ava',label:'Ava',text:"What's the service address?",pause:.4},
-  {f:'cx_leak_05',who:'cx',label:'Mike',text:"78 Birch Ave.",pause:.4},
-  {f:'ava_leak_05',who:'ava',label:'Ava',text:"You're booked, Mike. Today between 2 and 4 for the leak. We'll text you when the tech is on the way.",pause:0}
+  {f:'hvac_08',who:'cx',label:'Dave',text:"900 Pine Street.",pause:.4},
+  {f:'hvac_09',who:'ava',label:'Ava',text:"You're booked, Dave. Today between two and four for the AC. We'll text you when the tech is on the way.",pause:0}
  ],
- sms:{h:"New booking, Copperline Plumbing",b:["Mike Dalton, today 2-4 PM","Kitchen sink leak","555-882-0134, 78 Birch Ave"]},
- cal:{day:"10",dow:"TUE",t:"Mike Dalton — kitchen sink leak",s:"today 2-4 PM · 78 Birch Ave"},
- stack:[["9:04","Mike Dalton","Kitchen sink leak","today 2-4 PM"],["9:31","Sarah Miller","Water heater","today 2-4 PM"],["10:15","Price shopper","No booking","number logged"]]
-},
-price:{
+ sms:{b:["Dave Reynolds, today 2-4 PM","AC blowing warm","555-340-7712, 900 Pine St"]},
+ cal:{day:"10",dow:"TUE",t:"Dave Reynolds — AC blowing warm",s:"today 2-4 PM · 900 Pine St"},
+ stack:[["9:04","Dave Reynolds","AC blowing warm","today 2-4 PM"],["9:31","Sarah Miller","Water heater","today 2-4 PM"],["10:15","Price shopper","No booking","number logged"]],
+ sync:{item:"AC tune-up",prices:[89,109,129],q:"sync_q_hvac",a:{89:"sync_a_hvac_89",109:"sync_a_hvac_109",129:"sync_a_hvac_129"}}},
+auto:{label:'Auto repair',biz:'Redline Auto Co.',lock:"You're under a car on the lift.",
  seq:[
   {f:'ava_01',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you calling about a repair, an install, or something else?",pause:.5},
-  {f:'cx_price_01',who:'cx',label:'Jordan',text:"What do you charge for a service call?",pause:.4},
-  {f:'ava_price_01',who:'ava',label:'Ava',text:"Our diagnostic visit is 89 dollars, and that goes toward the repair if you move forward. Want me to get you on the schedule?",pause:.6},
-  {f:'cx_price_02',who:'cx',label:'Jordan',text:"Not right now.",pause:.4},
-  {f:'ava_price_02',who:'ava',label:'Ava',text:"No problem. We're here Monday through Saturday if you need us.",pause:0}
+  {f:'auto_01',who:'cx',label:'Priya',text:"My brakes started squeaking yesterday.",pause:.4},
+  {f:'auto_02',who:'ava',label:'Ava',text:"Got it. Is it more of a squeal when you brake lightly, or a grinding sound?",pause:.5},
+  {f:'auto_03',who:'cx',label:'Priya',text:"Just a squeal, no grinding.",pause:.4},
+  {f:'auto_04',who:'ava',label:'Ava',text:"That's usually the wear indicators, which means your pads are getting thin, but you've caught it early. I have Saturday at ten AM. Want me to book that?",pause:.6},
+  {f:'auto_05',who:'cx',label:'Priya',text:"Yeah, let's do Saturday.",pause:.4},
+  {f:'ava_05',who:'ava',label:'Ava',text:"Great. Can I get your name?",pause:.4},
+  {f:'auto_06',who:'cx',label:'Priya',text:"Priya Patel.",pause:.3},
+  {f:'ava_06',who:'ava',label:'Ava',text:"And the best number to reach you?",pause:.4},
+  {f:'auto_07',who:'cx',label:'Priya',text:"555 718 2044.",pause:.4},
+  {f:'auto_08',who:'ava',label:'Ava',text:"You're all booked, Priya. Saturday at ten AM for a brake inspection. We'll text you a confirmation.",pause:0}
  ],
- sms:{nobooking:true,b:["Price shopper, no booking.","Ava logged the number for follow-up."]},
- cal:null,
- stack:[["9:04","Price shopper","No booking","number logged"],["9:31","Sarah Miller","Water heater","today 2-4 PM"],["10:15","Mike D.","Kitchen sink leak","today 2-4 PM"]]
-}};
+ sms:{b:["Priya Patel, Sat 10 AM","Brake inspection (squeaking)","555-718-2044"]},
+ cal:{day:"14",dow:"SAT",t:"Priya Patel — brake inspection",s:"Sat 10 AM"},
+ stack:[["9:04","Priya Patel","Brake inspection","Sat 10 AM"],["9:31","Dave R.","AC blowing warm","today 2-4 PM"],["10:15","Price shopper","No booking","number logged"]],
+ sync:{item:"Brake job",prices:[189,210,249],q:"sync_q_auto",a:{189:"sync_a_auto_189",210:"sync_a_auto_210",249:"sync_a_auto_249"}}},
+salon:{label:'Salon',biz:'Halfmoon Nail Boutique',lock:"You're mid-fill with a client.",
+ seq:[
+  {f:'salon_greet',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you looking to book an appointment, or is this about something else?",pause:.5},
+  {f:'salon_01',who:'cx',label:'Jessica',text:"Hi, do you have anything for a gel fill on Saturday?",pause:.4},
+  {f:'salon_02',who:'ava',label:'Ava',text:"We do. I have Saturday at eleven, or two thirty. Which works better for you?",pause:.5},
+  {f:'salon_03',who:'cx',label:'Jessica',text:"Eleven works.",pause:.4},
+  {f:'ava_05',who:'ava',label:'Ava',text:"Great. Can I get your name?",pause:.4},
+  {f:'salon_04',who:'cx',label:'Jessica',text:"Jessica Lin.",pause:.3},
+  {f:'ava_06',who:'ava',label:'Ava',text:"And the best number to reach you?",pause:.4},
+  {f:'salon_05',who:'cx',label:'Jessica',text:"555 902 6118.",pause:.4},
+  {f:'salon_06',who:'ava',label:'Ava',text:"You're booked, Jessica. Saturday at eleven for a gel fill. We'll text you a confirmation.",pause:0}
+ ],
+ sms:{b:["Jessica Lin, Sat 11 AM","Gel fill","555-902-6118"]},
+ cal:{day:"14",dow:"SAT",t:"Jessica Lin — gel fill",s:"Sat 11 AM"},
+ stack:[["9:04","Jessica Lin","Gel fill","Sat 11 AM"],["9:31","Priya P.","Brake inspection","Sat 10 AM"],["10:15","Price shopper","No booking","number logged"]],
+ sync:{item:"Gel fill",prices:[45,55,65],q:"sync_q_salon",a:{45:"sync_a_salon_45",55:"sync_a_salon_55",65:"sync_a_salon_65"}}},
+restaurant:{label:'Restaurant',biz:'Ember & Oak',lock:"You're in the middle of dinner service.",
+ seq:[
+  {f:'rest_greet',who:'ava',label:'Ava',text:"Hi, thanks for calling. I'm Ava. Are you looking to make a reservation, or is this about something else?",pause:.5},
+  {f:'rest_01',who:'cx',label:'Tom',text:"Do you have a table for six this Friday night?",pause:.4},
+  {f:'rest_02',who:'ava',label:'Ava',text:"We do. What time were you thinking?",pause:.4},
+  {f:'rest_03',who:'cx',label:'Tom',text:"Around seven.",pause:.4},
+  {f:'rest_04',who:'ava',label:'Ava',text:"I have seven fifteen available. Can I get a name for the reservation?",pause:.4},
+  {f:'rest_05',who:'cx',label:'Tom',text:"Tom Becker.",pause:.3},
+  {f:'ava_06',who:'ava',label:'Ava',text:"And the best number to reach you?",pause:.4},
+  {f:'rest_06',who:'cx',label:'Tom',text:"555 441 8890.",pause:.4},
+  {f:'rest_07',who:'ava',label:'Ava',text:"You're all set, Tom. Table for six, Friday at seven fifteen. We'll text you a confirmation.",pause:0}
+ ],
+ sms:{b:["Tom Becker, Fri 7:15 PM","Table for 6","555-441-8890"]},
+ cal:{day:"13",dow:"FRI",t:"Tom Becker — table for 6",s:"Fri 7:15 PM"},
+ stack:[["9:04","Tom Becker","Table for 6","Fri 7:15 PM"],["9:31","Jessica L.","Gel fill","Sat 11 AM"],["10:15","Price shopper","No booking","number logged"]],
+ sync:{item:"Prix fixe menu",prices:[65,75,85],q:"sync_q_rest",a:{65:"sync_a_rest_65",75:"sync_a_rest_75",85:"sync_a_rest_85"}}}
+};
 
-var bizName='Copperline Plumbing',bizSlug='copperlineplumbing';
+var bizName='Copperline Plumbing',bizSlug='copperlineplumbing',customBiz=false;
 function slugify(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,'');}
 function applyBiz(){
   document.getElementById('tsd2BizName').textContent=bizName;
@@ -754,20 +793,50 @@ function applyBiz(){
 document.getElementById('tsd2BizGo').addEventListener('click',function(){
   var v=document.getElementById('tsd2BizInput').value.trim();
   if(!v)return;
-  bizName=v;bizSlug=slugify(v)||'copperlineplumbing';
+  bizName=v;bizSlug=slugify(v)||'copperlineplumbing';customBiz=true;
   applyBiz();resetAll();startCall();
 });
 document.getElementById('tsd2BizInput').addEventListener('keydown',function(e){
   if(e.key==='Enter')document.getElementById('tsd2BizGo').click();
 });
-var cur='heater',SEQ=SCEN[cur].seq,audios={},durations={},totalDur=0,
-    idx=0,playing=false,callT=0,tickInt=null,afterTimer=null;
+function fmtPrice(p){return '$'+p.toLocaleString('en-US');}
+function renderSync(){
+  var sy=IND[cur].sync;
+  var btns=document.getElementById('tsd2PriceBtns');
+  btns.innerHTML='';
+  sy.prices.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.setAttribute('data-p',p);b.textContent=fmtPrice(p);
+    if(i===0)b.className='current';
+    btns.appendChild(b);
+  });
+  syncPrice=sy.prices[0];synced=false;
+  document.getElementById('tsd2SyncItem').textContent=sy.item;
+  document.getElementById('tsd2SyncItem2').textContent=sy.item.toLowerCase();
+  document.getElementById('tsd2WebPrice').textContent=fmtPrice(syncPrice);
+  document.getElementById('tsd2BrainItem').textContent=sy.item.toLowerCase();
+  document.getElementById('tsd2BrainPrice').textContent=fmtPrice(syncPrice);
+  document.getElementById('tsd2WebCheck').classList.remove('show');
+  document.getElementById('tsd2BrainCheck').classList.remove('show');
+  document.getElementById('tsd2AvaCheck').classList.remove('show');
+  document.getElementById('tsd2PriceHint').textContent='';
+  document.getElementById('tsd2SyncPlay').disabled=true;
+}
+function switchIndustry(k){
+  cur=k;SEQ=IND[cur].seq;
+  if(!customBiz){bizName=IND[cur].biz;bizSlug=slugify(bizName);applyBiz();}
+  renderSync();resetAll();startCall();
+}
+var cur='plumbing',SEQ=IND[cur].seq,audios={},durations={},totalDur=0,
+    idx=0,playing=false,callT=0,tickInt=null,afterTimer=null,
+    syncPrice=1199,synced=false;
+
 
 function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
 function scroll(el){el.scrollTop=el.scrollHeight;}
 function loadAll(cb){
   var files={},pending=0;
-  Object.keys(SCEN).forEach(function(k){SCEN[k].seq.forEach(function(s){files[s.f]=1;});});
+  Object.keys(IND).forEach(function(k){IND[k].seq.forEach(function(s){files[s.f]=1;});});
   Object.keys(files).forEach(function(f){
     pending++;
     var a=new Audio('audio/'+f+'.mp3');a.preload='auto';audios[f]=a;
@@ -824,9 +893,8 @@ function endCall(){
   playBtn.style.display='none';
   ownerSequence();
 }
-function resetAll(scenario){
+function resetAll(){
   pauseCall();
-  if(scenario){cur=scenario;SEQ=SCEN[cur].seq;}
   Object.keys(audios).forEach(function(k){audios[k].pause();audios[k].currentTime=0;});
   idx=0;callT=0;cxTimer.textContent='0:00';cxTimer.style.color='';
   transcript.innerHTML='';pfill.style.width='0%';
@@ -842,7 +910,7 @@ function owShow(html){
   scroll(owScreen);
 }
 function ownerSequence(){
-  var D=SCEN[cur];
+  var D=IND[cur];
   setTimeout(function(){
     owShow('<div class="tsd2-otime">9:04 AM · text message</div>'+
       '<div class="tsd2-sms"><b>'+(D.sms.nobooking?bizName:'New booking, '+bizName)+'</b><br>'+D.sms.b.join('<br>')+
@@ -890,12 +958,11 @@ document.getElementById('tsd2Scen').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
   document.querySelectorAll('#tsd2Scen button').forEach(function(x){x.classList.remove('active');});
   b.classList.add('active');
-  resetAll(b.getAttribute('data-s'));startCall();
+  switchIndustry(b.getAttribute('data-ind'));startCall();
 });
 
 /* ---------- owner sync demo ---------- */
 (function(){
-var price=189,synced=false;
 var webPrice=document.getElementById('tsd2WebPrice'),
     brainPrice=document.getElementById('tsd2BrainPrice'),
     webCheck=document.getElementById('tsd2WebCheck'),
@@ -906,7 +973,6 @@ var webPrice=document.getElementById('tsd2WebPrice'),
     priceHint=document.getElementById('tsd2PriceHint'),
     arrowL=document.getElementById('tsd2ArrowL'),
     arrowR=document.getElementById('tsd2ArrowR');
-var files={189:'ava_p189.mp3',210:'ava_p210.mp3',249:'ava_p249.mp3'};
 function fireArrows(){
   [arrowL,arrowR].forEach(function(a){
     a.classList.remove('fire');void a.offsetWidth;a.classList.add('fire');
@@ -915,17 +981,17 @@ function fireArrows(){
 document.getElementById('tsd2PriceBtns').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
   var p=parseInt(b.getAttribute('data-p'),10);
-  if(p===price){priceHint.textContent='That\u2019s already the current price.';return;}
-  priceHint.textContent='';price=p;synced=false;
+  if(p===syncPrice){priceHint.textContent='That\u2019s already the current price.';return;}
+  priceHint.textContent='';syncPrice=p;synced=false;
   document.querySelectorAll('#tsd2PriceBtns button').forEach(function(x){
     x.classList.remove('current','picked');
     if(parseInt(x.getAttribute('data-p'),10)===p)x.classList.add('picked');
   });
   fireArrows();
   setTimeout(function(){
-    webPrice.textContent='$'+p;
+    webPrice.textContent=fmtPrice(p);
     webPrice.classList.remove('flip');void webPrice.offsetWidth;webPrice.classList.add('flip');
-    brainPrice.textContent='$'+p;
+    brainPrice.textContent=fmtPrice(p);
     brainPrice.classList.remove('flip');void brainPrice.offsetWidth;brainPrice.classList.add('flip');
     webCheck.classList.add('show');brainCheck.classList.add('show');
   },450);
@@ -934,26 +1000,30 @@ document.getElementById('tsd2PriceBtns').addEventListener('click',function(e){
 });
 syncPlay.addEventListener('click',function(){
   if(synced)return;
-  syncPlay.disabled=true;syncPlay.innerHTML='☎&nbsp; Calling…';
-  var q=new Audio('audio/cx_sync_q.mp3'),a=new Audio('audio/'+files[price]);
+  var sy=IND[cur].sync;
+  syncPlay.disabled=true;syncPlay.innerHTML='&#9742;&nbsp; Calling\u2026';
+  var q=new Audio('audio/'+sy.q+'.mp3'),a=new Audio('audio/'+sy.a[syncPrice]+'.mp3');
   function done(){
-    avaQuoted.textContent='$'+price;
+    avaQuoted.textContent=fmtPrice(syncPrice);
     avaCheck.classList.add('show');synced=true;
-    syncPlay.innerHTML='▶&nbsp; Play the next call';syncPlay.disabled=false;
+    syncPlay.innerHTML='&#9654;&nbsp; Play the next call';syncPlay.disabled=false;
   }
   q.onended=function(){setTimeout(function(){
     a.onended=done;a.onerror=done;
-    try{var p=a.play();if(p&&p.catch)p.catch(done);}catch(e){done();}
+    try{var pp=a.play();if(pp&&pp.catch)pp.catch(done);}catch(e){done();}
   },500);};
   q.onerror=done;
-  try{var p=q.play();if(p&&p.catch)p.catch(done);}catch(e){done();}
+  try{var pp=q.play();if(pp&&pp.catch)pp.catch(done);}catch(e){done();}
 });
 })();
-loadAll(function(){cap.textContent='Ready. Pick a scenario and press play.';});
+
+renderSync();
+loadAll(function(){cap.textContent='Ready. Pick an industry and press play.';});
 })();
 </script>
       </div>
     </section>
+
 
 
 
